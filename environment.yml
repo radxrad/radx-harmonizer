@@ -1,0 +1,11 @@
+name: radx-harmonizer 
+
+channels:
+  - conda-forge
+  - anaconda
+
+dependencies:
+  - python=3.11
+  - jupyterlab
+  - pandas
+  - black
