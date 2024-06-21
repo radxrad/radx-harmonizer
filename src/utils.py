@@ -147,7 +147,9 @@ def check_meta_file(filename, error_messages):
         error_messages = append_error(message, filename, error_messages)
         error = True
         return error, error_messages
-        
+
+    data.rename(columns={"Description": "Descriptions"}, inplace=True)
+    
     columns = data.columns
 
     if len(columns) != 3:
@@ -167,7 +169,7 @@ def check_meta_file(filename, error_messages):
         message = "Choices column missing"
         error_messages = append_error(message, filename, error_messages)
         error = True
-    if columns[2] != "Description":
+    if columns[2] != "Descriptions":
         message = "Description column missing"
         error_messages = append_error(message, filename, error_messages)
         error = True
@@ -210,7 +212,7 @@ def check_meta_file(filename, error_messages):
         error_messages = append_error(message, filename, error_messages)
         error = True
 
-    description = filenames["Description"].tolist()
+    description = filenames["Descriptions"].tolist()
     description = description[0]
     if description == "":
         message = "Data file description is missing"
