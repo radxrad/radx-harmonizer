@@ -34,6 +34,8 @@ def phase1_checker(data_path):
     check for errors and create error files as necessary.
 
     """
+    error_file_name = "phase1_errors.csv"
+    
     directories = glob.glob(os.path.join(data_path, "rad_*_*-*"))
 
     for directory in directories:
@@ -45,7 +47,7 @@ def phase1_checker(data_path):
         os.makedirs(work_dir, exist_ok=True)
 
         # clean up error file from a previous run
-        error_file_name = "phase1_errors.csv"
+
         error_file = os.path.join(work_dir, error_file_name)
         if os.path.exists(error_file):
             os.remove(error_file)
