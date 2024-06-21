@@ -414,22 +414,31 @@ def increment_file_version(filename):
     return f"{prefix}_{postfix}.csv"
 
 
-def create_error_summary(data_path, error_file_name):
+def create_error_summary(data_path, error_filename):
     error_dict = []
+    error_all = []
 
     directories = glob.glob(os.path.join(data_path, "rad_*_*-*"))
     for directory in directories:
         path = pathlib.PurePath(directory)
         work_dir = os.path.join(directory, "work")
-        error_file = os.path.join(work_dir, error_file_name)
+        error_file = os.path.join(work_dir, error_filename)
 
         if os.path.exists(error_file):
             errors = pd.read_csv(error_file)
             num_errors = errors.shape[0]
             error_dict.append({"error_file": error_file, "errors": num_errors})
+            error_all.append(errors)
 
+    # Create error file summary
     error_df = pd.DataFrame(error_dict)
-    error_df.to_csv(os.path.join(data_path, error_file_name), index=False)
+    error_df.to_csv(os.path.join(data_path, error_filename), index=False)
+    
+    # Create comprehensive data file with all error messages
+    error_df_all = pd.concat(error_all)
+    all_error_filename = error_filename.replace(".csv", "_all.csv")
+    error_df_all.to_csv(os.path.join(data_path, all_error_filename), index=False)
+    
 
 
 def save_error_file(error_messages, error_file):

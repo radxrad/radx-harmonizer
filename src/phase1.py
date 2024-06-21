@@ -43,7 +43,7 @@ def phase1_checker(data_path):
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
         work_dir = os.path.join(directory, "work")
 
-        print("work:", work_dir)
+        print("checking:", work_dir)
         os.makedirs(work_dir, exist_ok=True)
 
         # clean up error file from a previous run
