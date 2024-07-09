@@ -326,9 +326,12 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
     columns_to_keep = data.columns[~empty_col_mask]
     # filter the DataFrame by selecting the desired columns
     data = data[columns_to_keep]
-
+    
     data.dropna(axis="rows", how="all", inplace=True)
     data.dropna(axis="columns", how="all", inplace=True)
+
+    # Remove Unnamed columns
+    data = remove_unnamed_columns(data)
 
     error = check_column_names(data, input_file, error_messages)
     if error:
@@ -336,6 +339,25 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
 
     data.to_csv(output_file, index=False)
     return False
+
+
+def remove_unnamed_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Remove columns with 'Unnamed' in their name from a Pandas DataFrame.
+
+    Parameters:
+    df (pd.DataFrame): The input DataFrame.
+
+    Returns:
+    pd.DataFrame: The DataFrame with 'Unnamed' columns removed.
+    """
+    # Identify columns to drop
+    columns_to_drop = [col for col in df.columns if "Unnamed" in col]
+    
+    # Drop the identified columns
+    df_cleaned = df.drop(columns=columns_to_drop)
+    
+    return df_cleaned
 
 
 def has_empty_rows(filename, error_messages):
@@ -783,7 +805,7 @@ def update_meta_data(
     meta_data = pd.read_csv(meta_file)
     description = meta_data[
         meta_data["Field Label"] == "datafile_names - add_additional_rows_as_needed"
-    ]
+    ].copy()
 
     # There is some inconsistency in the META files. Use Descriptions instead of Description
     description.rename(columns={"Description": "Descriptions"}, inplace=True)

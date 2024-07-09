@@ -60,8 +60,8 @@ def phase2_checker_new(data_path, meta_data_template_path, clean_start=False):
         step6(work_dir, error_file, error_messages)
         step7(work_dir, error_file, error_messages)
         
-        # Create error summary files
-        utils.create_error_summary(data_path, error_file_name)
+    # Create error summary files
+    utils.create_error_summary(data_path, error_file_name)
 
 
 def step1(preorigcopy_dir, work_dir):
