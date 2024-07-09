@@ -278,7 +278,7 @@ def convert_iso_to_utf8(orig_filename, fixed_filename, error_messages):
     return is_not_utf8_encoded(fixed_filename, error_messages)
 
 
-def check_column_names(data, error_messages):
+def check_column_names(data, filename, error_messages):
     error = False
     if len(data.columns) != data.shape[1]:
         message = "Number of columns in header do not match the data"
@@ -314,6 +314,9 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
 
     # remove leading and trailing whitespace
     data = data.map(lambda x: x.strip())
+    # in Pandas < 2.1.0
+    # data = data.applymap(lambda x: x.strip())
+    
     # identify rows with all empty strings
     empty_row_mask = data.eq("").all(axis=1)
     data = data[~empty_row_mask]
@@ -327,7 +330,7 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
     data.dropna(axis="rows", how="all", inplace=True)
     data.dropna(axis="columns", how="all", inplace=True)
 
-    error = check_column_names(data, error_messages)
+    error = check_column_names(data, input_file, error_messages)
     if error:
         return error
 
@@ -782,7 +785,10 @@ def update_meta_data(
         meta_data["Field Label"] == "datafile_names - add_additional_rows_as_needed"
     ]
 
-    if description.shape[0] == 0 or not "Description" in description.columns:
+    # There is some inconsistency in the META files. Use Descriptions instead of Description
+    data.rename(columns={"Description": "Descriptions"}, inplace=True)
+
+    if description.shape[0] == 0 or not "Descriptions" in description.columns:
         message = "Data file description not found"
         error = append_error(message, meta_file, error_messages)
         #error = True
@@ -1042,11 +1048,11 @@ def check_provenance(dict_file, error_messages):
     # Check number of URLs in the CDE Reference column. There must be no more than one URL.
     dictionary["url_count"] = dictionary["CDE Reference"].apply(count_urls)
     dictionary.query("url_count > 1", inplace=True)
-    print("check_provenance:")
-    print(dictionary.head().to_string())
 
     error = False
     if dictionary.shape[0] > 0:
+        print("check_provenance:")
+        print(dictionary.head().to_string())
         message = f"CDE Reference column contains multiple URLs. Only one URL is allowed."
         error = append_error(message, dict_file, error_messages)
         error = True

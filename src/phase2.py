@@ -335,7 +335,13 @@ def step7(work_dir, error_file, error_messages):
 
 
 if __name__ == "__main__":
-    phase2_checker_new("../data_harmonized", "../meta", True)
+    # directory = "r:\data_harmonized"
+    # meta = "r:\data_harmonized"
+    directory = "../data_harmonized"
+    meta = "../data_harmonized"
+    error_summary = os.path.join(directory, "phase1_errors.csv")
+    error_all = os.path.join(directory, "phase1_errors_all.csv")
+    phase2_checker_new(directory, meta, True)
     print(
-        "Phase 2: Check file: ../data_harmonized/phase2_errors.csv for a summary of errors."
+        f"Phase 2: Check error summary: {error_summary} and {error_all} for errors in the preorigcopy files."
     )
