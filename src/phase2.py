@@ -338,9 +338,9 @@ if __name__ == "__main__":
     # directory = "r:\data_harmonized"
     # meta = "r:\data_harmonized"
     directory = "../data_harmonized"
-    meta = "../data_harmonized"
-    error_summary = os.path.join(directory, "phase1_errors.csv")
-    error_all = os.path.join(directory, "phase1_errors_all.csv")
+    meta = "../meta"
+    error_summary = os.path.join(directory, "phase2_errors.csv")
+    error_all = os.path.join(directory, "phase2_errors_all.csv")
     phase2_checker_new(directory, meta, True)
     print(
         f"Phase 2: Check error summary: {error_summary} and {error_all} for errors in the preorigcopy files."

@@ -786,14 +786,14 @@ def update_meta_data(
     ]
 
     # There is some inconsistency in the META files. Use Descriptions instead of Description
-    data.rename(columns={"Description": "Descriptions"}, inplace=True)
+    description.rename(columns={"Description": "Descriptions"}, inplace=True)
 
     if description.shape[0] == 0 or not "Descriptions" in description.columns:
         message = "Data file description not found"
         error = append_error(message, meta_file, error_messages)
         #error = True
         return error
-    data_file_title = description["Description"].tolist()
+    data_file_title = description["Descriptions"].tolist()
     data_file_title = data_file_title[0]
 
     # Extract timestamp
