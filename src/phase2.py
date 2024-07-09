@@ -23,6 +23,7 @@ def phase2_checker_new(data_path, meta_data_template_path, clean_start=False):
     directories = glob.glob(os.path.join(data_path, "rad_*_*-*"))
 
     for directory in directories:
+        print("checking:", directory)
         path = pathlib.PurePath(directory)
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
         work_dir = os.path.join(directory, "work")
@@ -58,6 +59,9 @@ def phase2_checker_new(data_path, meta_data_template_path, clean_start=False):
         )
         step6(work_dir, error_file, error_messages)
         step7(work_dir, error_file, error_messages)
+        
+        # Create error summary files
+        utils.create_error_summary(data_path, error_file_name)
 
 
 def step1(preorigcopy_dir, work_dir):
@@ -331,7 +335,7 @@ def step7(work_dir, error_file, error_messages):
 
 
 if __name__ == "__main__":
-    phase2_checker_new("../data_harmonized", "../meta", False)
+    phase2_checker_new("../data_harmonized", "../meta", True)
     print(
         "Phase 2: Check file: ../data_harmonized/phase2_errors.csv for a summary of errors."
     )

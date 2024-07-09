@@ -40,6 +40,7 @@ def phase1_checker(data_path, clean_start=False):
     directories = glob.glob(os.path.join(data_path, "rad_*_*-*"))
 
     for directory in directories:
+        print("checking:", directory)
         path = pathlib.PurePath(directory)
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
         work_dir = os.path.join(directory, "work")
@@ -48,7 +49,6 @@ def phase1_checker(data_path, clean_start=False):
             shutil.rmtree(work_dir, ignore_errors=True)
 
         os.makedirs(work_dir, exist_ok=True)
-        print("checking:", work_dir)
         os.makedirs(work_dir, exist_ok=True)
 
         # Clean up error file from a previous run

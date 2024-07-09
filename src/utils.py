@@ -236,7 +236,7 @@ def check_meta_file(filename, error_messages):
 def is_not_utf8_encoded(filename, error_messages):
     error = False
     try:
-        data = pd.read_csv(filename, encoding="utf8", skip_blank_lines=False)
+        data = pd.read_csv(filename, encoding="utf8", low_memory=False, skip_blank_lines=False)
     except Exception:
         message = f"Not utf-8 encoded or invalid csv file: {traceback.format_exc().splitlines()[-1]}"
         error = append_error(message, filename, error_messages)
@@ -269,9 +269,9 @@ def convert_iso_to_utf8(orig_filename, fixed_filename, error_messages):
         )
         data.to_csv(fixed_filename, encoding="utf-8", index=False)
         message = "File was automatically converted to utf-8"
-        error = append_warning(message, fixed_file, error_messages)
+        error = append_warning(message, fixed_filename, error_messages)
     except Exception:
-        message = traceback.format_exc().splitlines()[-1]
+        message = f"Not ISO-8859-1 encoded or invalid csv file: {traceback.format_exc().splitlines()[-1]}"
         error = append_error(message, filename, error_messages)
         return error
 
