@@ -2,10 +2,11 @@
 import os
 import glob
 import pathlib
+import shutil
 import utils
 
 
-def phase1_checker(data_path):
+def phase1_checker(data_path, clean_start=False):
     """
     Check and validate the contents of directories within a specified path, and manage errors.
 
@@ -35,7 +36,7 @@ def phase1_checker(data_path):
 
     """
     error_file_name = "phase1_errors.csv"
-    
+
     directories = glob.glob(os.path.join(data_path, "rad_*_*-*"))
 
     for directory in directories:
@@ -43,11 +44,14 @@ def phase1_checker(data_path):
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
         work_dir = os.path.join(directory, "work")
 
+        if clean_start:
+            shutil.rmtree(work_dir, ignore_errors=True)
+
+        os.makedirs(work_dir, exist_ok=True)
         print("checking:", work_dir)
         os.makedirs(work_dir, exist_ok=True)
 
-        # clean up error file from a previous run
-
+        # Clean up error file from a previous run
         error_file = os.path.join(work_dir, error_file_name)
         if os.path.exists(error_file):
             os.remove(error_file)
@@ -56,7 +60,7 @@ def phase1_checker(data_path):
         error_messages = []
 
         # Check for missing files
-        error, error_messages = utils.file_is_missing(preorigcopy_dir, error_messages)
+        error = utils.file_is_missing(preorigcopy_dir, error_messages)
         if error:
             utils.save_error_file(error_messages, error_file)
 
@@ -64,16 +68,19 @@ def phase1_checker(data_path):
         for file in glob.glob(
             os.path.join(preorigcopy_dir, "rad_*_*-*_*_META_preorigcopy.csv")
         ):
-            error, error_messaged = utils.check_meta_file(file, error_messages)
+            error = utils.check_meta_file(file, error_messages)
             if error:
                 utils.save_error_file(error_messages, error_file)
 
-    # Create an error summary file
+    # Create error summary files
     utils.create_error_summary(data_path, error_file_name)
 
 
 if __name__ == "__main__":
-    phase1_checker("../data_harmonized")
+    directory = "../data_harmonized"
+    error_summary = os.path.join(directory, "phase1_errors.csv")
+    error_all = os.path.join(directory, "phase1_errors_all.csv")
+    phase1_checker(directory, True)
     print(
-        "Phase 1: Check file: ../data_harmonized/phase1_errors.csv for errors in preorigcopy files"
+        f"Phase 1: Check error summary: {error_summary} and {error_all} for errors in the preorigcopy files."
     )

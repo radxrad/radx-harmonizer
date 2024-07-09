@@ -59,6 +59,8 @@ NULL_VALUES = ["N/A", "NA", "NULL", "NaN", "None", "n/a", "nan", "null"]
 enum_pattern_int = r"(\d+),\s*([^|]+)\s*(?:\||$)"  # Example: 1, Male | 2, Female | 3, Intersex | 4, None of these describe me
 enum_pattern_str = r"([A-Z]+),\s*([^|]+)\s*(?:\||$)"  # Example: AL, Alabama | AK, Alaska | AS, American Samoa
 
+column_map = {"Variable / Field Name": "Id", "Field Label": "Label", "Section Header": "Section", "Field Type": "Datatype", "Unit": "Unit", "Units": "Unit", "Choices, Calculations, OR Slider Labels": "Enumeration", "Field Note": "Notes", "CDE Reference": "Provenance"}
+
 # Field names that contain specimen information
 SPECIMEN_COLUMNS = ["specimen_type", "virus_sample_type", "sample_media", "sample_type"]
 
@@ -70,7 +72,8 @@ def append_error(message, filename, error_messages):
             "message": message,
         }
     )
-    return error_messages
+    return True
+    #return error_messages
 
 
 def append_warning(message, filename, error_messages):
@@ -81,7 +84,7 @@ def append_warning(message, filename, error_messages):
             "message": message,
         }
     )
-    return error_messages
+    return True
 
 
 def file_is_missing(directory, error_messages):
@@ -103,8 +106,8 @@ def file_is_missing(directory, error_messages):
     extra_files = all_files - data_files - dict_files - meta_files
     for extra_file in extra_files:
         message = "Unrecognized file name"
-        error_messages = append_error(message, extra_file, error_messages)
-        error = True
+        error = append_error(message, extra_file, error_messages)
+        #error = True
 
     # Check that the number of DATA, DICT, and META files is the same
     if len(data_files) != len(dict_files) or len(data_files) != len(meta_files):
@@ -119,17 +122,17 @@ def file_is_missing(directory, error_messages):
         dict_file = data_file.replace("_DATA_preorigcopy.csv", "_DICT_preorigcopy.csv")
         if not dict_file in dict_files:
             message = "DICT file missing"
-            error_messages = append_error(message, dict_file, error_messages)
-            error = True
+            error = append_error(message, dict_file, error_messages)
+            #error = True
 
         # Check for missing META files
         meta_file = data_file.replace("_DATA_preorigcopy.csv", "_META_preorigcopy.csv")
         if not meta_file in meta_files:
             message = "META file missing"
-            error_messages = append_error(message, meta_file, error_messages)
-            error = True
+            error = append_error(message, meta_file, error_messages)
+            #error = True
 
-    return error, error_messages
+    return error
 
 
 def check_meta_file(filename, error_messages):
@@ -144,9 +147,9 @@ def check_meta_file(filename, error_messages):
         )
     except Exception:
         message = f"Invalid csv file: {traceback.format_exc().splitlines()[-2]}"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
-        return error, error_messages
+        error = append_error(message, filename, error_messages)
+        #error = True
+        return error
 
     data.rename(columns={"Description": "Descriptions"}, inplace=True)
     
@@ -154,44 +157,52 @@ def check_meta_file(filename, error_messages):
 
     if len(columns) != 3:
         message = f"Metadata file has {len(columns)} columns, 3 columns are required"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
     if error:
-        return error, error_messages
+        return error
 
-    # check column names
-    if columns[0] != "Field Label":
-        message = "Field Label column missing"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
-    if columns[1] != "Choices":
-        message = "Choices column missing"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
-    if columns[2] != "Descriptions":
-        message = "Description column missing"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+    required_columns = ["Field Label", "Choices", "Descriptions"]
+
+    # Check column names
+    for i, expected_column in enumerate(required_columns):
+        if columns[i] != expected_column:
+            message = f"{expected_column} column missing"
+            error = append_error(message, filename, error_messages)
+            #error = True
+    # # check column names
+    # if columns[0] != "Field Label":
+    #     message = "Field Label column missing"
+    #     error = append_error(message, filename, error_messages)
+    #     #error = True
+    # if columns[1] != "Choices":
+    #     message = "Choices column missing"
+    #     error = append_error(message, filename, error_messages)
+    #     #error = True
+    # if columns[2] != "Descriptions":
+    #     message = "Description column missing"
+    #     error = append_error(message, filename, error_messages)
+    #     #error = True
 
     if error:
-        return error, error_messages
+        return error
 
     # check the number of data files
     filenames = data[data["Field Label"] == "number_of_datafiles_in_this_package"]
     if filenames.shape[0] != 1:
         message = "Row 'number_of_datafiles_in_this_package' is missing"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
     if error:
-        return error, error_messages
+        return error
 
     num_files = filenames["Choices"].tolist()
     if num_files[0] != "1":
         message = f"number_of_datafiles_in_this_package is {num_files[0]}, it must be 1"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
     # check data file name
     filenames = data[
@@ -199,27 +210,27 @@ def check_meta_file(filename, error_messages):
     ]
     if filenames.shape[0] != 1:
         message = "Row 'datafile_names - add_additional_rows_as_needed' is missing"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
     if error:
-        return error, error_messages
+        return error
 
     data_file = os.path.basename(filename).replace("_META_", "_DATA_")
     data_files = filenames["Choices"].tolist()
     if data_files[0] != data_file:
         message = f"Data file name: {data_files[0]} doesn't match"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
     description = filenames["Descriptions"].tolist()
     description = description[0]
     if description == "":
         message = "Data file description is missing"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
-    return error, error_messages
+    return error
 
 
 def is_not_utf8_encoded(filename, error_messages):
@@ -228,10 +239,9 @@ def is_not_utf8_encoded(filename, error_messages):
         data = pd.read_csv(filename, encoding="utf8", skip_blank_lines=False)
     except Exception:
         message = f"Not utf-8 encoded or invalid csv file: {traceback.format_exc().splitlines()[-1]}"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
 
-    return error, error_messages
+    return error
 
 
 def is_not_iso_encoded(filename, error_messages):
@@ -242,10 +252,10 @@ def is_not_iso_encoded(filename, error_messages):
         # this traceback has an empty last line.
         # use the second from last line instead.
         message = f"Not ISO-8859-1 encoded or invalid csv file: {traceback.format_exc().splitlines()[-2]}"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
-    return error, error_messages
+    return error
 
 
 def convert_iso_to_utf8(orig_filename, fixed_filename, error_messages):
@@ -259,12 +269,11 @@ def convert_iso_to_utf8(orig_filename, fixed_filename, error_messages):
         )
         data.to_csv(fixed_filename, encoding="utf-8", index=False)
         message = "File was automatically converted to utf-8"
-        error_messages = append_warning(message, fixed_file, error_messages)
+        error = append_warning(message, fixed_file, error_messages)
     except Exception:
         message = traceback.format_exc().splitlines()[-1]
-        error_messages = append_error(message, filename, error_messages)
-        error = True
-        return error, error_messages
+        error = append_error(message, filename, error_messages)
+        return error
 
     return is_not_utf8_encoded(fixed_filename, error_messages)
 
@@ -273,24 +282,24 @@ def check_column_names(data, error_messages):
     error = False
     if len(data.columns) != data.shape[1]:
         message = "Number of columns in header do not match the data"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
     for col in data.columns:
         col_stripped = col.strip()
         if col_stripped != col:
             message = f"column header: '{col}' contains spaces"
-            error_messages = append_error(message, filename, error_messages)
-            error = True
+            error = append_error(message, filename, error_messages)
+            #error = True
         if col_stripped == "":
             message = "Empty column name"
-            error_messages = append_error(message, filename, error_messages)
-            error = True
+            error = append_error(message, filename, error_messages)
+            #error = True
         if "Unnamed" in col:
             message = f"Unnamed column: {col}"
-            error_messages = append_error(message, filename, error_messages)
-            error = True
+            error = append_error(message, filename, error_messages)
+            #error = True
 
-    return error, error_messages
+    return error
 
 
 def remove_empty_rows_cols(input_file, output_file, error_messages):
@@ -318,12 +327,12 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
     data.dropna(axis="rows", how="all", inplace=True)
     data.dropna(axis="columns", how="all", inplace=True)
 
-    error, error_messages = check_column_names(data, error_messages)
+    error = check_column_names(data, error_messages)
     if error:
-        return error, error_messsages
+        return error
 
     data.to_csv(output_file, index=False)
-    return False, error_messages
+    return False
 
 
 def has_empty_rows(filename, error_messages):
@@ -333,10 +342,9 @@ def has_empty_rows(filename, error_messages):
     error = False
     if filtered_data.shape[0] != data.shape[0]:
         message = "file has empty rows"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
 
-    return error, error_messages
+    return error
 
 
 def is_newer(filename1, filename2):
@@ -345,28 +353,6 @@ def is_newer(filename1, filename2):
         return True
     # check if the first file is newer than the second file
     return os.path.getmtime(filename1) > os.path.getmtime(filename2)
-
-
-def get_input_output_files_for_next_step(input_file):
-    # _tofix file are not suitable as input files
-    if "_tofix.csv" in input_file:
-        return None, None
-
-    if os.path.isfile(input_file):
-        has_fixed_file = "_fixed.csv" in input_file
-        if has_fixed_file:
-            parts = input_file.replace("_fixed", "").rsplit("_", maxsplit=1)
-        else:
-            parts = input_file.rsplit("_", maxsplit=1)
-
-        prefix = parts[0]
-        postfix = int(parts[1].replace(".csv", ""))
-        postfix += 1
-        output_file = f"{prefix}_{postfix}.csv"
-
-        return input_file, output_file
-
-    return None, None
 
 
 def get_input_file(input_file):
@@ -379,7 +365,10 @@ def get_input_file(input_file):
     if os.path.isfile(tofix_file) and os.path.isfile(input_file):
         return None
     # Return the original file for further processing
-    return input_file
+    if os.path.isfile(input_file):
+        return input_file
+    else:
+        return None
 
 
 def get_output_file(input_file):
@@ -454,22 +443,17 @@ def update_error_file(error_file, filename, error_messages):
 
     # Remove error messages for issues that have been fixed
     for message in error_messages:
-        #print("update_error_file:", message)
         if message["filename"] == basename:
-            print("update_error_message: removing:", message)
             error_messages.remove(message)
 
     if not os.path.exists(error_file):
         return error_messages
 
     errors = pd.read_csv(error_file)
-    # print("update/remove errors:", errors.to_string(), "for:", filename)
-    
 
     # Remove error messages from the error file
     errors = errors[errors["filename"] != basename]
     if errors.shape[0] == 0:
-        #print("removing error file")
         os.remove(error_file)
     else:
         errors.to_csv(error_file, index=False)
@@ -491,45 +475,7 @@ def save_next_version(input_file, output_file, error_file, error_messages):
 def save_tofix_version(input_file, error_file, error_messages):
     tofix_file = get_tofix_file(input_file)
     shutil.copyfile(input_file, tofix_file)
-    print("save_tofix_version:", tofix_file)
     save_error_file(error_messages, error_file)
-    return error_messages
-
-
-def process_dict_file(input_file, field_names, error_messages):
-    df = pd.read_csv(
-        input_file, dtype=str, keep_default_na=False, skip_blank_lines=False
-    )
-
-    # Rename Units to Unit (some wastewater projects used Units instead of Unit)
-    df = df.rename(columns={"Units": "Unit"})
-
-    # Trim away any extraneous columns not used by the Global Codebook
-    cols = list(df.columns)
-    use_cols = [field for field in field_names if field in cols]
-    df = df[use_cols].copy()
-    # Trim away any extraneous columns not used by the Global Codebook
-    # use_cols = list(set(field_names).intersection(set(df.columns)))
-    # error =  False
-    # if len(use_cols) == 0:
-    #     message = "Required fields: 'Variable / Field Name', 'Field Label', 'Field Type' are missing"
-    #     error_messages.append(
-    #     {
-    #         "severity": "ERROR",
-    #         "filename": os.path.basename(input_file),
-    #          "message": message,
-    #     }
-    #     )
-    #     error = True
-    #     return error, error_messages
-
-    # Keep only the fields required for conversion to the Global Codebook format
-    # df = df[use_cols].copy()
-
-    # Check dictionary file
-    # error, error_messages = check_dict(input_file, df, error_messages, ["Variable / Field Name", "Field Label", "Field Type"])
-
-    return error, error_messages, df
 
 
 def get_num_empty_rows(df, field_name):
@@ -547,17 +493,17 @@ def check_dict(filename, error_messages):
     error = False
     if len(missing_columns) > 0:
         message = f"Missing columns: {missing_columns}"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
     # Find unexpected columns
     unexpected_columns = columns - ALL_COLUMNS
     if len(unexpected_columns) > 0:
         message = f"Unexpected columns: {unexpected_columns}, can be ignored, unless they are typos"
-        error_messages = append_warning(message, filename, error_messages)
-        error = True
+        append_warning(message, filename, error_messages)
+        #error = True
 
-    return error, error_messages
+    return error
 
 
 def check_missing_values(filename, error_messages):
@@ -569,10 +515,10 @@ def check_missing_values(filename, error_messages):
         num_empty_rows = get_num_empty_rows(df, field_name)
         if num_empty_rows > 0:
             message = f"Column: `{field_name}` has {num_empty_rows} empty values out of {df.shape[0]} rows"
-            error_messages = append_error(message, filename, error_messages)
-            error = True
+            error = append_error(message, filename, error_messages)
+            #error = True
 
-    return error, error_messages
+    return error
 
 
 def check_field_types(filename, error_messages):
@@ -582,15 +528,15 @@ def check_field_types(filename, error_messages):
     error = False
     if len(invalid_field_types) > 0:
         message = f"Invalid Field Types: {list(invalid_field_types)}"
-        error_messages = append_error(message, filename, error_messages)
-        error = True
+        error = append_error(message, filename, error_messages)
+        #error = True
 
-    return error, error_messages
+    return error
+
 
 def save_next_version(input_file, output_file, error_file, error_messages):
     shutil.copyfile(input_file, output_file)
     error_messages = update_error_file(error_file, input_file, error_messages)
-    return error_messages
 
 
 def save_next_version_without_none(input_file, output_file, error_file, error_messages):
@@ -602,16 +548,13 @@ def save_next_version_without_none(input_file, output_file, error_file, error_me
         for col_type in types:
             if col_type in NULL_VALUES:
                 message = f"Removed null value: {col_type} in column: {column}"
-                error_messages = append_warning(message, input_file, error_messages)
-                print("Removed null values:", column, message, input_file)
+                error = append_warning(message, input_file, error_messages)
                 
     data.fillna("",inplace=True)
     data.to_csv(output_file, index=False)
-    return error_messages
 
     
 def check_data_type(data_file, dict_file, error_messages):
-    #print("check data type:", data_file)
     data = pd.read_csv(
         data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
     )
@@ -633,21 +576,21 @@ def check_data_type(data_file, dict_file, error_messages):
                 continue
             message = f"Invalid data type in column: {column}: {types[0]} in DATA vs. {dict_type} in DICT"
             #print("check_data_type:", message, data_file, dict_file)
-            error_messages = append_error(message, data_file, error_messages)
+            error = append_error(message, data_file, error_messages)
             message = f"Invalid data type in column: {column}: {dict_type} in DICT vs. {types[0]} in DATA"
-            error_messages = append_error(message, dict_file, error_messages)
-            error = True
+            error = append_error(message, dict_file, error_messages)
+            #error = True
         elif len(types) > 1:
             # mixed types are ok if the type in the dictionary is defined as string
             if dict_type == "string":
                 continue
             else:
                 message = f"Mixed data types in column: {column}: {types} in DATA vs. {dict_type} IN DICT"
-                error_messages = append_error(message, data_file, error_messages)
-                error_messages = append_error(message, dict_file, error_messages)
-                error = True
+                error = append_error(message, data_file, error_messages)
+                error = append_error(message, dict_file, error_messages)
+                #error = True
 
-    return error, error_messages
+    return error
 
 
 def get_dictionary_data_types(dict_file):
@@ -753,12 +696,11 @@ def check_enums(data_file, dict_file, error_messages):
     data = pd.read_csv(
         data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
     )
-
+    
+    error = False
+    
     # Get the allowed values for enumerated types
     allowed_values = get_allowed_values(dict_file)
-    #print("enum:", allowed_values, os.path.basename(data_file))
-
-    error = False
 
     # Check data file columns with enumerated values
     for column, enum_values in allowed_values.items():
@@ -767,18 +709,14 @@ def check_enums(data_file, dict_file, error_messages):
         column_values = set(filter(None, column_values))
         enum_values = set(enum_values)
         mismatches = column_values - enum_values
-        # print("cols:", column_values)
-        # print("enum:", enum_values)
-        # print("mismatches:", mismatches)
+
         if len(mismatches) > 0:
-            #print("mismatches:", mismatches)
             message = f"Invalid enumerated value(s): {mismatches} in column {column}"
-            #print(message)
-            error_messages = append_error(message, data_file, error_messages)
-            error = True
+            error = append_error(message, data_file, error_messages)
+            #error = True
 
     # TODO: for enums, check if the Field Type is correct?
-    return error, error_messages
+    return error
 
 
 def get_allowed_values(dict_file):
@@ -828,11 +766,11 @@ def update_meta_data(
     # Get metadata template
     prefix = extract_prefix(os.path.basename(meta_file))
     template_file = os.path.join(meta_data_template_path, f"{prefix}_TEMPLATE_META.csv")
+    
     if not os.path.exists(template_file):
         message = f"Metadata template file {template_file} not found"
-        error_messages = append_error(message, meta_file, error_messages)
-        error = True
-        return error, error_messages
+        error = append_error(message, meta_file, error_messages)
+        return error
     meta_template = pd.read_csv(template_file)
 
     # Get specimen type from data file
@@ -846,18 +784,18 @@ def update_meta_data(
 
     if description.shape[0] == 0 or not "Description" in description.columns:
         message = "Data file description not found"
-        error_messages = append_error(message, meta_file, error_messages)
-        error = True
-        return error, error_messages
+        error = append_error(message, meta_file, error_messages)
+        #error = True
+        return error
     data_file_title = description["Description"].tolist()
-    #print("data file desc:", data_file_title)
     data_file_title = data_file_title[0]
 
     # Extract timestamp
-    # timestamp = meta_data[
-    #     meta_data["Field Label"] == "data_file_creation_dateTime"]
-    # data_file_creation_dateTime = timestamp["Choices"].tolist()[0]
-    data_file_creation_dateTime = "placeholder"
+    timestamp = meta_data[meta_data["Field Label"] == "data_file_creation_dateTime"].copy()
+    if timestamp.shape[0] == 0:
+        data_file_creation_dateTime = "placeholder"
+    else:
+        data_file_creation_dateTime = timestamp["Choices"].tolist()[0]
 
     # Get the SHA256 hash code for the data file
     data_file_sha256_digest = calculate_sha256(data_file)
@@ -879,7 +817,7 @@ def update_meta_data(
 
     metadata.to_csv(meta_output_file, index=False)
 
-    return error, error_messages
+    return error
 
 
 def calculate_sha256(file_path):
@@ -927,7 +865,6 @@ def extract_prefix(filename):
 
 
 def fix_dict_columns(dictionary, field_names):
-    #print("fix_dict_columns")
     # Add missing columns
     for field in field_names:
         if not field in dictionary.columns:
@@ -935,10 +872,11 @@ def fix_dict_columns(dictionary, field_names):
 
     # Reorder the columns
     dictionary = dictionary[field_names]
-    #print("reordered columns:", list(dictionary.columns))
     return dictionary
 
 
+
+    
 def data_dict_matcher(data_file, dict_file, error_file, error_messages):
     data = pd.read_csv(
         data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
@@ -958,25 +896,23 @@ def data_dict_matcher(data_file, dict_file, error_file, error_messages):
     error = False
     if len(missing_data_elements) > 0:
         message = f"DICT file is missing data elements: {missing_data_elements}"
-        error_messages = append_error(message, dict_file, error_messages)
-        error = True
+        error = append_error(message, dict_file, error_messages)
+        #error = True
         # add placeholders for the missing data elements
         dictionary = add_missing_data_elements(dictionary, missing_data_elements)
         message = f"Added DICT missing data elements in _tofix file: {missing_data_elements}, fill in fields"
         # TODO if the missing data element is part of the harmonized RADx-rad data elements, it doesn't need to be filled in here!!!1
-        error_messages = append_warning(message, dict_file, error_messages)
-        # print("ERROR: data_dict_matcher: save tofix:", dict_file)
+        error = append_warning(message, dict_file, error_messages)
         tofix_file = get_tofix_file(dict_file)
         dictionary.to_csv(tofix_file, index=False)
     else:
         # reorder the dictionary data elements to match the order in the data file
         dictionary = reorder_data_dictionary(dictionary, list(data.columns))
         output_file = get_output_file(dict_file)
-        # print("data_dict_matcher: saving", output_file)
         dictionary.to_csv(output_file, index=False)
         error_messages = update_error_file(error_file, dict_file, error_messages)
 
-    return error, error_messages
+    return error
 
 
 def add_missing_data_elements(dictionary, missing_data_elements):
@@ -1013,3 +949,135 @@ def reorder_data_dictionary(dictionary, data_fields):
     )
 
     return dictionary
+
+
+def update_dict_file(dict_file, dict_output_file):
+    dictionary = pd.read_csv(
+        dict_file, dtype=str, keep_default_na=False, skip_blank_lines=False
+    )
+    # Some wastewater projects used Units field instead of Unit field
+    dictionary = dictionary.rename(columns={"Units": "Unit"})
+    
+    # Fill in empty Section Header and CDE Reference columns
+    dictionary["Section Header"] = dictionary["Section Header"].replace("", "Project specific")
+    dictionary["CDE Reference"] = dictionary["CDE Reference"].replace("", "Depositor")
+    
+    dictionary.to_csv(dict_output_file, index=False)
+
+
+def set_cardinality(data_type):
+    if data_type == "list":
+        return "multiple"
+    else:
+        return "single"
+
+
+def convert_data_type_new(row):
+    data_type = row["Datatype"]
+    enum = row["Enumeration"]
+    
+    parsed_data = parse_integer_enums(enum)
+    if len(parsed_data) > 0:
+        return "integer"
+
+    parsed_data = parse_string_enums(enum)
+    if len(parsed_data) > 0:
+        return "string"
+    
+    # find enumeration with text values
+    if "|" in enum:
+        return "string"
+    
+    if data_type in ["text", "list", "url", "sequence", "category", "yesno", "radio", "dropdown", "checkbox", "zipcode"]:
+        return "string"
+    
+    return data_type
+
+
+def convert_enumeration(enum):
+    
+    # parse integer and string encoded enumerations
+    parsed_data = parse_integer_enums(enum) + parse_string_enums(enum)
+    
+    if parsed_data and len(parsed_data) > 0:
+        enums = []
+        for value, label in parsed_data:
+            enums.append(f'"{value}"=[{label}]')
+            
+        return " | ".join(enums)
+    
+    # parse simple value enumerations. Example: IgA | IgG | IgM
+    if "|" in enum:
+        enums = []
+        values = enum.split("|")
+        for value in values:
+            value = value.strip()
+            enums.append(f'"{value}"=[{value}]')
+
+        return " | ".join(enums)
+            
+    
+    return ""
+
+
+def extract_urls(input_string):
+    # Define a regular expression pattern for URLs
+    url_pattern = re.compile(
+        r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+    )
+    # Find all matches of the pattern in the input string
+    urls = url_pattern.findall(input_string)
+    # Return the list of URLs
+    return urls
+
+def count_urls(input_string):
+    return len(extract_urls(input_string))
+    
+    
+def check_provenance(dict_file, error_messages):
+    dictionary = pd.read_csv(
+        dict_file, dtype=str, keep_default_na=False, skip_blank_lines=False
+    )
+
+    # Check number of URLs in the CDE Reference column. There must be no more than one URL.
+    dictionary["url_count"] = dictionary["CDE Reference"].apply(count_urls)
+    dictionary.query("url_count > 1", inplace=True)
+    print("check_provenance:")
+    print(dictionary.head().to_string())
+
+    error = False
+    if dictionary.shape[0] > 0:
+        message = f"CDE Reference column contains multiple URLs. Only one URL is allowed."
+        error = append_error(message, dict_file, error_messages)
+        error = True
+
+    return error
+
+    
+def split_provenance(provenance):
+    see_also = ""
+    if len(provenance) > 0 and "|" in provenance:
+        provenance, see_also = provenance.split("|", maxsplit=1)
+        # If URL is in provenance, switch places with see_also
+        if count_urls(provenance) == 1:
+            see_also, provenance = provenance, see_also
+
+    return pd.Series([provenance, see_also])
+
+
+def convert_dict(dict_file, dict_output_file):
+    dictionary = pd.read_csv(
+        dict_file, dtype=str, keep_default_na=False, skip_blank_lines=False
+    )
+    dictionary.rename(columns=column_map, inplace=True)
+    dictionary = dictionary[["Id", "Label", "Section", "Datatype", "Unit", "Enumeration", "Notes", "Provenance"]].copy()
+
+    # Split the 'Provenance' column into two columns (URLs go into the SeeAlso column)
+    dictionary[["Provenance", "SeeAlso"]] = dictionary["Provenance"].apply(split_provenance)
+
+    dictionary["Cardinality"] = dictionary["Datatype"].apply(set_cardinality)
+    dictionary["Datatype"] = dictionary.apply(convert_data_type_new, axis=1)
+    dictionary["Enumeration"] = dictionary["Enumeration"].apply(convert_enumeration)
+
+    dictionary = dictionary[["Id", "Label", "Section", "Cardinality", "Datatype", "Unit", "Enumeration", "Notes", "Provenance", "SeeAlso"]]
+    dictionary.to_csv(dict_output_file, index=False)

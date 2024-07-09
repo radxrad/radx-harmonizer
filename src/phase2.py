@@ -27,6 +27,13 @@ def phase2_checker_new(data_path, meta_data_template_path, clean_start=False):
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
         work_dir = os.path.join(directory, "work")
 
+        # Skip and directories with Phase 1 errors
+        phase1_error_file_name = "phase1_errors.csv"
+        phase1_error_file = os.path.join(work_dir, phase1_error_file_name)
+        if os.path.exists(phase1_error_file):
+            print(f"Skipping: {directory} due to Phase I errors")
+            continue
+
         if clean_start:
             shutil.rmtree(work_dir, ignore_errors=True)
 
@@ -43,12 +50,14 @@ def phase2_checker_new(data_path, meta_data_template_path, clean_start=False):
         step1(preorigcopy_dir, work_dir)
 
         error_messages = []
-        error_messages = step2(work_dir, error_file, error_messages)
-        error_messages = step3(work_dir, error_file, error_messages)
-        error_messages = step4(work_dir, error_file, error_messages)
-        error_messages = step5(
+        step2(work_dir, error_file, error_messages)
+        step3(work_dir, error_file, error_messages)
+        step4(work_dir, error_file, error_messages)
+        step5(
             work_dir, error_file, error_messages, meta_data_template_path
         )
+        step6(work_dir, error_file, error_messages)
+        step7(work_dir, error_file, error_messages)
 
 
 def step1(preorigcopy_dir, work_dir):
@@ -85,27 +94,30 @@ def step2(work_dir, error_file, error_messages):
             continue
 
         # Check if file is UTF-8 encoded
-        error, error_messages = utils.is_not_utf8_encoded(input_file, error_messages)
-        # If there is an error, try to convert iso-encoded file to utf8-encoded files
+        error = utils.is_not_utf8_encoded(input_file, error_messages)
+        # If there is an error, try to convert to an iso-encoded file
         if error:
             # Check if file is ISO encoded
-            error, error_messages = utils.is_not_iso_encoded(input_file, error_messages)
+            error = utils.is_not_iso_encoded(input_file, error_messages)
             # If the file can be read ISO encoded, try to convert to UTF-8
             if not error:
                 fixed_file = utils.get_fixed_file(input_file)
-                error, error_messages = utils.convert_iso_to_utf8(
+                error = utils.convert_iso_to_utf8(
                     input_file, fixed_file, error_messages
                 )
         else:
             # Copy the original file which is already utf-8 encoded
-            error, error_messages = utils.remove_empty_rows_cols(
+            error = utils.remove_empty_rows_cols(
                 input_file, output_file, error_messages
             )
 
         if error:
             # Create a "_tofix" file for manual fixing
-            error_messages = utils.save_tofix_version(input_file, error_file, error_messages)
+            utils.save_tofix_version(input_file, error_file, error_messages)
 
+        # TODO??
+        #utils.update_error_file(error_file, input_file, error_messages)
+        
     return error_messages
 
 
@@ -121,15 +133,18 @@ def step3(work_dir, error_file, error_messages):
 
         if "_DICT_" in input_file:
             # Check DICT file for mandatory columns
-            error, error_messages = utils.check_dict(input_file, error_messages)
+            error = utils.check_dict(input_file, error_messages)
             if error:
                 # Create a "_tofix" file for manual fixing
-                error_messages = utils.save_tofix_version(input_file, error_file, error_messages)
+                utils.save_tofix_version(input_file, error_file, error_messages)
             else:
-                error_messages = utils.save_next_version(input_file, output_file, error_file, error_messages)
+                utils.save_next_version(input_file, output_file, error_file, error_messages)
         else:
             # DATA and META files are passed through to the next step
-            error_messages = utils.save_next_version(input_file, output_file, error_file, error_messages)
+            utils.save_next_version(input_file, output_file, error_file, error_messages)
+
+        # TODO??
+        #utils.update_error_file(error_file, filename, error_messages)
 
     return error_messages
 
@@ -143,34 +158,32 @@ def step4(work_dir, error_file, error_messages):
             shutil.copyfile(meta_file, meta_output_file)
 
         data_file = dict_file.replace("DICT", "DATA")
-        #print("step4: data_file:", data_file, utils.get_input_file(data_file))
+
         if not (data_file := utils.get_input_file(data_file)):
             continue
         if not (dict_file := utils.get_input_file(dict_file)):
             continue
 
-        #print("step3:", data_file, dict_file)
         # Proceed only if the input files are newer than the output file
         dict_output_file = utils.get_output_file(dict_file)
         data_output_file = utils.get_output_file(data_file)
-        if (not utils.is_newer(dict_file, dict_output_file)) and (not utils.is_newer(data_file, data_output_file)):
+        if ((not utils.is_newer(dict_file, dict_output_file)) and 
+            (not utils.is_newer(data_file, data_output_file))):
             continue
 
-        # # Copy DATA file to the next version
-        # error_messages = utils.save_next_version_without_none(data_file, data_output_file, error_file, error_messages)
-        # utils.save_error_file(error_messages, error_file)
-
         # Match data fields to data elements in the dictionary files
-        error, error_messages = utils.data_dict_matcher(
+        error = utils.data_dict_matcher(
             data_file, dict_file, error_file, error_messages
         )
         if error:
-            print("step4: tofix:", dict_file)
-            error_messages = utils.save_tofix_version(dict_file, error_file, error_messages)
+            utils.save_tofix_version(dict_file, error_file, error_messages)
 
         # Copy DATA file to the next version
-        error_messages = utils.save_next_version_without_none(data_file, data_output_file, error_file, error_messages)
+        utils.save_next_version_without_none(data_file, data_output_file, error_file, error_messages)
         utils.save_error_file(error_messages, error_file)
+
+        # TODO??
+        #utils.update_error_file(error_file, filename, error_messages)
 
             
     return error_messages
@@ -200,37 +213,40 @@ def step5(work_dir, error_file, error_messages, meta_data_template_path):
         # 
         any_error = False
         # Check for missing values in mandatory DICT fields
-        error, error_messages = utils.check_missing_values(dict_file, error_messages)
+        error = utils.check_missing_values(dict_file, error_messages)
         if error:
-            error_messages = utils.save_tofix_version(data_file, error_file, error_messages)
+            utils.save_tofix_version(dict_file, error_file, error_messages)
             any_error = True
 
         # Check for valid field types in the DICT file
-        error, error_messages = utils.check_field_types(dict_file, error_messages)
+        error = utils.check_field_types(dict_file, error_messages)
         if error:
-            error_messages = utils.save_tofix_version(data_file, error_file, error_messages)
+            utils.save_tofix_version(dict_file, error_file, error_messages)
+            any_error = True
+
+        # Check provenance column for proper format
+        error = utils.check_provenance(dict_file, error_messages)
+        if error:
+            utils.save_tofix_version(dict_file, error_file, error_messages)
             any_error = True
 
         # Check if the data types in the DATA file match the data types specified in the DICT file
-        error, error_messages = utils.check_data_type(data_file, dict_file, error_messages)
+        error = utils.check_data_type(data_file, dict_file, error_messages)
         if error:
             # The error could either be in the DATA or DICT file
-            error_messages = utils.save_tofix_version(data_file, error_file, error_messages)
-            error_messages = utils.save_tofix_version(dict_file, error_file, error_messages)
-            print("step5: data type errors")
+            utils.save_tofix_version(data_file, error_file, error_messages)
+            utils.save_tofix_version(dict_file, error_file, error_messages)
             any_error = True
 
         # Check if the enumerated values used in the DATA file match the enumerations in the DICT file
-        error, error_messages = utils.check_enums(data_file, dict_file, error_messages)
+        error = utils.check_enums(data_file, dict_file, error_messages)
         if error:
-            error_messages = utils.save_tofix_version(data_file, error_file, error_messages)
-            print("step5: enum errors")
+            utils.save_tofix_version(data_file, error_file, error_messages)
             any_error = True 
 
-        
         if not any_error:
             # Use the metadata templates and combine them with data from the DATA file to create an updated META file
-            error, error_messages = utils.update_meta_data(
+            error = utils.update_meta_data(
                 meta_file,
                 meta_output_file,
                 meta_data_template_path,
@@ -238,14 +254,80 @@ def step5(work_dir, error_file, error_messages, meta_data_template_path):
                 error_messages,
             )
             if error:
-                error_messages = utils.save_tofix_version(meta_file, error_file, error_messages)
-            else:
-                error_messages = utils.save_next_version(meta_file, meta_output_file, error_file, error_messages)
+                utils.save_tofix_version(meta_file, error_file, error_messages)
 
-            error_messages = utils.save_next_version(dict_file, dict_output_file, error_file, error_messages)
-            error_messages = utils.save_next_version(data_file, data_output_file, error_file, error_messages)
+            utils.save_next_version(dict_file, dict_output_file, error_file, error_messages)
+            utils.save_next_version(data_file, data_output_file, error_file, error_messages)
+
+        # TODO??
+        #utils.update_error_file(error_file, filename, error_messages)
+            
+    utils.save_error_file(error_messages, error_file)
 
     return error_messages
+
+
+def step6(work_dir, error_file, error_messages):
+    for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_DICT_5.csv")):
+        # Copy META file to the next version
+        meta_file = dict_file.replace("DICT", "META")
+        if not (meta_file := utils.get_input_file(meta_file)):
+            continue
+        meta_output_file = utils.get_output_file(meta_file)
+        if utils.is_newer(meta_file, meta_output_file):
+            shutil.copyfile(meta_file, meta_output_file)
+
+        # Copy DATA file to the next version
+        data_file = dict_file.replace("DICT", "DATA")
+        if not (data_file := utils.get_input_file(data_file)):
+            continue
+        data_output_file = utils.get_output_file(data_file)
+        if utils.is_newer(data_file, data_output_file):
+            shutil.copyfile(data_file, data_output_file)
+
+        if not (dict_file := utils.get_input_file(dict_file)):
+            continue
+
+        # Proceed only if the input files are newer than the output file
+        dict_output_file = utils.get_output_file(dict_file)
+        if not utils.is_newer(dict_file, dict_output_file):
+            continue
+
+        utils.update_dict_file(dict_file, dict_output_file)
+
+        # TODO??
+        #utils.update_error_file(error_file, filename, error_messages)
+
+            
+    return error_messages
+
+
+def step7(work_dir, error_file, error_messages):
+    for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_DICT_6.csv")):
+        # Copy META file to the next version
+        meta_file = dict_file.replace("DICT", "META")
+        if not (meta_file := utils.get_input_file(meta_file)):
+            continue
+        meta_output_file = utils.get_output_file(meta_file)
+        if utils.is_newer(meta_file, meta_output_file):
+            shutil.copyfile(meta_file, meta_output_file)
+
+        # Copy DATA file to the next version
+        data_file = dict_file.replace("DICT", "DATA")
+        if not (data_file := utils.get_input_file(data_file)):
+            continue
+        data_output_file = utils.get_output_file(data_file)
+        if utils.is_newer(data_file, data_output_file):
+            shutil.copyfile(data_file, data_output_file)
+
+        # Process DICT file
+        if not (dict_file := utils.get_input_file(dict_file)):
+            continue
+        dict_output_file = utils.get_output_file(dict_file)
+        if not utils.is_newer(dict_file, dict_output_file):
+            continue
+
+        utils.convert_dict(dict_file, dict_output_file)
 
 
 if __name__ == "__main__":
