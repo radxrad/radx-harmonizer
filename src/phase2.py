@@ -179,8 +179,8 @@ def step4(work_dir, error_file, error_messages):
         error = utils.data_dict_matcher(
             data_file, dict_file, error_file, error_messages
         )
-        if error:
-            utils.save_tofix_version(dict_file, error_file, error_messages)
+        # if error:
+        #     utils.save_tofix_version(dict_file, error_file, error_messages)
 
         # Copy DATA file to the next version
         utils.save_next_version_without_none(data_file, data_output_file, error_file, error_messages)

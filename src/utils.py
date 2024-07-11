@@ -830,6 +830,7 @@ def update_meta_data(
 
     # Create additional rows for metadata file
     data_file_name = os.path.basename(data_file)
+    data_file_name = data_file_name.replace("_DATA_7.csv", "DATA_origcopy.csv")
     data_dictionary_file_name = data_file_name.replace("_DATA_", "_DICT_")
     additional_rows = [
         {"Field": "specimen_type_used", "Value": specimen_type_used},
@@ -932,6 +933,11 @@ def data_dict_matcher(data_file, dict_file, error_file, error_messages):
         # TODO if the missing data element is part of the harmonized RADx-rad data elements, it doesn't need to be filled in here!!!1
         error = append_warning(message, dict_file, error_messages)
         tofix_file = get_tofix_file(dict_file)
+        # reorder the dictionary data elements to match the order in the data file
+        dictionary = reorder_data_dictionary(dictionary, list(data.columns))
+        print("Updated dict file:", tofix_file)
+        print(dictionary[["Variable / Field Name"]].to_string())
+
         dictionary.to_csv(tofix_file, index=False)
     else:
         # reorder the dictionary data elements to match the order in the data file
@@ -957,7 +963,10 @@ def add_missing_data_elements(dictionary, missing_data_elements):
 
     # append the new rows to the dictionary
     new_rows_df = pd.DataFrame(new_rows)
+    print("add_missing_data_elements:")
+    print(new_rows_df.to_string())
     dictionary = pd.concat([dictionary, new_rows_df], ignore_index=True)
+    print("Updated dict:", dictionary.to_string())
 
     return dictionary
 
