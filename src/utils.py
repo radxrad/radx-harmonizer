@@ -73,7 +73,6 @@ def append_error(message, filename, error_messages):
         }
     )
     return True
-    #return error_messages
 
 
 def append_warning(message, filename, error_messages):
@@ -85,6 +84,12 @@ def append_warning(message, filename, error_messages):
         }
     )
     return True
+
+
+def save_error_messages(error_file, error_messages):
+    errors = pd.DataFrame(error_messages)
+    errors.sort_values("filename", inplace=True)
+    errors.to_csv(error_file, index=False)
 
 
 def file_is_missing(directory, error_messages):
@@ -552,7 +557,7 @@ def check_field_types(filename, error_messages):
     invalid_field_types = field_types - ALLOWED_TYPES
     error = False
     if len(invalid_field_types) > 0:
-        message = f"Invalid Field Types: {list(invalid_field_types)}"
+        message = f"Invalid field types: {list(invalid_field_types)}"
         error = append_error(message, filename, error_messages)
         #error = True
 
@@ -578,8 +583,22 @@ def save_next_version_without_none(input_file, output_file, error_file, error_me
     data.fillna("",inplace=True)
     data.to_csv(output_file, index=False)
 
-    
+
+def remove_na(input_file, output_file):
+    data = pd.read_csv(input_file, dtype=str, keep_default_na=False, skip_blank_lines=False)
+    data.replace(NULL_VALUES, "", inplace=True)
+    # Add warning messages for columns with "null" values
+    # for column in list(data.columns):
+    #     types = get_column_type(data, column)
+    #     for col_type in types:
+    #         if col_type in NULL_VALUES:      
+    data.fillna("",inplace=True)
+    data.to_csv(output_file, index=False)
+
+
 def check_data_type(data_file, dict_file, error_messages):
+    remove_na(data_file, data_file)
+    
     data = pd.read_csv(
         data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
     )
@@ -599,21 +618,15 @@ def check_data_type(data_file, dict_file, error_messages):
             # Integer values are ok in float columns
             if dict_type == "float" and types[0] == "integer":
                 continue
-            message = f"Invalid data type in column: {column}: {types[0]} in DATA vs. {dict_type} in DICT"
-            #print("check_data_type:", message, data_file, dict_file)
-            error = append_error(message, data_file, error_messages)
-            message = f"Invalid data type in column: {column}: {dict_type} in DICT vs. {types[0]} in DATA"
+            message = f"Invalid data type in column: {column}: '{dict_type}' in DICT vs. '{types[0]}' in DATA"
             error = append_error(message, dict_file, error_messages)
-            #error = True
         elif len(types) > 1:
             # mixed types are ok if the type in the dictionary is defined as string
             if dict_type == "string":
                 continue
             else:
-                message = f"Mixed data types in column: {column}: {types} in DATA vs. {dict_type} IN DICT"
+                message = f"Mixed data types in column: {column}: '{types}' in DATA vs. '{dict_type}' IN DICT"
                 error = append_error(message, data_file, error_messages)
-                error = append_error(message, dict_file, error_messages)
-                #error = True
 
     return error
 
@@ -830,7 +843,7 @@ def update_meta_data(
 
     # Create additional rows for metadata file
     data_file_name = os.path.basename(data_file)
-    data_file_name = data_file_name.replace("_DATA_7.csv", "DATA_origcopy.csv")
+    data_file_name = data_file_name.replace("_DATA.csv", "DATA_origcopy.csv")
     data_dictionary_file_name = data_file_name.replace("_DATA_", "_DICT_")
     additional_rows = [
         {"Field": "specimen_type_used", "Value": specimen_type_used},
@@ -929,15 +942,12 @@ def data_dict_matcher(data_file, dict_file, error_file, error_messages):
         #error = True
         # add placeholders for the missing data elements
         dictionary = add_missing_data_elements(dictionary, missing_data_elements)
-        message = f"Added DICT missing data elements in _tofix file: {missing_data_elements}, fill in fields"
+        message = f"Added DICT missing data elements in _tofile: {missing_data_elements}, fill in fields"
         # TODO if the missing data element is part of the harmonized RADx-rad data elements, it doesn't need to be filled in here!!!1
         error = append_warning(message, dict_file, error_messages)
         tofix_file = get_tofix_file(dict_file)
         # reorder the dictionary data elements to match the order in the data file
         dictionary = reorder_data_dictionary(dictionary, list(data.columns))
-        print("Updated dict file:", tofix_file)
-        print(dictionary[["Variable / Field Name"]].to_string())
-
         dictionary.to_csv(tofix_file, index=False)
     else:
         # reorder the dictionary data elements to match the order in the data file
@@ -945,6 +955,43 @@ def data_dict_matcher(data_file, dict_file, error_file, error_messages):
         output_file = get_output_file(dict_file)
         dictionary.to_csv(output_file, index=False)
         error_messages = update_error_file(error_file, dict_file, error_messages)
+
+    return error
+
+
+def data_dict_matcher_new(data_file, dict_file, error_file, error_messages):
+    data = pd.read_csv(
+        data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
+    )
+    dictionary = pd.read_csv(
+        dict_file, dtype=str, keep_default_na=False, skip_blank_lines=False
+    )
+
+    # remove extra data elements in the dictionary that not present in the data file
+    data_fields = set(data.columns)
+    dictionary = dictionary[dictionary["Variable / Field Name"].isin(data_fields)]
+
+    # check for missing data element (data fields that are not present in the dictionary)
+    data_elements = set(dictionary["Variable / Field Name"].tolist())
+    missing_data_elements = list(data_fields - data_elements)
+
+    error = False
+    if len(missing_data_elements) > 0:
+        message = f"DICT file is missing data elements: {missing_data_elements}"
+        error = append_error(message, dict_file, error_messages)
+        #error = True
+        # add placeholders for the missing data elements
+        dictionary = add_missing_data_elements(dictionary, missing_data_elements)
+        message = f"Added missing data elements {missing_data_elements}, fill in definitions"
+        # TODO if the missing data element is part of the harmonized RADx-rad data elements, it doesn't need to be filled in here!!!1
+        error = append_warning(message, dict_file, error_messages)
+        # reorder the dictionary data elements to match the order in the data file
+        dictionary = reorder_data_dictionary(dictionary, list(data.columns))
+        dictionary.to_csv(dict_file, index=False)
+    else:
+        # reorder the dictionary data elements to match the order in the data file
+        dictionary = reorder_data_dictionary(dictionary, list(data.columns))
+        dictionary.to_csv(dict_file, index=False)
 
     return error
 
@@ -963,10 +1010,7 @@ def add_missing_data_elements(dictionary, missing_data_elements):
 
     # append the new rows to the dictionary
     new_rows_df = pd.DataFrame(new_rows)
-    print("add_missing_data_elements:")
-    print(new_rows_df.to_string())
     dictionary = pd.concat([dictionary, new_rows_df], ignore_index=True)
-    print("Updated dict:", dictionary.to_string())
 
     return dictionary
 
