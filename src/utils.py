@@ -316,12 +316,12 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
         keep_default_na=False,
         skip_blank_lines=False,
     )
-    # TODO remove whitespace from the header
 
     # remove leading and trailing whitespace
-    data = data.map(lambda x: x.strip())
-    # in Pandas < 2.1.0
-    # data = data.applymap(lambda x: x.strip())
+    if pd.__version__ < "2.1.0":
+        data = data.applymap(lambda x: x.strip())
+    else:
+        data = data.map(lambda x: x.strip())
     
     # identify rows with all empty strings
     empty_row_mask = data.eq("").all(axis=1)
@@ -345,6 +345,20 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
 
     data.to_csv(output_file, index=False)
     return False
+
+
+def remove_spaces_from_header(filename):
+    df = pd.read_csv(filename, dtype=str, keep_default_na=False, skip_blank_lines=False)
+
+    has_spaces = False
+    for col in df.columns:
+        col_stripped = col.strip()
+        if col != col_stripped:
+            has_spaces = True
+            df.rename(columns={col, col_stripped}, inplace=True)
+
+    if has_spaces:
+        df.to_csv(filename, index=False)
 
 
 def remove_unnamed_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -452,14 +466,14 @@ def create_error_summary(data_path, error_filename):
 
     # Create error file summary
     error_df = pd.DataFrame(error_dict)
-    error_df.to_csv(os.path.join(data_path, error_filename), index=False)
+    error_summary_filename = error_filename.replace(".csv", "_summary.csv")
+    error_df.to_csv(os.path.join(data_path, error_summary_filename), index=False)
     
     # Create comprehensive data file with all error messages
     error_df_all = pd.concat(error_all)
-    all_error_filename = error_filename.replace(".csv", "_all.csv")
-    error_df_all.to_csv(os.path.join(data_path, all_error_filename), index=False)
+    error_details_filename = error_summary_file = error_filename.replace(".csv", "_details.csv")
+    error_df_all.to_csv(os.path.join(data_path, error_details_filename), index=False)
     
-
 
 def save_error_file(error_messages, error_file):
     df = pd.DataFrame(error_messages)
@@ -525,18 +539,24 @@ def check_dict(filename, error_messages):
     if len(missing_columns) > 0:
         message = f"Missing columns: {missing_columns}"
         error = append_error(message, filename, error_messages)
-        #error = True
 
     # Find unexpected columns
-    unexpected_columns = columns - ALL_COLUMNS
-    if len(unexpected_columns) > 0:
-        message = f"Unexpected columns: {unexpected_columns}, can be ignored, unless they are typos"
-        append_warning(message, filename, error_messages)
-        #error = True
+    # unexpected_columns = columns - ALL_COLUMNS
+    # if len(unexpected_columns) > 0:
+    #     message = f"Unexpected columns: {unexpected_columns}, can be ignored, unless they are typos"
+    #     append_warning(message, filename, error_messages)
+    #     #error = True
 
     return error
 
 
+def fix_units(filename):
+    df = pd.read_csv(filename, dtype=str, keep_default_na=False, skip_blank_lines=False)
+    if "Units" in df.columns:
+        df.rename(columns={"Units": "Unit"}, inplace=True)
+        df.to_csv(filename, index=False)
+
+    
 def check_missing_values(filename, error_messages):
     df = pd.read_csv(filename, dtype=str, keep_default_na=False, skip_blank_lines=False)
     error = False
@@ -547,7 +567,6 @@ def check_missing_values(filename, error_messages):
         if num_empty_rows > 0:
             message = f"Column: `{field_name}` has {num_empty_rows} empty values out of {df.shape[0]} rows"
             error = append_error(message, filename, error_messages)
-            #error = True
 
     return error
 

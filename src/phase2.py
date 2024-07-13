@@ -4,8 +4,9 @@ import sys
 import glob
 import pathlib
 import shutil
-import utils
+from datetime import datetime
 import argparse
+import utils
 
 # File paths on AWS
 # DATA_DIR = "r:\data_harmonized"
@@ -110,16 +111,20 @@ def step2(work_dir, error_file, error_messages):
         error = utils.is_not_utf8_encoded(input_file, error_messages)
 
         if not error:
+            # Remove space from header to make sure they can be mapped to data elements
+            utils.remove_spaces_from_header(input_file)
             # Copy the original file and remove any empty rows and columns
             error = utils.remove_empty_rows_cols(
                 input_file, input_file, error_messages
-            )
+            )         
         
     return error_messages
 
 
 def step3(work_dir, error_file, error_messages):
-    for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):       
+    for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
+        # Some DICT files contain a Units column. Rename it to Unit.
+        utils.fix_units(input_file)
         # Check DICT file for mandatory columns
         error = utils.check_dict(input_file, error_messages)
 
@@ -217,8 +222,9 @@ def main(include, exclude, reset):
 
     print()
 
-    error_summary = os.path.join(DATA_DIR, "phase2_errors_summary.csv")
-    error_all = os.path.join(DATA_DIR, "phase2_errors_details.csv")
+
+    error_summary = os.path.join(DATA_DIR, f"phase2_errors_summary.csv")
+    error_all = os.path.join(DATA_DIR, f"phase2_errors_details.csv")
     phase2_checker(DATA_DIR, include, exclude, META_DIR, HARMONIZED_DICT, reset)
 
     print()
