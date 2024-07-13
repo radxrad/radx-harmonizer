@@ -59,7 +59,8 @@ NULL_VALUES = ["N/A", "NA", "NULL", "NaN", "None", "n/a", "nan", "null"]
 enum_pattern_int = r"(\d+),\s*([^|]+)\s*(?:\||$)"  # Example: 1, Male | 2, Female | 3, Intersex | 4, None of these describe me
 enum_pattern_str = r"([A-Z]+),\s*([^|]+)\s*(?:\||$)"  # Example: AL, Alabama | AK, Alaska | AS, American Samoa
 
-column_map = {"Variable / Field Name": "Id", "Field Label": "Label", "Section Header": "Section", "Field Type": "Datatype", "Unit": "Unit", "Units": "Unit", "Choices, Calculations, OR Slider Labels": "Enumeration", "Field Note": "Notes", "CDE Reference": "Provenance"}
+column_map = {"Variable / Field Name": "Id", "Section Header": "Section", "Field Type": "Datatype", "Field Label": "Label", 
+              "Choices, Calculations, OR Slider Labels": "Enumeration", "Field Note": "Notes", "Unit": "Unit", "CDE Reference": "Provenance"}
 
 # Field names that contain specimen information
 SPECIMEN_COLUMNS = ["specimen_type", "virus_sample_type", "sample_media", "sample_type"]
@@ -843,7 +844,7 @@ def update_meta_data(
 
     # Create additional rows for metadata file
     data_file_name = os.path.basename(data_file)
-    data_file_name = data_file_name.replace("_DATA.csv", "DATA_origcopy.csv")
+    data_file_name = data_file_name.replace("_DATA.csv", "_DATA_origcopy.csv")
     data_dictionary_file_name = data_file_name.replace("_DATA_", "_DICT_")
     additional_rows = [
         {"Field": "specimen_type_used", "Value": specimen_type_used},
@@ -919,19 +920,64 @@ def fix_dict_columns(dictionary, field_names):
 
 
     
-def data_dict_matcher(data_file, dict_file, error_file, error_messages):
+# def data_dict_matcher(data_file, dict_file, error_file, error_messages):
+#     data = pd.read_csv(
+#         data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
+#     )
+#     dictionary = pd.read_csv(
+#         dict_file, dtype=str, keep_default_na=False, skip_blank_lines=False
+#     )
+
+#     # remove extra data elements in the dictionary that not present in the data file
+#     data_fields = set(data.columns)
+#     dictionary = dictionary[dictionary["Variable / Field Name"].isin(data_fields)]
+
+#     # check for missing data element (data fields that are not present in the dictionary)
+#     data_elements = set(dictionary["Variable / Field Name"].tolist())
+#     missing_data_elements = list(data_fields - data_elements)
+
+#     error = False
+#     if len(missing_data_elements) > 0:
+#         message = f"DICT file is missing data elements: {missing_data_elements}"
+#         error = append_error(message, dict_file, error_messages)
+#         #error = True
+#         # add placeholders for the missing data elements
+#         dictionary = add_missing_data_elements(dictionary, missing_data_elements)
+#         message = f"Added DICT missing data elements in _tofile: {missing_data_elements}, fill in fields"
+#         # TODO if the missing data element is part of the harmonized RADx-rad data elements, it doesn't need to be filled in here!!!1
+#         error = append_warning(message, dict_file, error_messages)
+#         tofix_file = get_tofix_file(dict_file)
+#         # reorder the dictionary data elements to match the order in the data file
+#         dictionary = reorder_data_dictionary(dictionary, list(data.columns))
+#         dictionary.to_csv(tofix_file, index=False)
+#     else:
+#         # reorder the dictionary data elements to match the order in the data file
+#         dictionary = reorder_data_dictionary(dictionary, list(data.columns))
+#         output_file = get_output_file(dict_file)
+#         dictionary.to_csv(output_file, index=False)
+#         error_messages = update_error_file(error_file, dict_file, error_messages)
+
+#     return error
+
+
+def data_dict_matcher_new(data_file, dict_file, harmonized_dict, error_file, error_messages):
     data = pd.read_csv(
         data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
     )
     dictionary = pd.read_csv(
         dict_file, dtype=str, keep_default_na=False, skip_blank_lines=False
     )
+    # Add missing columns and remove extraneous columns
+    dictionary = fix_dictionary_columns(dictionary)
 
-    # remove extra data elements in the dictionary that not present in the data file
+    # Add latest version of the harmonized data elements (they will replace any older versions)
+    dictionary = add_harmonized_data_elements(dictionary, harmonized_dict)
+
+    # Remove extra data elements in the dictionary that not present in the data file
     data_fields = set(data.columns)
     dictionary = dictionary[dictionary["Variable / Field Name"].isin(data_fields)]
 
-    # check for missing data element (data fields that are not present in the dictionary)
+    # Check for missing data element (data fields that are not present in the dictionary)
     data_elements = set(dictionary["Variable / Field Name"].tolist())
     missing_data_elements = list(data_fields - data_elements)
 
@@ -939,61 +985,37 @@ def data_dict_matcher(data_file, dict_file, error_file, error_messages):
     if len(missing_data_elements) > 0:
         message = f"DICT file is missing data elements: {missing_data_elements}"
         error = append_error(message, dict_file, error_messages)
-        #error = True
-        # add placeholders for the missing data elements
-        dictionary = add_missing_data_elements(dictionary, missing_data_elements)
-        message = f"Added DICT missing data elements in _tofile: {missing_data_elements}, fill in fields"
-        # TODO if the missing data element is part of the harmonized RADx-rad data elements, it doesn't need to be filled in here!!!1
-        error = append_warning(message, dict_file, error_messages)
-        tofix_file = get_tofix_file(dict_file)
-        # reorder the dictionary data elements to match the order in the data file
-        dictionary = reorder_data_dictionary(dictionary, list(data.columns))
-        dictionary.to_csv(tofix_file, index=False)
-    else:
-        # reorder the dictionary data elements to match the order in the data file
-        dictionary = reorder_data_dictionary(dictionary, list(data.columns))
-        output_file = get_output_file(dict_file)
-        dictionary.to_csv(output_file, index=False)
-        error_messages = update_error_file(error_file, dict_file, error_messages)
 
-    return error
-
-
-def data_dict_matcher_new(data_file, dict_file, error_file, error_messages):
-    data = pd.read_csv(
-        data_file, dtype=str, keep_default_na=False, skip_blank_lines=False
-    )
-    dictionary = pd.read_csv(
-        dict_file, dtype=str, keep_default_na=False, skip_blank_lines=False
-    )
-
-    # remove extra data elements in the dictionary that not present in the data file
-    data_fields = set(data.columns)
-    dictionary = dictionary[dictionary["Variable / Field Name"].isin(data_fields)]
-
-    # check for missing data element (data fields that are not present in the dictionary)
-    data_elements = set(dictionary["Variable / Field Name"].tolist())
-    missing_data_elements = list(data_fields - data_elements)
-
-    error = False
-    if len(missing_data_elements) > 0:
-        message = f"DICT file is missing data elements: {missing_data_elements}"
-        error = append_error(message, dict_file, error_messages)
-        #error = True
         # add placeholders for the missing data elements
         dictionary = add_missing_data_elements(dictionary, missing_data_elements)
         message = f"Added missing data elements {missing_data_elements}, fill in definitions"
-        # TODO if the missing data element is part of the harmonized RADx-rad data elements, it doesn't need to be filled in here!!!1
         error = append_warning(message, dict_file, error_messages)
-        # reorder the dictionary data elements to match the order in the data file
-        dictionary = reorder_data_dictionary(dictionary, list(data.columns))
-        dictionary.to_csv(dict_file, index=False)
-    else:
-        # reorder the dictionary data elements to match the order in the data file
-        dictionary = reorder_data_dictionary(dictionary, list(data.columns))
-        dictionary.to_csv(dict_file, index=False)
+
+    # Drop duplicate data elements
+    dictionary.drop_duplicates(subset="Variable / Field Name", inplace=True)
+    
+    # Reorder the dictionary data elements to match the order in the data file
+    dictionary = reorder_data_dictionary(dictionary, list(data.columns))
+    dictionary.to_csv(dict_file, index=False)
 
     return error
+
+
+def fix_dictionary_columns(dictionary):
+    # Rename Units to Unit (Units was used by some projects)
+    dictionary = dictionary.rename(columns={"Units": "Unit"})
+
+    # Add any missing columns
+    actual_cols = set(dictionary.columns)
+    required_cols = set(column_map.keys())
+    missing_cols = required_cols - actual_cols
+    for col in missing_cols:
+        dictionary[col] = ""
+
+    # Remove extraneous columns and reorder columns
+    dictionary = dictionary[column_map.keys()]
+
+    return dictionary
 
 
 def add_missing_data_elements(dictionary, missing_data_elements):
@@ -1012,6 +1034,13 @@ def add_missing_data_elements(dictionary, missing_data_elements):
     new_rows_df = pd.DataFrame(new_rows)
     dictionary = pd.concat([dictionary, new_rows_df], ignore_index=True)
 
+    return dictionary
+
+
+def add_harmonized_data_elements(dictionary, harmonized_dict):
+    dictionary_harmonized = pd.read_csv(harmonized_dict, dtype=str, keep_default_na=False)
+    dictionary = pd.concat([dictionary_harmonized, dictionary], ignore_index=True)
+    
     return dictionary
 
 

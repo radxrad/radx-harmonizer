@@ -7,24 +7,20 @@ import shutil
 import utils
 import argparse
 
-# required and optional fields in the RADx-rad dictionary files
-# check order, unit later?
-DICT_FIELDS = [
-    "Variable / Field Name",
-    "Field Label",
-    "Section Header",
-    "Field Type",
-    "Unit",
-    "Choices, Calculations, OR Slider Labels",
-    "Field Note",
-    "CDE Reference",
-]
+# File paths on AWS
+# DATA_DIR = "r:\data_harmonized"
+# META_DIR = "r:\meta"]
+# HARMONIZED_DICT = "r:\reference\RADx-rad_HARMONIZED_DICT_2024-07-12.csv"
 
+# File paths local
+DATA_DIR = "../data_harmonized"
+META_DIR = "../meta"
+HARMONIZED_DICT = "../reference/RADx-rad_HARMONIZED_DICT_2024-07-12.csv"
 
-def phase2_checker(data_path, include_dirs, exclude_dirs, meta_data_template_path, clean_start=False):
-    directories = get_directories(data_path, include_dirs, exclude_dirs)
-    
-    #directories = glob.glob(os.path.join(data_path, "rad_*_*-*"))
+ERROR_FILE_NAME = "phase2_errors.csv"
+
+def phase2_checker(DATA_DIR, include_dirs, exclude_dirs, META_DIR, HARMONIZED_DICT, reset=False):
+    directories = get_directories(DATA_DIR, include_dirs, exclude_dirs)
 
     for directory in directories:
         path = pathlib.PurePath(directory)
@@ -32,8 +28,8 @@ def phase2_checker(data_path, include_dirs, exclude_dirs, meta_data_template_pat
         work_dir = os.path.join(directory, "work")
 
         # Skip and directories with Phase 1 errors
-        phase1_error_file_name = "phase1_errors.csv"
-        phase1_error_file = os.path.join(work_dir, phase1_error_file_name)
+        phase1_error_file = "phase1_errors.csv"
+        phase1_error_file = os.path.join(work_dir, phase1_error_file)
         if os.path.exists(phase1_error_file):
             print(f"skipping: {directory} due to Phase I errors")
             continue
@@ -41,13 +37,12 @@ def phase2_checker(data_path, include_dirs, exclude_dirs, meta_data_template_pat
         print(f"checking: {directory}")
         
         # Create work directory
-        if clean_start:
+        if reset:
             shutil.rmtree(work_dir, ignore_errors=True)
         os.makedirs(work_dir, exist_ok=True)
 
         # Clean up error file from a previous run
-        error_file_name = "phase2_errors.csv"
-        error_file = os.path.join(work_dir, error_file_name)
+        error_file = os.path.join(work_dir, ERROR_FILE_NAME)
 
         if os.path.exists(error_file):
             os.remove(error_file)
@@ -65,12 +60,12 @@ def phase2_checker(data_path, include_dirs, exclude_dirs, meta_data_template_pat
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             continue
-        step4(work_dir, error_file, error_messages)
+        step4(work_dir, error_file, error_messages, HARMONIZED_DICT)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             continue
         step5(
-            work_dir, error_file, error_messages, meta_data_template_path
+            work_dir, error_file, error_messages, META_DIR
         )
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
@@ -85,11 +80,11 @@ def phase2_checker(data_path, include_dirs, exclude_dirs, meta_data_template_pat
             continue
         
     # Create error summary files
-    utils.create_error_summary(data_path, error_file_name)
+    utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
 
 
-def get_directories(data_path, include_dirs, exclude_dirs):
-    all_dirs = glob.glob(os.path.join(data_path, "rad_*_*-*"))
+def get_directories(DATA_DIR, include_dirs, exclude_dirs):
+    all_dirs = glob.glob(os.path.join(DATA_DIR, "rad_*_*-*"))
     if include_dirs:
         return [f for f in all_dirs if os.path.basename(f) in include_dirs]
     elif exclude_dirs:
@@ -113,12 +108,8 @@ def step2(work_dir, error_file, error_messages):
     for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_*.csv")):
         # Check if file is UTF-8 encoded
         error = utils.is_not_utf8_encoded(input_file, error_messages)
-        # If there is an error, try to convert to an iso-encoded file
-        if error:
-            # Check if file is ISO encoded
-            error = utils.is_not_iso_encoded(input_file, error_messages)
-            # If the file can be read ISO encoded, try to convert to UTF-8
-        else:
+
+        if not error:
             # Copy the original file and remove any empty rows and columns
             error = utils.remove_empty_rows_cols(
                 input_file, input_file, error_messages
@@ -135,18 +126,18 @@ def step3(work_dir, error_file, error_messages):
     return error_messages
 
 
-def step4(work_dir, error_file, error_messages):
+def step4(work_dir, error_file, error_messages, HARMONIZED_DICT):
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):  
         # Match data fields to data elements in the dictionary files
         data_file = dict_file.replace("DICT", "DATA")
         error = utils.data_dict_matcher_new(
-            data_file, dict_file, error_file, error_messages
+            data_file, dict_file, HARMONIZED_DICT, error_file, error_messages
         )
             
     return error_messages
 
 
-def step5(work_dir, error_file, error_messages, meta_data_template_path):
+def step5(work_dir, error_file, error_messages, META_DIR):
     for dict_file in glob.glob(os.path.join(work_dir,  "rad_*_*-*_*_DICT.csv")):
         any_error = False
         # Check for missing values in mandatory DICT fields
@@ -178,11 +169,11 @@ def step5(work_dir, error_file, error_messages, meta_data_template_path):
         if not any_error:
             # Use the metadata templates and combine them with data from the DATA file to create an updated META file
             meta_file = dict_file.replace("_DICT.csv", "_META.csv")
-            meta_output_file = dict_file.replace("DICT.csv", "META_converted.csv")
+            meta_output_file = dict_file.replace("_DICT.csv", "_META_origcopy.csv")
             error = utils.update_meta_data(
                 meta_file,
                 meta_output_file,
-                meta_data_template_path,
+                META_DIR,
                 data_file,
                 error_messages,
             )
@@ -199,41 +190,40 @@ def step6(work_dir, error_file, error_messages):
 
 def step7(work_dir, error_file, error_messages):
     for dict_file in glob.glob(os.path.join(work_dir,  "rad_*_*-*_*_DICT.csv")):
-        utils.convert_dict(dict_file, dict_file)
+        dict_output_file = dict_file.replace("_DICT.csv", "_DICT_origcopy.csv")
+        utils.convert_dict(dict_file, dict_output_file)
 
 
 def main(include, exclude, reset):
-    # Convert reset flag
-    if reset:
-        reset = True
-        print("Resetting project")
-    else:
-        reset = False
-
+    print("Phase2: Check and prepare origcopy files.")
+    
     if include and exclude:
         print("Error: The '-include' and '-exclude' arguments cannot be specified at the same time.")
         sys.exit(1)
     elif include:
-        print(f"Included projects: {include}")
+        print(f"including projects: {include}")
     elif exclude:
-        print(f"Excluded projects: {exclude}")
+        print(f"excluding projects: {exclude}")
     else:
         print("Error: Use the '-include' or '-exclude' argument to specify which projects to process.")
         sys.exit(1)
 
-    # Set path to data and metadata directories
-    # directory = "r:\data_harmonized"
-    # meta = "r:\meta"]
-    directory = "../data_harmonized"
-    meta = "../meta"
-    
-    error_summary = os.path.join(directory, "phase2_errors.csv")
-    error_all = os.path.join(directory, "phase2_errors_all.csv")
-    phase2_checker(directory, include, exclude, meta, reset)
-    
-    print(
-        f"Phase 2: Check error summary: {error_summary} and {error_all} for errors in the preorigcopy files."
-    )
+    # Convert reset flag
+    if reset:
+        reset = True
+        print("resetting project files with preorigcopy files")
+    else:
+        reset = False
+
+    print()
+
+    error_summary = os.path.join(DATA_DIR, "phase2_errors_summary.csv")
+    error_all = os.path.join(DATA_DIR, "phase2_errors_details.csv")
+    phase2_checker(DATA_DIR, include, exclude, META_DIR, HARMONIZED_DICT, reset)
+
+    print()
+    print(f"Error summary: {error_summary}")
+    print(f"Error details: {error_all}")
 
 
 if __name__ == '__main__':
