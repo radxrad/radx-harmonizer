@@ -9,18 +9,18 @@ import argparse
 
 # File paths on AWS
 # DATA_DIR = "r:\data_harmonized"
-# META_DIR = "r:\meta"]
-# HARMONIZED_DICT = "r:\reference\RADx-rad_HARMONIZED_DICT_2024-07-12.csv"
+# META_DIR = "r:\meta"
+# HARMONIZED_DICT = "r:\reference\RADx-rad_Harmonized_dict_2024-07-12.csv"
 
 # File paths local
 DATA_DIR = "../data_harmonized"
 META_DIR = "../meta"
-HARMONIZED_DICT = "../reference/RADx-rad_HARMONIZED_DICT_2024-07-12.csv"
+HARMONIZED_DICT = "../reference/RADx-rad_Harmonized_dict_2024-07-12.csv"
 
 ERROR_FILE_NAME = "phase2_errors.csv"
 
-def phase2_checker(DATA_DIR, include_dirs, exclude_dirs, META_DIR, HARMONIZED_DICT, reset=False):
-    directories = get_directories(DATA_DIR, include_dirs, exclude_dirs)
+def phase2_checker(data_dir, include_dirs, exclude_dirs, meta_dir, harmonized_dict, reset=False):
+    directories = get_directories(data_dir, include_dirs, exclude_dirs)
 
     for directory in directories:
         path = pathlib.PurePath(directory)
@@ -60,12 +60,12 @@ def phase2_checker(DATA_DIR, include_dirs, exclude_dirs, META_DIR, HARMONIZED_DI
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             continue
-        step4(work_dir, error_file, error_messages, HARMONIZED_DICT)
+        step4(work_dir, error_file, error_messages, harmonized_dict)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             continue
         step5(
-            work_dir, error_file, error_messages, META_DIR
+            work_dir, error_file, error_messages, meta_dir
         )
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
@@ -80,10 +80,10 @@ def phase2_checker(DATA_DIR, include_dirs, exclude_dirs, META_DIR, HARMONIZED_DI
             continue
         
     # Create error summary files
-    utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
+    utils.create_error_summary(data_dir, ERROR_FILE_NAME)
 
 
-def get_directories(DATA_DIR, include_dirs, exclude_dirs):
+def get_directories(data_dir, include_dirs, exclude_dirs):
     all_dirs = glob.glob(os.path.join(DATA_DIR, "rad_*_*-*"))
     if include_dirs:
         return [f for f in all_dirs if os.path.basename(f) in include_dirs]
@@ -126,7 +126,7 @@ def step3(work_dir, error_file, error_messages):
     return error_messages
 
 
-def step4(work_dir, error_file, error_messages, HARMONIZED_DICT):
+def step4(work_dir, error_file, error_messages, harmonized_dict):
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):  
         # Match data fields to data elements in the dictionary files
         data_file = dict_file.replace("DICT", "DATA")
@@ -137,7 +137,7 @@ def step4(work_dir, error_file, error_messages, HARMONIZED_DICT):
     return error_messages
 
 
-def step5(work_dir, error_file, error_messages, META_DIR):
+def step5(work_dir, error_file, error_messages, meta_dir):
     for dict_file in glob.glob(os.path.join(work_dir,  "rad_*_*-*_*_DICT.csv")):
         any_error = False
         # Check for missing values in mandatory DICT fields
@@ -156,7 +156,7 @@ def step5(work_dir, error_file, error_messages, META_DIR):
             any_error = True
 
         # Check if the data types in the DATA file match the data types specified in the DICT file
-        data_file = dict_file.replace("DICT", "DATA")
+        data_file = dict_file.replace("_DICT.csv", "_DATA.csv")
         error = utils.check_data_type(data_file, dict_file, error_messages)
         if error:
             any_error = True
