@@ -34,7 +34,7 @@ def phase2_checker(data_dir, include_dirs, exclude_dirs, meta_dir, harmonized_di
             print(f"skipping: {directory} due to Phase I errors")
             continue
 
-        print(f"checking: {directory}")
+        print(f"checking: {directory} step: " ,end="")
         
         # Create work directory
         if reset:
@@ -49,46 +49,51 @@ def phase2_checker(data_dir, include_dirs, exclude_dirs, meta_dir, harmonized_di
 
         # Copy preorigcopy files in to work directory
         step1(preorigcopy_dir, work_dir)
+        print("1", end="")
 
         # Run data checks
         error_messages = []
-        any_error = False
         
         step2(work_dir, error_file, error_messages)
+        print(",2", end="")
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
-            any_error = True
+            print(f" - failed: {len(error_messages)} errors")
             continue
         step3(work_dir, error_file, error_messages)
+        print(",3", end="")
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
-            any_error = True
+            print(f" - failed: {len(error_messages)} errors")
             continue
         step4(work_dir, error_file, error_messages, harmonized_dict)
+        print(",4", end="")
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
-            any_error = True
+            print(f" - failed: {len(error_messages)} errors")
             continue
         step5(
             work_dir, error_file, error_messages, meta_dir
         )
+        print(",5", end="")
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
-            any_error = True
+            print(f" - failed: {len(error_messages)} errors")
             continue
         step6(work_dir, error_file, error_messages)
+        print(",6", end="")
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
-            any_error = True
+            print(f" - failed: {len(error_messages)} errors")
             continue
         step7(work_dir, error_file, error_messages)
+        print(",7", end="")
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
-            any_error = True
+            print(f" - failed: {len(error_messages)} errors")
             continue
 
-        if not any_error:
-            print(f"passed error check: {directory}")
+        print(" - passed")
             
     # Create error summary files
     utils.create_error_summary(data_dir, ERROR_FILE_NAME)
