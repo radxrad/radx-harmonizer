@@ -355,7 +355,7 @@ def remove_spaces_from_header(filename):
         col_stripped = col.strip()
         if col != col_stripped:
             has_spaces = True
-            df.rename(columns={col, col_stripped}, inplace=True)
+            df.rename(columns={col: col_stripped}, inplace=True)
 
     if has_spaces:
         df.to_csv(filename, index=False)

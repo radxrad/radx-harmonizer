@@ -24,7 +24,6 @@ def phase2_checker(data_dir, include_dirs, exclude_dirs, meta_dir, harmonized_di
     directories = get_directories(data_dir, include_dirs, exclude_dirs)
 
     for directory in directories:
-        path = pathlib.PurePath(directory)
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
         work_dir = os.path.join(directory, "work")
 
@@ -53,33 +52,44 @@ def phase2_checker(data_dir, include_dirs, exclude_dirs, meta_dir, harmonized_di
 
         # Run data checks
         error_messages = []
+        any_error = False
+        
         step2(work_dir, error_file, error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
+            any_error = True
             continue
         step3(work_dir, error_file, error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
+            any_error = True
             continue
         step4(work_dir, error_file, error_messages, harmonized_dict)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
+            any_error = True
             continue
         step5(
             work_dir, error_file, error_messages, meta_dir
         )
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
+            any_error = True
             continue
         step6(work_dir, error_file, error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
+            any_error = True
             continue
         step7(work_dir, error_file, error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
+            any_error = True
             continue
-        
+
+        if not any_error:
+            print(f"passed error check: {directory}")
+            
     # Create error summary files
     utils.create_error_summary(data_dir, ERROR_FILE_NAME)
 
