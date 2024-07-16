@@ -9,3 +9,5 @@ dependencies:
   - jupyterlab
   - pandas
   - black
+  - pylint
+  - vulture
