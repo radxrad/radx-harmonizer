@@ -77,12 +77,9 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
             continue
-        step6(work_dir, error_messages)
+        step6(work_dir)
         print(",6", end="")
-        if len(error_messages) > 0:
-            utils.save_error_messages(error_file, error_messages)
-            print(f" - failed: {len(error_messages)} errors")
-            continue
+
         step7(work_dir)
         print(",7 - passed")
 
@@ -126,9 +123,9 @@ def step2(work_dir, error_messages):
             # Remove space from header to make sure they can be mapped to data elements
             utils.remove_spaces_from_header(input_file)
             # Copy the original file and remove any empty rows and columns
-            error = utils.remove_empty_rows_cols(input_file, input_file, error_messages)
+            utils.remove_empty_rows_cols(input_file, input_file, error_messages)
 
-    return error_messages
+    #return error_messages
 
 
 def step3(work_dir, error_messages):
@@ -138,7 +135,7 @@ def step3(work_dir, error_messages):
         # Check DICT file for mandatory columns
         utils.check_dict(input_file, error_messages)
 
-    return error_messages
+    #return error_messages
 
 
 def step4(work_dir, error_messages):
@@ -149,7 +146,7 @@ def step4(work_dir, error_messages):
             data_file, dict_file, HARMONIZED_DICT, error_messages
         )
 
-    return error_messages
+    #return error_messages
 
 
 def step5(work_dir, error_messages):
@@ -157,29 +154,24 @@ def step5(work_dir, error_messages):
         any_error = False
         # Check for missing values in mandatory DICT fields
         error = utils.check_missing_values(dict_file, error_messages)
-        if error:
-            any_error = True
+        any_error = any_error or error
 
         # Check for valid field types in the DICT file
         error = utils.check_field_types(dict_file, error_messages)
-        if error:
-            any_error = True
+        any_error = any_error or error
 
         # Check provenance column for proper format
         error = utils.check_provenance(dict_file, error_messages)
-        if error:
-            any_error = True
+        any_error = any_error or error
 
         # Check if the data types in the DATA file match the data types specified in the DICT file
         data_file = dict_file.replace("_DICT.csv", "_DATA.csv")
         error = utils.check_data_type(data_file, dict_file, error_messages)
-        if error:
-            any_error = True
+        any_error = any_error or error
 
         # Check if the enumerated values used in the DATA file match the enumerations in the DICT file
         error = utils.check_enums(data_file, dict_file, error_messages)
-        if error:
-            any_error = True
+        any_error = any_error or error
 
         if not any_error:
             # Use the metadata templates and combine them with data from the DATA file to create an updated META file
@@ -193,14 +185,12 @@ def step5(work_dir, error_messages):
                 error_messages,
             )
 
-    return error_messages
+    #return error_messages
 
 
-def step6(work_dir, error_messages):
+def step6(work_dir):
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         utils.update_dict_file(dict_file, dict_file)
-
-    return error_messages
 
 
 def step7(work_dir):
@@ -239,13 +229,6 @@ def main(include, exclude, reset):
 
     # Run phase 2 check
     phase2_checker(include, exclude, reset)
-
-    # Print error summary
-    error_summary = os.path.join(DATA_DIR, "phase2_errors_summary.csv")
-    error_details = os.path.join(DATA_DIR, "phase2_errors_details.csv")
-    print()
-    print(f"Error summary: {error_summary}")
-    print(f"Error details: {error_details}")
 
 
 if __name__ == "__main__":
