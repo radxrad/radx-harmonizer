@@ -1,12 +1,20 @@
 #!/usr/bin/python3
 import os
 import glob
-import pathlib
 import shutil
 import utils
 
 
-def phase1_checker(data_path, clean_start=False):
+# File paths on AWS
+# DATA_DIR = "r:\data_harmonized"
+
+# File paths local
+DATA_DIR = "../data_harmonized"
+
+ERROR_FILE_NAME = "phase1_errors.csv"
+
+
+def phase1_checker(reset=False):
     """
     Check and validate the contents of directories within a specified path, and manage errors.
 
@@ -35,24 +43,21 @@ def phase1_checker(data_path, clean_start=False):
     check for errors and create error files as necessary.
 
     """
-    error_file_name = "phase1_errors.csv"
-
-    directories = glob.glob(os.path.join(data_path, "rad_*_*-*"))
+    directories = glob.glob(os.path.join(DATA_DIR, "rad_*_*-*"))
 
     for directory in directories:
         print("checking:", directory)
-        path = pathlib.PurePath(directory)
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
         work_dir = os.path.join(directory, "work")
 
-        if clean_start:
+        if reset:
             shutil.rmtree(work_dir, ignore_errors=True)
 
         os.makedirs(work_dir, exist_ok=True)
         os.makedirs(work_dir, exist_ok=True)
 
         # Clean up error file from a previous run
-        error_file = os.path.join(work_dir, error_file_name)
+        error_file = os.path.join(work_dir, ERROR_FILE_NAME)
         if os.path.exists(error_file):
             os.remove(error_file)
 
@@ -73,14 +78,19 @@ def phase1_checker(data_path, clean_start=False):
                 utils.save_error_file(error_messages, error_file)
 
     # Create error summary files
-    utils.create_error_summary(data_path, error_file_name)
+    utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
 
 
 if __name__ == "__main__":
-    directory = "../data_harmonized"
-    error_summary = os.path.join(directory, "phase1_errors.csv")
-    error_all = os.path.join(directory, "phase1_errors_all.csv")
-    phase1_checker(directory, True)
-    print(
-        f"Phase 1: Check error summary: {error_summary} and {error_all} for errors in the preorigcopy files."
+    phase1_checker(True)
+
+    error_summary = os.path.join(
+        DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_summary.csv")
     )
+    error_details = os.path.join(
+        DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_details.csv")
+    )
+
+    print()
+    print(f"Error summary: {error_summary}")
+    print(f"Error details: {error_details}")
