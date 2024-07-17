@@ -84,13 +84,13 @@ def phase1_checker(reset=False):
 if __name__ == "__main__":
     phase1_checker(True)
 
-    error_summary = os.path.join(
-        DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_summary.csv")
-    )
-    error_details = os.path.join(
-        DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_details.csv")
-    )
+    # error_summary = os.path.join(
+    #     DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_summary.csv")
+    # )
+    # error_details = os.path.join(
+    #     DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_details.csv")
+    # )
 
-    print()
-    print(f"Error summary: {error_summary}")
-    print(f"Error details: {error_details}")
+    # print()
+    # print(f"Error summary: {error_summary}")
+    # print(f"Error details: {error_details}")

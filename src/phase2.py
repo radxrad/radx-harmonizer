@@ -36,9 +36,15 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
         print(f"checking: {directory} step: ", end="")
 
         # Create work directory
-        if reset:
-            shutil.rmtree(work_dir, ignore_errors=True)
-        os.makedirs(work_dir, exist_ok=True)
+        # if reset:
+        #     shutil.rmtree(work_dir, ignore_errors=True)
+        try:
+            if reset:
+                shutil.rmtree(work_dir)
+            os.makedirs(work_dir, exist_ok=True)
+        except Exception:
+            print(f"skipping {directory}: error resetting/accessing work directory")
+            continue
 
         # Clean up error file from a previous run
         error_file = os.path.join(work_dir, ERROR_FILE_NAME)
@@ -173,6 +179,10 @@ def step5(work_dir, error_messages):
         error = utils.check_enums(data_file, dict_file, error_messages)
         any_error = any_error or error
 
+        # Check if file that contains minimum CDEs had study_id column. 
+        error = utils.has_study_id(data_file, dict_file, HARMONIZED_DICT)
+        any_error = any_error or error
+        
         if not any_error:
             # Use the metadata templates and combine them with data from the DATA file to create an updated META file
             meta_file = dict_file.replace("_DICT.csv", "_META.csv")

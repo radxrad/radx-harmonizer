@@ -72,6 +72,35 @@ COLUMN_MAP = {
 # Field names that contain specimen information
 SPECIMEN_COLUMNS = ["specimen_type", "virus_sample_type", "sample_media", "sample_type"]
 
+# Standard units
+# see: https://github.com/bmir-radx/radx-data-dictionary-specification/blob/main/radx-data-dictionary-specification.md#field-unit
+# Units for lab tests: https://www.cdc.gov/cliac/docs/addenda/cliac0313/13A_CLIAC_2013March_UnitsOfMeasure.pdf
+STANDARD_UNITS = {
+     "pound": "lb",
+     "kilograms": "kg",
+     "percent": "%",
+     "mMol/L": "mmol/L",
+    # "gm/dL": "g/dL", check rad_023_610-01
+    # "gms.dL": "g/dL", check
+     "beats per minute": "beats/min",
+     "breaths per minute": "breaths/min",
+     "Seconds(s)": "s",
+     "seconds": "s",
+     "sec": "s",
+     "minutes": "min",
+     "days": "d",
+     "months": "month",
+     "years, to tenth percent": "year",
+     "mm/hr": "mm/h", # check
+     "Celsius": "°C",
+     "celsius": "°C",
+     "Â°C": "°C",
+     "centimeters": "cm",
+     "nanometers": "nm",
+     "mmHg": "mm Hg",
+     "free text": "",
+     "N/A": "",
+}
 
 def append_error(message, filename, error_messages):
     error_messages.append(
@@ -982,6 +1011,10 @@ def update_dict_file(dict_file, dict_output_file):
     # Some wastewater projects used Units field instead of Unit field
     dictionary = dictionary.rename(columns={"Units": "Unit"})
 
+    # Standardize units
+    for key, value in STANDARD_UNITS.items():
+        dictionary["Unit"].replace(key, value)
+
     # Fill in empty Section Header and CDE Reference columns
     dictionary["Section Header"] = dictionary["Section Header"].replace(
         "", "Project specific"
@@ -1093,6 +1126,47 @@ def check_provenance(dict_file, error_messages):
         error = append_error(message, dict_file, error_messages)
 
     return error
+
+
+def has_study_id(data_file, dict_file, harmonized_dict):
+    error = False
+    if has_minimum_cdes(dict_file, harmonized_dict):
+        dictionary = pd.read_csv(
+            dict_file,
+            encoding="utf8",
+            dtype=str,
+            keep_default_na=False,
+            skip_blank_lines=False,
+        )
+        field_names = set(dictionary["Variable / Field Name"].to_list())
+        if not "study_id" in field_names:
+            message = ("Minimum CDEs found: 'study_id' column missing or misnamed")
+            error = append_error(message, dict_file, error_messages)
+            error = append_error(message, data_file, error_messages)
+
+    return error
+    
+
+def has_minimum_cdes(dict_file, harmonized_dict):
+    # Read the minimum CDEs (first 46 data elements in the harmonized data dictionary)
+    dictionary_harmonized = pd.read_csv(
+        harmonized_dict,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+        nrows=46
+    )
+    dictionary = pd.read_csv(
+        dict_file,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+
+    min_cdes = dictionary.merge(dictionary_harmonized, on="Variable / Field Name")
+    return min_cdes.shape[0] > 0
 
 
 def split_provenance(provenance):
