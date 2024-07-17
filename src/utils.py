@@ -93,6 +93,7 @@ STANDARD_UNITS = {
      "years, to tenth percent": "year",
      "mm/hr": "mm/h", # check
      "Celsius": "°C",
+     "Celcius": "°C",
      "celsius": "°C",
      "Â°C": "°C",
      "centimeters": "cm",
@@ -1128,7 +1129,7 @@ def check_provenance(dict_file, error_messages):
     return error
 
 
-def has_study_id(data_file, dict_file, harmonized_dict):
+def has_study_id(data_file, dict_file, harmonized_dict, error_messages):
     error = False
     if has_minimum_cdes(dict_file, harmonized_dict):
         dictionary = pd.read_csv(

@@ -180,7 +180,7 @@ def step5(work_dir, error_messages):
         any_error = any_error or error
 
         # Check if file that contains minimum CDEs had study_id column. 
-        error = utils.has_study_id(data_file, dict_file, HARMONIZED_DICT)
+        error = utils.has_study_id(data_file, dict_file, HARMONIZED_DICT, error_messages)
         any_error = any_error or error
         
         if not any_error:
