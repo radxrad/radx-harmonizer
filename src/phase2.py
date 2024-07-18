@@ -109,6 +109,9 @@ def get_directories(include_dirs, exclude_dirs):
 
 def step1(preorigcopy_dir, work_dir):
     for input_file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*.csv")):
+        if "_origcopy.csv" in input_file:
+            continue
+        
         basename = os.path.basename(input_file)
         output_file = os.path.join(
             work_dir, basename.replace("_preorigcopy.csv", ".csv")
@@ -121,6 +124,11 @@ def step1(preorigcopy_dir, work_dir):
 
 
 def step2(work_dir, error_messages):
+    input_files = glob.glob(os.path.join(work_dir, "rad_*_*-*_*_*.csv"))
+    if len(input_files) == 0:
+        print(f"ERROR: Cannot process {work_dir}. No csv files found!")
+        sys.exit(-1)
+
     for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_*.csv")):
         # Check if file is UTF-8 encoded
         error = utils.is_not_utf8_encoded(input_file, error_messages)
@@ -131,8 +139,6 @@ def step2(work_dir, error_messages):
             # Copy the original file and remove any empty rows and columns
             utils.remove_empty_rows_cols(input_file, input_file, error_messages)
 
-    #return error_messages
-
 
 def step3(work_dir, error_messages):
     for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
@@ -140,8 +146,6 @@ def step3(work_dir, error_messages):
         utils.fix_units(input_file)
         # Check DICT file for mandatory columns
         utils.check_dict(input_file, error_messages)
-
-    #return error_messages
 
 
 def step4(work_dir, error_messages):
@@ -151,8 +155,6 @@ def step4(work_dir, error_messages):
         utils.data_dict_matcher_new(
             data_file, dict_file, HARMONIZED_DICT, error_messages
         )
-
-    #return error_messages
 
 
 def step5(work_dir, error_messages):
@@ -194,8 +196,9 @@ def step5(work_dir, error_messages):
                 data_file,
                 error_messages,
             )
-
-    #return error_messages
+            # Make a origcopy for the data file
+            data_output_file = data_file.replace("_DATA.csv", "_DATA_origcopy.csv")
+            shutil.copyfile(data_file, data_output_file)
 
 
 def step6(work_dir):
