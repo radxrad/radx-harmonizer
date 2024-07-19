@@ -813,7 +813,7 @@ def update_meta_data(
 
     # Create additional rows for metadata file
     data_file_name = os.path.basename(data_file)
-    data_file_name = data_file_name.replace("_DATA_preorigcopy.csv", "_DATA_origcopy.csv")
+    data_file_name = data_file_name.replace("_DATA.csv", "_DATA_origcopy.csv")
     data_dictionary_file_name = data_file_name.replace("_DATA_", "_DICT_")
     additional_rows = [
         {"Field": "specimen_type_used", "Value": specimen_type_used},
