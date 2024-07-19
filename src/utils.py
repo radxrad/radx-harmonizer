@@ -9,11 +9,23 @@ import hashlib
 import pandas as pd
 
 
-# Columns required for dictionary files
+# Mandatory columns in dictionary files
 MANDATORY_COLUMNS = {
     "Variable / Field Name",
     "Field Label",
     "Field Type",
+}
+
+# Mandatory and optional columns in dictionary files
+USABLE_COLUMNS = {
+    "Variable / Field Name",
+    "Section Header",
+    "Field Type",
+    "Field Label",
+    "Choices, Calculations, OR Slider Labels",
+    "Field Note",
+    "Unit",
+    "CDE Reference",
 }
 
 # All columns that are allowed in a dictionary files
@@ -309,22 +321,32 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
         skip_blank_lines=False,
     )
 
-    # remove leading and trailing whitespace
+    # Remove leading and trailing whitespace
     if pd.__version__ < "2.1.0":
         data = data.applymap(lambda x: x.strip())
     else:
         data = data.map(lambda x: x.strip())
 
-    # identify rows with all empty strings
+    # Identify rows with all empty strings
     empty_row_mask = data.eq("").all(axis=1)
     data = data[~empty_row_mask]
-    # identify columns with all empty strings
-    empty_col_mask = data.eq("").all(axis=0)
-    # select columns where the mask is False
-    columns_to_keep = data.columns[~empty_col_mask]
-    # filter the DataFrame by selecting the desired columns
-    data = data[columns_to_keep]
 
+
+    # Identify empty columns
+    empty_cols = [col for col in data.columns if data[col].eq("").all()]
+
+   # Remove empty columns that are not in the exclusion list
+    cols_to_drop = [col for col in empty_cols if col not in USABLE_COLUMNS]
+    data = data.drop(columns=cols_to_drop)
+
+    # # identify columns with all empty strings
+    # empty_col_mask = data.eq("").all(axis=0)
+    # columns_to_keep = data.columns[~empty_col_mask]
+
+    # # filter the DataFrame by selecting the desired columns
+    # data = data[columns_to_keep]
+
+    # Drop all rows and columns that contain all NA values
     data.dropna(axis="rows", how="all", inplace=True)
     data.dropna(axis="columns", how="all", inplace=True)
 
@@ -456,12 +478,11 @@ def check_dict(filename, error_messages):
         error = append_error(message, filename, error_messages)
 
     # Find unexpected columns
-    # TODO: Include warning, but don't raise error?
-    # unexpected_columns = columns - ALL_COLUMNS
-    # if len(unexpected_columns) > 0:
-    #     message = f"Unexpected columns: {unexpected_columns}, can be ignored, unless they are typos"
-    #     append_warning(message, filename, error_messages)
-    #     error = True
+    unexpected_columns = columns - ALL_COLUMNS
+    if len(unexpected_columns) > 0:
+        message = f"Unexpected columns: {unexpected_columns}, either rename or delete these columns."
+        append_error(message, filename, error_messages)
+        error = True
 
     return error
 
