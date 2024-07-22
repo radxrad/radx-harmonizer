@@ -19,7 +19,7 @@ HARMONIZED_DICT = "../reference/RADx-rad_HARMONIZED_DICT_2024-07-12.csv"
 ERROR_FILE_NAME = "phase2_errors.csv"
 
 
-def phase2_checker(include_dirs, exclude_dirs, reset=False):
+def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
     directories = get_directories(include_dirs, exclude_dirs)
 
     for directory in directories:
@@ -89,12 +89,13 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
         step7(work_dir)
         print(",7 - passed")
 
-    # Create error summary files
-    utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
-    # Collect primary keys to be manually checked for consistency
-    utils.collect_primary_keys(DATA_DIR)
-    # Collect units to be manually checked for consistency
-    utils.collect_units(DATA_DIR)
+    if update:
+        # Create error summary files
+        utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
+        # Collect primary keys to be manually checked for consistency
+        utils.collect_primary_keys(DATA_DIR)
+        # Collect units to be manually checked for consistency
+        utils.collect_units(DATA_DIR)
 
 
 def get_directories(include_dirs, exclude_dirs):
@@ -212,7 +213,7 @@ def step7(work_dir):
         utils.convert_dict(dict_file, dict_output_file)
 
 
-def main(include, exclude, reset):
+def main(include, exclude, reset, update):
     print("Phase2: Check and prepare origcopy files.")
 
     # Parse command line
@@ -237,11 +238,17 @@ def main(include, exclude, reset):
         print("resetting project files with preorigcopy files")
     else:
         reset = False
+    # Convert update flag
+    if update:
+        update = True
+        print("updating phase2_error_summary/details.csv files")
+    else:
+        update = False
 
     print()
 
     # Run phase 2 check
-    phase2_checker(include, exclude, reset)
+    phase2_checker(include, exclude, reset, update)
 
 
 if __name__ == "__main__":
@@ -266,9 +273,12 @@ if __name__ == "__main__":
     parser.add_argument(
         "-reset", action="store_true", help="Reset project using files from preorigcopy"
     )
+    parser.add_argument(
+        "-update", action="store_true", help="Update phase2_error_summary/details.csv files"
+    )
 
     # Parse the arguments
     args = parser.parse_args()
 
     # Call the main function with the parsed arguments
-    main(args.include, args.exclude, args.reset)
+    main(args.include, args.exclude, args.reset, args.update)
