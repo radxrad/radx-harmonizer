@@ -27,10 +27,14 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
         work_dir = os.path.join(directory, "work")
 
         # Skip and directories with Phase 1 errors
-        phase1_error_file = "phase1_errors.csv"
-        phase1_error_file = os.path.join(work_dir, phase1_error_file)
+        phase1_error_file = os.path.join(work_dir, "phase1_errors.csv")
         if os.path.exists(phase1_error_file):
             print(f"skipping: {directory} due to Phase I errors")
+            continue
+
+        lock_file = os.path.join(work_dir, "lock.txt")
+        if os.path.exists(lock_file):
+            print(f"skipping {directory}, this directory has been locked! Remove the lock.txt to make any updates.")
             continue
 
         print(f"checking: {directory} step: ", end="")
