@@ -584,7 +584,7 @@ def check_data_type(data_file, dict_file, error_messages):
             if dict_type == "float" and types[0] == "integer":
                 continue
             message = f"Invalid data type in column: {column}: '{dict_type}' in DICT vs. '{types[0]}' in DATA"
-            error = append_error(message, dict_file, error_messages)
+            error = append_error(message, data_file, error_messages)
             any_error = any_error or error
         elif len(types) > 1:
             # mixed types are ok if the type in the dictionary is defined as string
