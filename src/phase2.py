@@ -20,10 +20,48 @@ ERROR_FILE_NAME = "phase2_errors.csv"
 
 
 def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
-    directories = get_directories(include_dirs, exclude_dirs)
+    """
+    Validate, clean, and update the contents of directories within the specified paths and manage errors.
+
+    Parameters
+    ----------
+    include_dirs : list of str
+        List of directories to include in the check.
+    exclude_dirs : list of str
+        List of directories to exclude from the check.
+    reset : bool, optional
+        Flag to indicate if the work directory should be reset (default is False).
+    update : bool, optional
+        Flag to indicate if the error summary files should be updated (default is False).
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This function performs the following tasks:
+    1. Identifies subdirectories matching the pattern 'rad_*_*-*' within `DATA_DIR`.
+    2. Skips directories with Phase 1 errors or locked directories.
+    3. Creates or resets the work directory.
+    4. Copies preorigcopy files into the work directory.
+    5. Runs data checks and cleanups on the copied files.
+    6. Matches data fields to data elements in the dictionary files.
+    7. Checks for missing values, valid field types, and proper format in the data.
+    8. Updates metadata templates and creates updated META files.
+    9. Converts and updates dictionary files.
+    """
+
+    directories = utils.get_directories(include_dirs, exclude_dirs, DATA_DIR)
 
     for directory in directories:
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
+
+        # Check if the directory exists
+        if not os.path.isdir(preorigcopy_dir):
+            print(f"ERROR: Project directory {preorigcopy_dir} does not exist!")
+            sys.exit(-1)
+
         work_dir = os.path.join(directory, "work")
 
         # Skip and directories with Phase 1 errors
@@ -34,7 +72,9 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
 
         lock_file = os.path.join(work_dir, "lock.txt")
         if os.path.exists(lock_file):
-            print(f"skipping {directory}, this directory has been locked! Remove the lock.txt to make any updates.")
+            print(
+                f"skipping {directory}, this directory has been locked! Remove the lock.txt to make any updates."
+            )
             continue
 
         print(f"checking: {directory} step: ", end="")
@@ -102,21 +142,25 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
         utils.collect_units(DATA_DIR)
 
 
-def get_directories(include_dirs, exclude_dirs):
-    all_dirs = glob.glob(os.path.join(DATA_DIR, "rad_*_*-*"))
-    if include_dirs:
-        return [f for f in all_dirs if os.path.basename(f) in include_dirs]
-    if exclude_dirs:
-        return [f for f in all_dirs if os.path.basename(f) not in exclude_dirs]
-
-    return []
-
-
 def step1(preorigcopy_dir, work_dir):
+    """
+    Copy preorigcopy files into the work directory.
+
+    Parameters
+    ----------
+    preorigcopy_dir : str
+        Path to the preorigcopy directory.
+    work_dir : str
+        Path to the work directory.
+
+    Returns
+    -------
+    None
+    """
     for input_file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*.csv")):
         if "_origcopy.csv" in input_file:
             continue
-        
+
         basename = os.path.basename(input_file)
         output_file = os.path.join(
             work_dir, basename.replace("_preorigcopy.csv", ".csv")
@@ -129,6 +173,20 @@ def step1(preorigcopy_dir, work_dir):
 
 
 def step2(work_dir, error_messages):
+    """
+    Run data checks and data cleanups.
+
+    Parameters
+    ----------
+    work_dir : str
+        Path to the work directory.
+    error_messages : list of str
+        List to store error messages.
+
+    Returns
+    -------
+    None
+    """
     input_files = glob.glob(os.path.join(work_dir, "rad_*_*-*_*_*.csv"))
     if len(input_files) == 0:
         print(f"ERROR: Cannot process {work_dir}. No csv files found!")
@@ -141,11 +199,27 @@ def step2(work_dir, error_messages):
         if not error:
             # Remove space from header to make sure they can be mapped to data elements
             utils.remove_spaces_from_header(input_file)
-            # Copy the original file and remove any empty rows and columns
-            utils.remove_empty_rows_cols(input_file, input_file, error_messages)
+            # Remove empty rows and columns
+            utils.remove_empty_rows_cols(input_file, error_messages)
+            # Standardize units in *_unit columns
+            utils.standardize_units(input_file)
 
 
 def step3(work_dir, error_messages):
+    """
+    Check DICT files for mandatory columns and fix units.
+
+    Parameters
+    ----------
+    work_dir : str
+        Path to the work directory.
+    error_messages : list of str
+        List to store error messages.
+
+    Returns
+    -------
+    None
+    """
     for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         # Some DICT files contain a Units column. Rename it to Unit.
         utils.fix_units(input_file)
@@ -154,6 +228,20 @@ def step3(work_dir, error_messages):
 
 
 def step4(work_dir, error_messages):
+    """
+    Match data fields to data elements in the dictionary files.
+
+    Parameters
+    ----------
+    work_dir : str
+        Path to the work directory.
+    error_messages : list of str
+        List to store error messages.
+
+    Returns
+    -------
+    None
+    """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         # Match data fields to data elements in the dictionary files
         data_file = dict_file.replace("DICT", "DATA")
@@ -163,6 +251,20 @@ def step4(work_dir, error_messages):
 
 
 def step5(work_dir, error_messages):
+    """
+    Check for missing values, valid field types, and proper format in the data.
+
+    Parameters
+    ----------
+    work_dir : str
+        Path to the work directory.
+    error_messages : list of str
+        List to store error messages.
+
+    Returns
+    -------
+    None
+    """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         any_error = False
         # Check for missing values in mandatory DICT fields
@@ -186,10 +288,12 @@ def step5(work_dir, error_messages):
         error = utils.check_enums(data_file, dict_file, error_messages)
         any_error = any_error or error
 
-        # Check if file that contains minimum CDEs had study_id column. 
-        error = utils.has_study_id(data_file, dict_file, HARMONIZED_DICT, error_messages)
+        # Check if file that contains minimum CDEs had study_id column.
+        error = utils.has_study_id(
+            data_file, dict_file, HARMONIZED_DICT, error_messages
+        )
         any_error = any_error or error
-        
+
         if not any_error:
             # Use the metadata templates and combine them with data from the DATA file to create an updated META file
             meta_file = dict_file.replace("_DICT.csv", "_META.csv")
@@ -207,18 +311,60 @@ def step5(work_dir, error_messages):
 
 
 def step6(work_dir):
+    """
+    Update dictionary files.
+
+    Parameters
+    ----------
+    work_dir : str
+        Path to the work directory.
+
+    Returns
+    -------
+    None
+    """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         utils.update_dict_file(dict_file, dict_file)
 
 
 def step7(work_dir):
+    """
+    Convert dictionary files to origcopy.
+
+    Parameters
+    ----------
+    work_dir : str
+        Path to the work directory.
+
+    Returns
+    -------
+    None
+    """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         dict_output_file = dict_file.replace("_DICT.csv", "_DICT_origcopy.csv")
         utils.convert_dict(dict_file, dict_output_file)
 
 
 def main(include, exclude, reset, update):
-    print("Phase2: Check and prepare origcopy files.")
+    """
+    Main function to execute the phase2_checker with command-line arguments.
+
+    Parameters
+    ----------
+    include : str or None
+        Comma-separated list of projects to include.
+    exclude : str or None
+        Comma-separated list of projects to exclude.
+    reset : bool
+        Flag to reset the project files with preorigcopy files.
+    update : bool
+        Flag to update the phase2_error_summary/details.csv files.
+
+    Returns
+    -------
+    None
+    """
+    print("Phase2: Validate and prepare origcopy files.")
 
     # Parse command line
     if include and exclude:
@@ -239,9 +385,12 @@ def main(include, exclude, reset, update):
     # Convert reset flag
     if reset:
         reset = True
+        if not utils.confirm_rest():
+            sys.exit(0)
         print("resetting project files with preorigcopy files")
     else:
         reset = False
+
     # Convert update flag
     if update:
         update = True
@@ -278,7 +427,9 @@ if __name__ == "__main__":
         "-reset", action="store_true", help="Reset project using files from preorigcopy"
     )
     parser.add_argument(
-        "-update", action="store_true", help="Update phase2_error_summary/details.csv files"
+        "-update",
+        action="store_true",
+        help="Update phase2_error_summary/details.csv files",
     )
 
     # Parse the arguments

@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 import os
+import sys
 import glob
 import shutil
+import argparse
 import utils
 
 
@@ -14,14 +16,20 @@ DATA_DIR = "../data_harmonized"
 ERROR_FILE_NAME = "phase1_errors.csv"
 
 
-def phase1_checker(reset=False):
+def phase1_checker(include_dirs, exclude_dirs, reset, update):
     """
-    Check and validate the contents of directories within a specified path, and manage errors.
+    Validate the contents of preorigcopy directories within the specified paths, and manage errors.
 
     Parameters
     ----------
-    data_path : str
-        Path to the parent directory containing the 'rad_*_*-*' subdirectories to be checked.
+    include_dirs : list of str
+        List of directories to include in the check.
+    exclude_dirs : list of str
+        List of directories to exclude from the check.
+    reset : bool
+        Flag to indicate if the work directory should be reset.
+    update : bool
+        Flag to indicate if the error summary files should be updated.
 
     Returns
     -------
@@ -30,30 +38,36 @@ def phase1_checker(reset=False):
     Notes
     -----
     This function performs the following tasks:
-    1. Identifies subdirectories matching the pattern 'rad_*_*-*' within `data_path`.
-    3. Removes any existing error file from previous runs in the target subdirectories.
-    4. Checks for missing files and validates metadata files within each preorigcopy subdirectory.
-    5. Logs errors in a 'phase1_errors.csv' file within each subdirectory if any issues are found.
-    6. Generates an error summary file in `data_path` summarizing all identified errors.
-
-    Examples
-    --------
-    >>> phase1_checker('/path/to/data_harmonized')
-    This will process all 'rad_*_*-*' subdirectories and create corresponding work directories
-    check for errors and create error files as necessary.
-
+    1. Identifies subdirectories matching the pattern 'rad_*_*-*' within `DATA_DIR`.
+    2. Removes any existing error file from previous runs in the target subdirectories.
+    3. Checks for missing files and validates metadata files within each preorigcopy subdirectory.
+    4. Logs errors in a 'phase1_errors.csv' file within each subdirectory if any issues are found.
+    5. Generates an error summary file in `DATA_DIR` summarizing all identified errors.
     """
-    directories = glob.glob(os.path.join(DATA_DIR, "rad_*_*-*"))
+    directories = utils.get_directories(include_dirs, exclude_dirs, DATA_DIR)
 
     for directory in directories:
-        print("checking:", directory)
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
+
+        # Check if the directory exists
+        if not os.path.isdir(preorigcopy_dir):
+            print(f"ERROR: Project directory {preorigcopy_dir} does not exist!")
+            sys.exit(-1)
+
         work_dir = os.path.join(directory, "work")
+
+        lock_file = os.path.join(work_dir, "lock.txt")
+        if os.path.exists(lock_file):
+            print(
+                f"skipping {directory}, this directory has been locked! Remove the lock.txt to make any updates."
+            )
+            continue
+
+        print(f"checking: {directory}", end="")
 
         if reset:
             shutil.rmtree(work_dir, ignore_errors=True)
 
-        os.makedirs(work_dir, exist_ok=True)
         os.makedirs(work_dir, exist_ok=True)
 
         # Clean up error file from a previous run
@@ -77,20 +91,108 @@ def phase1_checker(reset=False):
             if error:
                 utils.save_error_file(error_messages, error_file)
 
-    # Create error summary files
-    utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
+        if len(error_messages) > 0:
+            utils.save_error_messages(error_file, error_messages)
+            print(f" - failed: {len(error_messages)} errors")
+            continue
+
+        print(" - passed")
+
+    if update:
+        # Create error summary files
+        utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
+
+
+def main(include, exclude, reset, update):
+    """
+    Main function to execute the phase1_checker with command-line arguments.
+
+    Parameters
+    ----------
+    include : str or None
+        Comma-separated list of projects to include.
+    exclude : str or None
+        Comma-separated list of projects to exclude.
+    reset : bool
+        Flag to reset the work directory.
+    update : bool
+        Flag to update the phase1_error_summary/details.csv files.
+
+    Returns
+    -------
+    None
+    """
+
+    print("Phase1: Validate preorigcopy files.")
+
+    # Parse command line
+    if include and exclude:
+        print(
+            "Error: The '-include' and '-exclude' arguments cannot be specified at the same time."
+        )
+        sys.exit(1)
+    elif include:
+        print(f"including projects: {include}")
+    elif exclude:
+        print(f"excluding projects: {exclude}")
+    else:
+        print(
+            "Error: Use the '-include' or '-exclude' argument to specify which projects to process."
+        )
+        sys.exit(1)
+
+    # Convert reset flag
+    if reset:
+        reset = True
+        if not utils.confirm_rest():
+            sys.exit(0)
+        print("resetting project, removing files in work directory")
+    else:
+        reset = False
+
+    # Convert update flag
+    if update:
+        update = True
+        print("updating phase1_error_summary/details.csv files")
+    else:
+        update = False
+
+    print()
+
+    # Run phase 2 check
+    phase1_checker(include, exclude, reset, update)
 
 
 if __name__ == "__main__":
-    phase1_checker(True)
+    # Create the parser
+    parser = argparse.ArgumentParser(description="Validate preorigcopy files.")
 
-    # error_summary = os.path.join(
-    #     DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_summary.csv")
-    # )
-    # error_details = os.path.join(
-    #     DATA_DIR, ERROR_FILE_NAME.replace(".csv", "_details.csv")
-    # )
+    # Add the arguments
+    parser.add_argument(
+        "-include",
+        type=str,
+        required=False,
+        help="Comma-separated list of projects to include.",
+    )
+    parser.add_argument(
+        "-exclude",
+        type=str,
+        required=False,
+        help="Comma-separated list of projects to exclude.",
+    )
+    parser.add_argument(
+        "-reset",
+        action="store_true",
+        help="Reset work directory (deletes all files in the work directory!)",
+    )
+    parser.add_argument(
+        "-update",
+        action="store_true",
+        help="Update phase1_error_summary/details.csv files",
+    )
 
-    # print()
-    # print(f"Error summary: {error_summary}")
-    # print(f"Error details: {error_details}")
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Call the main function with the parsed arguments
+    main(args.include, args.exclude, args.reset, args.update)

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import sys
 import glob
 import pathlib
 from datetime import datetime
@@ -88,32 +89,33 @@ SPECIMEN_COLUMNS = ["specimen_type", "virus_sample_type", "sample_media", "sampl
 # see: https://github.com/bmir-radx/radx-data-dictionary-specification/blob/main/radx-data-dictionary-specification.md#field-unit
 # Units for lab tests: https://www.cdc.gov/cliac/docs/addenda/cliac0313/13A_CLIAC_2013March_UnitsOfMeasure.pdf
 STANDARD_UNITS = {
-     "pound": "lb",
-     "kilograms": "kg",
-     "percent": "%",
-     "mMol/L": "mmol/L",
+    "pound": "lb",
+    "kilograms": "kg",
+    "percent": "%",
+    "mMol/L": "mmol/L",
     # "gm/dL": "g/dL", check rad_023_610-01
     # "gms.dL": "g/dL", check
-     "beats per minute": "beats/min",
-     "breaths per minute": "breaths/min",
-     "Seconds(s)": "s",
-     "seconds": "s",
-     "sec": "s",
-     "minutes": "min",
-     "days": "d",
-     "months": "month",
-     "years, to tenth percent": "year",
-     "mm/hr": "mm/h", # check
-     "Celsius": "°C",
-     "Celcius": "°C",
-     "celsius": "°C",
-     "Â°C": "°C",
-     "centimeters": "cm",
-     "nanometers": "nm",
-     "mmHg": "mm Hg",
-     "free text": "",
-     "N/A": "",
+    "beats per minute": "beats/min",
+    "breaths per minute": "breaths/min",
+    "Seconds(s)": "s",
+    "seconds": "s",
+    "sec": "s",
+    "minutes": "min",
+    "days": "d",
+    "months": "month",
+    "years, to tenth percent": "year",
+    "mm/hr": "mm/h",  # check
+    "Celsius": "°C",
+    "Celcius": "°C",
+    "celsius": "°C",
+    "Â°C": "°C",
+    "centimeters": "cm",
+    "nanometers": "nm",
+    "mmHg": "mm Hg",
+    "free text": "",
+    "N/A": "",
 }
+
 
 def append_error(message, filename, error_messages):
     error_messages.append(
@@ -141,6 +143,44 @@ def save_error_messages(error_file, error_messages):
     errors = pd.DataFrame(error_messages)
     errors.sort_values("filename", inplace=True)
     errors.to_csv(error_file, index=False)
+
+
+def get_directories(include, exclude, data_dir):
+    all_dirs = glob.glob(os.path.join(data_dir, "rad_*_*-*"))
+
+    if include:
+        include_dirs = include.split(",")
+        dir_list = [f for f in all_dirs if os.path.basename(f) in include_dirs]
+        if len(dir_list) != len(include_dirs):
+            print(
+                f"ERROR: Some or all of the following projects don't exist: {include_dirs}"
+            )
+            sys.exit(-1)
+        return dir_list
+    if exclude:
+        exclude_dirs = exclude.split(",")
+        dir_list = [f for f in all_dirs if os.path.basename(f) in exclude_dirs]
+        if len(dir_list) != len(exclude_dirs):
+            print(
+                f"ERROR: Some or all of the following projects don't exist: {exclude_dirs}"
+            )
+            sys.exit(-1)
+        return [f for f in all_dirs if os.path.basename(f) not in exclude_dirs]
+
+    return []
+
+
+def confirm_rest():
+    print()
+    print("-reset will remove all files in the work directory!")
+    confirmation = (
+        input(
+            "Are you sure you want to reset the work directory? Type 'yes' to confirm: "
+        )
+        .strip()
+        .lower()
+    )
+    return confirmation == "yes"
 
 
 def file_is_missing(directory, error_messages):
@@ -312,9 +352,9 @@ def check_column_names(data, filename, error_messages):
     return any_error
 
 
-def remove_empty_rows_cols(input_file, output_file, error_messages):
+def remove_empty_rows_cols(filename, error_messages):
     data = pd.read_csv(
-        input_file,
+        filename,
         encoding="utf8",
         dtype=str,
         keep_default_na=False,
@@ -331,20 +371,12 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
     empty_row_mask = data.eq("").all(axis=1)
     data = data[~empty_row_mask]
 
-
     # Identify empty columns
     empty_cols = [col for col in data.columns if data[col].eq("").all()]
 
-   # Remove empty columns that are not in the exclusion list
+    # Remove empty columns that are not in the exclusion list
     cols_to_drop = [col for col in empty_cols if col not in USABLE_COLUMNS]
     data = data.drop(columns=cols_to_drop)
-
-    # # identify columns with all empty strings
-    # empty_col_mask = data.eq("").all(axis=0)
-    # columns_to_keep = data.columns[~empty_col_mask]
-
-    # # filter the DataFrame by selecting the desired columns
-    # data = data[columns_to_keep]
 
     # Drop all rows and columns that contain all NA values
     data.dropna(axis="rows", how="all", inplace=True)
@@ -353,12 +385,35 @@ def remove_empty_rows_cols(input_file, output_file, error_messages):
     # Remove Unnamed columns
     data = remove_unnamed_columns(data)
 
-    error = check_column_names(data, input_file, error_messages)
+    error = check_column_names(data, filename, error_messages)
     if error:
         return error
 
-    data.to_csv(output_file, index=False)
+    data.to_csv(filename, index=False)
     return False
+
+
+def standardize_units(filename):
+    df = pd.read_csv(
+        filename,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+
+    # Create a list of columns that end with '_unit'
+    unit_columns = [col for col in df.columns if col.endswith('_unit')]
+    for col in unit_columns:
+        standardize_unit_column(df, col)
+   
+    df.to_csv(filename, index=False)
+
+
+def standardize_unit_column(df, unit_column):
+    # Standardize units
+    for key, value in STANDARD_UNITS.items():
+        df[unit_column].replace(key, value)
 
 
 def remove_spaces_from_header(filename):
@@ -539,26 +594,21 @@ def check_field_types(filename, error_messages):
     return error
 
 
-def remove_na(input_file, output_file):
+def remove_na(filename):
     data = pd.read_csv(
-        input_file,
+        filename,
         encoding="utf8",
         dtype=str,
         keep_default_na=False,
         skip_blank_lines=False,
     )
     data.replace(NULL_VALUES, "", inplace=True)
-    # Add warning messages for columns with "null" values
-    # for column in list(data.columns):
-    #     types = get_column_type(data, column)
-    #     for col_type in types:
-    #         if col_type in NULL_VALUES:
     data.fillna("", inplace=True)
-    data.to_csv(output_file, index=False)
+    data.to_csv(filename, index=False)
 
 
 def check_data_type(data_file, dict_file, error_messages):
-    remove_na(data_file, data_file)
+    remove_na(data_file)
 
     data = pd.read_csv(
         data_file,
@@ -1030,12 +1080,8 @@ def update_dict_file(dict_file, dict_output_file):
         keep_default_na=False,
         skip_blank_lines=False,
     )
-    # Some wastewater projects used Units field instead of Unit field
-    dictionary = dictionary.rename(columns={"Units": "Unit"})
-
     # Standardize units
-    for key, value in STANDARD_UNITS.items():
-        dictionary["Unit"].replace(key, value)
+    standardize_unit_column(dictionary, "Unit")
 
     # Fill in empty Section Header and CDE Reference columns
     dictionary["Section Header"] = dictionary["Section Header"].replace(
@@ -1162,12 +1208,12 @@ def has_study_id(data_file, dict_file, harmonized_dict, error_messages):
         )
         field_names = set(dictionary["Variable / Field Name"].to_list())
         if not "study_id" in field_names:
-            message = ("Minimum CDEs found: 'study_id' column missing or misnamed")
+            message = "Minimum CDEs found: 'study_id' column missing or misnamed"
             error = append_error(message, dict_file, error_messages)
             error = append_error(message, data_file, error_messages)
 
     return error
-    
+
 
 def has_minimum_cdes(dict_file, harmonized_dict):
     # Read the minimum CDEs (first 46 data elements in the harmonized data dictionary)
@@ -1177,7 +1223,7 @@ def has_minimum_cdes(dict_file, harmonized_dict):
         dtype=str,
         keep_default_na=False,
         skip_blank_lines=False,
-        nrows=46
+        nrows=46,
     )
     dictionary = pd.read_csv(
         dict_file,
