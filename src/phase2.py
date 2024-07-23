@@ -51,7 +51,6 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
     8. Updates metadata templates and creates updated META files.
     9. Converts and updates dictionary files.
     """
-
     directories = utils.get_directories(include_dirs, exclude_dirs, DATA_DIR)
 
     for directory in directories:

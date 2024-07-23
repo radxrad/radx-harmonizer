@@ -405,7 +405,7 @@ def standardize_units(filename):
     # Create a list of columns that end with '_unit'
     unit_columns = [col for col in df.columns if col.endswith('_unit')]
     for col in unit_columns:
-        standardize_unit_column(df, col)
+        df[unit_column] = df[unit_column].replace(STANDARD_UNITS)
    
     df.to_csv(filename, index=False)
 
@@ -413,7 +413,7 @@ def standardize_units(filename):
 def standardize_unit_column(df, unit_column):
     # Standardize units
     for key, value in STANDARD_UNITS.items():
-        df[unit_column].replace(key, value)
+        df[unit_column] = df[unit_column].replace(key, value)
 
 
 def remove_spaces_from_header(filename):
@@ -1081,7 +1081,7 @@ def update_dict_file(dict_file, dict_output_file):
         skip_blank_lines=False,
     )
     # Standardize units
-    standardize_unit_column(dictionary, "Unit")
+    df["Unit"] = df["Unit"].replace(STANDARD_UNITS)
 
     # Fill in empty Section Header and CDE Reference columns
     dictionary["Section Header"] = dictionary["Section Header"].replace(
