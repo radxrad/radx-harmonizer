@@ -404,16 +404,10 @@ def standardize_units(filename):
 
     # Create a list of columns that end with '_unit'
     unit_columns = [col for col in df.columns if col.endswith('_unit')]
-    for col in unit_columns:
-        df[unit_column] = df[unit_column].replace(STANDARD_UNITS)
-   
+    # Standardize '_unit' columns
+    df[unit_columns] = df[unit_columns].replace(STANDARD_UNITS)
+
     df.to_csv(filename, index=False)
-
-
-def standardize_unit_column(df, unit_column):
-    # Standardize units
-    for key, value in STANDARD_UNITS.items():
-        df[unit_column] = df[unit_column].replace(key, value)
 
 
 def remove_spaces_from_header(filename):
@@ -425,14 +419,17 @@ def remove_spaces_from_header(filename):
         skip_blank_lines=False,
     )
 
-    has_spaces = False
-    for col in df.columns:
-        col_stripped = col.strip()
-        if col != col_stripped:
-            has_spaces = True
-            df.rename(columns={col: col_stripped}, inplace=True)
+    has_spaces = any(col != (col_stripped := col.strip()) for col in df.columns)
+    
+    # has_spaces = False
+    # for col in df.columns:
+    #     col_stripped = col.strip()
+    #     if col != col_stripped:
+    #         has_spaces = True
+    #         df.rename(columns={col: col_stripped}, inplace=True)
 
     if has_spaces:
+        df.rename(columns={col: col.strip() for col in df.columns if col != col.strip()}, inplace=True)
         df.to_csv(filename, index=False)
 
 
@@ -1081,7 +1078,7 @@ def update_dict_file(dict_file, dict_output_file):
         skip_blank_lines=False,
     )
     # Standardize units
-    df["Unit"] = df["Unit"].replace(STANDARD_UNITS)
+    dictionary["Unit"] = dictionary["Unit"].replace(STANDARD_UNITS)
 
     # Fill in empty Section Header and CDE Reference columns
     dictionary["Section Header"] = dictionary["Section Header"].replace(
