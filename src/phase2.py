@@ -157,9 +157,6 @@ def step1(preorigcopy_dir, work_dir):
     None
     """
     for input_file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*.csv")):
-        if "_origcopy.csv" in input_file:
-            continue
-
         basename = os.path.basename(input_file)
         output_file = os.path.join(
             work_dir, basename.replace("_preorigcopy.csv", ".csv")
