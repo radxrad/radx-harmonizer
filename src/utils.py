@@ -64,13 +64,14 @@ ALLOWED_TYPES = {
     "checkbox",
 }
 
-# None values to be replaced by empty string
+# Null values to be replaced by empty string
 NULL_VALUES = ["N/A", "NA", "NULL", "NaN", "None", "n/a", "nan", "null"]
 
 
 ENUM_PATTERN_INT = r"(\d+),\s*([^|]+)\s*(?:\||$)"  # Example: 1, Male | 2, Female | 3, Intersex | 4, None of these describe me
 ENUM_PATTERN_STR = r"([A-Z]+),\s*([^|]+)\s*(?:\||$)"  # Example: AL, Alabama | AK, Alaska | AS, American Samoa
 
+# Map of RADx-rad dictionary columns to NIH Data Hub format
 COLUMN_MAP = {
     "Variable / Field Name": "Id",
     "Section Header": "Section",
@@ -420,13 +421,6 @@ def remove_spaces_from_header(filename):
     )
 
     has_spaces = any(col != (col_stripped := col.strip()) for col in df.columns)
-    
-    # has_spaces = False
-    # for col in df.columns:
-    #     col_stripped = col.strip()
-    #     if col != col_stripped:
-    #         has_spaces = True
-    #         df.rename(columns={col: col_stripped}, inplace=True)
 
     if has_spaces:
         df.rename(columns={col: col.strip() for col in df.columns if col != col.strip()}, inplace=True)
@@ -638,6 +632,9 @@ def check_data_type(data_file, dict_file, error_messages):
             if dict_type != "string":
                 message = f"Mixed data types in column: {column}: '{types}' in DATA vs. '{dict_type}' IN DICT"
                 error = append_error(message, data_file, error_messages)
+                offending_values = get_offending_data_values(data, column)
+                message = f"String values found in column {column}: {offending_values}"
+                error = append_error(message, data_file, error_messages)
                 any_error = any_error or error
 
     return any_error
@@ -669,6 +666,11 @@ def get_column_type(df, fieldname):
         types.remove("integer")
 
     return types
+
+
+def get_offending_data_values(df, fieldname):
+    df_string = df[df["type"] == "string"].copy()
+    return set(df_string[fieldname].unique())
 
 
 def determine_type(value: str) -> str:
@@ -768,7 +770,7 @@ def check_enums(data_file, dict_file, error_messages):
         mismatches = column_values - enum_values
 
         if len(mismatches) > 0:
-            message = f"Invalid enumerated value(s): {mismatches} in column {column}"
+            message = f"Invalid enumerated value(s)in column {column}: {mismatches}"
             error = append_error(message, data_file, error_messages)
             any_error = any_error and error
 
