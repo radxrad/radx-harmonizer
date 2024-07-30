@@ -772,7 +772,7 @@ def check_enums(data_file, dict_file, error_messages):
         if len(mismatches) > 0:
             message = f"Invalid enumerated value(s)in column {column}: {mismatches}"
             error = append_error(message, data_file, error_messages)
-            any_error = any_error and error
+            any_error = any_error or error
 
     # TODO: for enums, check if the Field Type is correct?
     return any_error
