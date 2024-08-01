@@ -762,7 +762,7 @@ def check_enums(data_file, dict_file, error_messages):
     
     # Get a list of fields that have a "List" Field Type
     # (list of values separated by the vertical bar | without spaces.)
-    list_fields = get_list_fields(dict_file)
+    multi_value_fields = get_multi_value_fields(dict_file)
 
     # Check data file columns with enumerated values
     any_error = False
@@ -770,9 +770,10 @@ def check_enums(data_file, dict_file, error_messages):
         column_values = data[column].unique()
         # Empty values are ok, remove them
         column_values = set(filter(None, column_values))
-        # Expand fields with multiple enum values
-        if column in list_fields:
-            column_values = column_values.split("|")
+        
+        # Expand lists of enumerated values
+        if column in multi_value_fields:
+            column_values = expand_column_values(column_values)
 
         enum_values = set(enum_values)
         mismatches = column_values - enum_values
@@ -784,6 +785,13 @@ def check_enums(data_file, dict_file, error_messages):
 
     # TODO: for enums, check if the Field Type is correct?
     return any_error
+
+
+def expand_column_values(column_values):
+    # For Field Type: "list", split multiple values.
+    # Example: analyte_type = viral RNA|human microRNA
+    expanded_column_values = {val for value in column_values for val in (value.split("|") if "|" in value else [value])}
+    return set(expanded_column_values)
 
 
 def get_allowed_values(dict_file):
@@ -807,7 +815,7 @@ def get_allowed_values(dict_file):
     return allowed_values
 
 
-def get_list_fields(dict_file):
+def get_multi_value_fields(dict_file):
     dictionary = pd.read_csv(
         dict_file,
         encoding="utf8",
@@ -815,7 +823,7 @@ def get_list_fields(dict_file):
         keep_default_na=False,
         skip_blank_lines=False,
     )
-    dictionary = dictionary[dictionary["Field Type"] == "List"].copy()
+    dictionary = dictionary[dictionary["Field Type"] == "list"].copy()
     list_fields = set(dictionary["Variable / Field Name"].to_list())
     return list_fields
 
