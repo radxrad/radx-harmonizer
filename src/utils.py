@@ -759,6 +759,10 @@ def check_enums(data_file, dict_file, error_messages):
 
     # Get the allowed values for enumerated types
     allowed_values = get_allowed_values(dict_file)
+    
+    # Get a list of fields that have a "List" Field Type
+    # (list of values separated by the vertical bar | without spaces.)
+    list_fields = get_list_fields(dict_file)
 
     # Check data file columns with enumerated values
     any_error = False
@@ -766,6 +770,10 @@ def check_enums(data_file, dict_file, error_messages):
         column_values = data[column].unique()
         # Empty values are ok, remove them
         column_values = set(filter(None, column_values))
+        # Expand fields with multiple enum values
+        if column in list_fields:
+            column_values = column_values.split("|")
+
         enum_values = set(enum_values)
         mismatches = column_values - enum_values
 
@@ -797,6 +805,19 @@ def get_allowed_values(dict_file):
         ].to_dict()
 
     return allowed_values
+
+
+def get_list_fields(dict_file):
+    dictionary = pd.read_csv(
+        dict_file,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    dictionary = dictionary[dictionary["Field Type"] == "List"].copy()
+    list_fields = set(dictionary["Variable / Field Name"].to_list())
+    return list_fields
 
 
 def get_enum_values(row):
