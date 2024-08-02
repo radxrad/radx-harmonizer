@@ -711,6 +711,8 @@ def convert_data_type(row):
         "text",
         "list",
         "url",
+        "date",
+        "time",
         "sequence",
         "category",
         "yesno",
