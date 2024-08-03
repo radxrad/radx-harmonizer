@@ -84,7 +84,7 @@ COLUMN_MAP = {
 }
 
 # Field names that contain specimen information
-SPECIMEN_COLUMNS = ["specimen_type", "virus_sample_type", "sample_media", "sample_type"]
+SPECIMEN_COLUMNS = ["specimen_type", "virus_sample_type", "sample_media", "sample_type", "covid_test_specimen_type"]
 
 # Standard units
 # see: https://github.com/bmir-radx/radx-data-dictionary-specification/blob/main/radx-data-dictionary-specification.md#field-unit
