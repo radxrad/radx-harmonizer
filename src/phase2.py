@@ -9,12 +9,12 @@ import utils
 # File paths on AWS
 # DATA_DIR = "r:\data_harmonized"
 # META_DIR = "r:\meta"
-# HARMONIZED_DICT = "r:/reference/RADx-rad_harmonized_dict_2024-08-05.csv"
+# HARMONIZED_DICT = "r:/reference/RADx-rad_harmonized_dict_2024-08-06.csv"
 
 # File paths local
 DATA_DIR = "../data_harmonized"
 META_DIR = "../meta"
-HARMONIZED_DICT = "../reference/RADx-rad_harmonized_dict_2024-08-05.csv"
+HARMONIZED_DICT = "../reference/RADx-rad_harmonized_dict_2024-08-06.csv"
 
 ERROR_FILE_NAME = "phase2_errors.csv"
 
