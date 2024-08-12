@@ -9,12 +9,12 @@ import utils
 # File paths on AWS
 # DATA_DIR = "r:\data_harmonized"
 # META_DIR = "r:\meta"
-# HARMONIZED_DICT = "r:/reference/RADx-rad_harmonized_dict_2024-08-06.csv"
+# HARMONIZED_DICT = "r:/reference/RADx-rad_harmonized_dict_2024-08-09.csv"
 
 # File paths local
 DATA_DIR = "../data_harmonized"
 META_DIR = "../meta"
-HARMONIZED_DICT = "../reference/RADx-rad_harmonized_dict_2024-08-06.csv"
+HARMONIZED_DICT = "../reference/RADx-rad_harmonized_dict_2024-08-09.csv"
 
 ERROR_FILE_NAME = "phase2_errors.csv"
 
@@ -156,8 +156,9 @@ def step1(preorigcopy_dir, work_dir):
     -------
     None
     """
-    for input_file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*.csv")):
+    for input_file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*.csv")):
         basename = os.path.basename(input_file)
+
         output_file = os.path.join(
             work_dir, basename.replace("_preorigcopy.csv", ".csv")
         )
@@ -189,6 +190,10 @@ def step2(work_dir, error_messages):
         sys.exit(-1)
 
     for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_*.csv")):
+        # Remove origcopy files from a previous run
+        if input_file.endswith("origcopy.csv"):
+            os.remove(input_file)
+
         # Check if file is UTF-8 encoded
         error = utils.is_not_utf8_encoded(input_file, error_messages)
 
