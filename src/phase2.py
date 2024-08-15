@@ -6,16 +6,18 @@ import shutil
 import argparse
 import utils
 
-# File paths on AWS
-# DATA_DIR = "r:\data_harmonized"
-# META_DIR = "r:\meta"
-# HARMONIZED_DICT = "r:/reference/RADx-rad_harmonized_dict_2024-08-09.csv"
 
-# File paths local
-DATA_DIR = "../data_harmonized"
-META_DIR = "../meta"
-HARMONIZED_DICT = "../reference/RADx-rad_harmonized_dict_2024-08-09.csv"
+# Root directory on AWS
+# ROOT_DIR = "r:"
 
+# Root directory local installation
+ROOT_DIR = ".."
+
+# File paths
+DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
+META_DIR = os.path.join(ROOT_DIR, "meta")
+HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_harmonized_dict_2024-08-09.csv")
+GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_harmonized_dict_2024-08-12.csv")
 ERROR_FILE_NAME = "phase2_errors.csv"
 
 
@@ -63,7 +65,7 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
 
         work_dir = os.path.join(directory, "work")
 
-        # Skip and directories with Phase 1 errors
+        # Skip directories with Phase 1 errors
         phase1_error_file = os.path.join(work_dir, "phase1_errors.csv")
         if os.path.exists(phase1_error_file):
             print(f"skipping: {directory} due to Phase I errors")
@@ -193,6 +195,7 @@ def step2(work_dir, error_messages):
         # Remove origcopy files from a previous run
         if input_file.endswith("origcopy.csv"):
             os.remove(input_file)
+            continue
 
         # Check if file is UTF-8 encoded
         error = utils.is_not_utf8_encoded(input_file, error_messages)

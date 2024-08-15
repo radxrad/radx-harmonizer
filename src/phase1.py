@@ -7,12 +7,14 @@ import argparse
 import utils
 
 
-# File paths on AWS
-# DATA_DIR = "r:\data_harmonized"
+# Root directory on AWS
+# ROOT_DIR = "r:"
 
-# File paths local
-DATA_DIR = "../data_harmonized"
+# Root directory local installation
+ROOT_DIR = ".."
 
+# File paths
+DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 ERROR_FILE_NAME = "phase1_errors.csv"
 
 
@@ -79,7 +81,8 @@ def phase1_checker(include_dirs, exclude_dirs, reset, update):
         error_messages = []
 
         # Check for missing files
-        error = utils.file_is_missing(preorigcopy_dir, error_messages)
+        postfix = "preorigcopy"
+        error = utils.file_is_missing(preorigcopy_dir, postfix, error_messages)
         if error:
             utils.save_error_file(error_messages, error_file)
 
