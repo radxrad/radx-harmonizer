@@ -84,7 +84,13 @@ COLUMN_MAP = {
 }
 
 # Field names that contain specimen information
-SPECIMEN_COLUMNS = ["specimen_type", "virus_sample_type", "sample_media", "sample_type", "covid_test_specimen_type"]
+SPECIMEN_COLUMNS = [
+    "specimen_type",
+    "virus_sample_type",
+    "sample_media",
+    "sample_type",
+    "covid_test_specimen_type",
+]
 
 # Standard units
 # see: https://github.com/bmir-radx/radx-data-dictionary-specification/blob/main/radx-data-dictionary-specification.md#field-unit
@@ -115,6 +121,78 @@ STANDARD_UNITS = {
     "mmHg": "mm Hg",
     "free text": "",
     "N/A": "",
+}
+
+RAX_RAD_TO_RADX_GLOBAL = {
+    "study_id": "nih_record_id",
+    "race": "nih_race",
+    "ethnicity": "nih_ethnicity",
+    "age": "nih_age",
+    "sex": "nih_sex",
+    "education": "nih_education_yrs",
+    "zip": "nih_zip",
+    "employment": "nih_employment",
+    "insurance": "nih_insurance",
+    "deaf": "nih_deaf",
+    "blind": "nih_blind",
+    "memory_dis": "nih_memory",
+    "walking_climbing_dis": "nih_walk_climb",
+    "dress_bathe_dis": "nih_dress_bathe",
+    "errand_dis": "nih_errand",
+    "vaping": "nih_vaping_yn",
+    "nicotine": "nih_nicotine_yn",
+    "alcohol_use": "nih_alcohol_yn",
+    "asthma": "nih_asthma",
+    "cancer": "nih_cancer",
+    "cardiovascular_disease": "nih_cardiovascular_disease",
+    "chronic_kidney_disease": "nih_chronic_kidney_disease",
+    "chronic_lung_disease": "nih_chronic_lung_disease",
+    "diabetes": "nih_diabetes",
+    "hypertension": "nih_hypertension",
+    "immunosuppressive_conditio": "nih_immunosuppressive_condition",
+    "serious_mental_illness": "nih_serious_mental_illness",
+    "sickle_cell_disease": "nih_sickle_cell_disease",
+    "pregnancy_status": "nih_pregnancy",
+    "cough": "nih_cough",
+    "fever": "nih_fever_chills1",  # combine
+    "chills": "nih_fever_chills2",  # combine
+    "shortness_of_breath_or_dif": "nih_diff_breath",
+    "headache": "nih_headache",
+    "muscle_ache": "nih_muscle_ache",
+    "new_loss_of_taste_or_smell": "nih_olfactory",
+    "excessive_fatigue": "nih_fatigue",
+    "nausea_vomiting": "nih_nausea_vomiting_diarrhea1",  # combine
+    "diarrhea": "nih_nausea_vomiting_diarrhea2",  # combine
+    "abdominal_pain": "nih_abdom_pain",
+    "skin_rash": "nih_skin_rash",
+    "conjunctivitis": "nih_conjunctivitis",
+    "height_feet": "nih_height1",
+    "height_inches": "nih_height2",  # height_feet * 12 + height_inches
+    "weight_lbs": "nih_weight",
+    "health_status": "nih_health_status",
+}
+
+# Mappings that are not one-to-one
+RADX_RAD_TO_RADX_GLOBAL_MAPPINGS = {
+    "nih_race": {"1": "0", "2": "2", "3": "1", "4": "3", "5": "4", "6": "97", "": ""},
+    "nih_sex": {"1": "1", "2": "0", "3": "2", "4": "96", "": ""},
+    "nih_employment": {"1": "0", "2": "97", "3": "1", "": ""},
+    "nih_insurance": {"1": "1", "2": "2", "3": "0", "": ""},
+    "nih_health_status": {"1": "0", "2": "1", "3": "2", "4": "3", "5": "4", "": ""},
+}
+
+# This map contains the combination rules for two yes/no columns (fever+chills, nausea_vomiting+diarrhea)
+# The values in the columns can be be 1 (yes), 2 (no), or "" (bank).
+# The key in this map is the concatenated value of the two columns.
+# The value in this map is the result of the combination
+YES_NO_MAPPINGS = {
+    "11": "1",  ##yes + yes -> yes
+    "10": "1",  # yes + no -> yes
+    "01": "1",  # no + yes -> yes
+    "00": "0",  # no + no -> no
+    "1": "1",  # yes + blank or blank + yes -> yes
+    "0": "0",  # no + blank or blank + no -> no
+    "": "",  # blank + blank -> blank
 }
 
 
@@ -184,16 +262,16 @@ def confirm_rest():
     return confirmation == "yes"
 
 
-def file_is_missing(directory, error_messages):
+def file_is_missing(directory, postfix, error_messages):
     all_files = set(glob.glob(os.path.join(directory, "*")))
     data_files = set(
-        glob.glob(os.path.join(directory, "rad_*_*-*_DATA_preorigcopy.csv"))
+        glob.glob(os.path.join(directory, f"rad_*_*-*_DATA_{postfix}.csv"))
     )
     dict_files = set(
-        glob.glob(os.path.join(directory, "rad_*_*-*_DICT_preorigcopy.csv"))
+        glob.glob(os.path.join(directory, f"rad_*_*-*_DICT_{postfix}.csv"))
     )
     meta_files = set(
-        glob.glob(os.path.join(directory, "rad_*_*-*_META_preorigcopy.csv"))
+        glob.glob(os.path.join(directory, f"rad_*_*-*_META_{postfix}.csv"))
     )
 
     any_error = False
@@ -214,18 +292,78 @@ def file_is_missing(directory, error_messages):
 
     for data_file in data_files:
         # Check for missing DICT files
-        dict_file = data_file.replace("_DATA_preorigcopy.csv", "_DICT_preorigcopy.csv")
+        dict_file = data_file.replace(f"_DATA_{postfix}.csv", f"_DICT_{postfix}.csv")
         if not dict_file in dict_files:
             message = "DICT file missing"
             error = append_error(message, dict_file, error_messages)
             any_error = any_error or error
 
         # Check for missing META files
-        meta_file = data_file.replace("_DATA_preorigcopy.csv", "_META_preorigcopy.csv")
+        meta_file = data_file.replace(f"_DATA_{postfix}.csv", f"_META_{postfix}.csv")
         if not meta_file in meta_files:
             message = "META file missing"
             error = append_error(message, meta_file, error_messages)
             any_error = any_error or error
+
+    return any_error
+
+
+def file_is_missing_in_work_directory(directory, postfix, error_messages):
+    all_files = set(glob.glob(os.path.join(directory, "*")))
+    data_files = set(glob.glob(os.path.join(directory, f"rad_*_*-*_*_DATA*.csv")))
+    dict_files = set(glob.glob(os.path.join(directory, f"rad_*_*-*_*_DICT*.csv")))
+    meta_files = set(glob.glob(os.path.join(directory, f"rad_*_*-*_*_META*.csv")))
+
+    any_error = False
+    # Check for files that don't match the file naming convention
+    extra_files = all_files - data_files - dict_files - meta_files
+    for extra_file in extra_files:
+        message = "Unrecognized file name"
+        error = append_error(message, extra_file, error_messages)
+        any_error = any_error or error
+
+    # Check that the number of DATA, DICT, and META files is the same
+    if len(data_files) != len(dict_files) or len(data_files) != len(meta_files):
+        message = "DATA, DICT, META file mismatch"
+        error_messages.append(
+            {"severity": "ERROR", "filename": directory, "message": message}
+        )
+        any_error = True
+
+    for data_file in data_files:
+
+        if postfix in data_file:
+            dict_file = data_file.replace(
+                f"_DATA_{postfix}.csv", f"_DICT_{postfix}.csv"
+            )
+            # Check for missing DICT files
+            if not dict_file in dict_files:
+                message = "DICT file missing"
+                error = append_error(message, dict_file, error_messages)
+                any_error = any_error or error
+
+            # Check for missing META files
+            meta_file = data_file.replace(
+                f"_DATA_{postfix}.csv", f"_META_{postfix}.csv"
+            )
+            if not meta_file in meta_files:
+                message = "META file missing"
+                error = append_error(message, meta_file, error_messages)
+                any_error = any_error or error
+        else:
+            # Check for missing DICT files
+            dict_file = data_file.replace(f"_DATA.csv", f"_DICT.csv")
+            if not dict_file in dict_files:
+                message = "DICT file missing"
+                error = append_error(message, dict_file, error_messages)
+                any_error = any_error or error
+
+            # Check for missing META files
+            meta_file = data_file.replace(f"_DATA.csv", f"_META.csv")
+            if not meta_file in meta_files:
+                message = "META file missing"
+                error = append_error(message, meta_file, error_messages)
+                any_error = any_error or error
 
     return any_error
 
@@ -306,6 +444,42 @@ def check_meta_file(filename, error_messages):
     description = description[0]
     if description == "":
         message = "Data file description is missing"
+        error = append_error(message, filename, error_messages)
+        any_error = any_error or error
+
+    return any_error
+
+
+def check_origcopy_meta_file(filename, error_messages):
+    error = False
+    try:
+        meta = pd.read_csv(
+            filename,
+            encoding="utf8",
+            dtype=str,
+            keep_default_na=False,
+            skip_blank_lines=False,
+        )
+    except Exception:
+        message = f"Invalid csv file: {traceback.format_exc().splitlines()[-2]}"
+        error = append_error(message, filename, error_messages)
+        return error
+
+    any_error = False
+
+    data_file = os.path.basename(filename).replace("_META_", "_DATA_")
+    meta_data_file = meta.query("Field == 'data_file_name'").copy()
+    data_files = meta_data_file["Value"].tolist()
+    if data_files[0] != data_file:
+        message = f"Data file name: {data_files[0]} doesn't match"
+        error = append_error(message, filename, error_messages)
+        any_error = any_error or error
+
+    dict_file = os.path.basename(filename).replace("_META_", "_DICT_")
+    meta_dict_file = meta.query(f"Field == 'data_dictionary_file_name'").copy()
+    dict_files = meta_dict_file["Value"].tolist()
+    if dict_files[0] != dict_file:
+        message = f"Dictionary file name: {dict_files[0]} doesn't match"
         error = append_error(message, filename, error_messages)
         any_error = any_error or error
 
@@ -404,7 +578,7 @@ def standardize_units(filename):
     )
 
     # Create a list of columns that end with '_unit'
-    unit_columns = [col for col in df.columns if col.endswith('_unit')]
+    unit_columns = [col for col in df.columns if col.endswith("_unit")]
     # Standardize '_unit' columns
     df[unit_columns] = df[unit_columns].replace(STANDARD_UNITS)
 
@@ -423,7 +597,10 @@ def remove_spaces_from_header(filename):
     has_spaces = any(col != (col_stripped := col.strip()) for col in df.columns)
 
     if has_spaces:
-        df.rename(columns={col: col.strip() for col in df.columns if col != col.strip()}, inplace=True)
+        df.rename(
+            columns={col: col.strip() for col in df.columns if col != col.strip()},
+            inplace=True,
+        )
         df.to_csv(filename, index=False)
 
 
@@ -609,12 +786,23 @@ def check_data_type(data_file, dict_file, error_messages):
         skip_blank_lines=False,
     )
     dict_types = get_dictionary_data_types(dict_file)
+    dict_cardinality = get_dictionary_cardinality(dict_file)
 
     any_error = False
     for column in list(data.columns):
         # Ignore the "type" column. It is used store temporay data types.
-        if column == "type":
+        if column == "type" or column == "cardinality":
             continue
+
+        # Check cardinality of data. Only list and checkbox can have multiple values separated by "|"
+        data_cardinality = get_column_cardinality(data, column)
+
+        if data_cardinality == "multiple" and dict_cardinality.get(column) == "single":
+            message = f"Multiple values are not allowed in column: {column}. Check the data dictionary. Only 'list' and 'checkbox' field types can have multiple values"
+            error = append_error(message, data_file, error_messages)
+            any_error = any_error or error
+
+        # Check data types
         types = get_column_type(data, column)
         dict_type = dict_types.get(column)
         if len(types) == 1 and not types[0] == dict_type:
@@ -668,12 +856,33 @@ def get_column_type(df, fieldname):
     return types
 
 
+def get_column_cardinality(df, fieldname):
+    data = df[fieldname].to_list()
+    for item in data:
+        if "|" in item:
+            return "multiple"
+
+    return "single"
+
+
 def get_offending_data_values(df, fieldname):
     df_string = df[df["type"] == "string"].copy()
     return set(df_string[fieldname].unique())
 
 
 def determine_type(value: str) -> str:
+    # split multi-value values
+    if "|" in value:
+        types = {determine_type(item) for item in value.split("|")}
+        # mixed integers and floats are represented as floats
+        if len(types) == 2 and "integer" in types and "float" in types:
+            types.remove("integer")
+        # if there are multiple types, make it a string
+        if len(types) > 1:
+            return "string"
+        else:
+            return list(types)[0]
+            
     if value == "":
         return "blank"
 
@@ -689,6 +898,27 @@ def determine_type(value: str) -> str:
             return "float"
         except ValueError:
             return "string"
+
+
+def get_dictionary_cardinality(dict_file):
+    dictionary = pd.read_csv(
+        dict_file,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    dictionary["cardinality"] = dictionary.apply(determine_cardinality, axis=1)
+    dict_types = dictionary.set_index("Variable / Field Name")["cardinality"].to_dict()
+    return dict_types
+    
+
+def determine_cardinality(row):
+    data_type = row["Field Type"]
+    if data_type == "list" or data_type == "checkbox":
+        return "multiple"
+    else:
+        return "single"
 
 
 def convert_data_type(row):
@@ -761,7 +991,7 @@ def check_enums(data_file, dict_file, error_messages):
 
     # Get the allowed values for enumerated types
     allowed_values = get_allowed_values(dict_file)
-    
+
     # Get a list of fields that have a "List" Field Type
     # (list of values separated by the vertical bar | without spaces.)
     multi_value_fields = get_multi_value_fields(dict_file)
@@ -772,7 +1002,7 @@ def check_enums(data_file, dict_file, error_messages):
         column_values = data[column].unique()
         # Empty values are ok, remove them
         column_values = set(filter(None, column_values))
-        
+
         # Expand lists of enumerated values
         if column in multi_value_fields:
             column_values = expand_column_values(column_values)
@@ -781,7 +1011,7 @@ def check_enums(data_file, dict_file, error_messages):
         mismatches = column_values - enum_values
 
         if len(mismatches) > 0:
-            message = f"Invalid enumerated value(s)in column {column}: {mismatches}"
+            message = f"Invalid enumerated value(s) in column {column}: {mismatches}"
             error = append_error(message, data_file, error_messages)
             any_error = any_error or error
 
@@ -792,7 +1022,11 @@ def check_enums(data_file, dict_file, error_messages):
 def expand_column_values(column_values):
     # For Field Type: "list", split multiple values.
     # Example: analyte_type = viral RNA|human microRNA
-    expanded_column_values = {val for value in column_values for val in (value.split("|") if "|" in value else [value])}
+    expanded_column_values = {
+        val
+        for value in column_values
+        for val in (value.split("|") if "|" in value else [value])
+    }
     return set(expanded_column_values)
 
 
@@ -825,7 +1059,7 @@ def get_multi_value_fields(dict_file):
         keep_default_na=False,
         skip_blank_lines=False,
     )
-    dictionary = dictionary[dictionary["Field Type"] == "list"].copy()
+    dictionary = dictionary[(dictionary["Field Type"] == "list") | (dictionary["Field Type"] == "checkbox")].copy()
     list_fields = set(dictionary["Variable / Field Name"].to_list())
     return list_fields
 
@@ -1008,10 +1242,11 @@ def data_dict_matcher_new(data_file, dict_file, harmonized_dict, error_messages)
 
     # Remove extra data elements in the dictionary that not present in the data file
     data_fields = set(data.columns)
-    dictionary = dictionary[dictionary["Variable / Field Name"].isin(data_fields)]
+    primary_key = "Variable / Field Name"
+    dictionary = dictionary[dictionary[primary_key].isin(data_fields)]
 
     # Check for missing data element (data fields that are not present in the dictionary)
-    data_elements = set(dictionary["Variable / Field Name"].tolist())
+    data_elements = set(dictionary[primary_key].tolist())
     missing_data_elements = list(data_fields - data_elements)
 
     error = False
@@ -1027,10 +1262,10 @@ def data_dict_matcher_new(data_file, dict_file, harmonized_dict, error_messages)
         error = append_warning(message, dict_file, error_messages)
 
     # Drop duplicate data elements
-    dictionary.drop_duplicates(subset="Variable / Field Name", inplace=True)
+    dictionary.drop_duplicates(subset=primary_key, inplace=True)
 
     # Reorder the dictionary data elements to match the order in the data file
-    dictionary = reorder_data_dictionary(dictionary, list(data.columns))
+    dictionary = reorder_data_dictionary(dictionary, primary_key, list(data.columns))
     dictionary.to_csv(dict_file, index=False)
 
     return error
@@ -1085,19 +1320,17 @@ def add_harmonized_data_elements(dictionary, harmonized_dict):
     return dictionary
 
 
-def reorder_data_dictionary(dictionary, data_fields):
-    # Convert the "Variable / Field Name" column to a categorical type with the specified order
-    dictionary["Variable / Field Name"] = pd.Categorical(
-        dictionary["Variable / Field Name"], categories=data_fields, ordered=True
+def reorder_data_dictionary(dictionary, primary_key, data_fields):
+    # Convert the primary key column to a categorical type with the specified order
+    dictionary[primary_key] = pd.Categorical(
+        dictionary[primary_key], categories=data_fields, ordered=True
     )
 
     # Sort the DataFrame by the "Variable / Field Name" column
-    dictionary = dictionary.sort_values("Variable / Field Name").reset_index(drop=True)
+    dictionary = dictionary.sort_values(primary_key).reset_index(drop=True)
 
     # Convert the "Variable / Field Name" column back to a string
-    dictionary["Variable / Field Name"] = dictionary["Variable / Field Name"].astype(
-        str
-    )
+    dictionary[primary_key] = dictionary[primary_key].astype(str)
 
     return dictionary
 
@@ -1245,6 +1478,7 @@ def has_study_id(data_file, dict_file, harmonized_dict, error_messages):
     return error
 
 
+# TODO see contains_min_cdes(dict_file):
 def has_minimum_cdes(dict_file, harmonized_dict):
     # Read the minimum CDEs (first 46 data elements in the harmonized data dictionary)
     dictionary_harmonized = pd.read_csv(
@@ -1326,6 +1560,186 @@ def convert_dict(dict_file, dict_output_file):
         ]
     ]
     dictionary.to_csv(dict_output_file, index=False)
+
+
+def contains_min_cdes(dict_file):
+    dictionary = pd.read_csv(
+        dict_file,
+        dtype=str,
+        encoding="utf8",
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    data_elements = set(dictionary["Id"].to_list())
+    min_cdes = set(RAX_RAD_TO_RADX_GLOBAL.keys())
+    overlap = min_cdes.intersection(data_elements)
+    return len(overlap) > 0
+
+
+def convert_min_to_global_data(data_file):
+    data = pd.read_csv(
+        data_file,
+        dtype=str,
+        encoding="utf8",
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+
+    data = data.rename(columns=RAX_RAD_TO_RADX_GLOBAL)
+    data = convert_exceptions(data)
+    data = convert_height_to_inches(data)
+    data = combine_yes_no_cdes(data, "nih_fever_chills")
+    data = combine_yes_no_cdes(data, "nih_nausea_vomiting_diarrhea")
+    # Add missing value code all emtpy cell
+    # https://github.com/bmir-radx/radx-data-dictionary-specification/blob/main/radx-data-dictionary-specification.md#field-missingvaluecodes
+    data.replace("", "-9960", inplace=True)
+
+    return data
+
+
+def combine_yes_no_cdes(data, cde):
+    cde1 = f"{cde}1"
+    cde2 = f"{cde}2"
+    if cde1 in data.columns and not cde2 in data.columns:
+        data = data.rename(columns={cde1, cde})
+    if cde2 in data.columns and not cde1 in data.columns:
+        data = data.rename(columns={cde2, cde})
+    if cde1 in data.columns and cde2 in data.columns:
+        # Reuse the existing column to avoid rearranging the position of this column
+        data[cde1] = data.apply(lambda r: yes_no_combiner(r[cde1], r[cde2]), axis=1)
+        data = data.drop(columns=[cde2])
+        data = data.rename(columns={cde1: cde})
+
+    return data
+
+
+def convert_exceptions(data):
+    # Apply the mapping if the column exists
+    for column, mapping in RADX_RAD_TO_RADX_GLOBAL_MAPPINGS.items():
+        if column in data.columns:
+            data[column] = data[column].replace(mapping)
+
+        # Special case: for multiple races (separated by "|"), assign 6: Two or more races
+        if column == "nih_race":
+            data[column] = data[column].apply(lambda x: "6" if "|" in x else x)
+
+    return data
+
+
+def yes_no_combiner(cde1, cde2):
+    # Create a composite key
+    key = cde1 + cde2
+    # Return the looked up value
+    return YES_NO_MAPPINGS[key]
+
+
+def convert_height_to_inches(data):
+    if "nih_height1" in data.columns and "nih_height2" in data.columns:
+        # temporaryly replace emtpy values with zero to enable calculation
+        data["nih_height1"] = data["nih_height1"].replace("", "0").fillna("0")
+        data["nih_height2"] = data["nih_height2"].replace("", "0").fillna("0")
+        data["nih_height2"] = data["nih_height1"].astype(int) * 12 + data[
+            "nih_height2"
+        ].astype(int)
+        data = data.rename(columns={"nih_height2": "nih_height"})
+        data = data.drop(columns=["nih_height1"])
+        # replace the zero values with empty string
+        data["nih_height"] = data["nih_height"].astype(str)
+        data["nih_height"] = data["nih_height"].replace("0", "")
+
+    return data
+
+
+def convert_min_to_global_dict(dict_file, global_harmonized_dict):
+    dictionary = pd.read_csv(
+        dict_file,
+        dtype=str,
+        encoding="utf8",
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    # Add a terms column to match the RADx Global Codebook format
+    dictionary["Terms"] = ""
+    # Order the columns as in the Global Codebook
+    dictionary = dictionary[["Id", "Label", "Section" , "Cardinality" , "Terms", "Datatype", 
+                             "Unit", "Enumeration", "Notes", "Provenance", "SeeAlso"]]
+    global_dictionary = pd.read_csv(
+        global_harmonized_dict,
+        dtype=str,
+        encoding="utf8",
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    dictionary = pd.concat([global_dictionary, dictionary])
+    # Drop duplicates keeping the global dictionary data elements
+    dictionary = dictionary.drop_duplicates(subset="Id", keep='first')
+
+    dictionary["MissingValueCodes"] = '-9960"=[Not Entered By Originator]'
+    
+    # Order the columns as in the Global Codebook
+    # https://github.com/bmir-radx/radx-data-dictionary-specification
+    dictionary = dictionary[["Id", "Label", "Section" , "Cardinality" , "Terms", "Datatype", 
+                             "Unit", "Enumeration", "Notes", "MissingValueCodes", "Provenance", "SeeAlso"]]
+
+    return dictionary   
+
+
+def global_data_dict_matcher(data_file, dict_file):
+    data = pd.read_csv(
+        data_file,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    dictionary = pd.read_csv(
+        dict_file,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    primary_key = "Id"
+    # Remove extra data elements in the dictionary that not present in the data file
+    data_fields = set(data.columns)
+    dictionary = dictionary[dictionary[primary_key].isin(data_fields)]
+
+    # Reorder the dictionary data elements to match the order in the data file
+    dictionary = reorder_data_dictionary(dictionary, primary_key, list(data.columns))
+    dictionary.to_csv(dict_file, index=False)
+
+    return dictionary
+
+
+def final_consistency_check(preorigcopy_dir, origcopy_dir, transformcopy_dir,  error_messages):
+    preorigcopies = len(glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*_preorigcopy.csv")))
+    origcopies = len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.csv")))
+    transformcopies = len(glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.csv")))
+    
+    if origcopies % 3 != 0 or origcopies < preorigcopies:
+        message = f" - ERROR: invalid number of origcopy files: {origcopies} generated: preorigcopy directory has {preorigcopies} files."
+        error = append_error(message, f"{origcopy_dir} directory", error_messages)
+        origcopies = -1
+        
+    if transformcopies % 3 != 0:
+        message = f"Invalid number of transformcopy files: {transformcopies} generated"
+        error = append_error(message, f"{transformcopy_dir} directory", error_messages)
+        transformcopies = -1
+
+    return origcopies, transformcopies
+
+
+def replace_and_save_text_file(input_file_path, output_file_path):
+    # Read the content of the file
+    with open(input_file_path, 'r') as file:
+        content = file.read()
+
+    # Replace occurrences of "_origcopy.csv" with "_transformcopy.csv"
+    modified_content = content.replace("_origcopy.csv", "_transformcopy.csv")
+
+    # Save the modified content to a new file
+    with open(output_file_path, 'w') as file:
+        file.write(modified_content)
 
 
 def collect_primary_keys(data_path):
