@@ -8,7 +8,7 @@ import utils
 
 
 # Root directory on AWS
-# ROOT_DIR = "r:"
+# ROOT_DIR = "r:/"
 
 # Root directory local installation
 ROOT_DIR = ".."
@@ -18,7 +18,7 @@ DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 ERROR_FILE_NAME = "phase1_errors.csv"
 
 
-def phase1_checker(include_dirs, exclude_dirs, reset, update):
+def phase1_checker(include_dirs, exclude_dirs, reset):
     """
     Validate the contents of preorigcopy directories within the specified paths, and manage errors.
 
@@ -30,8 +30,6 @@ def phase1_checker(include_dirs, exclude_dirs, reset, update):
         List of directories to exclude from the check.
     reset : bool
         Flag to indicate if the work directory should be reset.
-    update : bool
-        Flag to indicate if the error summary files should be updated.
 
     Returns
     -------
@@ -101,12 +99,8 @@ def phase1_checker(include_dirs, exclude_dirs, reset, update):
 
         print(" - passed")
 
-    if update:
-        # Create error summary files
-        utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
 
-
-def main(include, exclude, reset, update):
+def main(include, exclude, reset):
     """
     Main function to execute the phase1_checker with command-line arguments.
 
@@ -118,8 +112,6 @@ def main(include, exclude, reset, update):
         Comma-separated list of projects to exclude.
     reset : bool
         Flag to reset the work directory.
-    update : bool
-        Flag to update the phase1_error_summary/details.csv files.
 
     Returns
     -------
@@ -153,17 +145,10 @@ def main(include, exclude, reset, update):
     else:
         reset = False
 
-    # Convert update flag
-    if update:
-        update = True
-        print("updating phase1_error_summary/details.csv files")
-    else:
-        update = False
-
     print()
 
     # Run phase 2 check
-    phase1_checker(include, exclude, reset, update)
+    phase1_checker(include, exclude, reset)
 
 
 if __name__ == "__main__":
@@ -188,14 +173,9 @@ if __name__ == "__main__":
         action="store_true",
         help="Reset work directory (deletes all files in the work directory!)",
     )
-    parser.add_argument(
-        "-update",
-        action="store_true",
-        help="Update phase1_error_summary/details.csv files",
-    )
 
     # Parse the arguments
     args = parser.parse_args()
 
     # Call the main function with the parsed arguments
-    main(args.include, args.exclude, args.reset, args.update)
+    main(args.include, args.exclude, args.reset)

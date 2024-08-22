@@ -8,7 +8,7 @@ import utils
 
 
 # Root directory on AWS
-# ROOT_DIR = "r:"
+# ROOT_DIR = "r:/"
 
 # Root directory local installation
 ROOT_DIR = ".."
@@ -16,12 +16,16 @@ ROOT_DIR = ".."
 # File paths
 DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 META_DIR = os.path.join(ROOT_DIR, "meta")
-HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_harmonized_dict_2024-08-09.csv")
-GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_harmonized_dict_2024-08-12.csv")
+HARMONIZED_DICT = os.path.join(
+    ROOT_DIR, "reference/RADx-rad_harmonized_dict_2024-08-22.csv"
+)
+GLOBAL_HARMONIZED_DICT = os.path.join(
+    ROOT_DIR, "reference/RADx-global_harmonized_dict_2024-08-22.csv"
+)
 ERROR_FILE_NAME = "phase2_errors.csv"
 
 
-def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
+def phase2_checker(include_dirs, exclude_dirs, reset=False):
     """
     Validate, clean, and update the contents of directories within the specified paths and manage errors.
 
@@ -33,8 +37,6 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
         List of directories to exclude from the check.
     reset : bool, optional
         Flag to indicate if the work directory should be reset (default is False).
-    update : bool, optional
-        Flag to indicate if the error summary files should be updated (default is False).
 
     Returns
     -------
@@ -80,9 +82,6 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
 
         print(f"checking: {directory} step: ", end="")
 
-        # Create work directory
-        # if reset:
-        #     shutil.rmtree(work_dir, ignore_errors=True)
         try:
             if reset:
                 shutil.rmtree(work_dir)
@@ -133,14 +132,6 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False, update=False):
 
         step7(work_dir)
         print(",7 - passed")
-
-    if update:
-        # Create error summary files
-        utils.create_error_summary(DATA_DIR, ERROR_FILE_NAME)
-        # Collect primary keys to be manually checked for consistency
-        utils.collect_primary_keys(DATA_DIR)
-        # Collect units to be manually checked for consistency
-        utils.collect_units(DATA_DIR)
 
 
 def step1(preorigcopy_dir, work_dir):
@@ -293,9 +284,7 @@ def step5(work_dir, error_messages):
         any_error = any_error or error
 
         # Check if file that contains minimum CDEs had study_id column.
-        error = utils.has_study_id(
-            data_file, dict_file, HARMONIZED_DICT, error_messages
-        )
+        error = utils.has_study_id(data_file, dict_file, error_messages)
         any_error = any_error or error
 
         if not any_error:
@@ -349,7 +338,7 @@ def step7(work_dir):
         utils.convert_dict(dict_file, dict_output_file)
 
 
-def main(include, exclude, reset, update):
+def main(include, exclude, reset):
     """
     Main function to execute the phase2_checker with command-line arguments.
 
@@ -361,8 +350,6 @@ def main(include, exclude, reset, update):
         Comma-separated list of projects to exclude.
     reset : bool
         Flag to reset the project files with preorigcopy files.
-    update : bool
-        Flag to update the phase2_error_summary/details.csv files.
 
     Returns
     -------
@@ -395,17 +382,10 @@ def main(include, exclude, reset, update):
     else:
         reset = False
 
-    # Convert update flag
-    if update:
-        update = True
-        print("updating phase2_error_summary/details.csv files")
-    else:
-        update = False
-
     print()
 
     # Run phase 2 check
-    phase2_checker(include, exclude, reset, update)
+    phase2_checker(include, exclude, reset)
 
 
 if __name__ == "__main__":
@@ -430,14 +410,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "-reset", action="store_true", help="Reset project using files from preorigcopy"
     )
-    parser.add_argument(
-        "-update",
-        action="store_true",
-        help="Update phase2_error_summary/details.csv files",
-    )
 
     # Parse the arguments
     args = parser.parse_args()
 
     # Call the main function with the parsed arguments
-    main(args.include, args.exclude, args.reset, args.update)
+    main(args.include, args.exclude, args.reset)
