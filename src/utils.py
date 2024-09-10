@@ -268,12 +268,12 @@ def get_directories(include, exclude, data_dir):
     return []
 
 
-def confirm_rest():
+def confirm_rest(dir_name="work"):
     print()
-    print("-reset will remove all files in the work directory!")
+    print(f"-reset will remove all files in the {dir_name} directory!")
     confirmation = (
         input(
-            "Are you sure you want to reset the work directory? Type 'yes' to confirm: "
+            f"Are you sure you want to reset the {dir_name} directory? Type 'yes' to confirm: "
         )
         .strip()
         .lower()
@@ -337,6 +337,9 @@ def file_is_missing_in_work_directory(directory, postfix, error_messages):
     # Check for files that don't match the file naming convention
     extra_files = all_files - data_files - dict_files - meta_files
     for extra_file in extra_files:
+        # Ignore lock file
+        if "lock.txt" in extra_file:
+            continue
         message = "Unrecognized file name"
         error = append_error(message, extra_file, error_messages)
         any_error = any_error or error

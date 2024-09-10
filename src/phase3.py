@@ -245,7 +245,7 @@ def main(include, exclude, reset):
     # Convert reset flag
     if reset:
         reset = True
-        if not utils.confirm_rest():
+        if not utils.confirm_rest("origcopy and transform"):
             sys.exit(0)
         print("resetting origcopy and transformcopy directories")
     else:
