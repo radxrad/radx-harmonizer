@@ -1206,7 +1206,7 @@ def extract_unique_column_values(df, column):
 
         # For all other specimen types
         specimens = set(df[column].unique())
-        
+
         return specimens
 
     return set()
