@@ -1580,9 +1580,9 @@ def combine_yes_no_cdes(data, cde):
     cde1 = f"{cde}1"
     cde2 = f"{cde}2"
     if cde1 in data.columns and not cde2 in data.columns:
-        data = data.rename(columns={cde1, cde})
+        data = data.rename(columns={cde1: cde})
     if cde2 in data.columns and not cde1 in data.columns:
-        data = data.rename(columns={cde2, cde})
+        data = data.rename(columns={cde2: cde})
     if cde1 in data.columns and cde2 in data.columns:
         # Reuse the existing column to avoid rearranging the position of this column
         data[cde1] = data.apply(lambda r: yes_no_combiner(r[cde1], r[cde2]), axis=1)
