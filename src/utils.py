@@ -1666,7 +1666,7 @@ def convert_min_to_global_dict(dict_file, global_harmonized_dict):
     # Drop duplicates keeping the global dictionary data elements
     dictionary = dictionary.drop_duplicates(subset="Id", keep="first")
 
-    dictionary["MissingValueCodes"] = '-9960"=[Not Entered By Originator]'
+    dictionary["MissingValueCodes"] = '"-9960"=[Not Entered By Originator]'
 
     # Order the columns as in the Global Codebook
     # https://github.com/bmir-radx/radx-data-dictionary-specification
