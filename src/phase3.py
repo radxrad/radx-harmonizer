@@ -117,19 +117,19 @@ def phase3_checker(include_dirs, exclude_dirs, reset=False):
             print(f" - failed: {len(error_messages)} errors")
             continue
 
-        compile_metadata(work_dir, "origcopy", error_file)
+        compile_metadata(work_dir, "origcopy", error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
             continue
 
-        validate_dictionary(work_dir, "origcopy", error_file)
+        validate_dictionary(work_dir, "origcopy", error_message)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
             continue
 
-        validate_metadata(work_dir, "origcopy", error_file)
+        validate_metadata(work_dir, "origcopy", error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
@@ -146,19 +146,19 @@ def phase3_checker(include_dirs, exclude_dirs, reset=False):
 
         step4(work_dir, origcopy_dir, transformcopy_dir)
 
-        compile_metadata(transformcopy_dir, "transformcopy", error_file)
+        compile_metadata(transformcopy_dir, "transformcopy", error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
             continue
 
-        validate_dictionary(transformcopy_dir, "transformcopy", error_file)
+        validate_dictionary(transformcopy_dir, "transformcopy", error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
             continue
 
-        validate_metadata(transformcopy_dir, "transformcopy", error_file)
+        validate_metadata(transformcopy_dir, "transformcopy", error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
@@ -183,7 +183,7 @@ def phase3_checker(include_dirs, exclude_dirs, reset=False):
         )
 
 
-def compile_metadata(work_dir, file_type, error_file):
+def compile_metadata(work_dir, file_type, error_messages):
     any_error = False
 
     # Compile metadata csv files to json format
@@ -193,13 +193,13 @@ def compile_metadata(work_dir, file_type, error_file):
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             message = f"Compilation failed: {meta_file}: {e.output}"
-            error = utils.append_error(message, meta_file, error_file)
+            error = utils.append_error(message, meta_file, error_messages)
             any_error = any_error or error
 
     return any_error
 
 
-def validate_dictionary(work_dir, file_type, error_file):
+def validate_dictionary(work_dir, file_type, error_messages):
     any_error = False
     
     # Validate dictionary csv file
@@ -209,13 +209,13 @@ def validate_dictionary(work_dir, file_type, error_file):
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             error_message = f"Validation failed: {dict_file}: {e.output}"
-            error = utils.append_error(message, dict_file, error_file)
+            error = utils.append_error(message, dict_file, error_messages)
             any_error = any_error or error
 
     return any_error
 
 
-def validate_metadata(work_dir, file_type, error_file):
+def validate_metadata(work_dir, file_type, error_messages):
     any_error = False
     
     # Compile metadata csv files to json format
@@ -231,7 +231,7 @@ def validate_metadata(work_dir, file_type, error_file):
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             error_message = f"Validation failed: {data_file}: {e.output}"
-            error = utils.append_error(message, dict_file, error_file)
+            error = utils.append_error(message, dict_file, error_messages)
             any_error = any_error or error
 
     return any_error
