@@ -193,7 +193,7 @@ def compile_metadata(work_dir, file_type, error_file):
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             message = f"Compilation failed: {meta_file}: {e.output}"
-            error = utils.append_error(message, meta_file, error_messages)
+            error = utils.append_error(message, meta_file, error_file)
             any_error = any_error or error
 
     return any_error
@@ -209,7 +209,7 @@ def validate_dictionary(work_dir, file_type, error_file):
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             error_message = f"Validation failed: {dict_file}: {e.output}"
-            error = utils.append_error(message, dict_file, error_messages)
+            error = utils.append_error(message, dict_file, error_file)
             any_error = any_error or error
 
     return any_error
@@ -231,7 +231,7 @@ def validate_metadata(work_dir, file_type, error_file):
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             error_message = f"Validation failed: {data_file}: {e.output}"
-            error = utils.append_error(message, dict_file, error_messages)
+            error = utils.append_error(message, dict_file, error_file)
             any_error = any_error or error
 
     return any_error
