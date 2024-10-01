@@ -190,6 +190,7 @@ def compile_metadata(work_dir, file_type, error_messages):
     for meta_file in glob.glob(os.path.join(work_dir, f"rad_*_*-*_*_META_{file_type}.csv")):
         command = f"java -jar {METADATA_COMPILER_JAR} -c {meta_file} -o {work_dir} -t {METADATA_SPEC}"
         try:
+            print(command)
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             message = f"Compilation failed: {meta_file}: {e.output}"
@@ -206,9 +207,10 @@ def validate_dictionary(work_dir, file_type, error_messages):
     for dict_file in glob.glob(os.path.join(work_dir, f"rad_*_*-*_*_DICT_{file_type}.csv")):
         command = f"java -jar {DICTIONARY_VALIDATOR_JAR} --in={dict_file}"
         try:
+            print(command)
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
-            error_message = f"Validation failed: {dict_file}: {e.output}"
+            error_message = f"Dictionary validation failed: {dict_file}: {e.output}"
             error = utils.append_error(message, dict_file, error_messages)
             any_error = any_error or error
 
@@ -228,9 +230,10 @@ def validate_metadata(work_dir, file_type, error_messages):
         )
 
         try:
+            print(command)
             ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
-            error_message = f"Validation failed: {data_file}: {e.output}"
+            error_message = f"Metadata validation failed: {data_file}: {e.output}"
             error = utils.append_error(message, dict_file, error_messages)
             any_error = any_error or error
 
