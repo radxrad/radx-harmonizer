@@ -1168,6 +1168,14 @@ def calculate_sha256(file_path):
     return sha256_hash.hexdigest()
 
 
+def update_sha256_digest(data_file, metadata_file):
+    # Get the SHA256 hash code for the data file
+    data_file_sha256_digest = calculate_sha256(data_file)
+    metadata = pd.read_csv(metadata_file)
+    metadata.loc[metadata["Field"] == "data_file_sha256_digest", "Value"] = data_file_sha256_digest
+    metadata.to_csv(metadata_file, index=False)
+    
+    
 def extract_speciment_type(data_file):
     data = pd.read_csv(
         data_file,
@@ -1491,6 +1499,11 @@ def split_provenance(provenance):
     return pd.Series([provenance, see_also])
 
 
+def extract_example(note):
+    match = re.match(r'^Example:\s*(.*)', note, re.IGNORECASE)
+    return match.group(1) if match else ""
+
+
 def convert_dict(dict_file, dict_output_file):
     dictionary = pd.read_csv(
         dict_file,
@@ -1519,6 +1532,9 @@ def convert_dict(dict_file, dict_output_file):
         split_provenance
     )
 
+    # Move the examples from the Notes column the "Examples" column
+    dictionary['Examples'] = dictionary['Notes'].apply(extract_example)
+
     # Convert to new data types
     dictionary["Cardinality"] = dictionary["Datatype"].apply(set_cardinality)
     dictionary["Datatype"] = dictionary.apply(convert_data_type_new, axis=1)
@@ -1528,6 +1544,7 @@ def convert_dict(dict_file, dict_output_file):
         [
             "Id",
             "Label",
+            "Examples",
             "Section",
             "Cardinality",
             "Datatype",
@@ -1723,11 +1740,14 @@ def final_consistency_check(
     preorigcopies = len(
         glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*_preorigcopy.csv"))
     )
-    origcopies = len(
-        glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.csv"))
+    origcopies = (
+        len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.csv"))) +
+        len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.json")))
     )
-    transformcopies = len(
-        glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.csv"))
+
+    transformcopies = (
+        len(glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.csv"))) +
+        len(glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.json")))
     )
 
     if origcopies % 3 != 0 or origcopies < preorigcopies:
