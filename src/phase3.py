@@ -123,7 +123,7 @@ def phase3_checker(include_dirs, exclude_dirs, reset=False):
             print(f" - failed: {len(error_messages)} errors")
             continue
 
-        validate_dictionary(work_dir, "origcopy", error_message)
+        validate_dictionary(work_dir, "origcopy", error_messages)
         if len(error_messages) > 0:
             utils.save_error_messages(error_file, error_messages)
             print(f" - failed: {len(error_messages)} errors")
