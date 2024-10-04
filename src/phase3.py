@@ -166,7 +166,7 @@ def phase3_checker(include_dirs, exclude_dirs, reset=False):
 
 
         #  Remove the metadata .csv file, since it have been replaced by a .json file.
-        for meta_file in glob.glob(os.path.join(transform_dir, f"rad_*_*-*_*_META_transformcopy.csv")):
+        for meta_file in glob.glob(os.path.join(transformcopy_dir, f"rad_*_*-*_*_META_transformcopy.csv")):
             os.remove(meta_file)
             
         origcopies, transformcopies = utils.final_consistency_check(
