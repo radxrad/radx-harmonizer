@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,John R Cirrito
+pi_firstname_1,John
+pi_middlename_1,R
+pi_lastname_1,Cirrito
+pi_profileid_1,
+pi_orcid_1,0000-0002-7196-8786
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Washington University in St. Louis
+pi_inst_id_1,ror:01yc7t268
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002700.v1.p1
+subproject,Automatic Detection & Tracing
+nih_project_id,1U01AA029331-01
+nih_reporter_abstract,"Coronavirus 2019 (COVID-19) has afflicted 6.2 million Americans and killed 190,000 as of early September 2020 (WHO website); a roughly 3% mortality. Between a shortage in testing and unidentified asymptomatic individuals, the actual number of those infected could be 6 to 24-fold higher than that reported. SARS-CoV-2 (CoV-2), the virus underlying the disease, results in a range of symptoms; in select cases a severe respiratory illness that impedes breathing that could lead to hospitalization and death. CoV-2 is transmitted person-to- person via inhalation of the virus through mucosal membranes of the nose and throat from transfer after touching a contaminated surface or by inhaling aerosolized virus. Unfortunately, COVID-19 is likely to be prevalent well into 2021 and beyond.  We must increase our ability to test for CoV-2. First, testing is needed to diagnose individuals that are symptomatic or asymptomatic to reduce community spread. And second, monitoring gathering areas for airborne virus that could inform the decision to shutdown a space or implement disinfection and mitigation of an area. We propose to use an electrochemical biosensor in two detection devices, 1) a diagnostic breathalyzer for instant detection of CoV-2 and 2) an airborne detector for real-time, continuous surveillance of a large space.  We have developed a novel ultra-sensitive, antibody-based electrochemical biosensor to detect CoV-2 repeat binding domain (RBD) spike protein. The technology is based on a micro-immunoelectrode (MIE) biosensor pioneered by the Cirrito laboratory to study protein dynamics in the setting of neurodegeneration (2,3). The biosensor uses voltammetry to measure the oxidation of tyrosine amino acids; oxidation is the release of electrons that the biosensor measures as a change in current. Antibodies are covalently attached to the electrode surface to provide selectivity. Our prototype CoV-2 biosensor is sensitive to 2 femtogram/ml, compared to several current CoV-2 antigen tests that are sensitive to the low picogram/ml range.  The proposal will first (Aim 1) optimize our CoV-2 biosensor to detect CoV-2 viral particles, as well as test several parameters to increase sensitivity and longevity. Aim 2 will build a test breathalyzer that will utilize a nebulizer to generate virus laden air containing aerosol droplets similar to a breath that contain defined concentrations of CoV-2 viral particles. Aim 3 will test the airborne biosensor in a realistic environment. Co-I Chakrabarty’s laboratory has unique capabilities of mimicking real-world environmental conditions, especially in the context of atmospheric aerosols, necessary for testing and optimizing the biosensor’s performance for field deployment. Atmospheric conditions include relative humidity (RH) and temperature, as well as common airborne pollutants found indoors.  Finding novel means to detect the CoV-2, as well as create a platform to detect other and future pathogens, would enable us to limit the viral spread throughout the community in the current and future pandemics."
+nih_reporter_narrative,"COVID-19 has afflicted millions of Americans with a roughly 3% mortality rate. We have developed an ultra-sensitive electrochemical biosensor to detect CoV-2 which we will incorporate into a breathalyzer for diagnostic purposes, as well as an airborne detector to monitor large gathering spaces."
+publication_url,https://doi.org/10.1021/acssensors.3c00512|https://doi.org/10.1038/s41467-023-39419-z
+creator_fullname_1,Woodrow D Gardiner
+creator_firstname_1,Woodrow
+creator_middlename_1,D
+creator_lastname_1,Gardiner
+creator_orcid_1,0000-0002-6412-2539
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Nanobody-based Electrochemical Biosensor for Real-Time Detection of Aerosolized Sars-Cov-2
+description_of_project,Development of biosensor to be implemented in a breathalyzer and environmental detector for Covid.
+keywords,Screen printed electrode|nanobody|SARS-CoV-2|electrochemistry|aerosols
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,R

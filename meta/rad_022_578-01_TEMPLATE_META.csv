@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Pamela Helen Dalton
+pi_firstname_1,Pamela
+pi_middlename_1,Helen
+pi_lastname_1,Dalton
+pi_profileid_1,
+pi_orcid_1,0000-0003-2474-2888
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Monell Chemical Senses Center
+pi_inst_id_1,ror:01mdfdm06
+pi_inst_id_type_1,ROR
+pi_fullname_2,Valentina Parma
+pi_firstname_2,Valentina
+pi_middlename_2,
+pi_lastname_2,Parma
+pi_profileid_2,
+pi_orcid_2,0000-0003-0276-7072
+pi_role_2,co-PI
+pi_inst_name_2,Monell Chemical Senses Center
+pi_inst_id_2,ror:01mdfdm06
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002699.v1.p1
+subproject,Chemosensory Testing
+nih_project_id,1U01DC019578-01
+nih_reporter_abstract,"Smell loss is a predominant symptom of COVID-19, and initial evidence based on self-reports suggests that chemosensory loss is a sensitive predictor of COVID-19 in the general population, more so than fever. However, given the natural lack of awareness of chemosensory changes, self-reports underestimate the true prevalence of smell loss in patients with COVID-19 by 20% compared to an objective test. Therefore, we propose testing and deploying a rapid and objective measure of smell ability, the SCENTinel test, inspired by the NIH Toolbox® Odor Identification Test that our team previously developed. SCENTinel is an inexpensive, and convenient smell test for COVID-19 surveillance of the population that quickly and easily assesses three smell loss factors: odor detection, odor intensity, and odor identification. It is designed for practical use in several contexts, including high-density areas such as community medical sites, universities, subacute care facilities, and both industrial and nonindustrial workplaces. Our multi-disciplinary team has expertise in understanding taste and smell, developing and validating chemosensory tests, as well as studying the broad symptomatology of COVID-19. The group is led by MPI Dalton from the Monell Chemical Senses Center, an expert in human olfaction and designing olfactory tests; MPI Parma from Temple University is an expert in COVID-19 smell loss, is the Chair of the Global Consortium for Chemosensory Research, and has expertise in conducting research in rapidly changing situations; Dr. Schalet and his team at Northwestern University and Dr. Chun and his team at Yale University, among the other established and interested partners (Fox subacute nursing homes, Hormel Food). Our team also includes the Director of Technology Transfer at the Monell Center, Dr. O’Leary, to explore potential partners and expand SCENTinel deployment nationwide. Dr. Reed from the Monell Chemical Senses Center will work directly with the Data Coordination Center, drawing on her experience in managing large shared NIH datasets. All will work closely with the NIH Project Scientist. This proposal aims to a) fine-tune SCENTinel’s ability to predict a positive COVID-19 diagnostic test; b) examine marginal smell loss as a sign of the earliest phases of COVID-19, before a positive diagnostic test; and c) assess the test’s psychometric validity with test-retest reliability measures and validation against the NIH Toolbox® Odor Identification Test. Together, these aims will establish a standardized protocol for use of SCENTinel as a rapid and objective smell test that can easily be incorporated into onsite COVID-19 testing centers, schools, and workplaces nationwide. Furthermore, it will provide key insights into early-onset chemosensory symptoms in relation to a confirmed COVID-19 diagnosis, providing a crucially needed means to contain the spread of COVID-19."
+nih_reporter_narrative,"As COVID-19 continues to spread in concurrence with the reopening of activities and workplaces, there is an immediate need to develop more robust screening tools to ensure everyone’s personal safety. Loss of the sense of smell is an early and sensitive predictor of COVID-19 infection. The goal of this project is to develop the SCENTinel test, an inexpensive, rapid, and highly scalable objective smell test to use for COVID-19 surveillance."
+publication_url,https://doi.org/10.1101/2023.06.05.23290966|https://doi.org/10.1093/chemse/bjad002|https://doi.org/10.1101/2022.03.23.22272807|https://doi.org/10.1016/j.foodqual.2021.104483|https://doi.org/10.1093/chemse/bjab012
+creator_fullname_1,Pamela Helen Dalton
+creator_firstname_1,Pamela
+creator_middlename_1,Helen
+creator_lastname_1,Dalton
+creator_orcid_1,0000-0003-2474-2888
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,SCENTinel: a rapid smell test to screen for COVID-19 surveillance
+description_of_project,"Smell loss is a predominant symptom of COVID-19, and initial evidence based on self-reports suggests that chemosensory loss is a sensitive predictor of COVID-19 in the general population, more so than fever. However, given the natural lack of awareness of chemosensory changes, self-reports underestimate the true prevalence of smell loss in patients with COVID-19 by 20% compared to an objective test. Therefore, we propose testing and deploying a rapid and objective measure of smell ability, the SCENTinel test, inspired by the NIH Toolbox? Odor Identification Test that our team developed. SCENTinel is an inexpensive, convenient, and robust smell test for COVID-19 surveillance of the population that quickly and easily assesses three smell loss factors: odor detection, odor intensity, and odor identification. It is designed for practical use in several contexts, including high-density areas such as community medical sites, universities, subacute care facilities, and both industrial and nonindustrial workplaces. Our multi-disciplinary team has expertise in understanding taste and smell, developing and validating chemosensory tests, as well as studying the broad symptomatology of COVID-19. This project aims to a) fine-tune SCENTinel?s ability to predict a positive COVID-19 diagnostic test; b) examine marginal smell loss as a sign of the earliest phases of COVID-19, before a positive diagnostic test; and c) assess the test?s psychometric validity with test-retest reliability measures and validation against the NIH Toolbox? Odor Identification Test. Together, these aims will establish a standardized protocol for use of SCENTinel as a rapid and objective smell test that can easily be incorporated into onsite COVID-19 testing centers, schools, and workplaces nationwide. Furthermore, it will provide key insights into early-onset chemosensory symptoms in relation to a confirmed COVID-19 diagnosis, providing a crucially needed means to contain the spread of COVID-19."
+keywords,anosmia|hyposmia|smell loss|smell test|COVID-19|prediction
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,R

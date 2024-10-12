@@ -1,0 +1,60 @@
+Field,Value
+pi_fullname_1,Ananth V Annapragada
+pi_firstname_1,Ananth
+pi_middlename_1,V
+pi_lastname_1,Annapragada
+pi_profileid_1,
+pi_orcid_1,0000-0002-3156-9617
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Baylor College of Medicine
+pi_inst_id_1,ror:02pttbw34
+pi_inst_id_type_1,ROR
+pi_fullname_2,Carl E Allen
+pi_firstname_2,Carl
+pi_middlename_2,E
+pi_lastname_2,Allen
+pi_profileid_2,
+pi_orcid_2,0000-0002-6625-739X
+pi_role_2,co-PI
+pi_inst_name_2,Baylor College of Medicine
+pi_inst_id_2,ror:02pttbw34
+pi_inst_id_type_2,ROR
+pi_fullname_3,Sridevi Devaraj
+pi_firstname_3,Sridevi
+pi_middlename_3,
+pi_lastname_3,Devaraj
+pi_profileid_3,
+pi_orcid_3,0000-0001-9189-7914
+pi_role_3,co-PI
+pi_inst_name_3,"University of California, Davis"
+pi_inst_id_3,ror:05rrcem69
+pi_inst_id_type_3,ROR
+pi_fullname_4,Craig G Rusin
+pi_firstname_4,Craig
+pi_middlename_4,G
+pi_lastname_4,Rusin
+pi_profileid_4,
+pi_orcid_4,0000-0003-3812-8133
+pi_role_4,co-PI
+pi_inst_name_4,Baylor College of Medicine
+pi_inst_id_4,ror:02pttbw34
+pi_inst_id_type_4,ROR
+dbGaP_study_ID,phs002585.v1.p1
+subproject,PreVAIL kIds
+nih_project_id,1R61HD105593-01
+nih_reporter_abstract,"This work is directed at characterizing pediatric COVID-19 and stratifying incoming patients by projected (future) disease severity. Such stratification has several implications: immediately improving treatment planning, and as disease mechanistic pathways are uncovered, directing treatment. Predicting future severity will inform the risks of outpatient treatment; to the patients themselves, their family, other caregivers/cohabitants, and to schools and employers. As varying levels of “reopening” are adopted across the country (and the world), such prognostication will inform policy on the handling of pediatric carriers in the community. Based on our preliminary analysis we assert that a combination of novel assays including quantitative serology inflammatory markers (cytokine/chemokine profiles, immune profiles), transcriptomics, epigenomics, longitudinal physiological monitoring, time series analysis, imaging, radiomics and clinical observation including social determinants of health, contains adequate information even at early stages of infection to stratify the disease and predict disease severity. We propose an artificial intelligence/machine learning approach to integrate this rich and heterogeneous dataset, characterize the spectrum of disease and identify biosignatures that predict severity in progressive disease. To facilitate translation of the approaches developed in this work to a wide user community, we incorporate a Translational Development function, to oversee the design-control process and ensure readiness of our methods for regulatory review. Incorporated into our timelines are appropriate regulatory milestones intended to conform with the Emergency Use Authorization (EUA) programs in effect for SARS- CoV-2 diagnostics."
+nih_reporter_narrative,"We propose an artificial intelligence/machine learning approach to integrate a rich and heterogeneous dataset on COVID-19 in children, characterize the spectrum of disease and identify biosignatures that predict severity in progressive disease. To facilitate translation of the approaches developed in this work to a wide user community, we incorporate a Translational Development function, to oversee the design-control process and ensure readiness of our methods for regulatory review. Incorporated into our timelines are appropriate regulatory milestones intended to conform with the Emergency Use Authorization (EUA) programs in effect for SARS-CoV-2 diagnostics."
+publication_url,https://doi.org/10.3390/jcm12175435|https://doi.org/10.1097/INF.0000000000003888|https://doi.org/10.1111/ped.15407|https://doi.org/10.1038/s41390-022-02108-6|https://doi.org/10.1097/INF.0000000000003511|https://doi.org/10.1097/PCC.0000000000002976|https://doi.org/10.1515/cclm-2022-0082|https://doi.org/10.1016/j.plabm.2021.e00261|https://doi.org/10.1016/j.healun.2021.11.001|https://doi.org/10.1016/j.clinbiochem.2021.09.008|https://doi.org/10.1016/j.jbi.2021.103818
+creator_fullname_1,Nicholas L Rider
+creator_firstname_1,Nicholas
+creator_middlename_1,L
+creator_lastname_1,Rider
+creator_orcid_1,0000-0003-2549-0678
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,AICORE-kids Artificial Intelligence COVID-19 Risk AssEssment for kids
+description_of_project,Building analytics to understand and predict outcomes in children with COVID-19 related disease
+keywords,AI|Machine Learning|Analytics|Data Science|Timeseries Forecasting|MISC|EHR
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,

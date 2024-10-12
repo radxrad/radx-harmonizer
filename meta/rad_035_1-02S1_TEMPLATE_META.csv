@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,J Devin MacKenzie
+pi_firstname_1,J
+pi_middlename_1,Devin
+pi_lastname_1,MacKenzie
+pi_profileid_1,
+pi_orcid_1,0000-0002-3884-5127
+pi_role_1,data-PI
+pi_inst_name_1,
+pi_inst_id_1,
+pi_inst_id_type_1,
+pi_fullname_2,Rodney J Y Ho
+pi_firstname_2,Rodney
+pi_middlename_2,J Y
+pi_lastname_2,Ho
+pi_profileid_2,
+pi_orcid_2,0000-0001-5960-4288
+pi_role_2,contact-PI
+pi_inst_name_2,University of Washington
+pi_inst_id_2,ror:00cvxb145
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002924.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,3U01HL152401-02S1
+nih_reporter_abstract,"The University of Washington and the entrepreneurial community seeks to partner with the National Institutes of Health to become a Research Evaluation and Commercialization Hub (REACH) to accelerate academic biomedical discoveries into products helping ease the highest U.S. burden of disease and disability. The UW is a powerhouse in health sciences, technology, and innovation in a city known for seeking solutions to the most pressing health problems around the world. The University’s long-standing relationship with the entrepreneurial business community has helped in the formation of Boeing, Microsoft, Amazon, Immunex, Zymogenetics, Teblos, the Drug Interaction Database, and Seattle Genetics. It’s also led to well-recognized recombinant therapeutic and vaccine products such as growth hormone, insulin, RecombiVax HB®, and Gardasil®. Many of our graduates work at major health organizations in the city, including The Gates Foundation, Path, Fred Hutchinson Cancer Research Center, the Infectious Disease Research Institute. The University’s Foster School of Business gathers business leaders to judge and mentor solutions to health problems, and major business leaders are part of the governing board of these organizations and the networking hub The Washington Global Health Alliance and The Innovation Hub of Life Sciences Washington. In this rich spirt of collaboration, a hub to accelerate promising biomedical discoveries would fit right in. A hub is needed to further energize the spirit of discovery and collaboration and overcome barriers in getting products to the public. A hub will leverage existing resources for translational research and support the journey to fruition to innovative products that change lives. With institutional co-funding commitments, strong support of community leaders, and proven leadership in entrepreneurial startups, the four Aims of this proposal are to (1) Develop an integrated infrastructure and implementation system; (2) Identify the most promising technologies, and increase their availability using milestone-driven gap funding and mentoring (in business, marketing, and networking) for market-driven proof-of-product concept and product definition; (3) Fuel the formation of new biotechnology, pharmaceutical, and medical device companies, and assist in pathways to a self-sustaining structure; (4) Train the next generation of biomedical entrepreneurs to lead these ventures. With NIH support, this hub will accelerate the creation of small businesses using biomedical discoveries to launch products that impact health outcomes. An investment in the Pacific Northwest will amplify the returns on this funding due to the critical mass of investigators, and the will of our institutions to make this happen."
+nih_reporter_narrative,"This proposal plans to create a hub to accelerate academic biomedical discoveries into products helping ease the highest burden of disease and disability in the United States. The University of Washington and the region is a powerhouse in health sciences, technology, and collaboration but many promising ideas never get to market because of barriers in funding, connections to industry professionals or product development know-how. The Washington Entrepreneurial Research Evaluation and Commercialization Hub (WE-REACH) program will build on strengths and integration of the entrepreneurial and translational environment in the region to identify and accelerate promising products, foster milestone-driven project plans and translational teams, and then work with experts to overcome the barriers to create marketable health products."
+publication_url,https://doi.org/10.12968/jowc.2023.32.10.665|https://doi.org/10.1016/j.bios.2023.115237|https://doi.org/10.3390/ijms23137164
+creator_fullname_1,Oliver Nakano-Baker
+creator_firstname_1,Oliver
+creator_middlename_1,
+creator_lastname_1,Nakano-Baker
+creator_orcid_1,0000-0003-0813-0507
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Broad-spectrum Detection of VOC and Non-VOC Biomarkers from Patient Exhalant using Biomimetic Multiplexed eNose Biosensor for COVID-19 Diagnosis
+description_of_project,"Using simulated odorant-binding proteins and machine learning methods, we designed a multiplex of short carbon-binding peptide probes that sensitize a carbon nanotube-based transistor to detect the volatile organic compound markers of COVID-19 disease."
+keywords,peptides|carbon nanotubes|biosensor|biomimetic sensing|breathomics|machine learning
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,machine_learning

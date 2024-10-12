@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Khalid S Salaita
+pi_firstname_1,Khalid
+pi_middlename_1,S
+pi_lastname_1,Salaita
+pi_profileid_1,
+pi_orcid_1,0000-0003-4138-3477
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Emory University
+pi_inst_id_1,ror:03czfpz43
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002744.v1.p1
+subproject,Automatic Detection & Tracing
+nih_project_id,1U01AA029345-01
+nih_reporter_abstract,"The ultimate goal of this proposal is to develop a novel platform technology for automatic surveillance and tracing of airborne SARS-CoV-2 virus particles in real time. The centerpiece of this proposal is the “Rolosense” technology which leverages a DNA micromotor as the virus sensing and transduction material (VSTM) that can be detected by a conventional smart phone camera. This provides both geographical tracing and surveillance. Rolosense motor are comprised a DNA-coated spherical particle (5 micrometer diameter) that hybridizes to a surface modified with complementary RNA. The particle moves at speeds of over 1 micron/minute upon the addition of RNase H, which selectively hydrolyses hybridized RNA but not single-stranded RNA. DNA motors coated with virus binding ligand (VBL) stall in presence of SARS-CoV-2 virus particles. Because motors move autonomously for distances up to millimeters without intervention, the assay is fully automated, and conventional steps such as viral inactivation, RNA isolation and amplification are not required. The readout is performed using an automated smart phone app for particle tracking without the need for a spectrophotometer or fluorometer. Preliminary data shows realtime SARS-CoV-2 pseudovirus particle sensing. Milestones include the screening and identification of high affinity and high specificity VBLs. Both aptamers and antibody VBLs will be screening and validated. Simulations and experiments will be used to understand the role of temperature and environmental conditions in modulating Rolosense performance. Multivalent display of VBLs with DNA origami will enhance avidity. Finally, microfluidic chips with airborne droplet capture will be implemented and tested. The work will be performed by a highly interdisciplinary team with complementary expertise and a track-record of co-publications. PI Salaita invented the Rolosense technology and has past experience in developing cell phone diagnostics and synthetic motors. Co-I Melikian is an expert virologist, Co-I Heemstra is an expert at developing aptamers for novel targets, Co-I Ke has extensive experience in DNA origami structures for avid target binding and has co-authored work on Rolosense, Co-I Rajaraman and Primordia are experts at microfluidic device development and commercialization. Our solution offers the potential to provide an immediate solution to today’s urgent virus sensing and tracing needs."
+nih_reporter_narrative,The aim of this proposal is to help reduce the spread of SARS-CoV-2 virus by developing a surveillance technology that allows for realtime and fully automated viral sensing. The approach uses a smart phone camera to detect the displacement of motors that are highly sensitive to the SARS-CoV-2 virus.
+publication_url,https://doi.org/10.1101/2023.02.27.530294|https://doi.org/10.1038/s41565-022-01080-w|https://doi.org/10.1002/adma.202006600|https://doi.org/10.1002/anie.202107660
+creator_fullname_1,Selma Piranej
+creator_firstname_1,Selma
+creator_middlename_1,
+creator_lastname_1,Piranej
+creator_orcid_1,0000-0002-1940-641X
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Rolosense: An Innovative Platform for Automatic Mobile Phone Readout of Active SARS-CoV-2 Particles
+description_of_project,Antigen-based viral detection
+keywords,SARS-CoV-2|DNA-based motors|aptamers|particle tracking
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,particle tracking

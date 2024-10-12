@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Denise A Dillard
+pi_firstname_1,Denise
+pi_middlename_1,A
+pi_lastname_1,Dillard
+pi_profileid_1,
+pi_orcid_1,0000-0003-2969-7385
+pi_role_1,data-PI
+pi_inst_name_1,Washington State University
+pi_inst_id_1,ror:05dk0ce17
+pi_inst_id_type_1,ROR
+pi_fullname_2,Ka'Imi Alohilani Sinclair
+pi_firstname_2,Ka'Imi
+pi_middlename_2,Alohilani
+pi_lastname_2,Sinclair
+pi_profileid_2,
+pi_orcid_2,
+pi_role_2,contact-PI
+pi_inst_name_2,Washington State University
+pi_inst_id_2,ror:05dk0ce17
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002551.v1.p1
+subproject,Multimodal Surveillance
+nih_project_id,1R01MD016526-01
+nih_reporter_abstract,"Marshallese Pacific Islanders bear a disproportionate burden of COVID-19 infection, hospitalization, and death, with rates 4 to 25 times higher than those of other US racial and ethnic groups in the Continental US.2,3 For example, in Northwest Arkansas Marshallese people represent less than 3% of the total population, but they account for 1 out of 5 COVID-19 cases in this area.2 Similarly, Marshallese represent just 1% of the population in Spokane County, Washington, but were nearly 30% of COVID-19 cases between March and May, 2020.4 Social determinants of health have powerful influences on community and individual risks for COVID-19.18 Culturally, the Marshallese community is extremely tight-knit, self-contained, and highly clustered; they often live in multi-generational households; and they traditionally value close contact and large social events, all of which increase vulnerability to the COVID-19 pandemic.19,20Marshallese are important recipients of effective surveillance efforts given the disproportionate impact of COVID-19 on this population and the long- standing disparities in health and health care.  The MASC-UP study will generate novel data that reflect variation in risk of COVID-19 infection based on one’s place in the highly clustered Marshallese community. For Specific Aim 1, bilingual Marshallese Community Health Workers will recruit and train a longitudinal cohort of 800 Marshallese adults, ages 18 and older, in participatory disease surveillance methods that include using a wireless thermometer to continuously track body temperature; social media and text messaging in which participants (aka citizen scientists) can report symptoms; and a CHW helpline to report symptoms and request COVID-19 information. Participatory disease surveillance complements traditional surveillance systems by engaging communities in reporting COVID-19 symptoms and events. Its strengths lie in the speed at which data can be made available, the ability to scale the technology to obtain data at low cost, and the ability to cover populations that might not otherwise be tracked. For Specific Aim 2 participants will complete an ego-centric contact survey to characterize the social contact networks of members in the disease surveillance cohort from Aim 1. The networks will allow identification of people at highest risk of COVID-19 infection and elucidate targets for high-impact preventive intervention. For Specific Aim 3 we will integrate findings from Aims 1 and 2 into the existing test-based disease surveillance currently being performed at the state and local levels. This Aim will augment existing surveillance systems that have proved insufficient to stem the pandemic in Marshallese people. The proposed study will be generalizable to other high risk, clustered underserved populations."
+nih_reporter_narrative,"The Marshallese: Alternate Surveillance for COVID-19 in a Unique Population (MASC UP) study will deploy innovative, culturally tailored, multi-modal, multi-level participatory surveillance systems in 2 of the largest Marshallese communities in the US: Northwest Arkansas and Spokane County, Washington. MASC UP will demonstrate the value of culturally tailored, participatory disease surveillance developed and tested in real- world settings to mitigate COVID-19 disparities in a high-risk, clustered population that has been profoundly underserved by public health efforts to date. Our findings can be rapidly adapted and disseminated for improved surveillance and disease prevention in other high-risk minority groups across the US."
+publication_url,
+creator_fullname_1,Erin Renee Morgan
+creator_firstname_1,Erin
+creator_middlename_1,Renee
+creator_lastname_1,Morgan
+creator_orcid_1,0000-0002-9271-6414
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Marshallese: Alternate Surveillance for COVID-19 in a Unique Population
+description_of_project,"The MASC-UP study proposes the use of a multimodal, community-driven surveillance platform to generate effective mitigation strategies for reducing the spread of SARS-Cov-2 in a high-risk, clustered population. We also emphasize surveillance for early identification of pre-symptomatic and asymptomatic cases in a context that acknowledges complexities arising from overlapping political, economic, cultural, and social factors."
+keywords,
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,

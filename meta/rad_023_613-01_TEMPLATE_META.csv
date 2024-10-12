@@ -1,0 +1,50 @@
+Field,Value
+pi_fullname_1,Juan C Salazar
+pi_firstname_1,Juan
+pi_middlename_1,C
+pi_lastname_1,Salazar
+pi_profileid_1,
+pi_orcid_1,0000-0003-4112-6067
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,
+pi_inst_id_1,H6D6JMXJXDE6
+pi_inst_id_type_1,UEI
+pi_fullname_2,David A Lawrence
+pi_firstname_2,David
+pi_middlename_2,A
+pi_lastname_2,Lawrence
+pi_profileid_2,
+pi_orcid_2,0000-0002-8940-9640
+pi_role_2,co-PI
+pi_inst_name_2,Wadsworth Center
+pi_inst_id_2,ror:050kf9c55
+pi_inst_id_type_2,ROR
+pi_fullname_3,Michael A Lynes
+pi_firstname_3,Michael
+pi_middlename_3,A
+pi_lastname_3,Lynes
+pi_profileid_3,
+pi_orcid_3,0000-0003-0085-5394
+pi_role_3,co-PI
+pi_inst_name_3,University of Connecticut
+pi_inst_id_3,ror:02der9h97
+pi_inst_id_type_3,ROR
+dbGaP_study_ID,phs002609.v1.p1
+subproject,PreVAIL kIds
+nih_project_id,1R61HD105613-01
+nih_reporter_abstract,"In adults, SARS-CoV-2 infection exhibits a wide range of clinical outcomes, from asymptomatic and mild disease to severe viral pneumonia, respiratory distress, acute kidney injury, thrombotic disorders, and serious cardiac, cerebrovascular and vascular complications. Severe infection can also occur both in children and young adults (< 21), and a significant proportion of children admitted with Covid-19 require ICU support, frequently including mechanical ventilation. In addition, children and adolescents with initially asymptomatic SARS-CoV-2 infection have presented with a rare, but very severe multisystem inflammatory syndrome (MIS-C). Epidemiologic, clinical and laboratory predictors of progression towards severe forms of acute infection with SARS-CoV-2 and MIS-C are thus urgently needed in the fight against Covid-19 in this population. As defined in the NIH Rapid Acceleration of Diagnostics (RADx) program, biomarker discovery can enable risk stratification and guide interventional studies to target Covid-19 patients at enhanced risk of developing complications and/or severe disease. To target this discovery initiative, herein we will use a battery of biological, immunological and molecular tests, including Grating-Coupled Fluorescence Plasmonic (GCFP) and advanced flow cytometry, to study children and young adults (<21 years) with mild, moderate or severe SARS-CoV-2 infection. GCFP allows the use of disposable biosensor chips that can be mass-produced at low cost and spotted in microarray format to greatly increase multiplexing capabilities. In addition, we will use a similar biomarker approach for rapid differentiation of patients with MIS-C versus other pediatric infectious or inflammatory conditions where the clinical presentation resembles MIS-C, most importantly Kawasaki disease. A child’s biologic and immunologic response to SARS-CoV-2 exposure is likely influenced by a variety of factors, including genetics, epigenetics and products of the mucosa/gut-brain axis, adipose tissue and neuroendocrine immune network, and further modulated by environmental exposures. With these factors in mind, we hypothesize that a child’s biomarker profile in response to SARS-CoV-2 infection enables a timely and accurate prediction of severity of Covid-19 and diagnosis of MIS-C, and will help guide treatment strategies, and predict patient outcomes. To test this hypothesis, we will use a non-traditional diagnostic and comprehensive biomarker discovery to characterize the clinical and laboratory spectrum of children and adolescents with mild, moderate and severe SARS-CoV-2 infection, as well as MIS-C. We will then validate our newly developed diagnostic and prognostic algorithm to distinguish MIS-C from other inflammatory disorders with overlapping clinical manifestations, including Kawasaki disease, and predict the longitudinal risk of complications."
+nih_reporter_narrative,"SARS-CoV-2 infection has harshly impacted health care outcomes in children and young adults. This groundbreaking project will employ multiple state-of-the-art technologies and approaches to evaluate children and young adults (<21), enrolled in the United States and Colombia, across the spectrum of clinical manifestations of Covid-19 to identify and validate biomolecules or bacterial signatures with diagnostic and prognostic value."
+publication_url,https://doi.org/10.3389/fbioe.2023.1066391|https://doi.org/10.1016/S2589-7500(22)00149-2|https://doi.org/10.1053/j.gastro.2022.08.009|https://doi.org/10.1093/ibd/izab207|https://doi.org/10.1097/INF.0000000000003289
+creator_fullname_1,Katherine W Herbst
+creator_firstname_1,Katherine
+creator_middlename_1,W
+creator_lastname_1,Herbst
+creator_orcid_1,0000-0001-8280-7227
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Identifying biomarker signatures of prognostic value for Multisystem Inflammatory Syndrome in Children (MIS-C)
+description_of_project,"Study to evaluate children and young adults (<21), enrolled in the United States and Colombia, across the spectrum of clinical manifestations of Covid-19 to identify and validate biomolecules or bacterial signatures with diagnostic and prognostic value."
+keywords,Pediatrics|MIS-C|Multisystem Inflammatory Syndrome in Children|immunology|microbiome
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective|retrospective
+method_of_data_analysis - software_statistical_approach,R|SAS|deep learning

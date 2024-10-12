@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Anne-Catrin Uhlemann
+pi_firstname_1,Anne-Catrin
+pi_middlename_1,
+pi_lastname_1,Uhlemann
+pi_profileid_1,
+pi_orcid_1,0000-0002-9798-4768
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Columbia University Irving Medical Center
+pi_inst_id_1,ror:01esghr10
+pi_inst_id_type_1,ROR
+pi_fullname_2,Kartik Chandran
+pi_firstname_2,Kartik
+pi_middlename_2,
+pi_lastname_2,Chandran
+pi_profileid_2,
+pi_orcid_2,0000-0002-7526-3724
+pi_role_2,co-PI
+pi_inst_name_2,
+pi_inst_id_2,
+pi_inst_id_type_2,
+dbGaP_study_ID,phs002604.v1.p1
+subproject,Wastewater
+nih_project_id,1U01DA053949-01
+nih_reporter_abstract,"The novel coronavirus SARS-CoV-2 is causing significant morbidity and mortality. Current approaches to SARS- CoV-2 testing are costly, inconsistently implemented, and fail to rapidly identify evolving outbreaks. Innovative surveillance programs are urgently needed to better measure baseline transmission dynamics and anticipate new localized outbreaks. Wastewater based testing (WBT) has the potential to enable population level surveillance, trigger earlier regional responses to acute outbreaks, and overcome barriers to individual testing such as stigma and lack of access. WBT could therefore enable faster and cheaper pathogen detection and improve population-level estimates of prevalence. Reliable capture approaches for this novel coronavirus using WBT are currently undefined. Viral dynamics during wastewater transport must be considered, and correlation of WBT with clinical testing must be systematically evaluated at multiple scales. Here, we propose to optimize WBT surveillance protocols of waste streams at an urban university campus encompassing dorms, research facilities and a tertiary care hospital, surrounding sewershed and wastewater treatment plant. We will detect SARS-CoV-2 using qRT-PCR to estimate prevalence and viral panel-enriched metatranscriptomics to characterize viral diversity. We will model case counts using normalized WBT data and develop point-of-use microfluidics systems for WBT. Our team of investigators is uniquely positioned for this study, with expertise in infectious diseases, epidemiology, microbial characterization using WBT at national scales, and point-of-care testing. We will implement three complimentary specific aims. In Aim 1, we will optimize (1a) collection and processing to determine sensitivity and safety of WBT. This includes grab vs. composite sampling;) filtration- vs. precipitation-based enrichment; and viral inactivation protocols. We will further optimize scale and frequency of sampling (1b) at the building/sewer pit, campus, sewershed, and WWTP, and across various frequencies. Presence of SARS-CoV-2 will be ascertained by qRT-PCR and long-read spiked-primer enriched metatranscriptomics. WBT results will be integrated with clinical case-loads, existing surveillance cohorts and expanded employee surveillance. In Aim 2. we will improve modeling of SARS-CoV-2 case dynamics using extrapolated WBT data and site-specific normalization factors. We will correlate modeled building-, campus- and community-level case counts with existing clinical incidence data and campus surveillance using ensemble Kalman filter (EnKF) dynamic modeling incorporating both qRT-PCR and metatranscriptomics data. We will compare normalization methods factoring in wastewater residence time, per capita viral load equivalents (PCVLEs), and other waste flow parameters to reduce model error. Finally, in Aim 3, we will adapt point-of-use testing capabilities using microfluidics based on optimized WBT protocols. We will apply existing RADx development of a photothermal amplification system for SARS-CoV-2 detection to optimized WBT practices. We will develop a modular system for WBT samples and determine assay detection thresholds using viral controls."
+nih_reporter_narrative,"Wastewater based testing (WBT) holds great promise for cost-effective population-level surveillance and transmission tracking of SARS-CoV-2, but optimal sampling modalities and protocols are unknown. Taking advantage of a diverse inner city urban campus encompassing undergraduate and postgraduate dorms, research buildings, and medical facilities, we will optimize WBT surveillance strategies of waste streams at the building level, surrounding sewersheds and wastewater treatment plants and model case counts using normalized WBT data. We will further leverage metatranscriptomics for rapid identification of SARS-CoV-2 transmission chains and develop point-of-use microfluidics systems for timely WBT."
+publication_url,https://doi.org/10.1128/jcm.00600-22|https://doi.org/10.1038/s41586-021-03908-2|https://doi.org/10.1101/2021.02.23.21252259
+creator_fullname_1,Medini K Annavajhala
+creator_firstname_1,Medini
+creator_middlename_1,K
+creator_lastname_1,Annavajhala
+creator_orcid_1,0000-0002-9229-8849
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Optimizing SARS-CoV-2 Wastewater Based Surveillance in Urban and University Campus Settings
+description_of_project,"Wastewater based testing (WBT) holds great promise for cost-effective population-level surveillance and transmission tracking of SARS-CoV-2, but optimal sampling modalities and protocols are unknown. Taking advantage of a diverse inner city urban campus encompassing undergraduate and postgraduate dorms, research buildings, and medical facilities, we will optimize WBT surveillance strategies of waste streams at the building level, surrounding sewersheds and wastewater treatment plants and model case counts using normalized WBT data. We will further leverage metatranscriptomics for rapid identification of SARS-CoV-2 transmission chains and develop point-of-use microfluidics systems for timely WBT."
+keywords,Wastewater based surveillance|SARS-CoV-2|Wastewater epidemiology|COVID-19
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,

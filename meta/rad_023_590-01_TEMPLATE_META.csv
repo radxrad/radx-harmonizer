@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Jane C Burns
+pi_firstname_1,Jane
+pi_middlename_1,C
+pi_lastname_1,Burns
+pi_profileid_1,
+pi_orcid_1,0000-0001-5679-1217
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"University of California, San Diego"
+pi_inst_id_1,ror:0168r3w48
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002553.v1.p1
+subproject,PreVAIL kIds
+nih_project_id,1R61HD105590-01
+nih_reporter_abstract,"In the wake of COVID-19 pandemic, Multisystem Inflammatory Syndrome in Children (MIS-C) has evolved as a new threat to children exposed to SARS-CoV-2. The emergence of MIS-C is so new and so rapidly evolving that there are currently no diagnostic tests to identify these patients nor are there tools to predict disease progression. Through established, funded, multi-center consortia in the U.S. (CHARMS: Characterization of MIS-C and its Relationship to Kawasaki Disease funded by PCORI) and the UK (DIAMONDS), we will collect clinical data and samples to support the proposed studies. First, we will generate transcript, protein and antibody datasets from children with COVID-19, MIS-C, and with other febrile illnesses. Next, we will use these data to devise tests to distinguish children at risk of progression to severe COVID-19 or MIS-C and diagnostic tests to distinguish these conditions from other causes of fever in children. Continuing our established collaboration with Columbia University, we will define the antibody repertoire against all known human coronaviruses and determine how pre-existing antibody to other coronaviruses may shape the immune response in acute SARS-CoV-2 infection and MIS-C. The first two years (R61) will build on the expertise of the assembled teams to discover unique proteomic and transcriptomic patterns in MIS-C and SARS-CoV-2- infected patients and relate clinical parameters to the antibody response to coronaviral antigens profiled on peptide arrays. This work will leverage already banked plasma, serum, and RNA samples from children with COVID-19, MIS-C, Kawasaki disease and other inflammatory conditions. Rigorous Go/NoGo criteria have been established and will determine progression to the R33 phase. The final two years (R33) will focus on platform development and multicenter and bi-national test validation to diagnose and predict severity in children with SARS-CoV-2 infection or MIS-C based on aptamer technology, lateral-flow protein detection, point-of-service RNA or antibody profiling with commercial partners. De-identified clinical and molecular data will be deposited in the RADx-rad hub to facilitate data sharing. Many potential hurdles in this type of research have already been overcome: a) IRB-approved patient recruitment for data and samples is on-going, b) clinical samples have been banked, c) strong preliminary data has been generated on RNAseq, aptamer proteomics, and coronaviral antibody responses, and d) the teams have a strong track record of previous collaboration and productivity. The synergistic expertise of these investigative teams in this multi-center proposal provides a unique opportunity to create diagnostic and prognostic tools for children suffering from the spectrum of SARS- CoV-2 illnesses. 1"
+nih_reporter_narrative,"As the COVID-19 pandemic evolved in early 2020, case reports appeared describing children with unusual febrile illnesses with elevated inflammatory markers and multi-system involvement that is now termed Multisystem Inflammatory Syndrome in Children (MIS-C). The illness occurs weeks following exposure to SARS-CoV-2 and these children have a wide spectrum of disease severity ranging from cardiogenic shock to milder illness that can be self-limited. To address an urgent, unmet clinical need, investigative teams across three countries will join forces to discover and validate a diagnostic test to identify children with MIS-C and predict progression of disease."
+publication_url,https://doi.org/10.3390/ijms241512318|https://doi.org/10.1093/jpids/piad035|https://doi.org/10.1001/jamanetworkopen.2023.14291|https://doi.org/10.3390/ijms23137219|https://doi.org/10.1038/s41390-022-02148-y|https://doi.org/10.1038/s41467-022-30357-w|https://doi.org/10.1093/cid/ciac323|https://doi.org/10.3389/fimmu.2022.841126|https://doi.org/10.1101/2022.03.23.485509|https://doi.org/10.1002/eji.202149556|https://doi.org/10.1172/JCI147076|https://doi.org/10.1161/ATVBAHA.121.316210|https://doi.org/10.1097/INF.0000000000003219
+creator_fullname_1,Jane C Burns
+creator_firstname_1,Jane
+creator_middlename_1,C
+creator_lastname_1,Burns
+creator_orcid_1,0000-0001-5679-1217
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Diagnosing and predicting risk in children with SARS-CoV-2- related illness
+description_of_project,MIS-C data from CHARMS study at UCSD (multi-site)
+keywords,MIS-C|COVID|COVID-19|SARS-CoV-2
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,

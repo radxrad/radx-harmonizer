@@ -1,0 +1,56 @@
+Field,Value
+pi_fullname_1,Cristina Elizabeth Davis
+pi_firstname_1,Cristina
+pi_middlename_1,Elizabeth
+pi_lastname_1,Davis
+pi_profileid_1,
+pi_orcid_1,0000-0002-9878-7758
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"University of California, Davis"
+pi_inst_id_1,ror:05rrcem69
+pi_inst_id_type_1,ROR
+pi_fullname_2,Nicholas J Kenyon
+pi_firstname_2,Nicholas
+pi_middlename_2,J
+pi_lastname_2,Kenyon
+pi_profileid_2,
+pi_orcid_2,0000-0001-8839-4400
+pi_role_2,co-PI
+pi_inst_name_2,"University of California, Davis"
+pi_inst_id_2,ror:05rrcem69
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002600.v1.p1
+subproject,SCENT
+nih_project_id,1U18TR003795-01
+nih_reporter_abstract,"This proposal has two major goals: 1) Define signature exhaled breath volatile organic compounds (VOCs) to diagnose SARS-CoV-2 infections, and 2) Develop a portable chemical sensing device that can capture and detect exhaled VOCs and includes machine learning algorithms for automated data processing and results interpretation. This project will bring a portable sensor forward into clinical use with the aim of supplementing COVID-19 diagnostics with a reagentless alternative. Breath testing of exhaled VOC biomarkers is a relatively new concept that has the potential to transform healthcare in the US and globally. Our overarching hypothesis is that a miniature breath analysis device can measure signatures of exhaled breath VOCs in real-time and correlate their profile to viral upper respiratory infections such as SARS-CoV-2, even asymptomatically. In Aim #1, we propose a prospective, observational study to analyze breath samples from COVID-19 positive and negative subjects, solely for the purpose of analysis through gold standard GC- MS to define breath VOC biomarkers of infection. We will recruit subjects at two local sites, the UC Davis Medical Center (Sacramento, CA) and VA Northern California Health Care System (Mather, CA), where MPI Dr. Kenyon and Co-Is Drs. Harper and Schivo have joint clinical appointments. Our group has a proven track record to conduct these types of clinical breath studies. In Aim #2, we will develop a portable breath analysis device using our novel miniature differential mobility spectrometry (DMS) detector, coupled with chip-based gas chromatography. DMS is a subset of ion mobility spectrometry and detects VOCs at ambient temperatures and pressures, making it highly appropriate for portable devices. This device would include our custom chip- based preconcentrator, which is packed with a chemical sorbent for extraction of VOCs from breath, and will compare functionality of a compact commercially available GC column to a micro-GC column chip from Deviant, a subcontractor in this work. Individual components of this device have already been developed, and under direction of MPI Prof. Davis, Chair of Mechanical and Aerospace Engineering, a team of research engineers would integrate these pieces together into a single unit. Collaborator Prof. Chuah would guide development of a custom software package for the device with machine learning and artificial intelligence capabilities for automated data processing and interpretation. The device would be placed in the hands of clinicians, who would provide feedback that engineers would immediately incorporate into the device and return to the clinicians for more testing. Under Aim #3, our team would process the GC-MS and GC-DMS data generated in this work, identifying a novel VOC profile for COVID-19 diagnostics. Aim #4 would initiate towards the end of this study to develop both a regulatory pathway & contract manufacturing plan for large scale production and deployment of the device for clinical approval. These efforts are supported by collaborator Dr. Nam Tran, Director of Clinical Pathology & Clinical Chemistry at the UC Davis Medical Center."
+nih_reporter_narrative,"In the United States and worldwide, public health experts agree that nations must increase their capacity to test for COVID-19, yet global supplies for testing materials remain scarce. This project would lead to the development of an entirely new type of COVID-19 test, one that could diagnose infections with only a breath sample. Through this proposal, our team would develop a portable device that could identify people with COVID-19 infections by analyzing volatile organic compounds (VOCs) found in exhaled breath."
+publication_url,https://doi.org/10.1038/s41598-023-45997-1|https://doi.org/10.1088/1752-7163/acea3d|https://doi.org/10.1371/journal.pone.0285726|https://doi.org/10.21203/rs.3.rs-2883555/v1|https://doi.org/10.1088/1752-7163/acd715|https://doi.org/10.1038/s43856-022-00221-5|https://doi.org/10.3390/mi13111892|https://doi.org/10.1039/d2ay00723a|https://doi.org/10.1088/1752-7163/ac6c9f|https://doi.org/10.1088/1752-7163/ac3f24|https://doi.org/10.1088/1752-7163/ac3096|https://doi.org/10.1088/1752-7163/ac1a61|https://doi.org/10.1093/infdis/jiab205|https://doi.org/10.1094/PHYTO-10-20-0472-R
+creator_fullname_1,Mitchell M McCartney
+creator_firstname_1,Mitchell
+creator_middlename_1,M
+creator_lastname_1,McCartney
+creator_orcid_1,0000-0001-7236-8400
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+creator_fullname_2,Dante Emanuel Rojas
+creator_firstname_2,Dante
+creator_middlename_2,Emanuel
+creator_lastname_2,Rojas
+creator_orcid_2,0000-0002-4189-6662
+creator_inst_name_2,
+creator_inst_id_2,
+creator_inst_id_type_2,
+creator_fullname_3,Tristan Loren Hicks
+creator_firstname_3,Tristan
+creator_middlename_3,Loren
+creator_lastname_3,Hicks
+creator_orcid_3,0000-0003-0092-7714
+creator_inst_name_3,
+creator_inst_id_3,
+creator_inst_id_type_3,
+project_title,Portable GC Detector for Breath-based COVID Diagonstics
+description_of_project,COVID Breath Analysis
+keywords,Breath|Analysis|VOC|GC|COVID-19
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,

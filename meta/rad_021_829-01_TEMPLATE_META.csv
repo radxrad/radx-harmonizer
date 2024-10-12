@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Roya Khosravi-Far
+pi_firstname_1,Roya
+pi_middlename_1,
+pi_lastname_1,Khosravi-Far
+pi_profileid_1,
+pi_orcid_1,0000-0003-0430-4602
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"InnoTech Precision Medicine, Inc"
+pi_inst_id_1,E4LRXHW2EKS5
+pi_inst_id_type_1,UEI
+dbGaP_study_ID,phs002570.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,1R42DE030829-01
+nih_reporter_abstract,"The development of a rapid and reliable sensor system from readily available oral specimens is crucial for the screening and management of SARS-CoV-2 infection. Other than tests that require laboratory-scale instrumentation, the development of rapid tests can play a timely role in the management of an outbreak. Current rapid tests often involve the antibodies in a lateral flow format to detect viral protein components and, depending on the implementation, can result in a relatively high degree of error. In partnership with MIT, InnoTech proposes the development of a multiplexed sensor platform based on nanomaterials capable of molecular binding and subsequent reporting. We will develop and commercialize a multiplexed sensor platform using nanomaterial reporters capable of rapid simultaneous detection of multiple components of viral particles in a field applicable electrochemical device. For our Phase I- Aim 1 we will focus on the development and optimization of synthetic biosensors for accurate detection of SARS-CoV-2 viral proteins and nucleic acid. Our milestone is the discovery and validation an array of molecular recognition biosensors against both protein and nucleic acid segments of SARS-CoV-2. We will complete this phase in 4 months. In Phase II-Aim 1, we will develop and validate the electrochemical detectors. We will utilize the synthetic biosensors identified and validated in Aim 1 to an electrochemical platform for the rapid detection of an active SARS-CoV-2 infection using multiple biomarkers of the infection. We will specifically employ commercially-available, disposable electrode platforms and existing potentiostats from Metrohm DropSens to streamline scale-up and commercialization. Our milestone, to be completed in year 1 of Phase II, is to have a multiplex biosensor chip and an alpha prototype with a multiplex biosensor chip and a potentiostat reader which we will benchmark for sensitivity and quantitative accuracy against existing COVID-19 diagnostics. In Phase II-Aim 2, we will validate the prototype chips and detectors with retrospective clinical specimens in preparation for EUA-FDA submission. We will determine the LOD, clinical performance, and cross-reactivity with other respiratory pathogens and normal flora. The milestone for this Aim is to document a multiplex of at least two proteins and two nucleic acid biosensors for SARS-CoV-2 that will provide a LOD of 5-20 viruses per microliter in an oral specimen and will be clinically validated with greater than 95% concordance with RT-PCR in 30 positive and 30 negative specimens."
+nih_reporter_narrative,"The development of rapid tests can play a timely role in the management of an outbreak. The COVID-19 pandemic has been especially devastating due to the ability of asymptomatic carriers to transmit the virus. Thus, accurate and low-cost detection of the active infection on-site from easily collectible oral specimens is essential for the successful management of this disease."
+publication_url,https://doi.org/10.1021/acs.jpcc.2c06434
+creator_fullname_1,Xun Gong
+creator_firstname_1,Xun
+creator_middlename_1,
+creator_lastname_1,Gong
+creator_orcid_1,0000-0003-4168-2768
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Rapid Acceleration of Diagnostics - Radical (RADx-rad): A Multimodal Platform for Oral Screening of COVID
+description_of_project,Developing point-of-care tests to detect COVD using photoluminescent response of engineered single-walled carbon nanotubes
+keywords,COVID-19|sensor|nanomaterials|carbon nanotubes|optical
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,matlab

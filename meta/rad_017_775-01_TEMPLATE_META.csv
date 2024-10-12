@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Alan T Charlie Johnson
+pi_firstname_1,Alan
+pi_middlename_1,T Charlie
+pi_lastname_1,Johnson
+pi_profileid_1,
+pi_orcid_1,0000-0002-5402-1224
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,University of Pennsylvania
+pi_inst_id_1,ror:00b30xv10
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002588.v1.p1
+subproject,SCENT
+nih_project_id,1U18TR003775-01
+nih_reporter_abstract,"COVID-19 presents a public health emergency: There is a critical need for rapid, not reagent intensive, non- invasive testing technologies. This program will lead to the production of a prototype system to diagnose COVID-19 infection using the body odor signature of the disease. Our goal is to maximize societal impact by creating a validated prototype that can be used in a community or workplace setting by minimally trained personnel for low-cost, on-the-spot diagnosis within minutes. The system will be developed in a manner that puts it on a pathway for rapid FDA approval. The Research Aims are: Aim 1. Optimization, assembly, and integration of a prototype system with the ability to odor signature of COVID-19 in samples of body odor. The system will be simple to use, pose essentially zero risk to the operator and the test subject, and report a result within minutes. The production cost at scale will be approximately $9,000 for the complete measurement system, with a per test cost of approximately $0.50. The design and construction of the prototype will be conducted by Novo Engineering, a leading firm with extensive experience in medical device development. Aim 2. Software development. Software for the system from VOC sampling to final diagnostic result will be developed to ensure error-free operation of the device. Our preliminary results suggest that simple linear discriminant analysis (LDA) does an excellent job of classifying VOCs from human body odor as COVID-19 positive or negative (92% sensitivity and 87% specificity). Optimization of the sensor array (Aim 1) and use of richer feature sets in our classifier models will lead to further performance improvements in the prototype system. Aim 3. System Benchmarking and Validation. We will benchmark the full prototype system against a number of VOC mixtures, with and without in vitro skin models. The system will undergo extensive testing against body odor samples from individuals with pathological conditions other than COVID-19 and other sources of potentially confounding VOCs. The prototype will be validated against 1000 samples drawn from the COVID-SAFE program at Penn. The screening will include all members of the Penn community, and represents incredible racial and ethnic diversity as well as a wide variance in age, sex, and gender. Aim 4. Regulatory Approval Plan The plan will be developed under the direction of Sr/Key personnel John Fuson, JD, an attorney at Crowell & Moring LLP and a former Associate Chief Counsel at FDA. Novo Engineering has extensive experience in guiding prototype design in alignment with the requirements for FDA approval. The proposed COVID-19 VOC-based testing device will be regulated by the FDA, likely as a Class I or II medical device. Because there is no clear predicate device to reference in this case, we intend to submit a direct de novo petition to FDA asking the agency to categorize and clear the proposed COVID-19 testing device as Class I or Class II without reference to any predicate."
+nih_reporter_narrative,"This program addresses the critical unmet need of an effective means to screen for COVID-19 infection, and potentially other novel virus infections, in a community setting based upon the body odor signature of the disease. The program will result in a validated prototype system, with a test time of minutes, a test cost of approximately $0.50, on a path to rapid FDA approval."
+publication_url,https://doi.org/10.3390/diagnostics13040707
+creator_fullname_1,Liam Forsythe
+creator_firstname_1,Liam
+creator_middlename_1,
+creator_lastname_1,Forsythe
+creator_orcid_1,0009-0002-9358-7754
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,"Effective, Reagent-free Detection of the Odor Signature of Covid-19 Infection Using a Nano-Enabled Sensor Array"
+description_of_project,"Volatile organic compounds (VOCs) emanate from body fluids and it is possible to detect an infection from body fluids and odors. This study will focus on identifying and detecting VOCs associated with COVID-19 infection using an 'e-nose' device. Through chemical analysis and a DNA carbon-nanotube vapor sensor, odors from COVID-19 infection in VOC samples will be defined from symptomatic and asymptomatic individuals."
+keywords,VOC|COVID-19|e-nose device|nanotube
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,

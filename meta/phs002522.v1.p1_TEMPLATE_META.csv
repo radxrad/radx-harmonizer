@@ -1,0 +1,47 @@
+Field,Value
+pi_fullname_1,Jie Huang
+pi_firstname_1,Jie
+pi_middlename_1,
+pi_lastname_1,Huang
+pi_profileid_1,
+pi_orcid_1,0000-0002-8659-2910
+pi_role_1,data-PI
+pi_inst_name_1,
+pi_inst_id_1,
+pi_inst_id_type_1,
+pi_fullname_2,William P Fay
+pi_firstname_2,William
+pi_middlename_2,P
+pi_lastname_2,Fay
+pi_profileid_2,
+pi_orcid_2,0000-0001-9102-4216
+pi_role_2,contact-PI
+pi_inst_name_2,Harry S. Truman Memorial Veterans' Hospital
+pi_inst_id_2,ror:01a4gqp27
+pi_inst_id_type_2,ROR
+pi_fullname_3,Sheila Ann Grant
+pi_firstname_3,Sheila
+pi_middlename_3,Ann
+pi_lastname_3,Grant
+pi_profileid_3,
+pi_orcid_3,0000-0003-1009-2319
+pi_role_3,co-PI
+pi_inst_name_3,
+pi_inst_id_3,
+pi_inst_id_type_3,
+pi_fullname_4,William Monroe Turpin
+pi_firstname_4,William
+pi_middlename_4,Monroe
+pi_lastname_4,Turpin
+pi_profileid_4,
+pi_orcid_4,0000-0002-3616-5216
+pi_role_4,co-PI
+pi_inst_name_4,
+pi_inst_id_4,
+pi_inst_id_type_4,
+dbGaP_study_ID,phs002522.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,1U01HL152410-01
+nih_reporter_abstract,"The ultimate goal of biomedical research is to create new devices, drugs, and technologies that prevent, diagnose, and treat human diseases. Like scientific discovery, biomedical technology commercialization is complex and requires mentorship, resources, collaboration, and risk. However, several hurdles limit commercialization of promising laboratory discoveries, including 1) lack of awareness by academicians that commercialization is an option, 2) concerns that commercialization efforts delay academic advancement, and 3) failure to connect investigators with the collaborators and experts necessary to complete the commercialization process. The objective of this Research Evaluation and Commercialization Hub (REACH) proposal is to establish a partnership between the University of Missouri-Columbia (MU) and the University of Kansas Medical Center (KUMC) that will promote academic entrepreneurship and commercialization. To this collaboration MU brings its outstanding biomedical and bioengineering research programs and its vibrant track record of participation in the Coulter Translational Research Partnership Award program. KUMC provides its exceptional biomedical research programs and Frontiers, its NIH Clinical and Translational Science Award (CTSA). In addition, each institution has existing partnerships that strengthen and extend the alliance - i.e. 1) MU with University of Missouri state system universities in Kansas City, St. Louis, and Rolla; and 2) KUMC with the Kansas Idea Network of Biomedical Research Excellence (K-INBRE) and the Sustainable Heartland Accelerator Regional Partnership Hub (SHARPhub). The leadership team of this network, entitled the Midwest Biomedical Accelerator Consortium (MBArC), will employ the following strategies to increase biomedical research commercialization: 1) leverage MBArC’s geographic and institutional scope to develop strategic partnerships that invite scientists to engage in technology transfer and commercialization, 2) give academicians the training and resources needed to validate the clinical and commercial feasibility of their innovations, 3) provide researchers with funding and mentorship to complete product definition studies and attract follow- on funding, and 4) offer experiential learning opportunities in biomedical innovation and entrepreneurship. This initiative will build on existing programs in outstanding institutions to increase health-related business development, including small businesses, in Missouri, Kansas, and adjoining states. The MBArC REACH Hub will promote commercialization of novel scientific discoveries and establish a sustainable infrastructure to translate scientific discoveries into commercial products that prevent and treat high-burden diseases afflicting the US population."
+nih_reporter_narrative,"In many cases, scientific discoveries in biological research laboratories can only improve the health of citizens if the scientists who made the discoveries work with financial, business, and legal experts to create businesses that manufacture and sell health-related products. However, the lengthy process of creating a health-related small business often is not completed, even though the discovery was important and could have been converted into a successful business product. The objective of this project is to establish a multi-university working group, entitled the Midwest Biomedical Accelerator Consortium (MBArC), whose goal is to recruit scientific teams with important biological discoveries, train them in business development methods, and create new small businesses capable of manufacturing and selling health-related products."
+publication_url,https://doi.org/10.1109/jsen.2021.3094092

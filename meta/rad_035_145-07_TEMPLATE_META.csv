@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Hadi Shafiee
+pi_firstname_1,Hadi
+pi_middlename_1,
+pi_lastname_1,Shafiee
+pi_profileid_1,
+pi_orcid_1,0000-0003-2240-7648
+pi_role_1,data-PI
+pi_inst_name_1,Brigham and Women's Hospital
+pi_inst_id_1,ror:04b6nzv94
+pi_inst_id_type_1,ROR
+pi_fullname_2,Joseph Loscalzo
+pi_firstname_2,Joseph
+pi_middlename_2,
+pi_lastname_2,Loscalzo
+pi_profileid_2,
+pi_orcid_2,0000-0002-1153-8047
+pi_role_2,contact-PI
+pi_inst_name_2,Brigham and Women's Hospital
+pi_inst_id_2,ror:04b6nzv94
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002561.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,4U54HL119145-08
+nih_reporter_abstract,"A well-recognized gap exists in the path from biomedical discovery in academia to clinical application and  commercialization of therapeutic, device, and diagnostic technologies in cardiovascular, pulmonary,  hematologic, and sleep disorders. This chasm is the result of inadequate funding for support of proof-of-concept  or validation studies essential for early stage development; insufficient access to the resources and  expertise needed to develop new technologies; and a lack of knowledge and experience among academic  investigators in bringing new ideas to commercial realization. Within the partnering institutions included in  this application, the essential elements exist with which to build the infrastructure needed to support and  sustain the uninterrupted, durable flow of inventions from discovery through development and  commercialization. While these institutions have a clear track record of remarkably successful development  of many biomedical technologies, most of these commercial successes have been achieved by the tenacity  of individual inventors rather than with the help of committed institutional mechanisms. We proposed to  address these key shortcomings by establishing the regional Boston Center for Accelerated Innovation in  Therapeutics, Devices, and Diagnostics for Heart, Lung, Blood, and Sleep Disorders (B-BIC, or the Boston  Biomedical Innovation Center). The key objectives of this Center are to: 1) develop an integrated  infrastructure that would expand the universe of commercializable technologies for heart, lung, blood, and  sleep disorders; 2) place these opportunities in the proper evaluative context through an engagement (""seed  it""), solicitation (""find it""), and selection (""pick it"") strategy; 3) efficiently and effectively bring those selected to  an appropriate exit point from the development process; and 4) provide the educational and mentoring  infrastructure necessary for the development of the proper entrepreneurial skills among academic  innovators. By achieving these goals, B-BlC would change the culture of our academic environment, as  well as the relationship between the public and private sectors in facilitating successful development  strategies for technologies in heart, lung, blood, and sleep disorders for the ultimate benefit of patients and society."
+nih_reporter_narrative,"Translation of basic observations into clinical practice is limited by the resources needed for development,  inadequate experience of academic investigators, and the discovery-focused academic culture. Building an  academic infrastructure that facilitates translation by promoting development is an important goal to ensure  the successful translation of research into benefit for patients and society."
+publication_url,https://doi.org/10.1371/journal.pone.0286988|https://doi.org/10.1007/s10815-022-02585-y|https://doi.org/10.1002/admt.202100602
+creator_fullname_1,Hadi Shafiee
+creator_firstname_1,Hadi
+creator_middlename_1,
+creator_lastname_1,Shafiee
+creator_orcid_1,0000-0003-2240-7648
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,"RADx-rad: A Rapid, Sensitive, Point-of-care, Antigen-based Diagnostics for SARS-CoV-2"
+description_of_project,antigen at home diagnostic utilizing digital health and artificial intelligence technology
+keywords,antigen|self test|artificial intelligence
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,excel|fiji

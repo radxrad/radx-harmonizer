@@ -1,0 +1,50 @@
+Field,Value
+pi_fullname_1,Lawrence C Kleinman
+pi_firstname_1,Lawrence
+pi_middlename_1,C
+pi_lastname_1,Kleinman
+pi_profileid_1,
+pi_orcid_1,0000-0002-4024-2229
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"Rutgers, The State University of New Jersey"
+pi_inst_id_1,ror:05vt9qd57
+pi_inst_id_type_1,ROR
+pi_fullname_2,Maria Laura Gennaro
+pi_firstname_2,Maria
+pi_middlename_2,Laura
+pi_lastname_2,Gennaro
+pi_profileid_2,
+pi_orcid_2,0000-0003-4801-3567
+pi_role_2,co-PI
+pi_inst_name_2,"Rutgers, The State University of New Jersey"
+pi_inst_id_2,ror:05vt9qd57
+pi_inst_id_type_2,ROR
+pi_fullname_3,Daniel Benjamin Horton
+pi_firstname_3,Daniel
+pi_middlename_3,Benjamin
+pi_lastname_3,Horton
+pi_profileid_3,
+pi_orcid_3,0000-0002-1831-1339
+pi_role_3,co-PI
+pi_inst_name_3,"Rutgers, The State University of New Jersey"
+pi_inst_id_3,ror:05vt9qd57
+pi_inst_id_type_3,ROR
+dbGaP_study_ID,phs002569.v1.p1
+subproject,PreVAIL kIds
+nih_project_id,1R61HD105619-01
+nih_reporter_abstract,"The SARS-CoV-2 pandemic has manifested in children with a wide spectrum of clinical presentations ranging from asymptomatic infection to devastating acute respiratory symptoms, appendicitis (often with rupture), and Multisystem Inflammatory Syndrome in Children (MIS-C), a serious inflammatory condition presenting several weeks after exposure to or infection with the virus. These presentations overlap in their clinical severity while maintaining distinct clinical profiles. Public health and clinical approaches will benefit from an improved understanding of the spectrum of illness associated with SARS CoV-2 and from the capacity to integrate data to achieve two goals: (i) to identify the clinical, social, and biological variables that predict severe COVID-19 and MIS-C, and (ii) to target those populations and individuals at greatest risk for harm from the virus. We propose the COVID-19 Network of Networks Expanding Clinical and Translational approaches to Predict Severe Illness in Children (CONNECT to Predict SIck Children) comprising eight partners providing access to data on >15 million children. Our network will systematically integrate social, epidemiological, genetic, immunological, and computational approaches to identify both population- and individual-level risk factors for severe illness. Our underlying hypothesis is that a combination of multidimensional data – clinical, sociodemographic, epidemiologic, and biological -- can be integrated to predict which children are at greatest risk to have severe consequences from SARS-CoV-2 infection. To test our hypothesis, we will develop CONNECT to Predict SIck Children, a network of networks that leverages inpatient, outpatient, community, and epidemiological data resources to support the analysis of large data using machine learning and model-based analyses. For the R61 phase, we will develop and refine predictive models using data from our network of networks (Aim 1). We will also recruit participants previously diagnosed with either COVID-19 or MIS-C (along with appropriate controls who have had mild or asymptomatic infections with SARS-CoV2), who will provide survey data (including social determinants) and saliva and blood samples to identify persisting biological factors associated with severe disease (Aim 2). We will iteratively assess our models using a knowledge management framework that considers the marginal value of data for improving models' predictive capacity over time. In the R33 phase, we will validate and further refine predictive models incorporating data from additional participants recruited throughout our network of networks, including newly infected children with severe COVID-19 or MIS-C identified through real-time surveillance (Aim 3). We seek to develop predictive models for children and adolescents that are useful, sensitive to community and environmental contexts, and informed by the REASSURED framework specified by the RFA. The models and biomarkers developed through our nationwide network of networks will produce generalizable knowledge that will improve our ability to predict which children are at greatest risk for severe complications of SARS-CoV- 2 infection. This knowledge will facilitate interventions to prevent and treat severe pediatric illness."
+nih_reporter_narrative,"COVID-19, the disease caused by SARS-CoV-2, is a world-wide public health problem. Pediatric disease has been particularly difficult to manage since children tend less frequently to get sick from SARS-CoV-2 infection as adults but, when they do become ill, can present with life-threatening pulmonary disease or a systemic inflammatory condition known as multisystem inflammatory syndrome. The proposed COVID-19 Network of Networks Expanding Clinical and Translational approaches to Predict Severe Illness in Children (CONNECT to Predict SIck Children) will develop models and biomarkers that predict risk for severe disease in children and adolescents by systematically integrating social science, epidemiological, genetic, biochemical, immunological, and computational approaches."
+publication_url,https://doi.org/10.1097/RHU.0000000000002035|https://doi.org/10.1002/pds.5695|https://doi.org/10.1016/j.ebiom.2023.104731|https://doi.org/10.1176/appi.ps.20220314|https://doi.org/10.1542/peds.2020-045948G|https://doi.org/10.1101/2022.02.03.22269612|https://doi.org/10.1186/s12916-022-02252-0|https://doi.org/10.1016/j.jim.2021.113165|https://doi.org/10.1093/infdis/jiab411
+creator_fullname_1,Myriam Casseus
+creator_firstname_1,Myriam
+creator_middlename_1,
+creator_lastname_1,Casseus
+creator_orcid_1,0000-0002-5762-4864
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,COVID-19 Network of Networks Expanding Clinical and Translational approaches to Predict Severe Illness in Children (CONNECT to Predict SIck Children)
+description_of_project,"Develop models and uses biomarkers to predict risk for severe disease in children and adolescents by systematically integrating social science, epidemiological, genetic, biochemical, immunological, and computational approaches."
+keywords,COVID-19|SARS-CoV-2 infection|MIS-C|prospective cohort|risk factors|longitudinal data analysis
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,Logistic regression|Bayesian additive regression trees (BART)

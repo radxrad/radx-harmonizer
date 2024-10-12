@@ -3,9 +3,9 @@ import os
 import sys
 import glob
 import pathlib
-from datetime import datetime
 import traceback
 import re
+
 import hashlib
 import pandas as pd
 
@@ -141,7 +141,7 @@ STANDARD_UNITS = {
     "N/A": "",
 }
 
-RAX_RAD_TO_RADX_GLOBAL = {
+RADX_RAD_TO_RADX_GLOBAL = {
     "study_id": "nih_record_id",
     "race": "nih_race",
     "ethnicity": "nih_ethnicity",
@@ -188,6 +188,16 @@ RAX_RAD_TO_RADX_GLOBAL = {
     "height_inches": "nih_height2",  # height_feet * 12 + height_inches
     "weight_lbs": "nih_weight",
     "health_status": "nih_health_status",
+}
+
+RADX_RAD_COMBINED_TO_RADX_GLOBAL = {
+    "fever": "nih_fever_chills",
+    "chills": "nih_fever_chills",
+    "nausea_vomiting": "nih_nausea_vomiting_diarrhea",
+    "diarrhea": "nih_nausea_vomiting_diarrhea",
+    "height_feet": "nih_height",
+    "height_inches": "nih_height",
+    "weight_lbs": "nih_weight",
 }
 
 # Mappings that are not one-to-one
@@ -241,6 +251,14 @@ def save_error_messages(error_file, error_messages):
     errors = pd.DataFrame(error_messages)
     errors.sort_values("filename", inplace=True)
     errors.to_csv(error_file, index=False)
+
+
+def handle_errors_and_continue(error_file, error_messages):
+    if len(error_messages) > 0:
+        save_error_messages(error_file, error_messages)
+        print(f" - failed: {len(error_messages)} errors")
+        return True
+    return False
 
 
 def get_directories(include, exclude, data_dir):
@@ -860,9 +878,6 @@ def determine_type(value: str) -> str:
         # mixed integers and floats are represented as floats
         if set(types) == {"integer", "float"}:
             types.remove("integer")
-        # if len(types) == 2 and "integer" in types and "float" in types:
-        #     types.remove("integer")
-
         # if there are multiple types, make it a string
         if len(types) > 1:
             return "string"
@@ -1074,8 +1089,8 @@ def get_enum_values(row):
         # Extract string values
         return parsed_data
 
-    # TODO This should never happen - error message?
-    return []
+    # Raise an exception if none of the conditions are met
+    raise ValueError(f"Could not parse enum values for the input: {enum}")
 
 
 def update_meta_data(
@@ -1172,10 +1187,12 @@ def update_sha256_digest(data_file, metadata_file):
     # Get the SHA256 hash code for the data file
     data_file_sha256_digest = calculate_sha256(data_file)
     metadata = pd.read_csv(metadata_file)
-    metadata.loc[metadata["Field"] == "data_file_sha256_digest", "Value"] = data_file_sha256_digest
+    metadata.loc[metadata["Field"] == "data_file_sha256_digest", "Value"] = (
+        data_file_sha256_digest
+    )
     metadata.to_csv(metadata_file, index=False)
-    
-    
+
+
 def extract_speciment_type(data_file):
     data = pd.read_csv(
         data_file,
@@ -1500,11 +1517,15 @@ def split_provenance(provenance):
 
 
 def extract_example(note):
-    match = re.match(r'^Example:\s*(.*)', note, re.IGNORECASE)
-    return match.group(1) if match else ""
+    match = re.match(r"^(example|examples):\s*(.*)", note, re.IGNORECASE)
+    return match.group(2) if match else ""
 
 
-def convert_dict(dict_file, dict_output_file):
+def remove_example(note):
+    return re.split(r"(example|examples):", note, flags=re.IGNORECASE)[0].strip()
+
+
+def convert_dict(dict_file, tier1_dict_file, tier2_dict_file, dict_output_file):
     dictionary = pd.read_csv(
         dict_file,
         encoding="utf8",
@@ -1533,13 +1554,19 @@ def convert_dict(dict_file, dict_output_file):
     )
 
     # Move the examples from the Notes column the "Examples" column
-    dictionary['Examples'] = dictionary['Notes'].apply(extract_example)
+    dictionary["Examples"] = dictionary["Notes"].apply(extract_example)
+    dictionary["Notes"] = dictionary["Notes"].apply(remove_example)
+
+    # Add terms column
+    dictionary["Terms"] = ""
+    dictionary["MissingValueCodes"] = ""
 
     # Convert to new data types
     dictionary["Cardinality"] = dictionary["Datatype"].apply(set_cardinality)
     dictionary["Datatype"] = dictionary.apply(convert_data_type_new, axis=1)
     dictionary["Enumeration"] = dictionary["Enumeration"].apply(convert_enumeration)
 
+    # Order columns
     dictionary = dictionary[
         [
             "Id",
@@ -1547,14 +1574,45 @@ def convert_dict(dict_file, dict_output_file):
             "Examples",
             "Section",
             "Cardinality",
+            "Terms",
             "Datatype",
             "Unit",
             "Enumeration",
             "Notes",
+            "MissingValueCodes",
             "Provenance",
             "SeeAlso",
         ]
     ]
+
+    # Read the harmonized RADx-rad tier1 and tier2 data dictionaries
+    tier1_dict = pd.read_csv(
+        tier1_dict_file,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    tier2_dict = pd.read_csv(
+        tier2_dict_file,
+        encoding="utf8",
+        dtype=str,
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+    updated_dict = pd.concat([tier1_dict, tier2_dict])
+
+    # Update data elements
+    # First, ensure the 'Id' column is set as the index for both DataFrames
+    dictionary.set_index("Id", inplace=True)
+    updated_dict.set_index("Id", inplace=True)
+
+    # Update rows in df1 with corresponding rows from df2 based on the 'Id' column
+    dictionary.update(updated_dict)
+
+    # Reset the index back as a column
+    dictionary.reset_index(inplace=True)
+
     dictionary.to_csv(dict_output_file, index=False)
 
 
@@ -1567,7 +1625,7 @@ def contains_min_cdes(dict_file, primary_key):
         skip_blank_lines=False,
     )
     data_elements = set(dictionary[primary_key].to_list())
-    min_cdes = set(RAX_RAD_TO_RADX_GLOBAL.keys())
+    min_cdes = set(RADX_RAD_TO_RADX_GLOBAL.keys())
     overlap = min_cdes.intersection(data_elements)
     return len(overlap) > 0
 
@@ -1581,7 +1639,7 @@ def convert_min_to_global_data(data_file):
         skip_blank_lines=False,
     )
 
-    data = data.rename(columns=RAX_RAD_TO_RADX_GLOBAL)
+    data = data.rename(columns=RADX_RAD_TO_RADX_GLOBAL)
     data = convert_exceptions(data)
     data = convert_height_to_inches(data)
     data = combine_yes_no_cdes(data, "nih_fever_chills")
@@ -1654,43 +1712,12 @@ def convert_min_to_global_dict(dict_file, global_harmonized_dict):
         keep_default_na=False,
         skip_blank_lines=False,
     )
-    # Add a terms column to match the RADx Global Codebook format
-    dictionary["Terms"] = ""
     # Order the columns as in the Global Codebook
     dictionary = dictionary[
         [
             "Id",
             "Label",
-            "Section",
-            "Cardinality",
-            "Terms",
-            "Datatype",
-            "Unit",
-            "Enumeration",
-            "Notes",
-            "Provenance",
-            "SeeAlso",
-        ]
-    ]
-    global_dictionary = pd.read_csv(
-        global_harmonized_dict,
-        dtype=str,
-        encoding="utf8",
-        keep_default_na=False,
-        skip_blank_lines=False,
-    )
-    dictionary = pd.concat([global_dictionary, dictionary])
-    # Drop duplicates keeping the global dictionary data elements
-    dictionary = dictionary.drop_duplicates(subset="Id", keep="first")
-
-    dictionary["MissingValueCodes"] = '"-9960"=[Not Entered By Originator]'
-
-    # Order the columns as in the Global Codebook
-    # https://github.com/bmir-radx/radx-data-dictionary-specification
-    dictionary = dictionary[
-        [
-            "Id",
-            "Label",
+            "Examples",
             "Section",
             "Cardinality",
             "Terms",
@@ -1703,6 +1730,35 @@ def convert_min_to_global_dict(dict_file, global_harmonized_dict):
             "SeeAlso",
         ]
     ]
+
+    # Rename RADx-rad data element to the corresponding RADx global data elements
+    dictionary["Id"] = dictionary["Id"].replace(RADX_RAD_COMBINED_TO_RADX_GLOBAL)
+    dictionary["Id"] = dictionary["Id"].replace(RADX_RAD_TO_RADX_GLOBAL)
+    dictionary = dictionary.drop_duplicates(subset="Id", keep="first")
+
+    global_dictionary = pd.read_csv(
+        global_harmonized_dict,
+        dtype=str,
+        encoding="utf8",
+        keep_default_na=False,
+        skip_blank_lines=False,
+    )
+
+    # Update data elements
+    # First, ensure the 'Id' column is set as the index for both DataFrames
+    dictionary.set_index("Id", inplace=True)
+    global_dictionary.set_index("Id", inplace=True)
+
+    # Update rows in df1 with corresponding rows from df2 based on the 'Id' column
+    dictionary.update(global_dictionary)
+
+    # # Reset the index back as a column
+    dictionary.reset_index(inplace=True)
+
+    # Fill in MissingValueCodes for depositor created data elements
+    dictionary["MissingValueCodes"] = dictionary["MissingValueCodes"].replace(
+        "", '"-9960"=[Not Entered By Originator]'
+    )
 
     return dictionary
 
@@ -1723,9 +1779,17 @@ def global_data_dict_matcher(data_file, dict_file):
         skip_blank_lines=False,
     )
     primary_key = "Id"
+
+    orig_size = dictionary.shape[0]
     # Remove extra data elements in the dictionary that not present in the data file
     data_fields = set(data.columns)
     dictionary = dictionary[dictionary[primary_key].isin(data_fields)]
+
+    # Raise an exception: this should never happen
+    if dictionary.shape[0] != orig_size:
+        raise ValueError(
+            f"Internal error mapping RADx global data elements: {data_file} vs. {dict_file}"
+        )
 
     # Reorder the dictionary data elements to match the order in the data file
     dictionary = reorder_data_dictionary(dictionary, primary_key, list(data.columns))
@@ -1740,14 +1804,14 @@ def final_consistency_check(
     preorigcopies = len(
         glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*_preorigcopy.csv"))
     )
-    origcopies = (
-        len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.csv"))) +
-        len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.json")))
-    )
+    origcopies = len(
+        glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.csv"))
+    ) + len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.json")))
 
-    transformcopies = (
-        len(glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.csv"))) +
-        len(glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.json")))
+    transformcopies = len(
+        glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.csv"))
+    ) + len(
+        glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.json"))
     )
 
     if origcopies % 3 != 0 or origcopies < preorigcopies:

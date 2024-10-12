@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Mahmoud Lotfi Nasr
+pi_firstname_1,Mahmoud
+pi_middlename_1,Lotfi
+pi_lastname_1,Nasr
+pi_profileid_1,
+pi_orcid_1,0000-0003-0712-8667
+pi_role_1,data-PI
+pi_inst_name_1,Brigham and Women's Hospital
+pi_inst_id_1,ror:04b6nzv94
+pi_inst_id_type_1,ROR
+pi_fullname_2,Bruce D Levy
+pi_firstname_2,Bruce
+pi_middlename_2,D
+pi_lastname_2,Levy
+pi_profileid_2,
+pi_orcid_2,0000-0001-9515-5731
+pi_role_2,contact-PI
+pi_inst_name_2,Brigham and Women's Hospital
+pi_inst_id_2,ror:04b6nzv94
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002689.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,3U01HL146002-04S2
+nih_reporter_abstract,"Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) represents a major health threat to hu- mankind. The SARS-CoV-2 pandemic is not only an enormous burden to public health but has already significantly affected the global economy. As of today, the novel coronavirus has caused over 596 million confirmed cases and 6.5 million deaths globally and the number continues to grow (https//coronavirus.jhu.edu). Here, we propose to develop a simple, rapid, and sensitive assay, which is based on the split luciferase complementation on the trimeric structure of spike proteins. The proposed technology takes advantage of the trimeric structure of the spikes to form the complex of two complementary luciferase fragments to simply generate a bright blue bioluminescence. In Aim 1 we will validate our test with clinical samples and perform cross reactivity, microbial interference and endogenous interfering substances studies. In Aim 2, we will focus on the strip and dark box optimization and design verification. Aim 2 will be accomplished with the help of Jeff Hall (BioActive labs LLC) who has all the necessary equipment and materials to complete a 2,000-3,500 strip and several dark box prototype productions."
+nih_reporter_narrative,"The pandemic caused by SARS-CoV-2 has been associated with a very high disease burden as well as high global financial costs. In this proposal we are developing a simple, low-cost, rapid saliva-based test using test strips. Our aims are focused on producing and optimizing the test strip components and performing a feasibility study on clinical samples. By completing these goals, we hope to produce test strips that have the capability of use in office settings, schools, sport events, and at home."
+publication_url,
+creator_fullname_1,Mahmoud Lotfi Nasr
+creator_firstname_1,Mahmoud
+creator_middlename_1,Lotfi
+creator_lastname_1,Nasr
+creator_orcid_1,0000-0003-0712-8667
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,A rapid Saliva Antigen Test for SARS-CoV-2 Detection
+description_of_project,A rapid Saliva Antigen Test for SARS-CoV-2 Detection
+keywords,Rapid diagnostic test|SARS-CoV-2
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,Origin

@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Radislav A Potyrailo
+pi_firstname_1,Radislav
+pi_middlename_1,A
+pi_lastname_1,Potyrailo
+pi_profileid_1,
+pi_orcid_1,0000-0002-4823-1962
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,General Electric (United States)
+pi_inst_id_1,ror:013msgt25
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002543.v1.p1
+subproject,Automatic Detection & Tracing
+nih_project_id,1U01AA029324-01
+nih_reporter_abstract,"Available tools for detection of SARS-CoV-2 virus require extensive sample preparation and/or expensive lab- based equipment to obtain accurate results. The objective in this proposal is to build a touch-screen sensor array to directly capture, detect, and identify model SARS-CoV-2 virus particles with minimal false alarms. This ambi- tious goal will be achieved by the interdisciplinary team of GE Research scientists and engineers and will be a synergistic combination of the proposed innovations and the prior scientific and engineering accomplishments of the team.  Our proposed solution is based on several innovations driven by eliminating a need for a dedicated sam- pling step and solving the problems of detection and reliable selective recognition of virus particles, performing detection/recognition operation in a two-dimensional (2D) format of biosensors, e.g., as a touch-screen surface, and having this technical solution as a low-profile, low power, unobtrusive device that can be adapted to diverse application scenarios.  Innovations of the proposed proof-of-principle touch-screen detector are in three main areas. For virus recognition, we will create new multifunctional bioreceptors. Our transduction principle will be based on our earlier reported transduction with the significantly enhanced performance. Our touch surface design will have a 2D array of biosensors.  The proposed proof-of-principle sensor will be developed in five aims. Aim 1 will focus on demonstration of new multifunctional bioreceptors. Aim 2 will focus on validation of the functionality of these multifunctional bioreceptors upon their immobilization on sensor surface. Aim 3 will focus on demonstration of sensing of mod- el virus particles in a layout of 2D array of biosensors. Aim 4 will focus on demonstration of virus recognition with immobilized multifunctional bioreceptors in variable ambient conditions. Aim 5 will focus on demonstra- tion of enhanced detection and recognition of model virus particles in the same layout of 2D array of biosensors as in Aim 3, but under variable ambient conditions. The findings in this proposed work will change the state-of- the-art biosensing paradigm and will improve the scientific knowledge, technologies, and workflow practice for virus detection."
+nih_reporter_narrative,"Reliable real-time detection of SARS-CoV-2 virus represents a considerable challenge, with available tools re- quiring extensive sample preparation and/or expensive lab-based equipment to obtain accurate results. The ob- jective in this proposal is to build a touch-screen sensor array to directly capture, detect, and identify model SARS-CoV-2 virus particles with minimal false alarms. This ambitious goal will be achieved by the interdisci- plinary team of GE Research scientists and engineers and will be a synergistic combination of the proposed in- novations and the prior scientific and engineering accomplishments of the team."
+publication_url,
+creator_fullname_1,Christine L Surrette
+creator_firstname_1,Christine
+creator_middlename_1,L
+creator_lastname_1,Surrette
+creator_orcid_1,0000-0002-7334-4571
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Minimal False-Alarm Touch-Based Detection of SARS-CoV-2 Virus Particles Using Poly-aptamers
+description_of_project,"A touch-screen sensor array to directly capture, detect, and identify model SARS-CoV-2 virus particles with minimal false alarms. Such biosensor solution is applicable for detection of virus particles that are brought to the sensor surface either by touching the surface with finger or a by having the biosensor in the open air where the virus particles land onto the surface by air flow."
+keywords,aptamer|beads|detection
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,ImageJ

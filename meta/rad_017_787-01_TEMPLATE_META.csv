@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Xiao-An Fu
+pi_firstname_1,Xiao-An
+pi_middlename_1,
+pi_lastname_1,Fu
+pi_profileid_1,
+pi_orcid_1,0000-0001-6837-6512
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,University of Louisville
+pi_inst_id_1,ror:01ckdn478
+pi_inst_id_type_1,ROR
+pi_fullname_2,Michael H Nantz
+pi_firstname_2,Michael
+pi_middlename_2,H
+pi_lastname_2,Nantz
+pi_profileid_2,
+pi_orcid_2,0000-0003-1301-3399
+pi_role_2,co-PI
+pi_inst_name_2,University of Louisville
+pi_inst_id_2,ror:01ckdn478
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002563.v1.p1
+subproject,SCENT
+nih_project_id,1U18TR003787-01
+nih_reporter_abstract,"The COVID-19 pandemic has caused unprecedented societal suffering and economic disruption. In the United States, more than six million people have contracted COVID-19 and more than one hundred ninety thousand patients have died of this disease to date. Although current COVID-19 diagnostic testing technologies are critical for slowing the spread of the virus and preventing future outbreaks, they are not practical for field use. Current diagnostic tests are cumbersome to perform because they use aqueous solutions, require multiple steps, and hours-to-days to obtain results. Since the US began to reopen the economy in May, there has been a significant increase in the number of COVID-19 cases. Therefore, there is an urgent need to develop a diagnostic approach that is non-invasive, portable, and can rapidly provide test results.  The overall goal of the project is to develop a mobile breath analysis technology for rapid screening for COVID-19 using a handheld breath collection tool and a portable GC with a photoionization detector (PID). The handheld tool will be a closed system for trapping select volatile organic compounds (VOCs) on a microfabricated chip. The captured VOCs will be eluted with ethanol and then analyzed using a commercially available, portable GC-PID instrument. Artificial intelligence (AI) and machine learning algorithms will be applied to recognize the VOC pattern that correlates with COVID-19 infection. The central innovation is the microfabricated chip that captures carbonyl compounds in exhaled breath and thus serves as a preconcentrator, which enables analysis of carbonyl VOCs by the portable GC-PID. The hypothesis is that the carbonyl metabolome in exhaled breath is directly related to the body’s reaction to the novel coronavirus infection, and changes in the carbonyl VOC composition in exhaled breath relative to healthy controls can be used to detect both symptomatic and asymptomatic COVID-19 patients.  Three specific aims are proposed to fulfill the overall goal. Aim 1 is to build a disposable handheld breath analyzer tool for concentrating carbonyl VOCs. Aim 2 is to identify VOC patterns in the breath of COVID-19 patients by machine learning algorithms. Aim 3 is to integrate portable GC technology with the breath sampling tool for COVID-19 screening guided by an AI system. The University of Louisville is uniquely suited to rapidly transition the microchip technology to field use because of the PI and Co-PI’s experience in breath analysis and translational research, and the project team’s experience in virology, infectious diseases, biostatistics, and artificial intelligence as well as the state-of-the-art facilities that include a MicroNano Technology Center, Biosafety Level 3 Regional Biocontainment Lab, and an NIH-funded REACH program."
+nih_reporter_narrative,"This project will develop a mobile breath analysis technology for rapid screening for COVID-19 using a handheld breath collection tool and a portable GC with a photoionization detector (PID). Artificial intelligence and machine learning algorithms will be used to analyze the detected signals of volatile organic compounds (VOCs) in exhaled breath by the portable GC for detection of COVID-19 patients. UofL is uniquely suited to develop this approach because of the PI’s expertise in breath analysis for detection of Tuberculosis and lung cancer and the team’s experience in virology, infectious diseases, biostatistics, and artificial intelligence."
+publication_url,https://doi.org/10.1088/1752-7163/ad0646|https://doi.org/10.1021/acs.analchem.2c04604
+creator_fullname_1,Zhenzhen Xie
+creator_firstname_1,Zhenzhen
+creator_middlename_1,
+creator_lastname_1,Xie
+creator_orcid_1,0009-0004-5885-8509
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,A Handheld Microchip for GC analysis of breath to screen for COVID-19
+description_of_project,The goal of the project is to develop a handheld microchip to collect breath samples for portable GC analysis to detect COVID-19 infection
+keywords,Breath analysis|VOC|biomarkers|COVID-19|GC-PID
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,Logistic multivariable regression model

@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Shannon L Stott
+pi_firstname_1,Shannon
+pi_middlename_1,L
+pi_lastname_1,Stott
+pi_profileid_1,
+pi_orcid_1,0000-0002-0349-0522
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Massachusetts General Hospital
+pi_inst_id_1,ror:002pd6e78
+pi_inst_id_type_1,ROR
+pi_fullname_2,Genevieve Marie Boland
+pi_firstname_2,Genevieve
+pi_middlename_2,Marie
+pi_lastname_2,Boland
+pi_profileid_2,
+pi_orcid_2,0000-0002-7522-6173
+pi_role_2,co-PI
+pi_inst_name_2,
+pi_inst_id_2,
+pi_inst_id_type_2,
+dbGaP_study_ID,phs002778.v1.p1
+subproject,Exosome
+nih_project_id,1U18TR003793-01
+nih_reporter_abstract,"Robust, efficient and reliable testing for SARS-CoV-2 is extraordinarily challenging due to our lack of ultra- sensitive assays and ever evolving knowledge of the virus. Standard PCR based assays still result in very high false negative rates in the earliest days of infection. Microfluidic processing of clinical samples is low cost and shows great promise for translating most liquid biopsy assay to the clinic. Our laboratory was one of the first to apply microfluidic technologies for the isolation of both circulating tumor cells and exosomes in the blood of patients with cancer. For SARS-CoV-2 patients, saliva, stool, and plasma are all thought to be potential resources for both virus detection as well as other clinical biomarkers that might inform us of infection. Thus, for this U18, we will optimize our exosome capture technology, the EVHB-Chip, for the isolation of intact SARS-CoV-2 virus, testing its utility for each of these biofluids. To complete this work, we will complete a full clinical validation and benchmarking of the assay. Once fully optimized, our detection assay will be compared against existing EUA SARS-CoV-2 detection assay to determine detection sensitivity and specificity. Further, we plan to demonstrate that the increased sensitivity and specificity enabled by our microfluidic device will result in earlier detection of SARS-CoV-2, reducing false negatives in this testing window. At the completion of this work, we will have collected the data training sets and submitted a full EUA plan that would enable the FDA’s authorization of our test to be used in the clinic."
+nih_reporter_narrative,"We will develop a SARS-CoV-2 detection assay using our existing microfluidic exosome isolation technology, the EVHB-Chip. The high sensitivity and specificity of our technology allows for the isolation of rare nanoscale vesicles from complex biofluids. Based on our early data, we believe it is ideally suited for the isolation of SARS- CoV-2 virus particles and have established a strong team of collaborators to rapidly and efficiently lead us through assay development, validation, and clinical integration."
+publication_url,
+creator_fullname_1,Daniel C Rabe
+creator_firstname_1,Daniel
+creator_middlename_1,C
+creator_lastname_1,Rabe
+creator_orcid_1,0000-0001-6126-2280
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Microfluidic Isolation and Characterization of SARS-CoV-2 and Virus Related Exosomes
+description_of_project,Detection of COVID and COVID related exosome in patient biofluids using microfluic devices
+keywords,SARS-CoV-2|exosome|microfluidic
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,Quantasoft pro

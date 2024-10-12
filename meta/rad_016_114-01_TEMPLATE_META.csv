@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Jesse Vincent Jokerst
+pi_firstname_1,Jesse
+pi_middlename_1,Vincent
+pi_lastname_1,Jokerst
+pi_profileid_1,
+pi_orcid_1,0000-0003-2829-6408
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"University of California, San Diego"
+pi_inst_id_1,ror:0168r3w48
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002524.v1.p1
+subproject,Multimodal Surveillance
+nih_project_id,1R01DE031114-01
+nih_reporter_abstract,"Vulnerable populations do not just need testing—they need surveillance. The ideal surveillance tool would operate in the background with minimal involvement of the population to be tested; it would be simple, affordable, reliable, and accurate. Unfortunately, no such surveillance system yet exists. Here, we propose a “smart mask” that changes colors when the wearer has been exposed to biomarkers (proteases) of COVID-19. These proteases are known to be in saliva, and the smart mask will concentrate the proteases from aerosolized saliva when the subject breathes and speaks through the smart mask. This is a simple yet novel approach to surveillance because most people are already wearing masks—especially in high- risk settings. Our first goal is to optimize the reagents that will monitor the proteases. We will customize the peptide sequences such that the reagents change color only when two key SARS proteases are present. After characterizing the colorimetric reagents, Aim 2 will integrate these reagents into an adhesive strip (i.e., a sticker) that can be affixed to any existing cloth or surgical mask. Aim 3 is validation with human subjects. First, we will use biobanked saliva samples that are confirmed to be either COVID-19-positive or COVID-19-negative. Next, we will evaluate how long people infected with SARS-CoV-2 must breathe through the smart mask before it changes colors. Finally, we will use the smart mask for surveillance of a population that is concurrently being tested regularly via PCR. We will calculate the sensitivity and specificity of the smart masks through comparison to PCR. We will measure true positives, true negatives, false positives, and false negatives and estimate needing 800 subjects, which is very feasible at our institution. Our team is well-suited to conduct this research because of Dr. Jokerst’s training colorimetric sensing; Drs. Penny, Knight, and Laurent have decades of human subjects research experience, and Dr. Tu offers biostatistical experience to confirm study design. This work could have a significant impact on the pandemic because our proposed design combines the simplicity of the home pregnancy test with the specificity of expensive viral-based assays. It is practical because it uses the masks that are already common in daily life and reports the presence of SARS viruses via a simple color change. While a vaccine will hopefully be deployed during the course of this work, the proteases evaluated here have been implicated in a variety of SARS viruses. Thus, this work will be useful should future pandemics emerge."
+nih_reporter_narrative,"We propose to build a mask that changes color when the wearer has COVID-19 or has been exposed to COVID-19. Mask-wearing is currently widespread and thus adding this colorimetric sensing approach is a simple yet innovative way to perform surveillance especially among vulnerable groups. After building and characterizing this mask, we will validate it in group of at-risk individuals."
+publication_url,https://doi.org/10.1021/acs.jpcb.3c02099|https://doi.org/10.1021/acsami.3c09627|https://doi.org/10.1021/acsnano.3c04259|https://doi.org/10.1039/d3an00873h|https://doi.org/10.1021/acsami.3c00862|https://doi.org/10.1039/d2sc05837e|https://doi.org/10.1021/acs.analchem.2c04988|https://doi.org/10.1002/anie.202214394|https://doi.org/10.1021/acs.langmuir.2c02219|https://doi.org/10.1021/acs.nanolett.2c03052|https://doi.org/10.1021/acsami.2c17531|https://doi.org/10.1021/acs.analchem.2c02381|https://doi.org/10.1021/acsnano.2c03219|https://doi.org/10.1021/acsnano.1c11643|https://doi.org/10.1021/acs.chemmater.1c03871|https://doi.org/10.1002/anie.202112995|https://doi.org/10.1002/anie.202113617|https://doi.org/10.1021/acsami.1c11620|https://doi.org/10.1021/acs.analchem.1c02399|https://doi.org/10.1021/acssensors.1c00518
+creator_fullname_1,Jesse Vincent Jokerst
+creator_firstname_1,Jesse
+creator_middlename_1,Vincent
+creator_lastname_1,Jokerst
+creator_orcid_1,0000-0003-2829-6408
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Validation of Smart Masks for Surveillance of COVID-19
+description_of_project,Sticker for facial covering that changes colors upon exposure to SARS proteases
+keywords,COVID-19
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,

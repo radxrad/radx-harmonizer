@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Audrey Ragan Odom John
+pi_firstname_1,Audrey
+pi_middlename_1,Ragan
+pi_lastname_1,Odom John
+pi_profileid_1,
+pi_orcid_1,0000-0001-8395-8537
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Children's Hospital of Philadelphia
+pi_inst_id_1,ror:01z7r7q48
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002603.v1.p1
+subproject,PreVAIL kIds
+nih_project_id,1R61HD105594-01
+nih_reporter_abstract,"The recent emergence of SARS-CoV-2 and resultant pandemic of COVID-19 disease has overwhelmed global health systems and led to over 200,000 American deaths to date. While initial reports suggested that SARS- CoV-2 infection in children was generally benign, a novel post-inflammatory syndrome known as multisystem inflammatory syndrome in children (MIS-C) has now been described. MIS-C in children is characterized by fever, systemic inflammation, and end-organ involvement, and the majority of patients are IgG seropositive for SARS- CoV-2. Because the clinical features of MIS-C overlap with other infections and inflammatory disorders, new strategies for diagnosis of MIS-C in febrile children are urgently needed. Our immediate objective (during the R61 phase) is to determine the reproducible changes in breath, urine, and salivary volatile composition in chil- dren diagnosed with MIS-C. We will integrate these discovery studies with clinical and immunological profiling to develop (during R61 phase) and validate (during R33 phase) a novel and much-needed MIS-C diagnostic, which is expected to have a major impact on care of febrile children. Our long-term goal to develop a diagnostic strategy to distinguish children with MIS-C from children with other causes of fever. Supported by our strong preliminary data that indicate our expertise and feasibility of this strategy, our objectives will be met through three specific aims: 1) Characterize breath biomarkers in children with MIS-C (R61); 2) Relate breath VOC changes to virolog- ical, disease severity, and immunological features of MIS-C (R61); and 3) Validate our novel MIS-C diagnostic for clinical use (R33). The proposed research is significant, because we will progress in development of new, much-needed MIS-C rapid diagnostic tool."
+nih_reporter_narrative,"This research is highly relevant to public health because there is no current validated diagnostic tool for the post-SARS-CoV-2 inflammatory disorder in children, MIS-C. Our proposal will develop a new strategy to diagnose this disorder, which will directly improve care of children with fever and help support future clinical studies."
+publication_url,https://doi.org/10.1101/2023.09.18.23295747|https://doi.org/10.1038/s41564-022-01171-3|https://doi.org/10.34067/KID.0002172021|https://doi.org/10.1016/j.jbc.2021.101550|https://doi.org/10.1093/clinchem/hvab218|https://doi.org/10.1017/ice.2021.487|https://doi.org/10.1371/journal.pone.0250158|https://doi.org/10.1097/ALN.0000000000003765|https://doi.org/10.1093/ofid/ofab074|https://doi.org/10.1542/peds.2020-044289
+creator_fullname_1,Joseph R Logan
+creator_firstname_1,Joseph
+creator_middlename_1,R
+creator_lastname_1,Logan
+creator_orcid_1,0000-0002-5623-897X
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,PreVAIL kIds
+description_of_project,
+keywords,PreVAIL kIds|COVID-19|CHOP
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,RedCap|SQL|Python

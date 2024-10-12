@@ -1,0 +1,50 @@
+Field,Value
+pi_fullname_1,Helena Solo-Gabriele
+pi_firstname_1,Helena
+pi_middlename_1,
+pi_lastname_1,Solo-Gabriele
+pi_profileid_1,
+pi_orcid_1,0000-0003-3390-3823
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,University of Miami
+pi_inst_id_1,ror:02dgjyy92
+pi_inst_id_type_1,ROR
+pi_fullname_2,Christopher Edward Mason
+pi_firstname_2,Christopher
+pi_middlename_2,Edward
+pi_lastname_2,Mason
+pi_profileid_2,
+pi_orcid_2,0000-0002-1850-1642
+pi_role_2,co-PI
+pi_inst_name_2,Weill Cornell Medicine
+pi_inst_id_2,ror:02r109517
+pi_inst_id_type_2,ROR
+pi_fullname_3,Stephan C Schurer
+pi_firstname_3,Stephan
+pi_middlename_3,C
+pi_lastname_3,Schurer
+pi_profileid_3,
+pi_orcid_3,0000-0002-5522-3389
+pi_role_3,co-PI
+pi_inst_name_3,University of Miami
+pi_inst_id_3,ror:02dgjyy92
+pi_inst_id_type_3,ROR
+dbGaP_study_ID,phs002525.v1.p1
+subproject,Wastewater
+nih_project_id,1U01DA053941-01
+nih_reporter_abstract,"The University of Miami (UM), with three primary campuses in Miami, Florida, is geographically spread within one of the worst current COVID-19 hotbeds. UM has deployed an elaborate human surveillance testing, tracking and tracing (3T) system to monitor the student body, faculty, and staff. This 3T system includes a major hospital that is part of UM and that treats COVID-19 patients. To augment this COVID-19 monitoring system, UM has deployed a pilot wastewater surveillance program for detecting SARS-CoV-2 from clusters of buildings on campus. Weill Cornell Medicine (WCM) is located in New York City, NY, an area that until recently had one of the worst outbreaks of COVID-19. WCM has established an international consortium for SARS-CoV-2 environmental surveillance, including in NYC and globally with the MetaSUB Consortium, which is creating metagenomic and metatranscriptomic maps of the world’s sewage. Based on this work at both UM and WCM, this proposal aims to develop, implement, and demonstrate effective and predictive wastewater surveillance by optimizing sampling, concentration, and detection strategies. Working closely with the RADx-rad Data Coordination Center (DCC), this application (SF-RAD) will develop and implement data standards and informatics infrastructure and perform integrative analyses to make all data, results, and models available to the community, thus providing a critical contribution to the national SARS-COV-2 RADx-rad Wastewater Detection Consortium. Our objectives will be addressed through three aims. Aim 1: Data Standardization, focuses on developing and implementing data standards and quality metrics, and establishing the operational infrastructure to manage SARS-CoV-2 wastewater-based surveillance datasets and metadata. Aim 2: Wastewater Characterization, focuses on optimizing wastewater surveillance protocols and parameters for wastewater sampling, sample concentration, and viral detection technologies. Aim 3: Integration with Human Health Surveillance, focuses on metatranscriptomic analyses and on the integration of wastewater quantification data with community and hospital COVID-19 prevalence, to develop predictive models to detect local and community level spread of COVID-19. All data will be made Findable, Accessible, Interoperable and Reusable (FAIR) in close collaboration with the DCC, and will be collected and managed with attention to ethical issues in surveillance and data management, including efforts to ensure research rigor and reproducibility. The results from this proposal will develop and deploy experimental and informatics infrastructure and operations as part of the national RADx-rad SARS-CoV-2 wastewater surveillance network and will provide a proof-of-concept implementation to use wastewater for infectious disease surveillance for early detection of localized COVID-19 outbreaks."
+nih_reporter_narrative,"Through this collaborative study between the University of Miami in Florida and Weill Cornell Medicine in New York, we will generate, standardize, integrate, compare and make available to the RADx-rad Data Coordination Center (DCC), SARS-CoV-2 human surveillance and wastewater quantification data with various sampling, processing, detection, and analysis approaches. We hypothesize that sensitivity (enhanced detection and recovery) can be improved by optimizing sampling and concentration strategies, and that specificity (viral strain identification for epidemiologic tracking) can be improved by optimizing wastewater detection methods. The results from this proposal will develop and deploy experimental and informatics infrastructure and operations, provide a proof-of-concept implementation to use wastewater for infectious disease surveillance, and advance work towards a model capable of predicting local and community level spread of COVID-19 and emerging pathogens based upon measurements of SARS-CoV-2 and other viruses from wastewater."
+publication_url,https://doi.org/10.1093/nargab/lqad092|https://doi.org/10.1021/acsestwater.2c00047|https://doi.org/10.1101/2023.07.12.23292570|https://doi.org/10.1016/j.scitotenv.2023.165459|https://doi.org/10.1101/2023.05.31.23290781|https://doi.org/10.1016/j.scitotenv.2023.164289|https://doi.org/10.1038/s41467-023-38400-0|https://doi.org/10.1016/j.scitotenv.2023.161423|https://doi.org/10.1021/acsestwater.2c00045|https://doi.org/10.3390/genes13101914|https://doi.org/10.1016/j.isci.2022.105310|https://doi.org/10.1016/j.scitotenv.2022.159188|https://doi.org/10.1016/j.bios.2022.114654|https://doi.org/10.1186/s40168-022-01332-w|https://doi.org/10.1038/s41467-022-31654-0|https://doi.org/10.1038/s41592-022-01444-z|https://doi.org/10.3390/w14081187|https://doi.org/10.1101/2022.03.14.22272314|https://doi.org/10.1016/j.xcrm.2022.100522|https://doi.org/10.7171/jbt.21-3203-017|https://doi.org/10.7171/jbt.21-3203-019|https://doi.org/10.1038/s41587-021-01158-1|https://doi.org/10.1186/s13059-021-02529-2|https://doi.org/10.1038/s41587-021-01049-5|https://doi.org/10.1016/j.scitotenv.2021.149177|https://doi.org/10.1016/j.cell.2021.05.002|https://doi.org/10.1186/s40168-021-01044-7|https://doi.org/10.1186/s40168-021-01020-1|https://doi.org/10.1038/s41467-021-21361-7
+creator_fullname_1,Dusica Vidovic
+creator_firstname_1,Dusica
+creator_middlename_1,
+creator_lastname_1,Vidovic
+creator_orcid_1,0000-0001-9798-2108
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Development and Proof-of-Concept Implementation of the South Florida Miami RADx-rad SARS-CoV-2 Wastewater-Based Surveillance Infrastructure
+description_of_project,"Through this collaborative study between the University of Miami in Florida and Weill Cornell Medicine in New York, we will generate, standardize, integrate, compare and make available to the RADx-rad Data Coordination Center (DCC), SARS-CoV-2 human surveillance and wastewater quantification data with various sampling, processing, detection, and analysis approaches. We hypothesize that sensitivity (enhanced detection and recovery) can be improved by optimizing sampling and concentration strategies, and that specificity (viral strain identification for epidemiologic tracking) can be improved by optimizing wastewater detection methods. The results from this proposal will develop and deploy experimental and informatics infrastructure and operations, provide a proof-of-concept implementation to use wastewater for infectious disease surveillance, and advance work towards a model capable of predicting local and community level spread of COVID-19 and emerging pathogens based upon measurements of SARS-CoV-2 and other viruses from wastewater."
+keywords,"wastewater|SARS-CoV-2|water quality, PMMoV, fecal coliform, B2M, qPCR, V2G, data standardization, predictive modeling"
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,

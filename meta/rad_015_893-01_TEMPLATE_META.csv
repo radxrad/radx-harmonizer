@@ -1,0 +1,38 @@
+Field,Value
+pi_fullname_1,Jeffrey Wenzel
+pi_firstname_1,Jeffrey
+pi_middlename_1,
+pi_lastname_1,Wenzel
+pi_profileid_1,
+pi_orcid_1,0009-0005-9885-4809
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Missouri Department of Health and Senior Services
+pi_inst_id_1,ror:041qkag73
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002679.v1.p1
+subproject,Wastewater
+nih_project_id,1U01DA053893-01
+nih_reporter_abstract,"When faced with a pandemic such as SARS-Coronavirus-2 (SAR-CoV-2), the virus responsible for COVID-19, timely risk assessment and action are required to prevent public health impacts to entire communities. Because infected individuals may not have access to testing or may be asymptomatic and contraction can mean death, a proactive approach to detect the virus is needed to develop public health strategy to mitigate virus spread. Recent studies have detected SAR-CoV-2 genetic material in sewage and demonstrate a positive correlation between the concentration of viral markers and reported cases1-5. The Coronavirus Sewershed Surveillance Project (CSSP) is a collaborative effort to monitor sewersheds for genetic indicators of COVID-19 in wastewater to provide additional, population-level information about virus circulation that is not captured by clinical testing. Untreated wastewater (influent) samples are screened weekly from select sewersheds and targeted micro-sewersheds for detection and “true” prevalence. Congregate facilities provide unique opportunities for study because they are controlled populations where the precise number and timing of infections can be defined. Our team will utilize detailed monitoring of congregate facilities to define the precise per patient contribution and longevity of SARS-COV-2 RNA to wastewater by 1) increasing the number of facilities tested, 2) altering the frequency at which samples are collected, and 3) comparing sewershed data collected to clinical patient case data. Although SARS-COV-2 contribution/patient varies among communities, there have been clear outlier communities that produce little or no genetic material in the wastewater despite the presence of known outbreaks. The reason for this lost signal is not known, so our team will define factors that contribute to SARS- COV-2 signal suppression in wastewater by 1) defining the physical nature of the genetic material in the sewershed to better understand the types of factors that could suppress signal, 2) expanding testing within sewersheds with suppressed signal as well as from additional facilities with similar population and industry demographics as those with suppressed signal to narrow the sources of signal suppression, 3) performing exhaustive chemical characterization comparing wastewater from locations that are suppressed to those that are not to identify candidate compounds that could be causing suppression, and 4) obtaining or generating candidate inhibitors and test their ability to suppress signal from viral genetic material in a controlled experimental setting."
+nih_reporter_narrative,"Testing of wastewater for genetic traces of SARS-COV-2, a novel Coronavirus that has caused a destructive worldwide pandemic, has been shown to be an effective method for gaining population-level data about viral prevalence and infectivity trends. However, because we lack critical knowledge about the factors that contribute to SARS-COV-2 detection in wastewater, these measurements currently cannot be used to accurately predict how many infected patients exist in a population. With a better understanding of the individual patient contribution and duration of SARS-COV-2 signal in wastewater as well as a better understanding of factors that affect signal detection, it will be possible to more accurately predict the severity of outbreaks in populations using this powerful technique."
+publication_url,https://doi.org/10.1371/journal.ppat.1011688|https://doi.org/10.1371/journal.ppat.1010636|https://doi.org/10.1016/j.watres.2022.118824|https://doi.org/10.1101/2022.06.03.22275961|https://doi.org/10.1101/2022.03.14.22272359|https://doi.org/10.3390/v13081647
+creator_fullname_1,Melissa J Reynolds
+creator_firstname_1,Melissa
+creator_middlename_1,J
+creator_lastname_1,Reynolds
+creator_orcid_1,0009-0008-7151-5833
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+creator_fullname_2,Chenhui Li
+creator_firstname_2,Chenhui
+creator_middlename_2,
+creator_lastname_2,Li
+creator_orcid_2,0000-0003-3158-9869
+creator_inst_name_2,
+creator_inst_id_2,
+creator_inst_id_type_2,
+project_title,Wastewater Detection of COVID-19
+description_of_project,Wastewater COVID-19 Surveillance
+keywords,missouri|SARS-CoV-2 PCR|COVID-19|wastewater|sewershed|department of health|DHSS|department of natural resources|DNR|university of misouri|MU|health|map|tracking|viral load|variant
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,Week-to-week changes in copies (copies/L * flow rate [MGD]) are used to determine trends within a sewershed. Logistic regression (SAS) was previously used to determine a threshold at which increases in sewershed corresponded to a subsequent increase in cases. Details can be found at: https://storymaps.arcgis.com/stories/f7f5492486114da6b5d6fdc07f81aacf.

@@ -6,10 +6,6 @@ import shutil
 import argparse
 import utils
 
-
-# Root directory on AWS
-# ROOT_DIR = "r:/"
-
 # Root directory local installation
 ROOT_DIR = ".."
 
@@ -17,10 +13,16 @@ ROOT_DIR = ".."
 DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 META_DIR = os.path.join(ROOT_DIR, "meta")
 HARMONIZED_DICT = os.path.join(
-    ROOT_DIR, "reference/RADx-rad_harmonized_dict_2024-08-22.csv"
+    ROOT_DIR, "reference/RADx-rad_legacy_dict_2024-10-11.csv"
 )
 GLOBAL_HARMONIZED_DICT = os.path.join(
-    ROOT_DIR, "reference/RADx-global_harmonized_dict_2024-08-22.csv"
+    ROOT_DIR, "reference/RADx-global_tier1_dict_2024-10-11.csv"
+)
+TIER1_HARMONIZED_DICT = os.path.join(
+    ROOT_DIR, "reference/RADx-rad_tier1_dict_2024-10-11.csv"
+)
+TIER2_HARMONIZED_DICT = os.path.join(
+    ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-11.csv"
 )
 ERROR_FILE_NAME = "phase2_errors.csv"
 
@@ -41,33 +43,18 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
     Returns
     -------
     None
-
-    Notes
-    -----
-    This function performs the following tasks:
-    1. Identifies subdirectories matching the pattern 'rad_*_*-*' within `DATA_DIR`.
-    2. Skips directories with Phase 1 errors or locked directories.
-    3. Creates or resets the work directory.
-    4. Copies preorigcopy files into the work directory.
-    5. Runs data checks and cleanups on the copied files.
-    6. Matches data fields to data elements in the dictionary files.
-    7. Checks for missing values, valid field types, and proper format in the data.
-    8. Updates metadata templates and creates updated META files.
-    9. Converts and updates dictionary files.
     """
     directories = utils.get_directories(include_dirs, exclude_dirs, DATA_DIR)
 
     for directory in directories:
         preorigcopy_dir = os.path.join(directory, "preorigcopy")
 
-        # Check if the directory exists
         if not os.path.isdir(preorigcopy_dir):
             print(f"ERROR: Project directory {preorigcopy_dir} does not exist!")
             sys.exit(-1)
 
         work_dir = os.path.join(directory, "work")
 
-        # Skip directories with Phase 1 errors
         phase1_error_file = os.path.join(work_dir, "phase1_errors.csv")
         if os.path.exists(phase1_error_file):
             print(f"skipping: {directory} due to Phase I errors")
@@ -90,17 +77,14 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
             print(f"skipping {directory}: error resetting/accessing work directory")
             continue
 
-        # Clean up error file from a previous run
         error_file = os.path.join(work_dir, ERROR_FILE_NAME)
 
         if os.path.exists(error_file):
             os.remove(error_file)
 
-        # Copy preorigcopy files in to work directory
         step1(preorigcopy_dir, work_dir)
         print("1", end="")
 
-        # Run data checks and data cleanups
         error_messages = []
 
         step2(work_dir, error_messages)
@@ -130,7 +114,7 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
         step6(work_dir)
         print(",6", end="")
 
-        step7(work_dir)
+        step7(work_dir, TIER1_HARMONIZED_DICT, TIER2_HARMONIZED_DICT)
         print(",7 - passed")
 
 
@@ -151,14 +135,11 @@ def step1(preorigcopy_dir, work_dir):
     """
     for input_file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*.csv")):
         basename = os.path.basename(input_file)
-
         output_file = os.path.join(
             work_dir, basename.replace("_preorigcopy.csv", ".csv")
         )
 
-        # Proceed only if the input file is newer than the output file or it doesn't exist yet
         if utils.is_newer(input_file, output_file):
-            # Copy preorigcopy file to work directory
             shutil.copyfile(input_file, output_file)
 
 
@@ -182,21 +163,16 @@ def step2(work_dir, error_messages):
         print(f"ERROR: Cannot process {work_dir}. No csv files found!")
         sys.exit(-1)
 
-    for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_*.csv")):
-        # Remove origcopy files from a previous run
+    for input_file in input_files:
         if input_file.endswith("origcopy.csv"):
             os.remove(input_file)
             continue
 
-        # Check if file is UTF-8 encoded
         error = utils.is_not_utf8_encoded(input_file, error_messages)
 
         if not error:
-            # Remove space from header to make sure they can be mapped to data elements
             utils.remove_spaces_from_header(input_file)
-            # Remove empty rows and columns
             utils.remove_empty_rows_cols(input_file, error_messages)
-            # Standardize units in *_unit columns
             utils.standardize_units(input_file)
 
 
@@ -216,9 +192,7 @@ def step3(work_dir, error_messages):
     None
     """
     for input_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
-        # Some DICT files contain a Units column. Rename it to Unit.
         utils.fix_units(input_file)
-        # Check DICT file for mandatory columns
         utils.check_dict(input_file, error_messages)
 
 
@@ -238,7 +212,6 @@ def step4(work_dir, error_messages):
     None
     """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
-        # Match data fields to data elements in the dictionary files
         data_file = dict_file.replace("DICT", "DATA")
         utils.data_dict_matcher_new(
             data_file, dict_file, HARMONIZED_DICT, error_messages
@@ -262,43 +235,31 @@ def step5(work_dir, error_messages):
     """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         any_error = False
-        # Check for missing values in mandatory DICT fields
         error = utils.check_missing_values(dict_file, error_messages)
         any_error = any_error or error
 
-        # Check for valid field types in the DICT file
         error = utils.check_field_types(dict_file, error_messages)
         any_error = any_error or error
 
-        # Check provenance column for proper format
         error = utils.check_provenance(dict_file, error_messages)
         any_error = any_error or error
 
-        # Check if the data types in the DATA file match the data types specified in the DICT file
         data_file = dict_file.replace("_DICT.csv", "_DATA.csv")
         error = utils.check_data_type(data_file, dict_file, error_messages)
         any_error = any_error or error
 
-        # Check if the enumerated values used in the DATA file match the enumerations in the DICT file
         error = utils.check_enums(data_file, dict_file, error_messages)
         any_error = any_error or error
 
-        # Check if file that contains minimum CDEs had study_id column.
         error = utils.has_study_id(data_file, dict_file, error_messages)
         any_error = any_error or error
 
         if not any_error:
-            # Use the metadata templates and combine them with data from the DATA file to create an updated META file
             meta_file = dict_file.replace("_DICT.csv", "_META.csv")
             meta_output_file = dict_file.replace("_DICT.csv", "_META_origcopy.csv")
             error = utils.update_meta_data(
-                meta_file,
-                meta_output_file,
-                META_DIR,
-                data_file,
-                error_messages,
+                meta_file, meta_output_file, META_DIR, data_file, error_messages
             )
-            # Make a origcopy for the data file
             data_output_file = data_file.replace("_DATA.csv", "_DATA_origcopy.csv")
             shutil.copyfile(data_file, data_output_file)
 
@@ -320,7 +281,7 @@ def step6(work_dir):
         utils.update_dict_file(dict_file, dict_file)
 
 
-def step7(work_dir):
+def step7(work_dir, tier1_dict_file, tier2_dict_file):
     """
     Convert dictionary files to origcopy.
 
@@ -328,6 +289,10 @@ def step7(work_dir):
     ----------
     work_dir : str
         Path to the work directory.
+    tier1_dict_file : str
+        Path to the Tier 1 harmonized dictionary file.
+    tier2_dict_file : str
+        Path to the Tier 2 harmonized dictionary file.
 
     Returns
     -------
@@ -335,7 +300,9 @@ def step7(work_dir):
     """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         dict_output_file = dict_file.replace("_DICT.csv", "_DICT_origcopy.csv")
-        utils.convert_dict(dict_file, dict_output_file)
+        utils.convert_dict(
+            dict_file, tier1_dict_file, tier2_dict_file, dict_output_file
+        )
 
 
 def main(include, exclude, reset):
@@ -357,7 +324,6 @@ def main(include, exclude, reset):
     """
     print("Phase2: Validate and prepare origcopy files.")
 
-    # Parse command line
     if include and exclude:
         print(
             "Error: The '-include' and '-exclude' arguments cannot be specified at the same time."
@@ -373,7 +339,6 @@ def main(include, exclude, reset):
         )
         sys.exit(1)
 
-    # Convert reset flag
     if reset:
         reset = True
         if not utils.confirm_rest():
@@ -384,17 +349,13 @@ def main(include, exclude, reset):
 
     print()
 
-    # Run phase 2 check
     phase2_checker(include, exclude, reset)
 
 
 if __name__ == "__main__":
-    # Create the parser
     parser = argparse.ArgumentParser(
-        description="Check and process preorigcopy files into orgicopy files."
+        description="Check and process preorigcopy files into origcopy files."
     )
-
-    # Add the arguments
     parser.add_argument(
         "-include",
         type=str,
@@ -411,8 +372,5 @@ if __name__ == "__main__":
         "-reset", action="store_true", help="Reset project using files from preorigcopy"
     )
 
-    # Parse the arguments
     args = parser.parse_args()
-
-    # Call the main function with the parsed arguments
     main(args.include, args.exclude, args.reset)

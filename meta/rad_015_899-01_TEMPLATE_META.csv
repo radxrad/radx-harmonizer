@@ -1,0 +1,56 @@
+Field,Value
+pi_fullname_1,John Michael Ramsey
+pi_firstname_1,John
+pi_middlename_1,Michael
+pi_lastname_1,Ramsey
+pi_profileid_1,
+pi_orcid_1,0000-0002-5948-6813
+pi_role_1,data-PI
+pi_inst_name_1,University of North Carolina at Chapel Hill
+pi_inst_id_1,ror:0130frc33
+pi_inst_id_type_1,ROR
+pi_fullname_2,Rachel Todd Noble
+pi_firstname_2,Rachel
+pi_middlename_2,Todd
+pi_lastname_2,Noble
+pi_profileid_2,
+pi_orcid_2,0000-0001-9071-8312
+pi_role_2,contact-PI
+pi_inst_name_2,University of North Carolina at Chapel Hill
+pi_inst_id_2,ror:0130frc33
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002729.v1.p1
+subproject,Wastewater
+nih_project_id,1U01DA053899-01
+nih_reporter_abstract,"Presently, the application of molecular technology such as RT-qPCR and digital PCR (dPCR) to quantify SARS-CoV-2 and related targets in wastewater is cumbersome, time consuming, and costly. While progress has been made on the development of methods and the interpretation of data, much remains to be improved for the technology to be used as a public health management tool. A major drawback in the current approaches are 1) the lack of streamlined and consistent pre-analytical processing steps, 2) coverage across the relevant targets requires a high number of reactions (>20) from any single sample to provide quantitative information, and 3) a lack of vision on the development of a pathogen/marker panel, much like those used in clinical arenas, for interpretation of the data across different states, regions and nations. The goal of this project will be to successfully navigate these three limitations toward development of a public health warning system that is not dependent on clinical testing and has the ability to rapidly address novel pathogen threats in the future."
+nih_reporter_narrative,"The proposed research will enhance the usefulness of wastewater monitoring for pathogens to address public health responses to the COVID-19 pandemic as well as future pandemics. We will demonstrate highly multiplexed digital PCR assays on wastewater collected from multiple diverse geographical regions that will be comprehensive, rapid, low cost, and quantitative for monitoring the circulation of disease. Moreover, the assay system will be able to address novel pathogens by allowing rapid aggregation of genetic tests for these new targets."
+publication_url,
+creator_fullname_1,Rachel Todd Noble
+creator_firstname_1,Rachel
+creator_middlename_1,Todd
+creator_lastname_1,Noble
+creator_orcid_1,0000-0001-9071-8312
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+creator_fullname_2,Tom Clerkin
+creator_firstname_2,Tom
+creator_middlename_2,
+creator_lastname_2,Clerkin
+creator_orcid_2,0000-0001-5239-8266
+creator_inst_name_2,
+creator_inst_id_2,
+creator_inst_id_type_2,
+creator_fullname_3,A Denene Blackwood
+creator_firstname_3,A
+creator_middlename_3,Denene
+creator_lastname_3,Blackwood
+creator_orcid_3,0000-0002-4226-8633
+creator_inst_name_3,
+creator_inst_id_3,
+creator_inst_id_type_3,
+project_title,"Improved scalability, sensitivity, and interpretability of pathogen detection, including SARS-CoV-2, in wastewater using high-throughput, highly multiplexed digital array PCR technology"
+description_of_project,development of new technology for pathogen quantification
+keywords,digital droplet PCR|digital array PCR|RNA|DNA|molecular|protein
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,Excel

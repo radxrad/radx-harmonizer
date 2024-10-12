@@ -1,0 +1,27 @@
+Field,Value
+pi_fullname_1,Xudong Fan
+pi_firstname_1,Xudong
+pi_middlename_1,
+pi_lastname_1,Fan
+pi_profileid_1,
+pi_orcid_1,0000-0003-0149-1326
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,University of Michigan–Ann Arbor
+pi_inst_id_1,ror:00jmfr291
+pi_inst_id_type_1,ROR
+pi_fullname_2,Kevin Ward
+pi_firstname_2,Kevin
+pi_middlename_2,
+pi_lastname_2,Ward
+pi_profileid_2,
+pi_orcid_2,0000-0001-5939-409X
+pi_role_2,co-PI
+pi_inst_name_2,Virginia Commonwealth University
+pi_inst_id_2,ror:02nkdxk79
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002747.v1.p1
+subproject,SCENT
+nih_project_id,1U18TR003812-01
+nih_reporter_abstract,"Recent studies, including ours, have suggested that breath may allow us to diagnose COVID-19 infection and even monitor its progress. As compared to immunological and genetic based methods using sample media like blood, nasopharyngeal swab, and saliva, breath analysis is non-invasive, simple, safe, and inexpensive; it allows a nearly infinite amount of sample volume and can be used at the point-of-care for rapid detection. Fundamentally, breath also provides critical metabolomics information regarding how human body responds to virus infection and medical intervention (such as drug treatment and mechanical ventilation). The objectives of the proposed SCENT project are: (1) to refine automated, portable, high-performance micro-gas chromatography (GC) device and related data analysis / biomarker identification algorithms for rapid (5-6 minutes), in-situ, and sensitive (down to ppt) breath analysis and (2) to conduct breath analysis on up to 760 patients, and identify and validate the COVID-19 biomarkers in breath. Thus, in coordination with the RADx-rad Data Coordination Center (DCC), we will complete the following specific aims. (1) Refine 5 automated micro-GC devices to achieve higher speed and better separation capability. We will construct 5 new automated and portable one-dimensional micro-GC devices that require only ~6 minutes of assay time (improved from current 20 minutes) at the ppt level sensitivity (Sub-Aim 1a). Then the devices will be upgraded to 2-dimensional micro-GC to significantly increase the separation capability (Sub-Aim 1b). In the meantime, we will optimize and automate our existing data processing and biomarker identification algorithms and codes to streamline the workflow so that the GC device can automatically process and analyze the data without human intervention (Sub-Aim 1c). (2) Identify breath biomarkers that distinguish COVID-19 positive (symptomatic and asymptomatic) and negative patients. We will recruit a training cohort of 380 participants, including 190 COVID-19 positive patients (95 symptomatic and 95 asymptomatic) and 190 COVID-19 negative patients from two hospitals (Michigan Medicine – Ann Arbor and the Henry Ford Hospital – Detroit). We will conduct breath analysis using machine learning to identify VOC patterns that match each COVID-19 diagnostic status. (3) Validate the COVID-19 biomarkers using our refined micro-GC devices. Using the refined 2-D micro-GC devices from Sub-Aim 1b, we will recruit a new validation cohort of 380 participants (190 COVID-19 positive patients and 190 COVID-19 negative patients) to validate the biomarkers identified in Aim 2.  We will leverage existing engineering, data science, clinical, regulatory, and commercialization resources throughout the project to hit our milestones, ensuring a high likelihood of rapid patient impact. Upon completion of this work, we will have a portable micro-GC device and accompanying automated algorithms that can detect and monitor COVID-19 status for people in a variety of clinical and community settings."
+nih_reporter_narrative,"Our team of engineers, clinicians, and data scientists has developed a portable, high performance breath analyzer that can be used to detect certain diseases. In this project, we will adapt and refine our existing device and algorithms so they can be used for rapid, safe, and non- invasive COVID-19 detection. People will simply breath into the device and it will quickly provide results, meaning that it can be used in a variety of everyday settings to help fight against the COVID-19 pandemic."
+publication_url,https://doi.org/10.1109/EMBC40787.2023.10340662|https://doi.org/10.1001/jamanetworkopen.2023.0982|https://doi.org/10.1038/s41378-022-00452-5

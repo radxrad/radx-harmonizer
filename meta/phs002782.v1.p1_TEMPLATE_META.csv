@@ -1,0 +1,17 @@
+Field,Value
+pi_fullname_1,Douglas Bell
+pi_firstname_1,Douglas
+pi_middlename_1,
+pi_lastname_1,Bell
+pi_profileid_1,
+pi_orcid_1,0000-0001-7700-0840
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,National Institute of Environmental Health Sciences
+pi_inst_id_1,ror:00j4k1h63
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002782.v1.p1
+subproject,Diagnostic-Prognostic RNAseq
+nih_project_id,1ZIAES103366-01
+nih_reporter_abstract,"COVID-19 Diagnostics. Our proposed screening approach, if adopted by CLIA-compliant testing facilities with robotics, next generation sequencing and bioinformatics capability, would meet one important need among testing alternatives. It would provide the capability for testing tens of thousands of patient samples in a large bolus. It could allow accurate and fast-turnaround SARS-CoV-2 testing capacity at population scale, permitting massive scale monitoring of at-risk individuals with minimal processing delay. This method exploits the indexing of poly-adenylated RNA from both virus and host cells and allows the possibility of extracting many metrics at once (more flags = easier to detect) with the same upstream processing routine. This added information will be useful for interpreting variation in response to viral exposure for both positive and negative tests. Looking ahead, the technical improvements embodied by a successful NGS-based viral gRNA screening platform could reveal new means to establish strategic preparedness roadmaps for future pandemics. It would be a model for how new infectious disease screening platforms might be rapidly jump-started and developed. We are working to develop a method to analyze  nasopharyngeal, oropharyngeal, saliva, and/or blood samples from COVID-19 patients collected very early in the COVID-19 disease course (e.g. at diagnosis of infection) and prospectively determine or predict  COVID-19 disease severity (e.g. asymptomatic, mild, severe, long COVID, etc).  The method seeks to both quantify the viral content in the biological sample and to also obtain an informative gene expression profile from patient cells.  These profiles will be compared with patient symptoms and clinical data using machine learning to identify biomarkers that are prognostic for COVID-19 disease severity."
+nih_reporter_narrative,
+publication_url,

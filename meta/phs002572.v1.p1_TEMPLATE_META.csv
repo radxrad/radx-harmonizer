@@ -1,0 +1,27 @@
+Field,Value
+pi_fullname_1,Timothy Gordon
+pi_firstname_1,Timothy
+pi_middlename_1,
+pi_lastname_1,Gordon
+pi_profileid_1,
+pi_orcid_1,0000-0002-5128-9532
+pi_role_1,data-PI
+pi_inst_name_1,
+pi_inst_id_1,
+pi_inst_id_type_1,
+pi_fullname_2,Patricia Bea Keady
+pi_firstname_2,Patricia
+pi_middlename_2,Bea
+pi_lastname_2,Keady
+pi_profileid_2,
+pi_orcid_2,0000-0001-9612-0960
+pi_role_2,contact-PI
+pi_inst_name_2,"Aerosol Devices, Inc."
+pi_inst_id_2,KV6XHGACM3Z5
+pi_inst_id_type_2,UEI
+dbGaP_study_ID,phs002572.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,1R42DE030832-01
+nih_reporter_abstract,"A substantial and growing body of evidence has demonstrated that COVID-19 is transmitted by human-emitted airborne particles; therefore, it is critical to rapidly screen individuals to determine whether they are at risk of transmitting the disease to others before they enter large venues (e.g., airports, schools) and smaller ones where extended exposure or close proximity is expected (e.g., dental offices, hair salons). Given the large number of asymptomatic cases of the disease, the infrared thermometers and health questionnaires frequently used to screen individuals are plainly inadequate. Existing SARS-CoV-2 detection technology is time consum- ing and complicated to use, expensive and not portable and therefore ill-suited to use as point of care (POC) screening tools. Tests recently approved by the FDA under the Emergency Use Authorization face some of the same challenges. The goal of this project is to develop and test a novel breathalyzer for detecting aerosolized SARS-CoV-2 di- rectly from exhaled breath in near real-time by marrying a proven, cutting-edge aerosol sampling technology with a novel and inexpensive virus detector. The innovation is directly detecting virus in the breath, while other breathalyzers depend on indirect detection (VOCs and AI algorithms) to infer the presence of the virus. In this Fast-track STTR project, Aersol Devices Inc (ADev) will modify its commercial bioaerosol collector, which is used to sample from the ambient environment, to enable it to collect viruses from breath samples into a concentrated liquid sample. The University of Minnesota (UMN) will modify its Magnetic Particle Spectrome- ter (MPS), a version of which has previously been used to detect Influenza A H1N1 virus, so that the liquid samples from the collector can be analyzed to detect SARS-CoV-2. Specific aims include developing the hardware for transforming an ambient sampler into a breath sampler, de- signing a rapid means of decontaminating the collector between tests, integrating the collector and the detector into a robust package, functionalizing magnetic nanoparticles with SARS-CoV-2 antibodies, increasing the sig- nal/noise ratio of the MPS electronics, reducing the assay time, improving the analytical sensitivity/specificity, measuring the clinical sensitivity/specificity and comparing to RT-qPCR in pre-clinical testing. The technology platform proposed is flexible and extensible and could be tailored to detect other pathogens (e.g., rhinoviruses, respiratory syncytial virus, parainfluenza virus other coronaviruses, etc.). This flexibility is valuable since (1) this will not be the last pandemic (new pathogens in the future) and (2) development could pivot to a different pathogen if a vaccine or other control measures bring the current COVID-19 pandemic un- der control before this SARS-CoV-2 breathalyzer is commercially available."
+nih_reporter_narrative,"Aerosol transmission of SARS-CoV-2 is a likely contributor to the rapid spread of COVID-19. Tools are urgently needed for rapidly and inexpensively screening out contagious individuals before they can enter schools, hospitals, office buildings, assisted living facilities, military installations and other large venues in order to protect vulnerable populations and mitigate the pandemic. We will develop a breathalyzer to detect aerosolized SARS-CoV-2 directly from exhaled breath within minutes by marrying a proven, cutting-edge aerosol sampling technology with a novel and inexpensive virus detector based on magnetic particle spectroscopy."
+publication_url,https://doi.org/10.1021/acsanm.2c05237

@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Lu Peng
+pi_firstname_1,Lu
+pi_middlename_1,
+pi_lastname_1,Peng
+pi_profileid_1,
+pi_orcid_1,0000-0003-3545-286X
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Louisiana State University
+pi_inst_id_1,ror:05ect4e57
+pi_inst_id_type_1,ROR
+pi_fullname_2,Xing Wang
+pi_firstname_2,Xing
+pi_middlename_2,
+pi_lastname_2,Wang
+pi_profileid_2,
+pi_orcid_2,0000-0001-9930-3287
+pi_role_2,co-PI
+pi_inst_name_2,University of Illinois Urbana-Champaign
+pi_inst_id_2,ror:047426m28
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002573.v1.p1
+subproject,Automatic Detection & Tracing
+nih_project_id,1U01AA029348-01
+nih_reporter_abstract,"The COVID-19 pandemic has rapidly spread across the world, bringing death, illness, disruption to daily life, and economic crisis to businesses and individuals. The situation has been exacerbated after the schools and companies reopened due to economic pressure. One of the key failures in COVID-19 containment is underlined by the inability of our healthcare system in real-time detection in point-of-care (POC) and end-user settings and precise tracing with privacy protection of active infections. The fundamental limitations of current gene-based assays stem from their reliance upon amplification and detection of the viral genetic materials even if there were no intact/infectious viruses. These tests require labor-intensive, laboratory-based sample preparation protocols for virus lysis, extraction of genetic materials, purification of the isolated materials, thermal cycling for enzymatic amplification of viral nucleic acid sequences, and interpretation of complex results by professionals. To accurately determine the infectivity of the infected individuals, contaminated objects and environments, and provide guidance for patients, public and authorities to better manage treatment and containment, we seek a new paradigm for rapid and direct pathogen detection and identification in which the intact virions are directly recognized through their distinct surface epitope features, and the resultant fluorescent signal is immediately captured by an end-user smartphone, followed by automatic data transition and event tracing in a blockchain-encrypted manner. To achieve specific recognition of SARS-CoV-2 virions, we customized a designer DNA nanostructure (DDN)-based capture probe that harbors a macromolecular “net” whose vertices precisely match the intra- and inter-spatial pattern of SARS-CoV-2 trimeric spike glycoprotein clusters, and integrates a net-shaped array of SARS-CoV-2 spike specific-targeting aptamers. This aptamer-DDN is designed for maximum affinity and specificity binding with spikes on intact virions in a polyvalent and pattern-matching fashion. Once bound to intact virions, the DNA “nets” trigger the release of fluorescence. This fluorescent signal can be readily and automatically detected by a membrane-shaped and smartphone-based fluorimeter attached to the end-users' phone cameras. The acquired results will be associated with user device IDs that are cyber-protected before tracing. We propose to combine DDN capture probes and a smartphone device to develop and demonstrate a rapid, room temperature, single-step, virus- specific, and ultrasensitive detection of SARS-CoV-2 virus, in which the detection results can be acquired within 5 minutes upon exposure, at the user end, allowing tracing the presence of viruses without affecting user privacy. The signal to result transition, result to ID association, individual track and interacting network tracing will be blockchain-encrypted to ensure information security for individual privacy, while tracing information would be available to health authority for public health benefits."
+nih_reporter_narrative,"The goal of the project is to develop a pipeline for automatic detection and tracing of active SARS-CoV-2 infection in a cost-effective, highly accurate, real-time, portable, and super-encrypted manner. Our integrated approach first captures viral particles from patient samples to activate fluorescence reporters, followed by signal detection using a smartphone fluorimeter, along with blockchain-based data processing and tracing. We deployed designer DNA “net” nanostructures that match the spatial pattern of trimeric spike glycoprotein clusters on the viral outer surface for specific and rapid SARS-CoV-2 virion detection, smartphone-based point- of-care device for portable signal reading, and blockchain encryption for privacy protection during result recording and track tracing, therefore, our detection and tracing model allows a direct, automatic, and cost- effective detection, a highly flexible result acquisition process and a super-encrypted data transition and tracing system."
+publication_url,https://doi.org/10.1021/acs.jcim.3c00713|https://doi.org/10.1002/smll.202300040|https://doi.org/10.1016/j.bios.2023.115228|https://doi.org/10.1016/j.bios.2023.115197|https://doi.org/10.3390/bios13020298|https://doi.org/10.1021/acsinfecdis.1c00546|https://doi.org/10.1038/s41596-021-00641-y|https://doi.org/10.1016/j.cossms.2021.100966|https://doi.org/10.1038/s41563-021-01088-y
+creator_fullname_1,Tao Lu
+creator_firstname_1,Tao
+creator_middlename_1,
+creator_lastname_1,Lu
+creator_orcid_1,0000-0001-7265-9099
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Detection and Automatic Privacy-Protected Contact Tracing System Designed for COVID-19
+description_of_project,"GeauxTrace is using Android and iOS app to do contact tracing, where data are securely stored using a private blockchain."
+keywords,blockchain|contact tracing
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,

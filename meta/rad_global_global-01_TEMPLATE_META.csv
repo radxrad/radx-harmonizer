@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Suzie H Pun
+pi_firstname_1,Suzie
+pi_middlename_1,H
+pi_lastname_1,Pun
+pi_profileid_1,
+pi_orcid_1,0000-0003-1443-4996
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,University of Washington
+pi_inst_id_1,ror:00cvxb145
+pi_inst_id_type_1,ROR
+pi_fullname_2,Joshua R Smith
+pi_firstname_2,Joshua
+pi_middlename_2,R
+pi_lastname_2,Smith
+pi_profileid_2,
+pi_orcid_2,0000-0002-5331-4770
+pi_role_2,co-PI
+pi_inst_name_2,
+pi_inst_id_2,
+pi_inst_id_type_2,
+dbGaP_study_ID,phs002565.v1.p1
+subproject,Automatic Detection & Tracing
+nih_project_id,1U01AA029316-01
+nih_reporter_abstract,"The SARS-CoV-2 coronavirus, the cause of the COVID-19 global pandemic, is efficiently spread and has reached over 27 million confirmed cases as of September 8, 2020. There is therefore an urgent need for new technologies that can provide early detection of virus, reducing the transmission and infection rate. The goal of this proposal is to develop an integrated biosensor- touchscreen that sensitivity reports surface contact with SARS-CoV-2. In our preliminary work, we have identified several aptamers that bind specifically to the envelope-anchored trimeric spike (S) protein of SARS-CoV-2, but not of SARS-CoV or MERS. In comparison to antibodies, aptamers are synthetic molecules that more thermally stable and lower cost while providing similar specificity and affinity of target binding. In this application, we propose to integrate aptamer-based biosensing of SARS-CoV-2 into a touchscreen device. Our main objectives are to 1) engineer conformation switching aptamers for electrochemical sensing of SARS-CoV-2 binding, 2) develop nanogap capacitive sensors as a uniquely complementary approach to capacitive touchscreen technology and 3) build and test an integrated biosensor and touchscreen array that can detect SARS-CoV-2 from patient samples. Successful completion of these aims will result in a novel automatic sensing platform for SARS-CoV-2. This technology could transform personal device touchscreens as well as to multi-user touchscreen devices in hospitals, airports, libraries, restaurants, for early detection, curbing transmission rates from secondary exposure. Importantly, the developed technology could be adapted for other electronic sensing platforms, and easily applied for future pathogen detection."
+nih_reporter_narrative,"There is an urgent need for new and rapidly translatable technologies that can reduce SARS-CoV-2 transmission. The main goal of this proposal is to develop an integrated biosensor-touchscreen that sensitively reports surface contact with SARS-CoV-2. Successful completion of these aims will result in a novel automatic sensing platform for SARS-CoV-2 that could also applied to multi-user touchscreen devices such as those found in hospitals, airports, and restaurants, as well as single-user touchscreen such as mobile phones."
+publication_url,https://doi.org/10.1039/d3sc00439b|https://doi.org/10.1021/acs.analchem.2c01993|https://doi.org/10.1021/acs.analchem.2c00554|https://doi.org/10.1002/anie.202107730
+creator_fullname_1,Lucy F Yang
+creator_firstname_1,Lucy
+creator_middlename_1,F
+creator_lastname_1,Yang
+creator_orcid_1,0000-0001-6950-7764
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Touchscreen-compatible_real-time_sensing_of_SARS-CoV-2
+description_of_project,Spike N-terminal domain-binding aptamers|rapid SARS-CoV-2 detection
+keywords,aptamers|rapid diagnostics
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,

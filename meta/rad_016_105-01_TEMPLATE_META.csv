@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Michael P Snyder
+pi_firstname_1,Michael
+pi_middlename_1,P
+pi_lastname_1,Snyder
+pi_profileid_1,
+pi_orcid_1,0000-0003-0784-7987
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Stanford University
+pi_inst_id_1,ror:00f54p054
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002523.v1.p1
+subproject,Multimodal Surveillance
+nih_project_id,1R01NR020105-01
+nih_reporter_abstract,"Multi-Modal Wireless COVID Monitoring & Infection Alerts for Concentrated Populations Abstract: The high aerosolized transmissibility of COVID, long asymptomatic incubation period, and highly variable presentation attributes of the COVID pandemic have proven challenging in many settings where patchwork pandemic responses have disproportionately negatively impacted vulnerable socioeconomic, minority, and disabled sub-populations. Unfortunately, these dire trends are only made more acute in settings that feature populations with limited mobility and little to no ability to self-isolate (dense concentrated populations [DCPs]), such as residential nursing homes, schools, drug rehabilitation services, prison and psychiatric facility populations, and high-frequency essential medical services, such as chemotherapy infusion clinics or dialysis units. In these DCP settings, limited diagnostic testing, prolonged indoor contact, limitations in cleaning and filtration capacities, support staff shortages, pre-existing comorbidities, and lack of effective infectious disease surveillance systems all collude to drive an increased COVID burden in DCPs. From this, it is clear that alternative detection strategies for DCPs are urgently needed to improve local capacity to monitor COVID outbreaks, mitigate their spread, and thus reduce inequitable disease and mortality burdens in these under-resourced and often overcrowded settings. In previous work, we developed a first generation detection system using heart rate data from commercially-available Fitbit Ionic wearable devices to detect the onset of COVID and other infectious diseases up to 10 days before users self-reported symptom onset (overall sensitivity 67% prior to symptom onset). Here, we propose to further develop this system for the improved detection of COVID and other infectious diseases in DCPs using existing wearable fitness devices in a wireless and interoperable digital health framework that centralizes all wearable-derived data on PHD while tailoring its presentation and health event alert system to the IT capabilities and needs of each DCP setting. In this, not only will we adapt our existing infection detection algorithms for each DCP’s particular baseline characteristics, IT infrastructure, and needs, but also use incoming data to further optimize the performance of those algorithms for continuous improvement in the sensitivity, specificity, and alert lead time for COVID onset. This will quickly enable under-resourced DCP support staff to access and use world-class COVID surveillance data in identifying individual infection events, implementing isolation, cleaning, and testing policies, and minimizing transmission, thus reducing the burden of COVID in DCP settings and reducing DCP morbidity and mortality overall."
+nih_reporter_narrative,"Multi-Modal Wireless COVID Monitoring & Infection Alerts for Concentrated Populations Narrative: The myriad risks and health burdens accompanying the ongoing COVID pandemic have disproportionately impacted under-resourced settings with dense, concentrated populations that cannot readily transition to isolation or remote care. While diagnostic testing is increasingly available, it remains inaccessible to too many and highlights an urgent unmet need for alternative methods to detect COVID infection and spread. In previous work using online machine learning and commercially-available fitness wearables, we have demonstrated remote detection of COVID onset up to 7 days in advance of symptoms, which we here propose to optimize and extend to diverse dense concentrated population settings for ongoing and effective COVID surveillance."
+publication_url,https://doi.org/10.1038/s41591-021-01593-2|https://doi.org/10.1101/2021.06.13.21258795
+creator_fullname_1,Amir Bahmani
+creator_firstname_1,Amir
+creator_middlename_1,
+creator_lastname_1,Bahmani
+creator_orcid_1,0000-0003-4533-9334
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Multi-Modal Wireless COVID Monitoring & Infection Alerts for Concentrated Populations
+description_of_project,"Early detection of infectious diseases is crucial for reducing transmission and facilitating early intervention. In this study, we built a real-time smartwatch-based alerting system that detects aberrant physiological and activity signals (heart rates and steps) associated with the onset of early infection and implemented this system in a prospective study. In a cohort of 3,318 participants, of whom 84 were infected with severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), this system generated alerts for pre-symptomatic and asymptomatic SARS-CoV-2 infection in 67 (80%) of the infected individuals. Pre-symptomatic signals were observed at a median of 3 days before symptom onset. Examination of detailed survey responses provided by the participants revealed that other respiratory infections as well as events not associated with infection, such as stress, alcohol consumption and travel, could also trigger alerts, albeit at a much lower mean frequency (1.15 alert days per person compared to 3.42 alert days per person for coronavirus disease 2019 cases). Thus, analysis of smartwatch signals by an online detection algorithm provides advance warning of SARS-CoV-2 infection in a high percentage of cases. This study shows that a real-time alerting system can be used for early detection of infection and other stressors and employed on an open-source platform that is scalable to millions of users."
+keywords,Infectious diseases|Predictive markers
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective|retrospective
+method_of_data_analysis - software_statistical_approach,

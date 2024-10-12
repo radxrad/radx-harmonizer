@@ -1,0 +1,60 @@
+Field,Value
+pi_fullname_1,Eduardo Reátegui
+pi_firstname_1,Eduardo
+pi_middlename_1,
+pi_lastname_1,Reátegui
+pi_profileid_1,
+pi_orcid_1,0000-0002-8271-8205
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,The Ohio State University
+pi_inst_id_1,ror:00rs6vg23
+pi_inst_id_type_1,ROR
+pi_fullname_2,Ly James Lee
+pi_firstname_2,Ly
+pi_middlename_2,James
+pi_lastname_2,Lee
+pi_profileid_2,
+pi_orcid_2,0000-0002-3589-0280
+pi_role_2,co-PI
+pi_inst_name_2,"Nanomaterial Innovation, Ltd"
+pi_inst_id_2,N2KLACCRD6D5
+pi_inst_id_type_2,UEI
+pi_fullname_3,Preeti Pancholi
+pi_firstname_3,Preeti
+pi_middlename_3,
+pi_lastname_3,Pancholi
+pi_profileid_3,
+pi_orcid_3,0000-0001-9053-02644
+pi_role_3,co-PI
+pi_inst_name_3,
+pi_inst_id_3,
+pi_inst_id_type_3,
+pi_fullname_4,Kai Wang
+pi_firstname_4,Kai
+pi_middlename_4,
+pi_lastname_4,Wang
+pi_profileid_4,
+pi_orcid_4,0000-0002-4991-9259
+pi_role_4,co-PI
+pi_inst_name_4,
+pi_inst_id_4,
+pi_inst_id_type_4,
+dbGaP_study_ID,phs002709.v1.p1
+subproject,Exosome
+nih_project_id,1U18TR003807-01
+nih_reporter_abstract,"The World Health Organization has recognized a global pandemic of novel coronavirus pneumonia (COVID-19) from exposure to the severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). Coronaviruses (CoVs) are membrane-enveloped positive-sense, single-stranded RNA viruses decorated with membrane proteins. The spike (S) glycoprotein is implicated in the viral attachment and fusion to host cells via the human angiotensin- converting enzyme 2 (hACE2). There are different assays to test for COVID-19, including nucleic acid, antigen, and serological tests that can be used in hospitals, point-of-care, and large-scale population testing. Nucleic acid testing is the standard method for the detection of SARS-CoV-2, which consists of the amplification of viral RNA from nasopharyngeal swabs (NPS) by quantitative reverse-transcription polymerase chain reaction (qRT-PCR). Furthermore, given the invasive nature of NPS, saliva is being considered an alternative for detection. Methods that bypass RNA extraction, as well as isothermal amplification such as loop-mediated isothermal amplification (LAMP), have been developed to improve the speed of viral RNA detection. However, viral protein expression cannot be detected by qRT-PCR. Serological tests, on the other hand, are based on host antibodies against the virus (IgG/IgM). Although fast, these tests suffer from significant false negative/positive. Besides, they do not detect a current infection. Therefore, to relieve the current healthcare crisis, new technologies capable of simultaneous viral RNA/protein detection at the single virus level and host antibody response detection from a body fluid in an integrated device would be highly valuable for enhanced COVID-19 diagnosis. Recently, our group, as part of Phase 2 of the Extracellular RNA Communication Consortium (ERCC2), has successfully developed a microfluidics technology capable of capturing individual exosomes from biofluids and then simultaneously quantify both exosomal surface proteins and RNA cargo. Given the resemblance in size and other characteristics between exosomes and coronaviruses, our technology can be adapted for COVID-19 diagnosis. Therefore, we propose to develop and validate a safe-to-use version of our microfluidics system for direct detection of SARS-CoV-2. The integrated system is capable of multi-parametric detection for enhanced COVID-19 diagnosis. The platform will be engineered to simultaneously quantify both viral protein, viral RNA, and host antibodies (IgG/IgM) in the same sample, enabling diagnosis, disease status, and prognostic assessment. Model systems, including host IgG/IgM from patient serum, standard synthetic vesicles (SVs), and heat-inactivated SARS-CoV-2 viral particles (SVVs), will be designed and spiked in biofluids to validate and calibrate the system. To demonstrate the clinical utility, our biochip technology will be deployed and tested using different biofluids from COVID-19 patients at two independent laboratories (Institute of Systems Biology in Seattle and The Ohio State University (OSU) Wexner Medical Center in Columbus). Measurements obtained from the biochips will be compared to standard qRT-PCR and ELISA methods. A transition plan will be prepared for FDA Emergency Use Authorization (EUA) application of the biochip technology through a COVID-19 clinical testing laboratory at OSU Wexner Medical Center. A commercialization plan will also be developed via licensing to a biotech company. We have assembled a multi-disciplinary team with extensive knowledge and experience in nanobiotechnology, microfluidics, micro/nano-fabrication, infectious diseases, and clinical COVID-19 patient sample collection and testing. The proposed aims and milestones are given as follows: Specific Aim 1: Development of an integrated biochip to simultaneously capture, fix, and characterize single SARS-CoV-2 and IgG/IgM proteins. Milestones. (i) Sorting, capture, and quantitative analysis of selected proteins and viral RNA in single virus in spike experiments with >95% repeatability; (ii) A sensitivity of single virus detection with >90% repeatability and 5-fold better sensitivity than the current qRT-PCR and ELISA methods. Specific Aim 2: Testing of single SARS-CoV-2 virus and associated IgG/IgM in biofluids from COVID-19 patients. Milestones. (i) Quantitative analysis of clinical samples with >95% repeatability; (ii) 95% of concordance for the detection of SARS-CoV-2 between the biochip technology and the lab-based qRT-PCR and ELISA. Specific Aim 3: Biochip technology transition plan. Milestones. (i) Submission of documentation to the FDA Center for Devices and Radiological Health (CDRH) for EUA; (ii) Scale-up commercialization plan for GMP chip production."
+nih_reporter_narrative,"In this project, we propose to repurpose our single exosome-based characterization technology towards the detection of severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) infection from biofluids. Our approach will enable the simultaneous detection of viral signals and host antibodies, including viral RNA, S- protein, and associated IgG/IgM from the same sample on a single device, thus enabling enhanced diagnosis, disease status, and prognostic assessment of COVID-19."
+publication_url,https://doi.org/10.1002/jev2.12369|https://doi.org/10.1016/j.jneuroim.2023.578064|https://doi.org/10.1039/d1lc01053k
+creator_fullname_1,Eduardo Reategui
+creator_firstname_1,Eduardo
+creator_middlename_1,
+creator_lastname_1,Reategui
+creator_orcid_1,0000-0002-8271-8205
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Multi-parametric integrated molecular detection of SARS-CoV-2 from biofluids by adapting single extracellular vesicle characterization technologies
+description_of_project,Repurposing a single EV characterzation technology for the detection of SARS-CoV-2
+keywords,exosome|virus|S-protein|RNA
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,

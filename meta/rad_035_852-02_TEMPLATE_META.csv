@@ -1,0 +1,60 @@
+Field,Value
+pi_fullname_1,Edward DeMauro
+pi_firstname_1,Edward
+pi_middlename_1,
+pi_lastname_1,DeMauro
+pi_profileid_1,
+pi_orcid_1,0000-0002-3793-8014
+pi_role_1,data-PI
+pi_inst_name_1,
+pi_inst_id_1,
+pi_inst_id_type_1,
+pi_fullname_2,Reynold Alexander Panettieri
+pi_firstname_2,Reynold
+pi_middlename_2,Alexander
+pi_lastname_2,Panettieri
+pi_profileid_2,
+pi_orcid_2,0000-0003-0834-4636
+pi_role_2,contact-PI
+pi_inst_name_2,"Rutgers, The State University of New Jersey"
+pi_inst_id_2,ror:05vt9qd57
+pi_inst_id_type_2,ROR
+pi_fullname_3,Steven K Libutti
+pi_firstname_3,Steven
+pi_middlename_3,K
+pi_lastname_3,Libutti
+pi_profileid_3,
+pi_orcid_3,0000-0003-2313-9809
+pi_role_3,co-PI
+pi_inst_name_3,"Rutgers, The State University of New Jersey"
+pi_inst_id_3,ror:05vt9qd57
+pi_inst_id_type_3,ROR
+pi_fullname_4,Renata Pasqualini
+pi_firstname_4,Renata
+pi_middlename_4,
+pi_lastname_4,Pasqualini
+pi_profileid_4,
+pi_orcid_4,0000-0002-4155-9324
+pi_role_4,co-PI
+pi_inst_name_4,"Rutgers, The State University of New Jersey"
+pi_inst_id_4,ror:05vt9qd57
+pi_inst_id_type_4,ROR
+dbGaP_study_ID,phs002583.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,5U01HL150852-02
+nih_reporter_abstract,"The Rutgers Optimizes Innovation (ROI) Program will provide a vertically integrated mechanism to swiftly uncover promising biomedical product discoveries, and seamlessly guide the innovator through the commercialization process with financial and regulatory, IP protection, mentoring, management, and educational resources. Drawing on the biomedical/bioengineering sciences across Rutgers and on the solid expertise of the Office of Research Commercialization (ORC), we will integrate our strengths to uncover, develop and commercialize discoveries that improve health and well-being, and train the next generation of innovators. The ROI Program comprises a cooperative of Rutgers University and affiliates that includes the schools of engineering, arts and sciences, schools of medicine, nursing, dental science, public health, and research institutes and centers, industries, incubators, funders and policymakers.  All entities provide significant resources to the ROI Program and have contributed to the planning, development, and leadership composition of the cooperative. Based in one of the most productive states with respect to commercialization of health-related discoveries (assets), the ROI Program will serve as a platform for translating biomedical discoveries into marketable products. Our REACH Hub will identify innovative health-related technologies by using the expertise of the NCI-funded Cancer Institute of NJ (CINJ), the Rutgers Institute for Translational Medicine and Science (RITMS, lead of the NCATS-funded CTSA) and the Biomaterials Center, funded by NSF and DOD. These technologies will be evaluated for commercialization feasibility, especially with respect to providing precision therapy to tackle an unmet need created by the heterogeneity of disease pathogenesis and response to treatment. Addressing such unmet needs will provide assets tailored to patients’ therapeutic responses that ultimately improves population health.  The ROI Program will provide a streamlined and harmonized infrastructure that will enhance commercialization of academic discovery. The educational programs embedded in the ROI Program will provide our innovators with hands-on, practical training in product development and start-up requirements, while also training a diverse workforce in biomedical innovation by leveraging, coalescing and repurposing current resources, including I- Corps and iJOBS. Implementing a unique project management and mentoring program comprised of industry, disease-state and content experts will also enhance innovators’ opportunity for success. Embracing a Fail Fast Philosophy assures the technology will be developed in a cost-effective and market-conscious manner. Across all Aims, the ROI Program will collaborate with the REACH Consortium to build on their advances in platforms for commercialization, technology review, and training, and provide the Consortium with our expertise and commitment to serve as an active participating member. Importantly, evaluation milestones and metrics are planned in all aspects of the ROI Program to assure continuous quality assessment, improvement and sustainability."
+nih_reporter_narrative,"The Rutgers Optimizes Innovation (ROI) Program will accelerate the transformation of the most promising research discoveries into marketed products designed to provide the right therapy to the right patient at the right time. By identifying and advancing the most promising and transformative therapeutic and diagnostic technologies in precision medicine, ROI will impact the health and well-being of a diverse society."
+publication_url,
+creator_fullname_1,Edward DeMauro
+creator_firstname_1,Edward
+creator_middlename_1,
+creator_lastname_1,DeMauro
+creator_orcid_1,0000-0002-3793-8014
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,A rapid breathalyzer diagnostic platform for COVID-19
+description_of_project,We are developing a rapid breath test to detect the presence of SARS-CoV-2 spike proteins.
+keywords,
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,

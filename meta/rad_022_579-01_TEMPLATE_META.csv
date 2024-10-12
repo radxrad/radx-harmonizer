@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Mark W Albers
+pi_firstname_1,Mark
+pi_middlename_1,W
+pi_lastname_1,Albers
+pi_profileid_1,
+pi_orcid_1,0000-0001-7855-3455
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Massachusetts General Hospital
+pi_inst_id_1,ror:002pd6e78
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002964.v1.p1
+subproject,Chemosensory Testing
+nih_project_id,4U01DC019579-03
+nih_reporter_abstract,"Self-report of sudden loss of smell or taste substantially increases the odds of being infected with SARS-CoV-2 (10 – 37-fold). However, self-report of smell function is an unreliable predictor of smell loss. Based on our experience developing smell tests with personalized algorithms for asymptomatic detection of Alzheimer's disease, we created a self-administered easy to use “at home” 5-minute objective smell test to uncover alterations in smell function unbeknownst to many individuals, and confer increased risk of infection by SARS- CoV-2. Our new smell test consists of a physical smell card containing peel and sniff odor labels and a web- based application. The disposable smell card reduces the risk that the smell test serves as a vector of transmission to other patients, research staff, and to health care workers. Each participant accesses the web- based app on their own smartphone, tablet, or computer. In our pilot studies, we validated each participant's COVID status by extracting results of clinical SARS-CoV-2 RT PCR assays from electronic health records. The smell test provides better area under the curve for SARS-CoV-2 infection (0.83 – 0.85) in both US and Argentinian symptomatic patients (ages 19 - 87) than symptom tracking alone (0.66). We are expanding the smell test from one smell card with three odors to 6 smell cards, each with 3 different odors (18 odors total). Having six different versions of the smell card will afford longitudinal screening several times per week and provide data to construct personalized thresholds for changes in olfactory function - each person serving as their own control and monitoring for diminishment of their expected performance based on their personal trajectory rather than being based on population norms. Here we propose to develop a native app to conduct longitudinal COVID Smell Test (Aim 1), collect data on asymptomatic health care workers, symptomatic patients, and undergraduates (Aim 2) and develop algorithms for the longitudinal smell test for personalized thresholds, differentiate smell loss from COVID relative to influenza, and assess risk of developing pulmonary disease in COVID infected patients (Aim 3). The Longitudinal COVID Smell Test is accessible, affordable, and readily scalable. Effective screening with the COVID smell test will better inform students and employees if they should not report to school or work, and seek an evaluation by a healthcare professional and molecular testing at an early, often asymptomatic, stage of the disease."
+nih_reporter_narrative,"Disturbances of smell and taste is the predominant symptom of infection by the SARS-CoV-2 virus, which is the cause of the COVID-19 pandemic.. To identifying individuals at risk for SARS-CoV-2, we have developed a novel technology to assess smell function at home using disposable smell cards. Here we propose to detect signs of olfactory dysfunction in asymptomatic and symptomatic individuals with instantaneous return of a risk score based on algorithms derived from validated COVID patients, leading to earlier self-quarantine and evaluation by a healthcare professional."
+publication_url,
+creator_fullname_1,Colin Magdamo
+creator_firstname_1,Colin
+creator_middlename_1,
+creator_lastname_1,Magdamo
+creator_orcid_1,0000-0001-8965-4630
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Longitudinal At Home Smell Testing to Detect Infection by SARS-CoV-2
+description_of_project,Longitudinal Smell Testing
+keywords,Olfaction|olfactory|smell|COVID-19
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,R

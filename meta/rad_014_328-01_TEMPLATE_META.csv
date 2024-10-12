@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Diana Carolina Vanegas-Gamboa
+pi_firstname_1,Diana
+pi_middlename_1,Carolina
+pi_lastname_1,Vanegas-Gamboa
+pi_profileid_1,
+pi_orcid_1,0000-0001-9858-0960
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Clemson University
+pi_inst_id_1,ror:037s24f05
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002546.v1.p1
+subproject,Automatic Detection & Tracing
+nih_project_id,1U01AA029328-01
+nih_reporter_abstract,"The devastation caused by emerging pathogens with fast transmission capacity, such as SARS-CoV-2, has demonstrated the importance of preparedness for future viral outbreaks; this includes the ability for fast deployment of in-situ testing tools and epidemiological surveillance with high temporal and spatial resolution; particularly in places that are most vulnerable to becoming reservoirs of infectious agents. We propose to develop a versatile multiplexing detection platform for SARS-CoV-2 in saliva. The proposed system will integrate signals from different biorecognition elements. Aptamer, antibody, and ACE2 will be immobilized onto laser inscribed graphene electrodes, and detection mechanisms targeting SARS-CoV-2 spike protein will be studied under varying testing conditions (pH, temperature, ionic strength). After determining the operating conditions for enhanced performance of each biosensor, a self-referencing approach will be used between complementary recognition elements (i.e., possible combinations of aptamers, antibodies, and ACE2 enzyme biosensors) to evaluate the effects on test results accuracy (i.e., risk of false-positive and false-negative results). A saliva pre-treatment protocol will be developed to facilitate SARS-CoV-2 testing in human saliva using the multiplex biosensor platform. An open channel microfluidics system will be designed to automatically split and channel a single saliva sample into multiple streams to the biosensors without saturation, biofouling, and pump requirement. The development of a functional and reliable multiplex biosensor system will be useful for addressing longstanding needs in public health as the respiratory Coronavirus family continues its seasonal visits, which may repeat over several decades, much like the occasional visits from the influenza virus, with varying degrees of virulence."
+nih_reporter_narrative,The proposed research aims to develop a multiplex biosensor platform to support increased testing of SARS-CoV-2 with high accuracy and temporal resolution. A multiplex biosensor system could help reduce testing gaps in vulnerable areas where access to standard laboratory testing is very limited.
+publication_url,https://doi.org/10.1371/journal.pone.0290256|https://doi.org/10.3390/bios12110938|https://doi.org/10.3389/fsens.2022.917380|https://doi.org/10.3390/bios12020101
+creator_fullname_1,Diana Carolina Vanegas-Gamboa
+creator_firstname_1,Diana
+creator_middlename_1,Carolina
+creator_lastname_1,Vanegas-Gamboa
+creator_orcid_1,0000-0001-9858-0960
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Development of an Automated Diagnostic Platform for SARS-CoV-2 Monitoring in Vulnerable Areas
+description_of_project,The proposed research aims to develop a multiplex biosensor platform to support increased testing of SARS-CoV-2 with high accuracy and temporal resolution. A multiplex biosensor system could help reduce testing gaps in vulnerable areas where access to standard laboratory testing is very limited.
+keywords,"biosensor system|SARS-CoV-2|saliva|electrochemical sensing|diagnostic|vulnerable areas,|ow-cost"
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,Excel

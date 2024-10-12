@@ -1,0 +1,60 @@
+Field,Value
+pi_fullname_1,Charles Yen Chiu
+pi_firstname_1,Charles
+pi_middlename_1,Yen
+pi_lastname_1,Chiu
+pi_profileid_1,
+pi_orcid_1,0000-0003-2915-2094
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"University of California, San Francisco"
+pi_inst_id_1,ror:043mz5j54
+pi_inst_id_type_1,ROR
+pi_fullname_2,Iwijn De Vlaminck
+pi_firstname_2,Iwijn
+pi_middlename_2,
+pi_lastname_2,De Vlaminck
+pi_profileid_2,
+pi_orcid_2,0000-0001-6085-7311
+pi_role_2,co-PI
+pi_inst_name_2,Cornell University
+pi_inst_id_2,ror:05bnh6r87
+pi_inst_id_type_2,ROR
+pi_fullname_3,Roberta Lynn Debiasi
+pi_firstname_3,Roberta
+pi_middlename_3,Lynn
+pi_lastname_3,Debiasi
+pi_profileid_3,
+pi_orcid_3,0000-0002-5854-8875
+pi_role_3,co-PI
+pi_inst_name_3,CHILDREN'S NATIONAL RESEARCH INSTITUTE
+pi_inst_id_3,M3KHEEYRM1S6
+pi_inst_id_type_3,UEI
+pi_fullname_4,Christina Allen Rostad
+pi_firstname_4,Christina
+pi_middlename_4,Allen
+pi_lastname_4,Rostad
+pi_profileid_4,
+pi_orcid_4,0000-0001-8439-0592
+pi_role_4,co-PI
+pi_inst_name_4,
+pi_inst_id_4,
+pi_inst_id_type_4,
+dbGaP_study_ID,phs002781.v1.p1
+subproject,PreVAIL kIds
+nih_project_id,1R61HD105618-01
+nih_reporter_abstract,"Novel approaches for early and accurate diagnosis of COVID-19 associated syndromes and evaluation of clinical severity and outcomes of COVID-19 disease in children are urgently needed. The overarching goal of this grant proposal is to develop clinical assays that can evaluate and predict severity of pediatric COVID-19 disease, ranging from asymptomatic or mildly symptomatic to severe manifestations such as multisystem inflammatory syndrome (MIS-C). To date, we have collected and biobanked clinical samples from more than 400 patients across 3 academic hospitals, including approximately 100 patients with MIS-C. In the first R61 phase of this project, we will continue to enroll patients with pediatric COVID-19 and MIS-C for sample collection and longitudinal chart review and testing (Aim 1), leverage machine learning to identify diagnostic and prognostic “omics” host biomarkers based on RNA transcriptome profiling from nasal swab and whole blood samples (Aim 2) and cell-free DNA analysis from plasma (Aim 3), and generate predictive models of clinical severity and outcomes by incorporating longitudinal clinical, laboratory, viral, and omics data (Aim 4). Our rationale for including these samples is that they are routinely obtained in hospitals and clinics and permit easy and noninvasive collection without any special processing or handling requirements, which will accelerate the development of omics-based clinical assays. Our Go/No-Go transition milestones for transition to the R33 phase after 2 years include: (1) collection of longitudinal samples from a minimum of 120 patients for each identified presentation (mildly symptomatic outpatient, severely ill in the ICU, and MIS-C) and a comparable number of matched controls, (2) generation of panels of candidate of severity and confirmation of a subset of biomarkers by qPCR, (3) development of classifier models using machine learning using the biomarkers alone (for clinical assay development), and (4) combining these omics biomarkers with additional clinical, viral, and laboratory biomarkers into combined classifier models using machine learning. For the classifier models, the minimum/goal performance requirements would be 70%/>80% sensitivity and 80%/>90% specificity. In the second R33 phase, we propose to develop host-based clinical assays for diagnosis and severity prediction of COVID-19-associated syndromes, including MIS-C, in children from nasal swabs and blood (Aim 5) and validate these biomarker panels as a Laboratory Developed Test (LDT) in a CLIA (Clinical Laboratory Improvement Amendments) diagnostic laboratory (Aim 6). These assays will be evaluated for accuracy, precision, reproducibility, limits of detection (LOD), matrix effect, interference, among other performance characteristics. We will work closely with the RADx-rad Data Coordination Center (DCC) on assay development, testing, and validation for submission to the FDA for Emergency Use Authorization (EUA) and timely deployment of these assays for clinical use."
+nih_reporter_narrative,"Novel approaches to accurately diagnose acute pediatric COVID-19 associated diseases, including the Multisystem Inflammatory Syndrome in Children (MIS-C), as well as predict clinical severity and outcomes, are urgently needed. For this project, we will identify RNA transcriptomic and cell-free DNA omics biomarkers that will be used to develop and validate host-based assays from nasal swab and blood samples, with the goal of regulatory submission for FDA Emergency Use Authorization (EUA)."
+publication_url,https://doi.org/10.1016/j.xcrm.2023.101034|https://doi.org/10.1038/s41586-023-05949-1|https://doi.org/10.1093/infdis/jiac384|https://doi.org/10.1097/INF.0000000000003388|https://doi.org/10.1017/S1047951121003024
+creator_fullname_1,Miriam Oseguera
+creator_firstname_1,Miriam
+creator_middlename_1,
+creator_lastname_1,Oseguera
+creator_orcid_1,0009-0004-9621-2848
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Discovery and Clinical Validation of Host Biomarkers of Disease Severity and Multi-System Inflammatory Syndrome in Children (MIS-C) with COVID-19
+description_of_project,"The overarching goal is to develop clinical assays that can evaluate and predict severity of pediatric COVID-19 disease, ranging from asymptomatic or mildly symptomatic to severe manifestations such as multisystem inflammatory syndrome (MIS-C)."
+keywords,COVID-19|MIS-C|pediatric
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective|retrospective
+method_of_data_analysis - software_statistical_approach,R|Python

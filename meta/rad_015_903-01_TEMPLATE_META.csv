@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,James W Keck
+pi_firstname_1,James
+pi_middlename_1,W
+pi_lastname_1,Keck
+pi_profileid_1,
+pi_orcid_1,0000-0001-7193-065X
+pi_role_1,data-PI
+pi_inst_name_1,Alaska Native Tribal Health Consortium
+pi_inst_id_1,ror:029es6637
+pi_inst_id_type_1,ROR
+pi_fullname_2,Scott Michael Berry
+pi_firstname_2,Scott
+pi_middlename_2,Michael
+pi_lastname_2,Berry
+pi_profileid_2,
+pi_orcid_2,0000-0001-7403-9264
+pi_role_2,contact-PI
+pi_inst_name_2,University of Kentucky
+pi_inst_id_2,ror:02k3smh20
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002542.v1.p1
+subproject,Wastewater
+nih_project_id,1U01DA053903-01
+nih_reporter_abstract,"Wastewater Assessment for Coronavirus in Kentucky – Implementing Enhanced Surveillance Technology Surveillance for SARS-CoV-2 is hindered by the availability of testing, particularly in remote and rural areas. Screening of wastewater for SARS-CoV-2 viral biomarkers offers a viable alternative to individual testing and it can identify communities and facilities that are at risk of becoming hotspots.Wastewater surveillance overcomes several limitations of clinical surveillance, such as the need for robust healthcare and laboratory infrastructure and the lack of representative and comprehensive testing within communities. Conventional wastewater surveillance takes samples from sewer systems or wastewater treatment facilities and uses a series of extraction steps prior to advanced PCR technology to quantitate the viral biomarker (RNA). This approach is time and resource-intensive, which limits its wide-scale application. Developing next generation technology to simplify wastewater RNA extraction and quantitation will make it feasible to use more broadly at facilities and in rural communities. The limited clinical testing for COVID-19 in rural Southeastern Kentucky hampers disease surveillance and prevents informed public action to mitigate and contain the spread of disease. Wastewater testing for SARS-CoV- 2 in these communities using field-friendly technology will provide important information to local authorities and citizens about the spread and trend of SARS-CoV-2 infection in their communities. Our project will accomplish two aims: 1) Develop next generation wastewater assessment technology and 2) Implement and evaluate the next generation wastewater assay. For Aim 1 we adapt technology invented by our team termed exclusion-based sample preparation (ESP) to simplify and improve RNA extraction from wastewater. We will pair ESP with loop-mediated isothermal amplification (LAMP) technology for RNA detection to create a sensitive, robust, and field-friendly platform for testing wastewater for SARS- CoV-2 RNA. We will compare the next generation assay with established techniques on metrics of sensitivity, specificity, and usability (e.g., assay time, number of assay steps). For Aim 2 we will first validate the next generation assay in the field at congregate living facilities in a side-by-side comparison with conventional wastewater surveillance. Next, building on existing relationships in Appalachian Kentucky, we will recruit and train a purposive group of wastewater treatment plant operators, watershed watch citizen scientists, and school science teachers to test wastewater in their communities and schools using the field-friendly next generation wastewater assay. Field results will be validated in the lab. A robust mixed methods evaluation using the RE-AIM framework will assess community perceptions of feasibility, acceptability, and utility of wastewater surveillance for SARS-CoV-2 and identify community measures taken in response to test results."
+nih_reporter_narrative,"The goal of this project is to develop a “next generation” assay for the identification of SARS-CoV-2 in wastewater, which serves as a biomarker of community infection in contrast to more expensive and labor- intensive clinical testing. Existing wastewater assays have several limitations that reduce their accuracy and prevent use in remote and rural settings where disease surveillance could inform public action. Thus, we plan to develop, optimize, and validate a new “point-of-acquisition” SARS-CoV-2 assay that enables us to rapidly quantify the amount of coronavirus RNA in a wastewater sample, such that additional precautions (e.g. individual testing, infection prevention measures) can be taken when needed."
+publication_url,https://doi.org/10.1016/j.scitotenv.2023.168782|https://doi.org/10.1016/j.scitotenv.2023.162992|https://doi.org/10.1016/j.jece.2023.109595|https://doi.org/10.2105/AJPH.2022.307141|https://doi.org/10.1021/acsestwater.2c00044
+creator_fullname_1,Steven K Roggenkamp
+creator_firstname_1,Steven
+creator_middlename_1,K
+creator_lastname_1,Roggenkamp
+creator_orcid_1,0000-0002-6773-0468
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Wastewater Assessment for Coronavirus in Kentucky: Implementing Enhanced Surveillance Technology
+description_of_project,Our project will accomplish two aims: 1) Develop next generation wastewater assessment technology and 2) Implement and evaluate the next generation wastewater assay.
+keywords,wastewater|coronavirus|kentucky|surveillance
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,

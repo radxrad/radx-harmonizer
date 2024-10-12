@@ -1,0 +1,50 @@
+Field,Value
+pi_fullname_1,Usha Sethuraman
+pi_firstname_1,Usha
+pi_middlename_1,
+pi_lastname_1,Sethuraman
+pi_profileid_1,
+pi_orcid_1,0000-0002-5183-0325
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Central Michigan University
+pi_inst_id_1,ror:02xawj266
+pi_inst_id_type_1,ROR
+pi_fullname_2,Steven Daniel Hicks
+pi_firstname_2,Steven
+pi_middlename_2,Daniel
+pi_lastname_2,Hicks
+pi_profileid_2,
+pi_orcid_2,0000-0002-9579-6798
+pi_role_2,co-PI
+pi_inst_name_2,Penn State Milton S. Hershey Medical Center
+pi_inst_id_2,ror:01h22ap11
+pi_inst_id_type_2,ROR
+pi_fullname_3,Dongxiao Zhu
+pi_firstname_3,Dongxiao
+pi_middlename_3,
+pi_lastname_3,Zhu
+pi_profileid_3,
+pi_orcid_3,0000-0002-0225-7817
+pi_role_3,co-PI
+pi_inst_name_3,
+pi_inst_id_3,M6K6NTJ2MNE5
+pi_inst_id_type_3,UEI
+dbGaP_study_ID,phs002549.v1.p1
+subproject,PreVAIL kIds
+nih_project_id,1R61HD105610-01
+nih_reporter_abstract,"Children have been disproportionately less impacted by the Corona Virus Disease 2019 (COVID-19) caused by the Severe Acute Respiratory Syndrome Corona Virus 2 (SAR-CoV-2) compared to adults. However, severe illnesses including Multisystem Inflammatory Syndrome (MIS-C) and respiratory failure have occurred in a small proportion of children with SARS-CoV-2 infection. Nearly 80% of children with MIS-C are critically ill with a 2-4% mortality rate. Currently there are no modalities to characterize the spectrum of disease severity and predict which child with SARS-CoV-2 exposure will likely develop severe illness including MIS-C. Thus there is an urgent need to develop a diagnostic modality to distinguish the varying phenotypes of disease and risk stratify disease. The epigenetic changes in microRNA (miRNA) profiles that occur due to an infection can impact disease severity by altering immune response and cytokine regulation which may be detected in body fluids including saliva. Our long-term goal is to improve outcomes of children with SARS-CoV-2 by early identification and treatment of those at risk for severe illness. Our central hypothesis is that a model that integrates salivary biomarkers with social and clinical determinants of health will predict disease severity in children with SARS-CoV-2 infection. The central hypothesis will be pursued through phased four specific aims. The first two aims will be pursued during the R61 phase and include: 1) Define and compare the salivary molecular host response in children with varying phenotypes (severe and non severe) SARS-CoV-2 infections and 2) Develop and validate a sensitive and specific model to predict severe SARS-CoV-2 illness in children. During the R33 phase we will pursue the following two aims: 3) Develop a portable, rapid device that quantifies salivary miRNAs with comparable accuracy to predicate technology (qRT-PCR), and 4) Develop an artificial intelligence (AI) assisted cloud and mobile system for early recognition of severe SARS-CoV-2 infection in children. We will pursue the above aims using an innovative combination of salivaomics and bioinformatics, analytic techniques of AI and clinical informatics. The proposed research is significant because development of a sensitive model to risk stratify disease is expected to improve outcomes of children with severe SARS-CoV-2 infection via early recognition and timely intervention. The proximate expected outcome of this proposal is better understanding of the epigenetic regulation of host immune response to the viral infection which we expect to lead to personalized therapy in the future. The results will have a positive impact immediately as it will lead to the creation of patient profiles based on individual risk factors which can enable early identification of severe disease and appropriate resource allocation during the pandemic."
+nih_reporter_narrative,"This project is relevant to public health as development of a predictive model that integrates salivary biomarkers with clinical and social determinants into a bedside tool will enable early identification of severe COVID-19 in children, ensure appropriate resource allocation and aid in targeted treatment."
+publication_url,https://doi.org/10.1097/INF.0000000000003888|https://doi.org/10.1177/00099228231152840|https://doi.org/10.3390/genes13101874|https://doi.org/10.1038/s41390-022-02206-5|https://doi.org/10.1007/s10618-021-00746-8
+creator_fullname_1,Usha Sethuraman
+creator_firstname_1,Usha
+creator_middlename_1,
+creator_lastname_1,Sethuraman
+creator_orcid_1,0000-0002-5183-0325
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Severity Predictors using Immunology and Transcriptomics in Saliva using Multi neural network Intelligence in SARS-CoV2 infection in Children (SPITS MISC)
+description_of_project,
+keywords,COVID-19|children|severity of illness|saliva microRNA|saliva cytokines|social determinants of health|artificial intelligence
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,prospective
+method_of_data_analysis - software_statistical_approach,

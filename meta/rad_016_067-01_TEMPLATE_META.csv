@@ -1,0 +1,50 @@
+Field,Value
+pi_fullname_1,Yuedong Wang
+pi_firstname_1,Yuedong
+pi_middlename_1,
+pi_lastname_1,Wang
+pi_profileid_1,
+pi_orcid_1,0000-0001-9202-6723
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"University of California, Santa Barbara"
+pi_inst_id_1,ror:02t274463
+pi_inst_id_type_1,ROR
+pi_fullname_2,Wensheng Guo
+pi_firstname_2,Wensheng
+pi_middlename_2,
+pi_lastname_2,Guo
+pi_profileid_2,
+pi_orcid_2,0000-0002-8892-4309
+pi_role_2,co-PI
+pi_inst_name_2,University of Pennsylvania
+pi_inst_id_2,ror:00b30xv10
+pi_inst_id_type_2,ROR
+pi_fullname_3,Peter Kotanko
+pi_firstname_3,Peter
+pi_middlename_3,
+pi_lastname_3,Kotanko
+pi_profileid_3,
+pi_orcid_3,0000-0003-4373-412X
+pi_role_3,co-PI
+pi_inst_name_3,
+pi_inst_id_3,
+pi_inst_id_type_3,
+dbGaP_study_ID,phs002657.v1.p1
+subproject,Multimodal Surveillance
+nih_project_id,1R01DK130067-01
+nih_reporter_abstract,"With older age and multiple comorbidities, dialysis patients are at high risk for serious complications, even death, from COVID-19. There is a large disproportionate representation of minorities, especially Blacks and Hispanics. Over 85% of hemodialysis patients travel three times a week to dialysis facilities to receive life-sustaining treatments and cannot shelter in place. There is a critical need to characterize COVID-19 transmission pathways in dialysis patients and clinics, identify potential coronavirus carriers, and develop procedures to curb the spread. With regular medical encounters, a large amount of data has been collected for each patient over time. These data have not been fully utilized for COVID-19 prediction and control in dialysis clinics. In this proposal, we seek to leverage demographic, clinical, treatment, laboratory, socioeconomic, serological, metabolomic, wearable and machine-integrated sensors, and COVID-19 surveillance data to develop mathematical and statistical models and implement them in a large number of dialysis clinics. The mathematical and statistical modeling using multiple data resources will help us understand how COVID-19 spread in dialysis facilities, identify potential COVID-19 patients before symptoms appear, and identify potential asymptomatic COVID-19 patients. We will develop novel mathematical and statistical models that fully utilize the high dimensional multimodal data available to us and other dialysis providers. We capitalize on the intrinsic advantages of hemodialysis clinics to implement and validate the proposed prediction models. We firmly believe that this cross-disciplinary effort will improve patients’ and staff’s safety while delivering high-quality, individualized care to a high-risk population."
+nih_reporter_narrative,"Dialysis patients are at high risk for serious complications, even death, from COVID-19. We aim to leverage multimodal data to develop mathematical and statistical models and implement them in a large number of dialysis clinics. Our cross-disciplinary effort will improve patients' and staff's safety while delivering high-quality, individualized care to a high-risk population."
+publication_url,https://doi.org/10.3389/fpubh.2023.1237512|https://doi.org/10.1080/01621459.2021.2023552|https://doi.org/10.1080/03610926.2021.2004423|https://doi.org/10.1080/10618600.2022.2037434|https://doi.org/10.3389/fneph.2022.926635|https://doi.org/10.1177/09622802221122391|https://doi.org/10.1111/biom.13593|https://doi.org/10.1186/s12882-021-02518-4|https://doi.org/10.1111/hdi.12977|https://doi.org/10.1681/ASN.2021060812|https://doi.org/10.1681/ASN.2021020161|https://doi.org/10.1093/ckj/sfab019|https://doi.org/10.1016/j.xkme.2021.02.010|https://doi.org/10.1016/j.cmi.2021.04.007|https://doi.org/10.1681/ASN.2020121691|https://doi.org/10.1101/2021.02.20.21251855
+creator_fullname_1,Xiaoran Ma
+creator_firstname_1,Xiaoran
+creator_middlename_1,
+creator_lastname_1,Ma
+creator_orcid_1,0009-0000-0226-1835
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,"Early detection, containment, and management of COVID-19 in dialysis facilities using multimodal data sources"
+description_of_project,"Dialysis patients are at high risk for serious complications, even death, from COVID-19. We aim to leverage multimodal data to develop mathematical and statistical models and implement them in a large number of dialysis clinics."
+keywords,dialysis patients|multimodal data|feature extraction|prediction models|real-time early detection
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,XGBoost and LightGBM in R

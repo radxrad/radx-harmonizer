@@ -1,0 +1,38 @@
+Field,Value
+pi_fullname_1,Samarjit Das
+pi_firstname_1,Samarjit
+pi_middlename_1,
+pi_lastname_1,Das
+pi_profileid_1,
+pi_orcid_1,0000-0002-4377-2823
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Johns Hopkins University
+pi_inst_id_1,ror:00za53h95
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs003124.v1.p1
+subproject,Exosome
+nih_project_id,1U18TR003780-01
+nih_reporter_abstract,
+nih_reporter_narrative,"The urgent need to curb the spread of SARS-CoV-2 demands availability of diagnostics that are more rapid, accurate, sensitive and affordable than qPCR and antibody tests. Current qPCR tests are specific and sensitive, but lengthy turnaround times limit interventions against disease spread. Antibody testing is faster, but false- positive/negative rates are high. Here, we propose to repurpose extracellular vesicle (EV) separation and characterization technologies into a fully automated SARS-CoV-2 testing platform that is low-cost, accurate, sensitive, rapid (within 3 h), and practical. The device will be optimized to analyze blood, saliva, and nasopharyngeal (NP) swabs collected at home, without risking transmission to healthcare workers. The sample is processed with an automated device developed with Sognef, and data are transferred to the Sognef servers for analysis through an app that can be downloaded to any smart device. This technology is similar to Abbott's recently launched BinaxNOW COVID-19 Ag Card, but has the advantage of multiparametric detection of viral RNA (vRNA), including Spike (S) and Nucleocapsid (N) protein-coding regions, plus a panel of host EV microRNAs (exomiRs) that reveals infection even when viral loads are below detectable limits. This approach will decrease false-positives/negatives, the major limitation of antigen/antibody tests. Examine relationships of miRNA panels with characteristics such as: symptomatic vs asymptomatic, qPCR-determined viral load, biological sex, age (including pediatric populations), and comorbidities.  We will optimize a COVID-19 device that uses simple bind-elute microfluidics for sample separation followed by electrical, probe-based detection of i) all validated exomiRs from Aim 1 and ii) our three conserved vRNAs. We envision that the device will be used first for either finger-pricked blood or saliva, followed, if positive, by an optional confirmatory second test of NP swab viral transport medium (VTM) that could be done with the same device. We will then test the device in multiple centers worldwide in two phases: Phase 1 – every center will perform a double-blinded validation using their biorepository specimen, and Phase 2 – in a β-testing phase, we will provide a large number of devices to healthcare providers for regular testing of workers."
+publication_url,https://doi.org/10.1161/JAHA.122.028421|https://doi.org/10.1152/ajpheart.00250.2022|https://doi.org/10.1371/journal.pone.0256973|https://doi.org/10.1161/HYPERTENSIONAHA.120.16690
+creator_fullname_1,Samarjit Das
+creator_firstname_1,Samarjit
+creator_middlename_1,
+creator_lastname_1,Das
+creator_orcid_1,0000-0002-4377-2823
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+creator_fullname_2,Anubhav Dubey
+creator_firstname_2,Anubhav
+creator_middlename_2,
+creator_lastname_2,Dubey
+creator_orcid_2,0009-0005-8227-632X
+creator_inst_name_2,
+creator_inst_id_2,
+creator_inst_id_type_2,
+project_title,Broad-spectrum Detection of VOC and Non-VOC Biomarkers from Patient Exhalant using Biomimetic Multiplexed eNose Biosensor for COVID-19 Diagnosis
+description_of_project,Exosome-based Non-traditional Technologies Towards Multi-Parametric and Integrated Approaches for SARS-CoV-2
+keywords,microRNA|field effect sensor|mircofluidics
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,

@@ -1,0 +1,60 @@
+Field,Value
+pi_fullname_1,David T W Wong
+pi_firstname_1,David
+pi_middlename_1,T W
+pi_lastname_1,Wong
+pi_profileid_1,
+pi_orcid_1,0000-0002-0290-2206
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"University of California, Los Angeles"
+pi_inst_id_1,ror:046rm7j60
+pi_inst_id_type_1,ROR
+pi_fullname_2,Tony Jun Huang
+pi_firstname_2,Tony
+pi_middlename_2,Jun
+pi_lastname_2,Huang
+pi_profileid_2,
+pi_orcid_2,0000-0003-1205-3313
+pi_role_2,co-PI
+pi_inst_name_2,Duke University
+pi_inst_id_2,ror:00py81415
+pi_inst_id_type_2,ROR
+pi_fullname_3,Yong Kim
+pi_firstname_3,Yong
+pi_middlename_3,
+pi_lastname_3,Kim
+pi_profileid_3,
+pi_orcid_3,0000-0001-7224-0503
+pi_role_3,co-PI
+pi_inst_name_3,"University of California, Los Angeles"
+pi_inst_id_3,ror:046rm7j60
+pi_inst_id_type_3,ROR
+pi_fullname_4,Ya-Hong Xie
+pi_firstname_4,Ya-Hong
+pi_middlename_4,
+pi_lastname_4,Xie
+pi_profileid_4,
+pi_orcid_4,0000-0003-0971-4280
+pi_role_4,co-PI
+pi_inst_name_4,
+pi_inst_id_4,
+pi_inst_id_type_4,
+dbGaP_study_ID,phs002544.v1.p1
+subproject,Exosome
+nih_project_id,1U18TR003778-01
+nih_reporter_abstract,"This U18 application is responsive to the NIH’s RADx-rad Emergency Responses to the COVID- pandemic for new or non-traditional technologies developed for single extracellular vesicle, exosome and extracellular RNA (exRNA) isolation and analysis and reposition them for detection of SARS-CoV-2. The applicant’s group is a grantee in the NIH Common Fund “Extracellular RNA Communication (ERC)” Program advancing a new and emerging technology of Acoustofluidic Separation (AFS) for label-free, high yield and purity exosomes from biofluids which is coupled to extracellular RNA characterization using Surface Enhanced Raman Spectroscopy (SERS) for single EV identification. This U18 application is to reposition the AFS EV technology and SERS for the non-invasive earliest detection of SARS-CoV-2 in saliva of infected patients. Host immunity to SARS-CoV-2 will also be assessed in the saliva samples, permitting the earliest detection of SARS-CoV-2 infection and host immunity non-invasively in a saliva sample.  Five Specific Aims are in place to reposition the saliva-based AFS and SERS technologies, in a 2-year U18 proposal, to test the hypothesis that an integrated multi-parametric non-invasive saliva test for SARS-CoV- 2 infection, viral load and host immunity test demonstrating clinical performance surpassing current saliva-based SARS-CoV-2 EUA tests."
+nih_reporter_narrative,"This U18 application to develop exosome-based non-traditional technology for point-of-care sampling and non-invasive earliest detection of SARS-CoV-2 infection and COVID-19 antibodies detection, for population level testing for COVID-19 infection and immunity."
+publication_url,
+creator_fullname_1,Yong Kim
+creator_firstname_1,Yong
+creator_middlename_1,
+creator_lastname_1,Kim
+creator_orcid_1,0000-0001-7224-0503
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,AFS/SERS Saliva-based SARS-CoV-2 Earliest Infection and Antibodies Detection
+description_of_project,Reposition AFS EV technology and SERS for the non-invasive earliest detection of SARS-CoV2 in saliva of infected patients and assessment of host immunity to SARS-CoV-2
+keywords,AFS|SERS|EFIRM|SARS-CoV-2|antibody|viral RNA|antigen
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,retrospective
+method_of_data_analysis - software_statistical_approach,

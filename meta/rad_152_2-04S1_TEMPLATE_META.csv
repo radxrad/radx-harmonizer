@@ -1,0 +1,30 @@
+Field,Value
+pi_fullname_1,Susan P Travers
+pi_firstname_1,Susan
+pi_middlename_1,P
+pi_lastname_1,Travers
+pi_profileid_1,
+pi_orcid_1,0000-0001-8730-3618
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,The Ohio State University
+pi_inst_id_1,ror:00rs6vg23
+pi_inst_id_type_1,ROR
+dbGaP_study_ID,phs002642.v1.p1
+subproject,Chemosensory Testing
+nih_project_id,3R01DC016112-04S1
+nih_reporter_abstract,"The goals of this Emergency Competitive Revision are to develop (Aim 1) and deploy (Aim 2) a novel, objective, psychophysical smell and taste screening test to detect the onset of COVID 19 in at-risk populations. Complementary to the temperature screening procedures currently in use, this tool is predicted to promote early identification of COVID onset leading to better prognoses and the early implementation of protocols to prevent community spread. Our specific plan is to use a hard-candy containing different combinations of tastants and flavors that are easy to distribute to a large population. During the development phase (Aim 1), this novel test will be compared with the NIH toolbox to assess the acceptability and efficacy of the two methods. We expect that the hard-candy assessment will be at least as efficacious in detecting chemosensory loss but more acceptable to subjects. Aim 2 will entail daily self-monitoring of chemosensory function in at-risk populations with data tracked through a secure online portal. The novelty of this confectionary-based test is that it provides standard stimuli that can yield objective measures of both the qualitative and quantitative aspects of smell (aroma and flavor) and taste (sweet and sour). Moreover, both orthonasal and retronasal olfactory function will be independently assessed. The test can be self-administered and the familiar, pleasant nature of the stimuli should facilitate a high compliance rate, allowing for continuous monitoring over prolonged periods. Moreover, the test is rapid and inexpensive. Data will be incorporated into a predictive model for COVID 19 and assessed using AOC analyses of sensitivity and specificity. OSU is a leading large public land grant university with a varied population of students, faculty, and support staff that includes all health care specialties. These characteristics, along with the University-mandated regular PCR testing of students and staff makes it a perfect site to perform this urgent research."
+nih_reporter_narrative,"This research will develop a novel screening tool for COVID 19 using chemosensory testing. Loss of smell and/or taste is a predictive symptom of COVID 19 but current tests are not optimal for routine assessment in large populations of individuals. The development of a confectionary-based test will allow routine self-monitoring of chemosensory function using objective, sensitive, simple and inexpensive procedures to identify potential cases of COVID 19."
+publication_url,https://doi.org/10.1016/j.medj.2022.05.004
+creator_fullname_1,Susan P Travers
+creator_firstname_1,Susan
+creator_middlename_1,P
+creator_lastname_1,Travers
+creator_orcid_1,0000-0001-8730-3618
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,A Confectionary-based Screening Tool for Assessing Chemosensory Loss in COVID-19 Patients
+description_of_project,Psychophysical (perceptual) tests of smell and taste using candies as stimuli. 2 parts: (1) one-time test employing multiple candies and comparing the candy test to the NIH toolbox. control and COVID-19 subjects are compared. (2) A long-term tracking study where individual rate 1 candy per day and these data are related to their COVID-19 status.
+keywords,taste|smell|candy|orthonasal|retronasal|flavor|COVID-19
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,SAS|R

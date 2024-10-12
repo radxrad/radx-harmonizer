@@ -1,0 +1,58 @@
+Field,Value
+pi_fullname_1,Matthew Scotch
+pi_firstname_1,Matthew
+pi_middlename_1,
+pi_lastname_1,Scotch
+pi_profileid_1,
+pi_orcid_1,0000-0001-5100-9724
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,Arizona State University
+pi_inst_id_1,ror:03efmqc40
+pi_inst_id_type_1,ROR
+pi_fullname_2,Rolf U Halden
+pi_firstname_2,Rolf
+pi_middlename_2,U
+pi_lastname_2,Halden
+pi_profileid_2,
+pi_orcid_2,0000-0001-5232-7361
+pi_role_2,co-PI
+pi_inst_name_2,Arizona State University
+pi_inst_id_2,ror:03efmqc40
+pi_inst_id_type_2,ROR
+pi_fullname_3,Arvind Varsani
+pi_firstname_3,Arvind
+pi_middlename_3,
+pi_lastname_3,Varsani
+pi_profileid_3,
+pi_orcid_3,0000-0003-4111-2415
+pi_role_3,co-PI
+pi_inst_name_3,
+pi_inst_id_3,
+pi_inst_id_type_3,
+dbGaP_study_ID,phs002527.v1.p1
+subproject,Wastewater
+nih_project_id,3U01LM013129-02S1
+nih_reporter_abstract,"SARS-CoV-2 is now a global pandemic with 4.2M cases and 290K deaths worldwide (as of May 12, 2020). In the United States, there are over 1.3M cases and 81K deaths. Locally, Arizona has over 11K cases and 562 deaths. In response to this public health emergency, several studies have been published that describe patient characteristics in terms of signs, symptoms, and clinical endpoints. In addition, epidemiologists and infectious disease researchers have utilized next-generation sequencing technology to produce complete genomes of the virus for clinical and epidemiologic investigation. Genomic epidemiology has enabled scientists to understanding localized transmission while determining geographic sources of introductions from different states and countries. However, most of the sequencing for SARS-CoV-2 (as well as for other viruses) is performed outside of state or local health departments such as the Centers for Disease Control and Prevention (CDC), universities, or private labs. It can then be difficult to link the pathogen, once sequenced, back to the data collected by the health department for case investigation. This can inhibit genomic epidemiology when there is no link between sequences of viral isolates and epidemiologic case data.  There is limited research in how to link pathogen sequences to epidemiologic case data; especially for COVID-19. Thus, despite the abundance of clinical and epidemiologic data collected during this pandemic, more informatics research is needed to understand how to link viral genetic and epidemiological data and demonstrate the value of this for disease surveillance.  The goal of this supplement is to link epidemiologic data from COVID-19 positive patients in Arizona with viral genetics from sequenced isolates to better understand the relationship between viral genetics and epidemiologic and clinical phenotypes. We will accomplish this by utilizing Arizona’s disease surveillance system and available sequences and metadata that are published in online nucleic acid databases. We will use different probabilistic matching strategies to link the two different sources (Aim 1) and then use Bayesian phylogenetics and phylogeography to study clustering of epidemiologic cases (Aim 2). Epidemiologists can use these findings to gain an understanding of how local viruses genetically cluster in relation to specific epidemiologic and clinical cases. While disease severity is dependent on individual immune response and environmental factors, linking viral genetics to its proper epidemiologic case could also support hypothesis generation for future reverse genetics and immunological studies in animal models."
+nih_reporter_narrative,This biomedical informatics project will leverage probabilistic matching to link reportable disease data and viral sequence data of SARS-CoV-2. This will support the analysis of local SARS-CoV-2 cases by linking them with the genetics of the virus for on-going public health surveillance.
+publication_url,https://doi.org/10.1016/j.scitotenv.2023.166230|https://doi.org/10.1128/mra.00069-23|https://doi.org/10.1016/j.scitotenv.2023.162862|https://doi.org/10.1016/S2666-5247(22)00289-0|https://doi.org/10.1128/mra.00680-22|https://doi.org/10.1101/2022.09.25.22280344|https://doi.org/10.1111/irv.13057|https://doi.org/10.1128/mra.00337-22|https://doi.org/10.1128/mra.00681-22|https://doi.org/10.1016/j.meegid.2022.105315|https://doi.org/10.1080/22221751.2022.2071173|https://doi.org/10.1016/j.watres.2021.117710|https://doi.org/10.3390/v13091803|https://doi.org/10.1186/s12879-021-06526-5|https://doi.org/10.1101/2021.01.22.21250320|https://doi.org/10.3390/v13010074
+creator_fullname_1,Arjun Magge
+creator_firstname_1,Arjun
+creator_middlename_1,
+creator_lastname_1,Magge
+creator_orcid_1,0000-0002-4109-1346
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+creator_fullname_2,Rafaela Salgado Fontenele
+creator_firstname_2,Rafaela
+creator_middlename_2,Salgado
+creator_lastname_2,Fontenele
+creator_orcid_2,0000-0001-5638-7134
+creator_inst_name_2,
+creator_inst_id_2,
+creator_inst_id_type_2,
+project_title,Bioinformatics Framework for Wastewater-based Surveillance of Infectious Diseases
+description_of_project,"COVID-19 is expected to become one of the largest mass casualty events in the history of the United States (U.S.). Assessment of the true burden of disease in the population is needed for the prevention and mitigation of this and future viral disease outbreaks. Currently, testing of new cases (via swabs / saliva) and those previously exposed (via serum) has limited reach in the population. However, an alternative approach relying on the analysis of community wastewater can screen up to 70% of the U.S. population on a weekly basis at <0.01% of the cost of clinical screening of individuals. As a population-wide infectious disease surveillance tool, wastewater-based epidemiology (WBE) can be used to complement current surveillance methods to better understand disease burden and how these burdens differ across communities. The goal of our proposed RADx-rad supplement is to implement and evaluate a near real-time WBE framework for SARS-CoV-2 by (i) assessing in near real-time community spread of the new coronavirus, (ii) significantly increasing the fraction of the U.S. population screened, the frequency at which this testing is being completed (weekly) and the geospatial resolution of screening (from city-wide to neighborhood-specific), (iii) comparing novel coronavirus levels in wastewater with the burdens of infection, disease and mortality reported by local health systems, (iv) harvesting high throughput sequence (HTS) data on SARS-CoV-2 variants across the U.S., (v) optimizing pipelines for HTS analysis, and (vi) immediately sharing any new knowledge gained with the RADx-rad Data Coordinating Center (DCC), research community, and the general public via an expansion of our online dashboard that was pioneered by the proposing team in collaboration with the City of Tempe, AZ. We will leverage previously developed, peer-reviewed strategies for population-wide virus monitoring via reverse transcription real-time polymerase chain reaction (RT-qPCR), HTS, sequence analysis, and data communication originally developed for our parent award to quickly provide a data stream and scientific resource for managing the COVID-19 epidemic in the U.S. In Aim 1, develop a wastewater-based epidemiology (WBE) bioinformatics framework for SARS-CoV-2 at the national, city and intra-sewershed or neighborhood-level to produce RT-qPCR and SARS-CoV-2 RNA-seq data for studying the distribution of viral levels and genetic polymorphisms in the community. In Aim 2, we will evaluate a WBE bioinformatics framework for translating SARS-CoV-2 data from RT-qPCR and high-throughput sequencing into information for monitoring population health. Successful completion of this biomedical informatics project will provide the U.S. with an early warning system for SARS-CoV-2 detection and a tracking aid for public health epidemiologists seeking to reduce morbidity and mortality from infectious diseases like COVID-19 in the U.S."
+keywords,Bioinformatics|Wastewater-Based Epidemiological Monitoring|SARS-CoV-2
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,"Alignment to reference genome NC_045512.2 using BWA 0.7.17. Trimming and variant calling using ivar 1.3, lofreq 2.1.5, samtools 1.12."

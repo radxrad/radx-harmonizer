@@ -1,0 +1,58 @@
+Field,Value
+pi_fullname_1,Steven D Munger
+pi_firstname_1,Steven
+pi_middlename_1,D
+pi_lastname_1,Munger
+pi_profileid_1,
+pi_orcid_1,0000-0001-5624-0925
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,
+pi_inst_id_1,GXNFA6RYTKW3
+pi_inst_id_type_1,UEI
+pi_fullname_2,Richard C Gerkin
+pi_firstname_2,Richard
+pi_middlename_2,C
+pi_lastname_2,Gerkin
+pi_profileid_2,
+pi_orcid_2,0000-0002-2940-3378
+pi_role_2,co-PI
+pi_inst_name_2,New York University School of Medicine
+pi_inst_id_2,ror:05wthjx48
+pi_inst_id_type_2,ROR
+pi_fullname_3,John Edward Hayes
+pi_firstname_3,John
+pi_middlename_3,Edward
+pi_lastname_3,Hayes
+pi_profileid_3,
+pi_orcid_3,0000-0001-9065-6326
+pi_role_3,co-PI
+pi_inst_name_3,Pennsylvania State University
+pi_inst_id_3,ror:04p491231
+pi_inst_id_type_3,ROR
+dbGaP_study_ID,phs002631.v1.p1
+subproject,Chemosensory Testing
+nih_project_id,1U01DC019573-01
+nih_reporter_abstract,"The COVID-19 pandemic is the most devastating infectious disease outbreak in a century, particularly in underserved and minoritized communities. In 2020 alone, it will cost a million lives. It continues to wreak economic havoc worldwide. Therefore, it is critical to develop new tools that can mitigate the spread of SARS- CoV-2, the virus that causes COVID-19. Rapid screening tools can identify potentially infected individuals who can then be isolated/quarantined from the uninfected and directed towards further testing and treatment. Unfortunately, definitive viral testing for SARS-CoV-2 has proven difficult to implement in many countries, including the US, due to technical, financial and governmental hurdles to universal access and timely processing. Symptom-based screening offers a valuable, albeit imperfect, complement to viral testing that can help identify many individuals with the disease for isolation as well as treatment. A major challenge with symptomatic testing is that COVID-19 is highly protean: the heterogeneity of symptoms means no single symptom or constellation of symptoms is definitive diagnostically. Still, there is growing evidence that sudden partial or complete olfactory loss – even more than other symptoms such as fever or dry cough – is the single best predictor of COVID-19. In this proposal, we will develop and implement objective, self-administered smell tests for the purpose of identifying individuals with COVID-19 prior to, or in the absence of, viral testing, as well as for use in population-level surveillance of COVID-19 spread. Several kinds of objective tests have been used in clinical or laboratory settings to assess an individual's olfactory ability, including those that test the ability to identify or discriminate odors as well as procedures to determine the lowest concentration an individual can reliably perceive (i.e., odor detection threshold). Each approach has technical and logistical advantages and disadvantages, and each captures different aspects of olfactory dysfunction. Regarding COVID-19, it is unknown what type of measure has the highest specificity or sensitivity. In Aim 1, we will use self-administered objective testing of odor identification and odor detection threshold in SARS-CoV-2-tested individuals to determine which olfactory measure is the best predictor of COVID-19. In Aim 2, we will use objective smell testing to assess whether population monitoring of olfactory loss in university, municipal or other community settings can serve as a sentinel of COVID-19 community spread. Together, our studies will provide a rapid, remote-friendly, cost-effective, scalable, non-intrusive method to screen for COVID-19 at the individual level and to assess prevalence in communities, especially those that have been traditionally underserved by the health care system and public health infrastructure."
+nih_reporter_narrative,"Olfactory loss (anosmia or hyposmia) is the single best symptomatic predictor of COVID-19. Objective, self- administered smell testing can accelerate identification of COVID-19 in individuals and communities – particularly when timely viral testing is not readily available – and help mitigate community spread of this dangerous disease."
+publication_url,https://doi.org/10.1016/j.physbeh.2023.114331|https://doi.org/10.1093/chemse/bjad020|https://doi.org/10.1101/2023.03.27.23287763|https://doi.org/10.1101/2023.01.16.23284630|https://doi.org/10.1093/chemse/bjac036|https://doi.org/10.1016/j.foodqual.2021.104483|https://doi.org/10.1093/chemse/bjab020
+creator_fullname_1,Richard C Gerkin
+creator_firstname_1,Richard
+creator_middlename_1,C
+creator_lastname_1,Gerkin
+creator_orcid_1,0000-0002-2940-3378
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+creator_fullname_2,Stephanie R Hunter
+creator_firstname_2,Stephanie
+creator_middlename_2,R
+creator_lastname_2,Hunter
+creator_orcid_2,0000-0002-2540-7929
+creator_inst_name_2,
+creator_inst_id_2,
+creator_inst_id_type_2,
+project_title,Rapid olfactory tools for telemedicine-friendly COVID-19 screening
+description_of_project,Development and Testing of Olfactory Screening Tools for COVID-19
+keywords,Olfactory Screening|COVID-19
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,Python

@@ -1,0 +1,40 @@
+Field,Value
+pi_fullname_1,Erik F Young
+pi_firstname_1,Erik
+pi_middlename_1,F
+pi_lastname_1,Young
+pi_profileid_1,
+pi_orcid_1,0000-0002-7980-1251
+pi_role_1,contact-PI|data-PI
+pi_inst_name_1,"Quicksilver Biosciences, Inc."
+pi_inst_id_1,ZMEHBJ39DWK1
+pi_inst_id_type_1,UEI
+pi_fullname_2,Kenneth L Shepard
+pi_firstname_2,Kenneth
+pi_middlename_2,L
+pi_lastname_2,Shepard
+pi_profileid_2,
+pi_orcid_2,0000-0003-0665-6775
+pi_role_2,co-PI
+pi_inst_name_2,Columbia University
+pi_inst_id_2,ror:00hj8s172
+pi_inst_id_type_2,ROR
+dbGaP_study_ID,phs002550.v1.p1
+subproject,Novel Biosensing and VOC
+nih_project_id,1R44DE030841-01
+nih_reporter_abstract,"Direct bioelectronic detection of SARS-CoV-2 from saliva  using single-molecule field-effect transistor array  Nucleic acid tests have become the gold-standard for diagnostic testing for COVID-19, usually performed in specialized laboratories. Most are based on reverse-transcription quantitative polymerase chain reaction (qRT-PCR). The time required for specimen transport and processing results in a turnaround time that is typi- cally several days. The few rapid (<1 hour) point-of-care (POC) tests are more expensive, still require sample preparation and specialized reagents, and do not have the throughput needed for population surveillance. Di- rect testing for the virus, which also reduces requirements for multiple reagents, is a necessary step to improv- ing diagnostic testing. While four such antigen tests have been approved for detection of SARS-CoV-2 based on immunoassays to the N protein, sensitivity is limited and no quantitation of viral load is possible.  We will address this gap by using DiagnostikosTM, an in-development rapid POC platform for direct, real- time, multiplexed, quantitative bioelectronic detection of biomolecules that employs an all-electronic detection device that functions at the single-molecule level. These single-molecule field-effect transistors (smFETs) are arrayed on a complementary metal-oxide-semiconductor (CMOS) integrated circuit chip. Chips will interface with an envisioned USB-stick-form-factor reader device. Robust single-domain antibodies, known as nanobod- ies and immobilized on these devices, are used for sensitive detection of viral particles and viral debris. The use of multiple nanobodies for a single protein and nanobodies for different proteins in a single assay allows for significant improvements in specificity. Nanobodies will be specific for one or more of the four major struc- tural proteins in SARS-CoV-2; the nucleocapsid (N) protein engulfing the viral RNA, the spike (S) protein, the membrane (M) protein and the envelope (E) protein. No sample preparation or specialized reagents are re- quired for detection, and the device will be designed to operate with saliva, which has very recently been shown to be a reliable medium for detecting SARS-CoV-2. Individual sensor chips can be manufactured at a cost of $35. With the addition of other nanobodies, these large dense arrays can also allow detection of many pathogens in a single test.  In this Direct-To-Phase-2 SBIR program we will pursue several key innovations that are required to make such a platform possible, including isolation of nanobodies for key structure proteins of SARS-CoV-2 (Specific Aim 1), development of the smFET platform for antigen detection (Specific Aim 2), development of large CMOS arrays of these smFET devices (Specific Aim 3), and verification of detection in increasingly complex samples up to and including clinical samples (Specific Aim 4). This project is a partnership between university researchers who developed the smFET technology and a venture-based start-up venture, Quicksilver Biosci- ences, spun out to commercialize smFET technology and develop smFET/CMOS arrays for molecular diag- nostic applications."
+nih_reporter_narrative,The proposal seeks to provide a new bioelectronic approach for antigen testing for infectious diseases. Low- cost and pervasive antigen testing would be an essential new tool for the control of the COVID-19 pandemic.
+publication_url,
+creator_fullname_1,Erik F Young
+creator_firstname_1,Erik
+creator_middlename_1,F
+creator_lastname_1,Young
+creator_orcid_1,0000-0002-7980-1251
+creator_inst_name_1,
+creator_inst_id_1,
+creator_inst_id_type_1,
+project_title,Direct Bioelectronic Detection of SARS-Cov-2 From Saliva Using Singlemolecule Field-effect Transistor Array
+description_of_project,Trials of new nanobiosensor technology with COVID sensing application
+keywords,single molecule|saliva|assay|SARS-CoV2|nanotube
+study_include_prospective_or_retrospective_human_samples - effective_Feb_2021,
+method_of_data_analysis - software_statistical_approach,raw data
