@@ -6,6 +6,9 @@ import shutil
 import argparse
 import utils
 
+# Root directory on AWS
+# ROOT_DIR = "r:/"
+
 # Root directory local installation
 ROOT_DIR = ".."
 
@@ -88,29 +91,37 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
         error_messages = []
 
         step2(work_dir, error_messages)
+        if utils.handle_errors_and_continue(error_file, error_messages):
+            continue
         print(",2", end="")
-        if len(error_messages) > 0:
-            utils.save_error_messages(error_file, error_messages)
-            print(f" - failed: {len(error_messages)} errors")
-            continue
+        # if len(error_messages) > 0:
+        #     utils.save_error_messages(error_file, error_messages)
+        #     print(f" - failed: {len(error_messages)} errors")
+        #     continue
         step3(work_dir, error_messages)
+        if utils.handle_errors_and_continue(error_file, error_messages):
+            continue
         print(",3", end="")
-        if len(error_messages) > 0:
-            utils.save_error_messages(error_file, error_messages)
-            print(f" - failed: {len(error_messages)} errors")
-            continue
+        # if len(error_messages) > 0:
+        #     utils.save_error_messages(error_file, error_messages)
+        #     print(f" - failed: {len(error_messages)} errors")
+        #     continue
         step4(work_dir, error_messages)
+        if utils.handle_errors_and_continue(error_file, error_messages):
+            continue
         print(",4", end="")
-        if len(error_messages) > 0:
-            utils.save_error_messages(error_file, error_messages)
-            print(f" - failed: {len(error_messages)} errors")
-            continue
+        # if len(error_messages) > 0:
+        #     utils.save_error_messages(error_file, error_messages)
+        #     print(f" - failed: {len(error_messages)} errors")
+        #     continue
         step5(work_dir, error_messages)
-        print(",5", end="")
-        if len(error_messages) > 0:
-            utils.save_error_messages(error_file, error_messages)
-            print(f" - failed: {len(error_messages)} errors")
+        if utils.handle_errors_and_continue(error_file, error_messages):
             continue
+        print(",5", end="")
+        # if len(error_messages) > 0:
+        #     utils.save_error_messages(error_file, error_messages)
+        #     print(f" - failed: {len(error_messages)} errors")
+        #     continue
         step6(work_dir)
         print(",6", end="")
 

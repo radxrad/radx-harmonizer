@@ -1559,7 +1559,8 @@ def convert_dict(dict_file, tier1_dict_file, tier2_dict_file, dict_output_file):
 
     # Add terms column
     dictionary["Terms"] = ""
-    dictionary["MissingValueCodes"] = ""
+    # Fill in MissingValueCodes
+    dictionary["MissingValueCodes"] = '"-9960"=[Not Entered By Originator]'
 
     # Convert to new data types
     dictionary["Cardinality"] = dictionary["Datatype"].apply(set_cardinality)

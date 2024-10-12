@@ -8,6 +8,9 @@ import subprocess
 
 import utils
 
+# Root directory on AWS
+# ROOT_DIR = "r:/"
+
 # Root directory local installation
 ROOT_DIR = ".."
 
