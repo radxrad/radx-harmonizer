@@ -202,17 +202,15 @@ def compile_metadata(work_dir, file_type, error_messages):
         os.path.join(work_dir, f"rad_*_*-*_*_META_{file_type}.csv")
     ):
         command = f"java -jar {METADATA_COMPILER_JAR} -c {meta_file} -o {work_dir} -t {METADATA_SPEC}"
-        #ret = ""
         stderr = ""
         try:
             stdout, stderr = utils.run_command(command)
             if stderr != "":
-                message = f"Metadata compilation failed: {meta_file}: {command}: {stderr}"
+                message = f"Metadata compilation failed: {stderr}"
                 error = utils.append_error(message, meta_file, error_messages)
                 any_error = any_error or error
-            #ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
-            message = f"Metadata compilation failed: {meta_file}: {command}: {e.output}: {stderr}"
+            message = f"Metadata compilation failed: {e.output}: {stderr}"
             error = utils.append_error(message, meta_file, error_messages)
             any_error = any_error or error
 
@@ -244,17 +242,15 @@ def validate_dictionary(work_dir, file_type, error_messages):
         os.path.join(work_dir, f"rad_*_*-*_*_DICT_{file_type}.csv")
     ):
         command = f"java -jar {DICTIONARY_VALIDATOR_JAR} --in={dict_file}"
-        #ret = ""
         stderr = ""
         try:
             stdout, stderr = utils.run_command(command)
             if stderr != "":
-                message = f"Dictionary validation failed: {dict_file}: {command}: {stderr}"
+                message = f"Dictionary validation failed: {stderr}"
                 error = utils.append_error(message, dict_file, error_messages)
                 any_error = any_error or error
-            #ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
-            message = f"Dictionary validation failed: {dict_file}: {command}: {e.output}: {stderr}"
+            message = f"Dictionary validation failed: {e.output}: {stderr}"
             error = utils.append_error(message, dict_file, error_messages)
             any_error = any_error or error
 
@@ -291,18 +287,16 @@ def validate_metadata(work_dir, file_type, error_messages):
             f"java -jar {METADATA_VALIDATOR_JAR} --data={data_file} "
             f"--dict={dict_file} --instance={meta_file} --template={METADATA_SPEC}"
         )
-        ret = ""
         stderr = ""
         try:
             stdout, stderr = utils.run_command(command)
             if stderr != "":
-                message = f"Data/Dict validation failed: {data_file}: {command}: {stderr}"
+                message = f"Data/Dict validation failed: {stderr}"
                 error = utils.append_error(message, data_file, error_messages)
                 any_error = any_error or error
-            #ret = subprocess.run(command, capture_output=True, check=True, shell=True)
         except subprocess.CalledProcessError as e:
             message = (
-                f"Data/Dict validation failed: {data_file}: {command}: {e.output}: {stderr}"
+                f"Data/Dict validation failed: {e.output}: {stderr}"
             )
             error = utils.append_error(message, data_file, error_messages)
             any_error = any_error or error
