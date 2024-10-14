@@ -3,6 +3,7 @@ import os
 import sys
 import glob
 import pathlib
+import subprocess
 import traceback
 import re
 
@@ -259,6 +260,12 @@ def handle_errors_and_continue(error_file, error_messages):
         print(f" - failed: {len(error_messages)} errors")
         return True
     return False
+
+
+def run_command(command):
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    stdout, stderr = process.communicate()
+    return stdout.decode('utf-8'), stderr.decode('utf-8')
 
 
 def get_directories(include, exclude, data_dir):
