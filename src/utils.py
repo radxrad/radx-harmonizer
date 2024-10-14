@@ -265,9 +265,11 @@ def handle_errors_and_continue(error_file, error_messages):
 def run_command(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     stdout, stderr = process.communicate()
+    stdout = stdout.decode('utf-8')
+    stderr = stderr.decode('utf-8')
     stdout = stdout.replace("\n", " ")
     stderr = stderr.replace("\n", " ")
-    return stdout.decode('utf-8'), stderr.decode('utf-8')
+    return stdout, stderr
 
 
 def get_directories(include, exclude, data_dir):
