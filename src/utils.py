@@ -1234,6 +1234,8 @@ def extract_unique_column_values(df, column):
         # Decode COVID test specimen type
         if column == "covid_test_specimen_type":
             specimen = list(df[column].unique())
+            # Remove empty strings from the list
+            specimen = [s for s in specimen if s]
             # Only a single specimen type is allowed here
             specimen = specimen[0]
             # convert the type from integer to string representation
