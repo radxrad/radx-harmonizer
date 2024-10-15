@@ -1218,36 +1218,59 @@ def extract_speciment_type(data_file):
             extract_unique_column_values(data, specimen)
         )
 
-    return ",".join(specimens_used)
-
+    return "|".join(specimens_used)
 
 def extract_unique_column_values(df, column):
-    if column in df.columns:
-        # Aggregate wastewater sample types to "wastewater"
-        if column == "sample_type":
-            specimens = set(df[column].unique())
-            for specimen in specimens:
-                if "composite" in specimen or "grap" in specimen:
-                    specimens = {"wastewater"}
-                    return specimens
+    if column not in df.columns:
+        return set()
 
-        # Decode COVID test specimen type
-        if column == "covid_test_specimen_type":
-            specimen = list(df[column].unique())
-            # Remove empty strings from the list
-            specimen = [s for s in specimen if s]
-            # Only a single specimen type is allowed here
-            specimen = specimen[0]
-            # convert the type from integer to string representation
-            specimens = set(COVID_TEST_SPECIMEN_TYPES.get(specimen))
-            return specimens
+    specimens = set(df[column].dropna().unique())
 
-        # For all other specimen types
-        specimens = set(df[column].unique())
+    # Handle wastewater
+    if column == "sample_type":
+        if any("composite" in s or "grab" in s for s in specimens):
+            return {"wastewater"}
 
-        return specimens
+    # Handle COVID test speciment types
+    elif column == "covid_test_specimen_type":
+        specimens = {COVID_TEST_SPECIMEN_TYPES.get(specimen_id, "") for specimen_id in specimens}
+        specimens.discard('')
+    else:
+        specimens.discard('')
 
-    return set()
+    return specimens
+
+# def extract_unique_column_values(df, column):
+#     if column in df.columns:
+#         # Aggregate wastewater sample types to "wastewater"
+#         if column == "sample_type":
+#             specimens = set(df[column].unique())
+#             for specimen in specimens:
+#                 if "composite" in specimen or "grab" in specimen:
+#                     specimens = {"wastewater"}
+#                     return specimens
+
+#         # Decode COVID test specimen type
+#         if column == "covid_test_specimen_type":
+#             specimen_ids = df[column].unique()
+
+#             # convert the type from integer to string representation
+#             specimens = []
+#             for specimen_id in specimen_ids:
+#                 specimens.append(COVID_TEST_SPECIMEN_TYPES.get(specimen_id, ""))
+
+#             # Remove empty strings from the list
+#             specimens = {s for s in specimens if s}
+#             print("final:", specimens)
+#             return specimens
+
+#         # For all other specimen types
+#         specimens = df[column].unique()
+#         specimens = {s for s in specimens if s}
+
+#         return specimens
+
+#     return set()
 
 
 def extract_prefix(filename):
