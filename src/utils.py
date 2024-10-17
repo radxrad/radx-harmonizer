@@ -1155,7 +1155,10 @@ def update_meta_data(
         meta_data["Field Label"] == "data_file_creation_dateTime"
     ].copy()
     if timestamp.shape[0] == 0:
-        data_file_creation_date_time = "placeholder"
+        #data_file_creation_date_time = "placeholder"
+        message = f"Metadata template file {template_file} data_file_creation_dateTime value is missing."
+        error = append_error(message, meta_file, error_messages)
+        return error
     else:
         data_file_creation_date_time = timestamp["Choices"].tolist()[0]
 
