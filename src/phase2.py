@@ -1,3 +1,19 @@
+"""
+Script for cleaning, validating, and updating the contents of specified directories.
+
+This script is designed to process and validate data files within directories that follow a specific
+naming convention. It performs multiple checks on files, including metadata validation, handling of
+dictionaries, data type checks, and unit standardization. The script can be used to either reset
+the work directory from `preorigcopy` files or rerun validation steps without reinitializing from
+`preorigcopy`. Errors encountered during validation are logged into a designated error file.
+
+Key functionalities:
+1. Copies files from `preorigcopy` directories to working directories.
+2. Performs data validation and cleaning steps, such as checking for missing values, correct formats, and matching data to dictionary files.
+3. Generates output files with cleaned and validated data.
+4. Optionally resets the work directory or skips certain steps using rerun options.
+"""
+
 #!/usr/bin/python3
 import os
 import sys
@@ -15,24 +31,16 @@ ROOT_DIR = ".."
 # File paths
 DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 META_DIR = os.path.join(ROOT_DIR, "meta")
-HARMONIZED_DICT = os.path.join(
-    ROOT_DIR, "reference/RADx-rad_legacy_dict_2024-10-11.csv"
-)
-GLOBAL_HARMONIZED_DICT = os.path.join(
-    ROOT_DIR, "reference/RADx-global_tier1_dict_2024-10-11.csv"
-)
-TIER1_HARMONIZED_DICT = os.path.join(
-    ROOT_DIR, "reference/RADx-rad_tier1_dict_2024-10-11.csv"
-)
-TIER2_HARMONIZED_DICT = os.path.join(
-    ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-11.csv"
-)
+HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_legacy_dict_2024-10-17.csv")
+GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_tier1_dict_2024-10-17.csv")
+TIER1_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier1_dict_2024-10-17.csv")
+TIER2_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-17.csv")
 ERROR_FILE_NAME = "phase2_errors.csv"
 
 
-def phase2_checker(include_dirs, exclude_dirs, reset=False):
+def phase2_checker(include_dirs, exclude_dirs, reset=False, rerun=False):
     """
-    Validate, clean, and update the contents of directories within the specified paths and manage errors.
+    Clean, validate, and update the contents of the specified directories and manage errors.
 
     Parameters
     ----------
@@ -63,12 +71,15 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
             print(f"skipping: {directory} due to Phase I errors")
             continue
 
-        lock_file = os.path.join(work_dir, "lock.txt")
-        if os.path.exists(lock_file):
-            print(
-                f"skipping {directory}, this directory has been locked! Remove the lock.txt to make any updates."
-            )
-            continue
+        # When rerun is specified, the lock file is ignored
+        if not rerun:
+            lock_file = os.path.join(work_dir, "lock.txt")
+            if os.path.exists(lock_file):
+                print(
+                    f"skipping {directory}: directory has been locked! "
+                    "Remove the lock.txt to make any updates."
+                )
+                continue
 
         print(f"checking: {directory} step: ", end="")
 
@@ -85,15 +96,16 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
         if os.path.exists(error_file):
             os.remove(error_file)
 
-        step1(preorigcopy_dir, work_dir)
-        print("1", end="")
+        if not rerun:
+            step1(preorigcopy_dir, work_dir)
+            print("1,", end="")
 
         error_messages = []
 
         step2(work_dir, error_messages)
         if utils.handle_errors_and_continue(error_file, error_messages):
             continue
-        print(",2", end="")
+        print("2", end="")
 
         step3(work_dir, error_messages)
         if utils.handle_errors_and_continue(error_file, error_messages):
@@ -109,7 +121,7 @@ def phase2_checker(include_dirs, exclude_dirs, reset=False):
         if utils.handle_errors_and_continue(error_file, error_messages):
             continue
         print(",5", end="")
- 
+
         step6(work_dir)
         print(",6", end="")
 
@@ -134,9 +146,7 @@ def step1(preorigcopy_dir, work_dir):
     """
     for input_file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*.csv")):
         basename = os.path.basename(input_file)
-        output_file = os.path.join(
-            work_dir, basename.replace("_preorigcopy.csv", ".csv")
-        )
+        output_file = os.path.join(work_dir, basename.replace("_preorigcopy.csv", ".csv"))
 
         if utils.is_newer(input_file, output_file):
             shutil.copyfile(input_file, output_file)
@@ -212,9 +222,7 @@ def step4(work_dir, error_messages):
     """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         data_file = dict_file.replace("DICT", "DATA")
-        utils.data_dict_matcher_new(
-            data_file, dict_file, HARMONIZED_DICT, error_messages
-        )
+        utils.data_dict_matcher_new(data_file, dict_file, HARMONIZED_DICT, error_messages)
 
 
 def step5(work_dir, error_messages):
@@ -299,12 +307,10 @@ def step7(work_dir, tier1_dict_file, tier2_dict_file):
     """
     for dict_file in glob.glob(os.path.join(work_dir, "rad_*_*-*_*_DICT.csv")):
         dict_output_file = dict_file.replace("_DICT.csv", "_DICT_origcopy.csv")
-        utils.convert_dict(
-            dict_file, tier1_dict_file, tier2_dict_file, dict_output_file
-        )
+        utils.convert_dict(dict_file, tier1_dict_file, tier2_dict_file, dict_output_file)
 
 
-def main(include, exclude, reset):
+def main(include, exclude, reset, rerun):
     """
     Main function to execute the phase2_checker with command-line arguments.
 
@@ -338,17 +344,28 @@ def main(include, exclude, reset):
         )
         sys.exit(1)
 
+    if reset and rerun:
+        print("Can not use -reset and -rerun at the same time")
+        sys.exit(-1)
+
+    if rerun:
+        print()
+        print("skipping step 1 for: -rerun")
+
     if reset:
         reset = True
-        if not utils.confirm_rest():
+        print()
+        print("WARNING: -reset will remove all files in the work directory!")
+        if not utils.confirm_rerun(
+            "Are you sure you want to rest the work directory with the files from preorigcopy?"
+        ):
             sys.exit(0)
-        print("resetting project files with preorigcopy files")
     else:
         reset = False
 
     print()
 
-    phase2_checker(include, exclude, reset)
+    phase2_checker(include, exclude, reset, rerun)
 
 
 if __name__ == "__main__":
@@ -368,8 +385,15 @@ if __name__ == "__main__":
         help="Comma-separated list of projects to exclude.",
     )
     parser.add_argument(
-        "-reset", action="store_true", help="Reset project using files from preorigcopy"
+        "-reset",
+        action="store_true",
+        help="Reset project using files from preorigcopy.",
+    )
+    parser.add_argument(
+        "-rerun",
+        action="store_true",
+        help="Rerun phase2 in the work directory without copying files from preorigcopy.",
     )
 
     args = parser.parse_args()
-    main(args.include, args.exclude, args.reset)
+    main(args.include, args.exclude, args.reset, args.rerun)

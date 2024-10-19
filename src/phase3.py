@@ -1,3 +1,19 @@
+"""
+Script for validating and generating `origcopy` and `transformcopy` files for specified directories.
+
+This script performs phase 3 of the data validation and processing pipeline. It validates the metadata,
+dictionaries, and data files for each project directory and converts them into harmonized formats (`origcopy`
+and `transformcopy`). The script leverages external Java tools for metadata and dictionary validation
+and compiles metadata into JSON format.
+
+The script follows these key steps:
+1. Validates the presence and format of `origcopy` files.
+2. Compiles metadata from CSV to JSON format.
+3. Validates the dictionary and data files.
+4. Transforms the `origcopy` files into a global `transformcopy` format.
+5. Ensures consistency across all file types.
+"""
+
 #!/usr/bin/python3
 import os
 import sys
@@ -19,16 +35,12 @@ DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 META_DIR = os.path.join(ROOT_DIR, "meta")
 
 METADATA_COMPILER_JAR = os.path.join(ROOT_DIR, "source/radx-rad-metadata-compiler.jar")
-METADATA_VALIDATOR_JAR = os.path.join(
-    ROOT_DIR, "source/radx-metadata-validator-app-1.0.6.jar"
-)
+METADATA_VALIDATOR_JAR = os.path.join(ROOT_DIR, "source/radx-metadata-validator-app-1.0.6.jar")
 DICTIONARY_VALIDATOR_JAR = os.path.join(
     ROOT_DIR, "source/radx-data-dictionary-validator-app-1.3.4.jar"
 )
 METADATA_SPEC = os.path.join(ROOT_DIR, "reference/RADxMetadataSpecification.json")
-GLOBAL_HARMONIZED_DICT = os.path.join(
-    ROOT_DIR, "reference/RADx-global_tier1_dict_2024-10-11.csv"
-)
+GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_tier1_dict_2024-10-17.csv")
 ERROR_FILE_NAME = "phase3_errors.csv"
 
 
@@ -76,8 +88,7 @@ def phase3_checker(include_dirs, exclude_dirs):
             os.remove(error_file)
 
         # Remove temporary JSON files from a previous run
-        json_files = glob.glob(os.path.join(work_dir, "*.json"))
-        for json_file in json_files:
+        for json_file in glob.glob(os.path.join(work_dir, "*.json")):
             os.remove(json_file)
 
         # Remove the origcopy and transformcopy directories from a previous run
@@ -90,9 +101,7 @@ def phase3_checker(include_dirs, exclude_dirs):
         error_messages = []
 
         # Check for missing files
-        error = utils.file_is_missing_in_work_directory(
-            work_dir, "origcopy", error_messages
-        )
+        error = utils.file_is_missing_in_work_directory(work_dir, "origcopy", error_messages)
         if error:
             utils.save_error_file(error_messages, error_file)
 
@@ -119,12 +128,10 @@ def phase3_checker(include_dirs, exclude_dirs):
         step4(work_dir, transformcopy_dir)
 
         # Run validation suite on the transformcopy files
-        if not is_valid_data(
-            transformcopy_dir, "transformcopy", error_file, error_messages
-        ):
+        if not is_valid_data(transformcopy_dir, "transformcopy", error_file, error_messages):
             continue
 
-        # Remove the metadata .csv file, since it has been replaced by a .json file.
+        # Remove the metadata .csv files, since they has been replaced by .json files.
         for meta_file in glob.glob(
             os.path.join(transformcopy_dir, "rad_*_*-*_*_META_transformcopy.csv")
         ):
@@ -137,9 +144,7 @@ def phase3_checker(include_dirs, exclude_dirs):
         if utils.handle_errors_and_continue(error_file, error_messages):
             continue
 
-        print(
-            f" - {origcopies} origcopy and {transformcopies} transformcopy files created"
-        )
+        print(f" - {origcopies} origcopy and {transformcopies} transformcopy files created")
 
 
 def is_valid_data(work_dir, dir_type, error_file, error_messages):
@@ -198,13 +203,13 @@ def compile_metadata(work_dir, file_type, error_messages):
     any_error = False
 
     # Compile metadata CSV files to JSON format
-    for meta_file in glob.glob(
-        os.path.join(work_dir, f"rad_*_*-*_*_META_{file_type}.csv")
-    ):
-        command = f"java -jar {METADATA_COMPILER_JAR} -c {meta_file} -o {work_dir} -t {METADATA_SPEC}"
+    for meta_file in glob.glob(os.path.join(work_dir, f"rad_*_*-*_*_META_{file_type}.csv")):
+        command = (
+            f"java -jar {METADATA_COMPILER_JAR} -c {meta_file} -o {work_dir} -t {METADATA_SPEC}"
+        )
         stderr = ""
         try:
-            stdout, stderr = utils.run_command(command)
+            _, stderr = utils.run_command(command)
             if stderr != "":
                 message = f"Metadata compilation failed: {stderr}"
                 error = utils.append_error(message, meta_file, error_messages)
@@ -238,13 +243,11 @@ def validate_dictionary(work_dir, file_type, error_messages):
     any_error = False
 
     # Validate dictionary CSV file
-    for dict_file in glob.glob(
-        os.path.join(work_dir, f"rad_*_*-*_*_DICT_{file_type}.csv")
-    ):
+    for dict_file in glob.glob(os.path.join(work_dir, f"rad_*_*-*_*_DICT_{file_type}.csv")):
         command = f"java -jar {DICTIONARY_VALIDATOR_JAR} --in={dict_file}"
         stderr = ""
         try:
-            stdout, stderr = utils.run_command(command)
+            _, stderr = utils.run_command(command)
             if stderr != "":
                 message = f"Dictionary validation failed: {stderr}"
                 error = utils.append_error(message, dict_file, error_messages)
@@ -278,9 +281,7 @@ def validate_metadata(work_dir, file_type, error_messages):
     any_error = False
 
     # Validate metadata files
-    for dict_file in glob.glob(
-        os.path.join(work_dir, f"rad_*_*-*_*_DICT_{file_type}.csv")
-    ):
+    for dict_file in glob.glob(os.path.join(work_dir, f"rad_*_*-*_*_DICT_{file_type}.csv")):
         data_file = dict_file.replace(f"DICT_{file_type}.csv", f"DATA_{file_type}.csv")
         meta_file = dict_file.replace(f"DICT_{file_type}.csv", f"META_{file_type}.json")
         command = (
@@ -289,15 +290,13 @@ def validate_metadata(work_dir, file_type, error_messages):
         )
         stderr = ""
         try:
-            stdout, stderr = utils.run_command(command)
+            _, stderr = utils.run_command(command)
             if stderr != "":
                 message = f"Data/Dict validation failed: {stderr}"
                 error = utils.append_error(message, data_file, error_messages)
                 any_error = any_error or error
         except subprocess.CalledProcessError as e:
-            message = (
-                f"Data/Dict validation failed: {e.output}: {stderr}"
-            )
+            message = f"Data/Dict validation failed: {e.output}: {stderr}"
             error = utils.append_error(message, data_file, error_messages)
             any_error = any_error or error
 
@@ -396,9 +395,7 @@ def step2(work_dir, transformcopy_dir, global_harmonized_dict):
             transformed_dict_file = transformed_dict_file.replace(
                 "_origcopy.csv", "_transformcopy.csv"
             )
-            dictionary = utils.convert_min_to_global_dict(
-                dict_file, global_harmonized_dict
-            )
+            dictionary = utils.convert_min_to_global_dict(dict_file, global_harmonized_dict)
             dictionary.to_csv(transformed_dict_file, index=False)
 
 
@@ -418,9 +415,7 @@ def step3(transformcopy_dir):
     for dict_file in glob.glob(
         os.path.join(transformcopy_dir, "rad_*_*-*_*_DICT_transformcopy.csv")
     ):
-        data_file = dict_file.replace(
-            "_DICT_transformcopy.csv", "_DATA_transformcopy.csv"
-        )
+        data_file = dict_file.replace("_DICT_transformcopy.csv", "_DATA_transformcopy.csv")
         dictionary = utils.global_data_dict_matcher(data_file, dict_file)
         dictionary.to_csv(dict_file, index=False)
 
@@ -445,9 +440,7 @@ def step4(work_dir, transformcopy_dir):
     ):
         # For the DATA files in the transformcopy directory, copy the META file
         data_file_name = os.path.basename(data_file)
-        meta_file_name = data_file_name.replace(
-            "_DATA_transformcopy.csv", "_META_origcopy.csv"
-        )
+        meta_file_name = data_file_name.replace("_DATA_transformcopy.csv", "_META_origcopy.csv")
         meta_origcopy_file = os.path.join(work_dir, meta_file_name)
         meta_transformcopy_file = os.path.join(transformcopy_dir, meta_file_name)
         meta_transformcopy_file = meta_transformcopy_file.replace(

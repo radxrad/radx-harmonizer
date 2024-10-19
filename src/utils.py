@@ -265,8 +265,8 @@ def handle_errors_and_continue(error_file, error_messages):
 def run_command(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     stdout, stderr = process.communicate()
-    stdout = stdout.decode('utf-8')
-    stderr = stderr.decode('utf-8')
+    stdout = stdout.decode("utf-8")
+    stderr = stderr.decode("utf-8")
     stdout = stdout.replace("\n", " ")
     stderr = stderr.replace("\n", " ")
     return stdout, stderr
@@ -279,48 +279,30 @@ def get_directories(include, exclude, data_dir):
         include_dirs = include.split(",")
         dir_list = [f for f in all_dirs if os.path.basename(f) in include_dirs]
         if len(dir_list) != len(include_dirs):
-            print(
-                f"ERROR: Some or all of the following projects don't exist: {include_dirs}"
-            )
+            print(f"ERROR: Some or all of the following projects don't exist: {include_dirs}")
             sys.exit(-1)
         return dir_list
     if exclude:
         exclude_dirs = exclude.split(",")
         dir_list = [f for f in all_dirs if os.path.basename(f) in exclude_dirs]
         if len(dir_list) != len(exclude_dirs):
-            print(
-                f"ERROR: Some or all of the following projects don't exist: {exclude_dirs}"
-            )
+            print(f"ERROR: Some or all of the following projects don't exist: {exclude_dirs}")
             sys.exit(-1)
         return [f for f in all_dirs if os.path.basename(f) not in exclude_dirs]
 
     return []
 
 
-def confirm_rest(dir_name="work"):
-    print()
-    print(f"-reset will remove all files in the {dir_name} directory!")
-    confirmation = (
-        input(
-            f"Are you sure you want to reset the {dir_name} directory? Type 'yes' to confirm: "
-        )
-        .strip()
-        .lower()
-    )
+def confirm_rerun(message):
+    confirmation = input(f"{message}: Type 'yes' to confirm: ").strip().lower()
     return confirmation == "yes"
 
 
 def file_is_missing(directory, postfix, error_messages):
     all_files = set(glob.glob(os.path.join(directory, "*")))
-    data_files = set(
-        glob.glob(os.path.join(directory, f"rad_*_*-*_DATA_{postfix}.csv"))
-    )
-    dict_files = set(
-        glob.glob(os.path.join(directory, f"rad_*_*-*_DICT_{postfix}.csv"))
-    )
-    meta_files = set(
-        glob.glob(os.path.join(directory, f"rad_*_*-*_META_{postfix}.csv"))
-    )
+    data_files = set(glob.glob(os.path.join(directory, f"rad_*_*-*_DATA_{postfix}.csv")))
+    dict_files = set(glob.glob(os.path.join(directory, f"rad_*_*-*_DICT_{postfix}.csv")))
+    meta_files = set(glob.glob(os.path.join(directory, f"rad_*_*-*_META_{postfix}.csv")))
 
     any_error = False
     # # Check for files that don't match the file naming convention
@@ -333,9 +315,7 @@ def file_is_missing(directory, postfix, error_messages):
     # Check that the number of DATA, DICT, and META files is the same
     if len(data_files) != len(dict_files) or len(data_files) != len(meta_files):
         message = "DATA, DICT, META file mismatch"
-        error_messages.append(
-            {"severity": "ERROR", "filename": directory, "message": message}
-        )
+        error_messages.append({"severity": "ERROR", "filename": directory, "message": message})
         any_error = True
 
     for data_file in data_files:
@@ -376,17 +356,13 @@ def file_is_missing_in_work_directory(directory, postfix, error_messages):
     # Check that the number of DATA, DICT, and META files is the same
     if len(data_files) != len(dict_files) or len(data_files) != len(meta_files):
         message = "DATA, DICT, META file mismatch"
-        error_messages.append(
-            {"severity": "ERROR", "filename": directory, "message": message}
-        )
+        error_messages.append({"severity": "ERROR", "filename": directory, "message": message})
         any_error = True
 
     for data_file in data_files:
 
         if postfix in data_file:
-            dict_file = data_file.replace(
-                f"_DATA_{postfix}.csv", f"_DICT_{postfix}.csv"
-            )
+            dict_file = data_file.replace(f"_DATA_{postfix}.csv", f"_DICT_{postfix}.csv")
             # Check for missing DICT files
             if not dict_file in dict_files:
                 message = "DICT file missing"
@@ -394,9 +370,7 @@ def file_is_missing_in_work_directory(directory, postfix, error_messages):
                 any_error = any_error or error
 
             # Check for missing META files
-            meta_file = data_file.replace(
-                f"_DATA_{postfix}.csv", f"_META_{postfix}.csv"
-            )
+            meta_file = data_file.replace(f"_DATA_{postfix}.csv", f"_META_{postfix}.csv")
             if not meta_file in meta_files:
                 message = "META file missing"
                 error = append_error(message, meta_file, error_messages)
@@ -474,9 +448,7 @@ def check_meta_file(filename, error_messages):
         any_error = any_error or error
 
     # check data file name
-    filenames = data[
-        data["Field Label"] == "datafile_names - add_additional_rows_as_needed"
-    ]
+    filenames = data[data["Field Label"] == "datafile_names - add_additional_rows_as_needed"]
     if filenames.shape[0] != 1:
         message = "Row 'datafile_names - add_additional_rows_as_needed' is missing"
         error = append_error(message, filename, error_messages)
@@ -548,7 +520,9 @@ def is_not_utf8_encoded(filename, error_messages):
             skip_blank_lines=False,
         )
     except Exception:
-        message = f"Not utf-8 encoded or invalid csv file: {traceback.format_exc().splitlines()[-1]}"
+        message = (
+            f"Not utf-8 encoded or invalid csv file: {traceback.format_exc().splitlines()[-1]}"
+        )
         error = append_error(message, filename, error_messages)
 
     return error
@@ -715,7 +689,9 @@ def check_dict(filename, error_messages):
     # Find unexpected columns
     unexpected_columns = columns - ALL_COLUMNS
     if len(unexpected_columns) > 0:
-        message = f"Unexpected columns: {unexpected_columns}, either rename or delete these columns."
+        message = (
+            f"Unexpected columns: {unexpected_columns}, either rename or delete these columns."
+        )
         append_error(message, filename, error_messages)
         error = True
 
@@ -810,7 +786,11 @@ def check_data_type(data_file, dict_file, error_messages):
         data_cardinality = get_column_cardinality(data, column)
 
         if data_cardinality == "multiple" and dict_cardinality.get(column) == "single":
-            message = f"Multiple values are not allowed in column: {column}. Check the data dictionary. Only 'list' and 'checkbox' field types can have multiple values"
+            message = (
+                f"Multiple values are not allowed in column: {column}. "
+                "Check the data dictionary. Only 'list' and 'checkbox' "
+                "field types can have multiple values."
+            )
             error = append_error(message, data_file, error_messages)
             any_error = any_error or error
 
@@ -985,7 +965,7 @@ def parse_string_enums(enum):
 
 
 def parse_value_enums(enum):
-    # Example: aptamer | antibody | antigen | molecular beacon | nanobody | primer | receptor | DNA-oligonucleotide | analyte_binding_protein
+    # Example: aptamer | antibody | antigen | molecular beacon | nanobody | ...
     values = enum.split("|")
     values = [value.strip() for value in values]
     if len(values) > 0 and len(values[0]) > 0:
@@ -1037,9 +1017,7 @@ def expand_column_values(column_values):
     # For Field Type: "list", split multiple values.
     # Example: analyte_type = viral RNA|human microRNA
     expanded_column_values = {
-        val
-        for value in column_values
-        for val in (value.split("|") if "|" in value else [value])
+        val for value in column_values for val in (value.split("|") if "|" in value else [value])
     }
     return set(expanded_column_values)
 
@@ -1058,9 +1036,7 @@ def get_allowed_values(dict_file):
     # Create a dictionary of Variable name and enumerated values
     if dictionary.shape[0] > 0:
         dictionary["values"] = dictionary.apply(get_enum_values, axis=1)
-        allowed_values = dictionary.set_index("Variable / Field Name")[
-            "values"
-        ].to_dict()
+        allowed_values = dictionary.set_index("Variable / Field Name")["values"].to_dict()
 
     return allowed_values
 
@@ -1151,18 +1127,17 @@ def update_meta_data(
     data_file_title = data_file_title[0]
 
     # Extract timestamp
-    timestamp = meta_data[
-        meta_data["Field Label"] == "data_file_creation_dateTime"
-    ].copy()
+    timestamp = meta_data[meta_data["Field Label"] == "data_file_creation_dateTime"].copy()
     if timestamp.shape[0] == 0:
-        #data_file_creation_date_time = "placeholder"
-        message = f"Metadata template file {template_file} data_file_creation_dateTime value is missing."
+        # data_file_creation_date_time = "placeholder"
+        message = (
+            f"Metadata template file {template_file} data_file_creation_dateTime value is missing."
+        )
         error = append_error(message, meta_file, error_messages)
         return error
-    else:
-        data_file_creation_date_time = timestamp["Choices"].tolist()[0]
 
-    # Get the SHA256 hash code for the data file
+    data_file_creation_date_time = timestamp["Choices"].tolist()[0]
+
     data_file_sha256_digest = calculate_sha256(data_file)
 
     # Create additional rows for metadata file
@@ -1201,9 +1176,7 @@ def update_sha256_digest(data_file, metadata_file):
     # Get the SHA256 hash code for the data file
     data_file_sha256_digest = calculate_sha256(data_file)
     metadata = pd.read_csv(metadata_file)
-    metadata.loc[metadata["Field"] == "data_file_sha256_digest", "Value"] = (
-        data_file_sha256_digest
-    )
+    metadata.loc[metadata["Field"] == "data_file_sha256_digest", "Value"] = data_file_sha256_digest
     metadata.to_csv(metadata_file, index=False)
 
 
@@ -1217,11 +1190,10 @@ def extract_speciment_type(data_file):
     )
     specimens_used = set()
     for specimen in SPECIMEN_COLUMNS:
-        specimens_used = specimens_used.union(
-            extract_unique_column_values(data, specimen)
-        )
+        specimens_used = specimens_used.union(extract_unique_column_values(data, specimen))
 
     return "|".join(specimens_used)
+
 
 def extract_unique_column_values(df, column):
     if column not in df.columns:
@@ -1237,11 +1209,12 @@ def extract_unique_column_values(df, column):
     # Handle COVID test speciment types
     elif column == "covid_test_specimen_type":
         specimens = {COVID_TEST_SPECIMEN_TYPES.get(specimen_id, "") for specimen_id in specimens}
-        specimens.discard('')
+        specimens.discard("")
     else:
-        specimens.discard('')
+        specimens.discard("")
 
     return specimens
+
 
 # def extract_unique_column_values(df, column):
 #     if column in df.columns:
@@ -1323,9 +1296,7 @@ def data_dict_matcher_new(data_file, dict_file, harmonized_dict, error_messages)
 
         # add placeholders for the missing data elements
         dictionary = add_missing_data_elements(dictionary, missing_data_elements)
-        message = (
-            f"Added missing data elements {missing_data_elements}, fill in definitions"
-        )
+        message = f"Added missing data elements {missing_data_elements}, fill in definitions"
         error = append_warning(message, dict_file, error_messages)
 
     # Drop duplicate data elements
@@ -1414,9 +1385,7 @@ def update_dict_file(dict_file, dict_output_file):
     dictionary["Unit"] = dictionary["Unit"].replace(STANDARD_UNITS)
 
     # Fill in empty Section Header and CDE Reference columns
-    dictionary["Section Header"] = dictionary["Section Header"].replace(
-        "", "Project specific"
-    )
+    dictionary["Section Header"] = dictionary["Section Header"].replace("", "Project specific")
     dictionary["CDE Reference"] = dictionary["CDE Reference"].replace("", "Depositor")
 
     dictionary.to_csv(dict_output_file, index=False)
@@ -1516,9 +1485,7 @@ def check_provenance(dict_file, error_messages):
 
     error = False
     if dictionary.shape[0] > 0:
-        message = (
-            "CDE Reference column contains multiple URLs. Only one URL is allowed."
-        )
+        message = "CDE Reference column contains multiple URLs. Only one URL is allowed."
         error = append_error(message, dict_file, error_messages)
 
     return error
@@ -1588,9 +1555,7 @@ def convert_dict(dict_file, tier1_dict_file, tier2_dict_file, dict_output_file):
     ].copy()
 
     # Split the 'Provenance' column into two columns (URLs go into the SeeAlso column)
-    dictionary[["Provenance", "SeeAlso"]] = dictionary["Provenance"].apply(
-        split_provenance
-    )
+    dictionary[["Provenance", "SeeAlso"]] = dictionary["Provenance"].apply(split_provenance)
 
     # Move the examples from the Notes column the "Examples" column
     dictionary["Examples"] = dictionary["Notes"].apply(extract_example)
@@ -1732,9 +1697,7 @@ def convert_height_to_inches(data):
         # temporaryly replace emtpy values with zero to enable calculation
         data["nih_height1"] = data["nih_height1"].replace("", "0").fillna("0")
         data["nih_height2"] = data["nih_height2"].replace("", "0").fillna("0")
-        data["nih_height2"] = data["nih_height1"].astype(int) * 12 + data[
-            "nih_height2"
-        ].astype(int)
+        data["nih_height2"] = data["nih_height1"].astype(int) * 12 + data["nih_height2"].astype(int)
         data = data.rename(columns={"nih_height2": "nih_height"})
         data = data.drop(columns=["nih_height1"])
         # replace the zero values with empty string
@@ -1838,24 +1801,23 @@ def global_data_dict_matcher(data_file, dict_file):
     return dictionary
 
 
-def final_consistency_check(
-    preorigcopy_dir, origcopy_dir, transformcopy_dir, error_messages
-):
-    preorigcopies = len(
-        glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*_preorigcopy.csv"))
+def final_consistency_check(preorigcopy_dir, origcopy_dir, transformcopy_dir, error_messages):
+    preorigcopies = len(glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_*_preorigcopy.csv")))
+    origcopies = len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.csv"))) + len(
+        glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.json"))
     )
-    origcopies = len(
-        glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.csv"))
-    ) + len(glob.glob(os.path.join(origcopy_dir, "rad_*_*-*_*_*_origcopy.json")))
 
     transformcopies = len(
         glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.csv"))
-    ) + len(
-        glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.json"))
-    )
+    ) + len(glob.glob(os.path.join(transformcopy_dir, "rad_*_*-*_*_*_transformcopy.json")))
 
     if origcopies % 3 != 0 or origcopies < preorigcopies:
-        message = f" - ERROR: invalid number of origcopy files: {origcopies} generated: preorigcopy directory has {preorigcopies} files."
+        message = (
+            f" - ERROR: invalid number of origcopy files: {origcopies} "
+            "generated: preorigcopy directory has "
+            f"{preorigcopies} files."
+        )
+        # message = f" - ERROR: invalid number of origcopy files: {origcopies} generated: preorigcopy directory has {preorigcopies} files."
         append_error(message, f"{origcopy_dir} directory", error_messages)
         origcopies = -1
 

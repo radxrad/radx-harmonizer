@@ -1,3 +1,21 @@
+"""
+Script for validating the contents of `preorigcopy` directories within a specified data structure.
+
+This script is designed to check for missing files, validate metadata, and manage error reporting
+for a collection of directories organized according to a specific naming convention (e.g., 'rad_*_*-*').
+It can be run on specific sets of directories, with options to include or exclude particular projects,
+and a reset option that clears the work directory before execution.
+
+The script performs the following key tasks:
+1. Identifies directories that need validation.
+2. Validates the presence and format of required files.
+3. Logs any detected errors into an error file.
+4. Optionally resets the work directory for revalidation.
+
+The script is executed from the command line with arguments for inclusion/exclusion of directories
+and an option to reset the working directory.
+"""
+
 #!/usr/bin/python3
 import os
 import sys
@@ -59,7 +77,8 @@ def phase1_checker(include_dirs, exclude_dirs, reset):
         lock_file = os.path.join(work_dir, "lock.txt")
         if os.path.exists(lock_file):
             print(
-                f"skipping {directory}, this directory has been locked! Remove the lock.txt to make any updates."
+                f"skipping {directory}: directory has been locked! "
+                "Remove the lock.txt to make any updates."
             )
             continue
 
@@ -85,9 +104,7 @@ def phase1_checker(include_dirs, exclude_dirs, reset):
             utils.save_error_file(error_messages, error_file)
 
         # Check metadata file for correct format and information
-        for file in glob.glob(
-            os.path.join(preorigcopy_dir, "rad_*_*-*_*_META_preorigcopy.csv")
-        ):
+        for file in glob.glob(os.path.join(preorigcopy_dir, "rad_*_*-*_*_META_preorigcopy.csv")):
             error = utils.check_meta_file(file, error_messages)
             if error:
                 utils.save_error_file(error_messages, error_file)
@@ -139,9 +156,10 @@ def main(include, exclude, reset):
     # Convert reset flag
     if reset:
         reset = True
-        if not utils.confirm_rest():
+        print()
+        print("WARNING: -reset will remove all files in the work directory!")
+        if not utils.confirm_rerun("Are you sure you want to rest the work directory?"):
             sys.exit(0)
-        print("resetting project, removing files in work directory")
     else:
         reset = False
 
