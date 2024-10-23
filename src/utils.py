@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-import os
-import sys
 import glob
-import pathlib
-import subprocess
-import traceback
-import re
-
 import hashlib
-import pandas as pd
+import json
+import os
+import pathlib
+import re
+import subprocess
+import sys
+import traceback
 
+import numpy as np
+import pandas as pd
 
 # Mandatory columns in dictionary files
 MANDATORY_COLUMNS = {
@@ -227,24 +228,20 @@ YES_NO_MAPPINGS = {
 
 
 def append_error(message, filename, error_messages):
-    error_messages.append(
-        {
-            "severity": "ERROR",
-            "filename": os.path.basename(filename),
-            "message": message,
-        }
-    )
+    error_messages.append({
+        "severity": "ERROR",
+        "filename": os.path.basename(filename),
+        "message": message,
+    })
     return True
 
 
 def append_warning(message, filename, error_messages):
-    error_messages.append(
-        {
-            "severity": "WARN",
-            "filename": os.path.basename(filename),
-            "message": message,
-        }
-    )
+    error_messages.append({
+        "severity": "WARN",
+        "filename": os.path.basename(filename),
+        "message": message,
+    })
     return True
 
 
@@ -725,7 +722,10 @@ def check_missing_values(filename, error_messages):
     for field_name in MANDATORY_COLUMNS:
         num_empty_rows = get_num_empty_rows(df, field_name)
         if num_empty_rows > 0:
-            message = f"Column: `{field_name}` has {num_empty_rows} empty values out of {df.shape[0]} rows"
+            message = (
+                f"Column: `{field_name}` has {num_empty_rows} empty values out of"
+                f" {df.shape[0]} rows"
+            )
             error = append_error(message, filename, error_messages)
             any_error = any_error or error
 
@@ -804,13 +804,19 @@ def check_data_type(data_file, dict_file, error_messages):
             # Integer values are ok in float columns
             if dict_type == "float" and types[0] == "integer":
                 continue
-            message = f"Invalid data type in column: {column}: '{dict_type}' in DICT vs. '{types[0]}' in DATA"
+            message = (
+                f"Invalid data type in column: {column}: '{dict_type}' in DICT vs. '{types[0]}' in"
+                " DATA"
+            )
             error = append_error(message, data_file, error_messages)
             any_error = any_error or error
         elif len(types) > 1:
             # mixed types are ok if the type in the dictionary is defined as string
             if dict_type != "string":
-                message = f"Mixed data types in column: {column}: '{types}' in DATA vs. '{dict_type}' IN DICT"
+                message = (
+                    f"Mixed data types in column: {column}: '{types}' in DATA vs. '{dict_type}' IN"
+                    " DICT"
+                )
                 error = append_error(message, data_file, error_messages)
                 offending_values = get_offending_data_values(data, column)
                 message = f"String values found in column {column}: {offending_values}"
@@ -1541,18 +1547,16 @@ def convert_dict(dict_file, tier1_dict_file, tier2_dict_file, dict_output_file):
     )
     # Select the required fields
     dictionary.rename(columns=COLUMN_MAP, inplace=True)
-    dictionary = dictionary[
-        [
-            "Id",
-            "Label",
-            "Section",
-            "Datatype",
-            "Unit",
-            "Enumeration",
-            "Notes",
-            "Provenance",
-        ]
-    ].copy()
+    dictionary = dictionary[[
+        "Id",
+        "Label",
+        "Section",
+        "Datatype",
+        "Unit",
+        "Enumeration",
+        "Notes",
+        "Provenance",
+    ]].copy()
 
     # Split the 'Provenance' column into two columns (URLs go into the SeeAlso column)
     dictionary[["Provenance", "SeeAlso"]] = dictionary["Provenance"].apply(split_provenance)
@@ -1572,23 +1576,21 @@ def convert_dict(dict_file, tier1_dict_file, tier2_dict_file, dict_output_file):
     dictionary["Enumeration"] = dictionary["Enumeration"].apply(convert_enumeration)
 
     # Order columns
-    dictionary = dictionary[
-        [
-            "Id",
-            "Label",
-            "Examples",
-            "Section",
-            "Cardinality",
-            "Terms",
-            "Datatype",
-            "Unit",
-            "Enumeration",
-            "Notes",
-            "MissingValueCodes",
-            "Provenance",
-            "SeeAlso",
-        ]
-    ]
+    dictionary = dictionary[[
+        "Id",
+        "Label",
+        "Examples",
+        "Section",
+        "Cardinality",
+        "Terms",
+        "Datatype",
+        "Unit",
+        "Enumeration",
+        "Notes",
+        "MissingValueCodes",
+        "Provenance",
+        "SeeAlso",
+    ]]
 
     # Read the harmonized RADx-rad tier1 and tier2 data dictionaries
     tier1_dict = pd.read_csv(
@@ -1716,23 +1718,21 @@ def convert_min_to_global_dict(dict_file, global_harmonized_dict):
         skip_blank_lines=False,
     )
     # Order the columns as in the Global Codebook
-    dictionary = dictionary[
-        [
-            "Id",
-            "Label",
-            "Examples",
-            "Section",
-            "Cardinality",
-            "Terms",
-            "Datatype",
-            "Unit",
-            "Enumeration",
-            "Notes",
-            "MissingValueCodes",
-            "Provenance",
-            "SeeAlso",
-        ]
-    ]
+    dictionary = dictionary[[
+        "Id",
+        "Label",
+        "Examples",
+        "Section",
+        "Cardinality",
+        "Terms",
+        "Datatype",
+        "Unit",
+        "Enumeration",
+        "Notes",
+        "MissingValueCodes",
+        "Provenance",
+        "SeeAlso",
+    ]]
 
     # Rename RADx-rad data element to the corresponding RADx global data elements
     dictionary["Id"] = dictionary["Id"].replace(RADX_RAD_COMBINED_TO_RADX_GLOBAL)
@@ -1842,6 +1842,57 @@ def replace_and_save_text_file(input_file_path, output_file_path):
         file.write(modified_content)
 
 
+def get_data_elements(dict_file):
+    df = pd.read_csv(dict_file, 
+                     dtype=str,
+                     keep_default_na=False)
+    return df[["Id"]]
+
+
+def extract_fields_from_metadata(meta_file):
+    with open(meta_file, "r") as file:
+        data = json.load(file)
+
+    subproject = data.get("Auxiliary Metadata", {}).get("subproject", {}).get("@value", "")
+    phs_identifier = data.get("Data File Parent Studies", [{}])[0].get("PHS Identifier", {}).get("@value", "")
+    project_num = data.get("Data File Parent Studies", [{}])[0].get("Study Identifier", {}).get("@value", "")
+    
+    return subproject, phs_identifier, project_num
+
+
+def extract_radx_id(file_path):
+    # Regular expression to match patterns like rad_*_*-*
+    pattern = r"rad_[A-Za-z0-9]+_[A-Za-z0-9]+-[A-Za-z0-9]+"
+
+    # Extract the first match
+    match = re.search(pattern, file_path)
+    if match:
+        return match.group()
+        
+    return ""
+
+
+def assign_data_element_tier(df, tier1_dict, tier2_dict):
+    tier1 = pd.read_csv(tier1_dict, usecols=["Id"])
+    tier1_ids = set(tier1["Id"].to_list())
+    tier2 = pd.read_csv(tier2_dict, usecols=["Id"])
+    tier2_ids = set(tier2["Id"].to_list())
+
+    # Define conditions
+    conditions = [
+        df["Id"].isin(tier1_ids),  # Check if ID is in tier 1
+        df["Id"].isin(tier2_ids),  # Check if ID is in tier 2
+    ]
+    
+    # Define corresponding tier values
+    choices = ["tier1", "tier2"]
+    
+    # Assign tiers based on conditions
+    df["tier"] = np.select(conditions, choices, default="tier3")
+
+    return df
+    
+ 
 def collect_primary_keys(data_path):
     primary_keys = []
 
