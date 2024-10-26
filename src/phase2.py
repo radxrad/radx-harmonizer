@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Script for cleaning, validating, and updating the contents of specified directories.
 
@@ -14,12 +15,12 @@ Key functionalities:
 4. Optionally resets the work directory or skips certain steps using rerun options.
 """
 
-#!/usr/bin/python3
-import os
-import sys
-import glob
-import shutil
 import argparse
+import glob
+import os
+import shutil
+import sys
+
 import utils
 
 # Root directory on AWS
@@ -31,10 +32,10 @@ ROOT_DIR = ".."
 # File paths
 DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 META_DIR = os.path.join(ROOT_DIR, "meta")
-HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_legacy_dict_2024-10-17.csv")
-GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_tier1_dict_2024-10-17.csv")
-TIER1_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier1_dict_2024-10-17.csv")
-TIER2_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-17.csv")
+HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_legacy_dict_2024-10-24.csv")
+GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_tier1_dict_2024-10-24.csv")
+TIER1_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier1_dict_2024-10-24.csv")
+TIER2_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-24.csv")
 ERROR_FILE_NAME = "phase2_errors.csv"
 
 

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Script for validating the contents of `preorigcopy` directories within a specified data structure.
 
@@ -16,14 +17,13 @@ The script is executed from the command line with arguments for inclusion/exclus
 and an option to reset the working directory.
 """
 
-#!/usr/bin/python3
-import os
-import sys
-import glob
-import shutil
 import argparse
-import utils
+import glob
+import os
+import shutil
+import sys
 
+import utils
 
 # Root directory on AWS
 # ROOT_DIR = "r:/"

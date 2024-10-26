@@ -8,6 +8,11 @@ dependencies:
   - python=3.11
   - jupyterlab
   - pandas
+  - pandas-stubs
+  - matplotlib
+  - seaborn
+  - isort
+  - mypy
   - black
   - pylint
   - vulture

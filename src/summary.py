@@ -17,8 +17,8 @@ ROOT_DIR = ".."
 # File paths
 DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 SUMMARY_DIR = os.path.join(ROOT_DIR, "summary")
-TIER1_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier1_dict_2024-10-17.csv")
-TIER2_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-17.csv")
+TIER1_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier1_dict_2024-10-24.csv")
+TIER2_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-24.csv")
 
 
 def summary(include_dirs, exclude_dirs):
