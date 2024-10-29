@@ -780,6 +780,7 @@ run_id,Sample,text,"Unique identifier for a run, e.g., a replicate or repeat",,,
 specimen_type,Assay Results,text,Specimen type used in assay,breath | hand odor | plasma | saliva | skin | serum | exhaled breath condensate,example: saliva,,,,,,RADx-rad DCC
 specimen_dilution_factor,Assay Results,float,"Dilution of specimen before test. The dilution factor is the ratio of the final volume divided
 by the original volume.",,example: 10 (fold),,,,,,RADx-rad DCC
+analyte_type,Technology Metadata,list,Type of analyte(s) or target(s) to be detected,,example: virus,,,,,,RADx-rad DCC
 assay_result,Assay Results,category,"Measured result. If other, specify result in assay_result_other",positive | negative | failed | lost | other,example: positive,,,,,,RADx-rad DCC
 assay_result_other,Assay Results,text,Description of other assay result,,,,,,,,RADx-rad DCC
 assay_readout,Assay Results,float,Numerical assay readout,,example: 0.7,,,,,,RADx-rad DCC
