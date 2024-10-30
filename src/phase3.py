@@ -34,7 +34,7 @@ ROOT_DIR = ".."
 DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 META_DIR = os.path.join(ROOT_DIR, "meta")
 
-METADATA_COMPILER_JAR = os.path.join(ROOT_DIR, "source/radx-rad-metadata-compiler.jar")
+METADATA_COMPILER_JAR = os.path.join(ROOT_DIR, "source/radx-rad-metadata-compiler-1.0.3.jar")
 METADATA_VALIDATOR_JAR = os.path.join(ROOT_DIR, "source/radx-metadata-validator-app-1.0.6.jar")
 DICTIONARY_VALIDATOR_JAR = os.path.join(
     ROOT_DIR, "source/radx-data-dictionary-validator-app-1.3.4.jar"
