@@ -89,18 +89,22 @@ def get_publications(origcopy_dir, summary_dir):
         # Collect metadata
         subproject, phs_identifier, project_num, publications = utils.extract_fields_from_metadata(meta_file)
         for publication in publications:
-            data = {
+            row = {
                    'subproject': [subproject],
                    'phs_identifier': [phs_identifier],
                    'project_num': [project_num],
                    'publications': [publication],
                    'radx_id': [ utils.extract_radx_id(meta_file)],
             }
-            df = pd.DataFrame(data)
+            df = pd.DataFrame(row)
             df_list.append(df)
 
-    data = pd.concat(df_list)
-    data.drop_duplicates(inplace=True)
+    if len(df_list) > 0:
+        data = pd.concat(df_list)
+        data.drop_duplicates(inplace=True)
+    else:
+        data = pd.DataFrame()
+
     return data
 
 
