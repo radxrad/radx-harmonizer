@@ -1856,8 +1856,11 @@ def extract_fields_from_metadata(meta_file):
     subproject = data.get("Auxiliary Metadata", {}).get("subproject", {}).get("@value", "")
     phs_identifier = data.get("Data File Parent Studies", [{}])[0].get("PHS Identifier", {}).get("@value", "")
     project_num = data.get("Data File Parent Studies", [{}])[0].get("Study Identifier", {}).get("@value", "")
+    related_resources = data.get("Data File Related Resources", [{}])
+    publications = [related_resource.get("Related Resource Identifier", {}).get("@value", "") for related_resource in related_resources]
+    #publications = '|'.join(publications)
     
-    return subproject, phs_identifier, project_num
+    return subproject, phs_identifier, project_num, publications
 
 
 def extract_radx_id(file_path):

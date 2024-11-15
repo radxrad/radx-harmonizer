@@ -21,21 +21,7 @@ TIER1_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier1_dict_20
 TIER2_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier2_dict_2024-10-28.csv")
 
 
-def summary(include_dirs, exclude_dirs):
-    """
-    Executes the phase 3 checks on the specified directories.
-
-    Parameters
-    ----------
-    include_dirs : list of str
-        List of directories to include in the check.
-    exclude_dirs : list of str
-        List of directories to exclude from the check.
-
-    Returns
-    -------
-    None
-    """
+def data_element_summary(include_dirs, exclude_dirs):
     directories = utils.get_directories(include_dirs, exclude_dirs, DATA_DIR)
 
     df_list = []
@@ -48,11 +34,30 @@ def summary(include_dirs, exclude_dirs):
             raise ValueError(f"Error: {origcopy_dir} does not exist!")
 
     os.makedirs(SUMMARY_DIR, exist_ok=True)
+    
     data = pd.concat(df_list)
-    
     data = utils.assign_data_element_tier(data, TIER1_HARMONIZED_DICT, TIER2_HARMONIZED_DICT)
+    data.to_csv(os.path.join(SUMMARY_DIR, "data_elements.csv"), index=False)
+    print(f"Data element summary saved to: {os.path.join(SUMMARY_DIR, 'data_elements.csv')}")
+
+
+def publication_summary(include_dirs, exclude_dirs):
+    directories = utils.get_directories(include_dirs, exclude_dirs, DATA_DIR)
+
+    df_list = []
+    for directory in directories:
+        origcopy_dir = os.path.join(directory, "origcopy")
+        if os.path.exists(origcopy_dir):
+            df = get_publications(origcopy_dir, SUMMARY_DIR)
+            df_list.append(df)
+        else:
+            raise ValueError(f"Error: {origcopy_dir} does not exist!")
+
+    os.makedirs(SUMMARY_DIR, exist_ok=True)
     
-    data.to_csv(os.path.join(SUMMARY_DIR, "data_element.csv"), index=False)
+    data = pd.concat(df_list)
+    data.to_csv(os.path.join(SUMMARY_DIR, "publications.csv"), index=False)
+    print(f"Publication summary saved to: {os.path.join(SUMMARY_DIR, 'publications.csv')}")
 
                  
 def get_basic_data(origcopy_dir, summary_dir):
@@ -64,7 +69,7 @@ def get_basic_data(origcopy_dir, summary_dir):
 
         # Collect metadata
         meta_file = dict_file.replace("_DICT_origcopy.csv", "_META_origcopy.json")
-        subproject, phs_identifier, project_num = utils.extract_fields_from_metadata(meta_file)
+        subproject, phs_identifier, project_num, _ = utils.extract_fields_from_metadata(meta_file)
         df["subproject"] = subproject
         df["phs_id"] = phs_identifier
         df["project_num"] = project_num
@@ -77,22 +82,30 @@ def get_basic_data(origcopy_dir, summary_dir):
     return data
 
 
+def get_publications(origcopy_dir, summary_dir):
+    df_list =[]
+
+    for meta_file in glob.glob(os.path.join(origcopy_dir, f"rad_*_*-*_*_META_origcopy.json")):
+        # Collect metadata
+        subproject, phs_identifier, project_num, publications = utils.extract_fields_from_metadata(meta_file)
+        for publication in publications:
+            data = {
+                   'subproject': [subproject],
+                   'phs_identifier': [phs_identifier],
+                   'project_num': [project_num],
+                   'publications': [publication],
+                   'radx_id': [ utils.extract_radx_id(meta_file)],
+            }
+            df = pd.DataFrame(data)
+            df_list.append(df)
+
+    data = pd.concat(df_list)
+    data.drop_duplicates(inplace=True)
+    return data
+
+
 def main(include, exclude):
-    """
-    Main function to execute the phase3_checker with command-line arguments.
-
-    Parameters
-    ----------
-    include : str or None
-        Comma-separated list of projects to include.
-    exclude : str or None
-        Comma-separated list of projects to exclude.
-
-    Returns
-    -------
-    None
-    """
-    print("Phase3: Validate and create origcopy and transformcopy files.")
+    print("summary: Create a summary of data elements and publications for RADx-rad datasets.")
 
     # Parse command line
     if include and exclude:
@@ -112,8 +125,11 @@ def main(include, exclude):
 
     print()
 
-    # Run the summarizer
-    summary(include, exclude)
+    # Collect data elements
+    data_element_summary(include, exclude)
+    
+    # Collect publications
+    publication_summary(include, exclude)
 
 
 if __name__ == "__main__":
