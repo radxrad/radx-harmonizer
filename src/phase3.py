@@ -87,12 +87,13 @@ def phase3_checker(include_dirs, exclude_dirs, start, end):
         if os.path.exists(error_file):
             os.remove(error_file)
 
-        # Remove temporary JSON files from a previous run
-        for json_file in glob.glob(os.path.join(work_dir, "*.json")):
-            os.remove(json_file)
 
-        # Remove the origcopy and transformcopy directories from a previous run
         if start == 0:
+            # Remove temporary JSON files from a previous run
+            for json_file in glob.glob(os.path.join(work_dir, "*.json")):
+                os.remove(json_file)
+
+            # Remove the origcopy and transformcopy directories from a previous run
             shutil.rmtree(origcopy_dir, ignore_errors=True)
             shutil.rmtree(transformcopy_dir, ignore_errors=True)
 
