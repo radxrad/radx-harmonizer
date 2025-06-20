@@ -92,7 +92,6 @@ ENV/
 .ropeproject
 
 # Spark 
-mmtfPyspark/metastore_db
 spark-warehouse
 *.crc
 .
@@ -107,8 +106,7 @@ logs/
 # Nemo
 config.yml
 
-# kg-import
-example_results
-.env_desktop
-.env_community
-.env_enterprise
+# RADx-harmonizer
+meta
+source
+reference
