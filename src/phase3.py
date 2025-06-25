@@ -40,7 +40,7 @@ DICTIONARY_VALIDATOR_JAR = os.path.join(
     ROOT_DIR, "source/radx-data-dictionary-validator-app-1.3.4.jar"
 )
 METADATA_SPEC = os.path.join(ROOT_DIR, "reference/RADxMetadataSpecification.json")
-GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_tier1_dict_2025-01-14.csv")
+GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_tier1_dict_2025-06-24.csv")
 ERROR_FILE_NAME = "phase3_errors.csv"
 
 
