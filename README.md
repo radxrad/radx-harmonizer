@@ -80,7 +80,7 @@ conda install git -n base -c anaconda
 ### 1. Clone Repositories
 ```bash
 git clone https://github.com/radxrad/metadata.git
-git clone https://github.com/radxrad/radx-harmonizer
+git clone https://github.com/radxrad/radx-harmonizer.git 
 cd radx-harmonizer
 ```
 
