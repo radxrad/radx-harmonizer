@@ -32,7 +32,7 @@ ROOT_DIR = ".."
 # File paths
 DATA_DIR = os.path.join(ROOT_DIR, "data_harmonized")
 META_DIR = os.path.join(ROOT_DIR, "meta")
-HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_legacy_dict_2025-04-24.csv")
+HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_legacy_dict_2025-06-24.csv")
 GLOBAL_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-global_tier1_dict_2025-06-24.csv")
 TIER1_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier1_dict_2025-06-24.csv")
 TIER2_HARMONIZED_DICT = os.path.join(ROOT_DIR, "reference/RADx-rad_tier2_dict_2025-06-24.csv")

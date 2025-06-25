@@ -9,6 +9,7 @@ dependencies:
   - jupyterlab
   - pandas
   - pandas-stubs
+  - numpy
   - matplotlib
   - seaborn
   - isort
