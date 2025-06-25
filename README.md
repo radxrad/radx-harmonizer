@@ -116,6 +116,12 @@ wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-element
 wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-rad_legacy_dict_2025-06-24.csv
 ```
 
+### 4. Copy the Metadata Template Files
+```bash
+mkdir meta
+cp ../metadata/metadata_templates/*.csv meta
+```
+
 ---
 
 ## 🧪 Environment Setup
@@ -142,6 +148,7 @@ conda deactivate
 | [RADx-rad Data Dictionaries](https://github.com/radxrad/common-data-elements) | Tier 1 (RADx global) and Tier 2 (RADx-rad-specific) data elements |
 | [RADx-rad Metadata](https://github.com/radxrad/metadata) | Study-specific metadata files |
 | [RADx-rad Publications](https://github.com/radxrad/radx-destiller/blob/main/publications/radx_rad_related_publications_2025-06-17.csv) | List of publications related to RADx-rad objectives |
+| [RADx-rad Tech Data Organization](RADx-rad_Tech_Data_Organization.pdf) | Description how data for diagnostic methods development are organized |
 
 ---
 
