@@ -30,21 +30,22 @@ Run the following steps for each study (`rad_xxx_yyy-zz`), fixing any reported e
 
 ### 1. Phase 1 – Validate Submission Files
 ```bash
-python src/phase1.py -include rad_xxx_yyy-zz
+cd src
+python phase1.py -include rad_xxx_yyy-zz
 ```
 - Output: `work/phase1_errors.csv`
 - Fix files in `preorigcopy/` and rerun if needed.
 
 ### 2. Phase 2 – Standardize and Validate Copies in `work` Directory
 ```bash
-python src/phase2.py -include rad_xxx_yyy-zz
+python phase2.py -include rad_xxx_yyy-zz
 ```
 - Output: `work/phase2_errors.csv`
 - Fix files in `work/` and rerun if needed.
 
 ### 3. Phase 3 – Harmonize Data
 ```bash
-python src/phase3.py -include rad_xxx_yyy-zz
+python phase3.py -include rad_xxx_yyy-zz
 ```
 - Output directories:
   - `origcopy/`: Harmonized raw submission files
@@ -105,14 +106,14 @@ mkdir reference
 wget -P reference/ https://github.com/bmir-radx/radx-metadata-validator/releases/download/v1.0.6/RADxMetadataSpecification.json
 
 # Global Tier1 Dictionary
-wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-global_tier1_dict_2025-03-19.csv
+wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-global_tier1_dict_2025-06-24.csv
 
 # RADx-rad Tier1 and Tier2 Dictionaries
-wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-rad_tier1_dict_2025-03-19.csv
-wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-rad_tier2_dict_2025-03-19.csv
+wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-rad_tier1_dict_2025-06-24.csv
+wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-rad_tier2_dict_2025-06-24.csv
 
 # Legacy Dictionary
-wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-rad_legacy_dict_2025-03-19.csv
+wget -P reference/ https://raw.githubusercontent.com/radxrad/common-data-elements/refs/heads/main/cdes/RADx-rad_legacy_dict_2025-06-24.csv
 ```
 
 ---
